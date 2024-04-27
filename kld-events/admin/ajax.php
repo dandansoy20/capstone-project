@@ -1,5 +1,4 @@
 <?php
-//use TCPDF;
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -9,6 +8,42 @@ if (!array_key_exists('ajax', $_POST)) {
 } else {
 
     switch ($_POST['ajax']) {
+        case "logging_in":            
+            $username= $_POST['username'];
+            $password = base64_encode(base64_encode($_POST['password']));
+            $login_type = $_POST['login_type'];
+
+            switch ($login_type){
+                case "admin":
+                    
+                    $try = mysqli_query($conn,"Select * from admin_acc where admin_uname = '".$username."' and admin_pass = '".$password."'");
+                    $json = [];
+                    while ($row = $try->fetch_array()){
+                        echo "success"; //match yung uname at pass
+                        $_SESSION['kld_username'] = $row['admin_uname'];
+                        $_SESSION['kld_fname'] = $row['admin_fname'];
+                        $_SESSION['kld_lname'] = $row['admin_lname'];
+                        $_SESSION['kld_login_expiration'] = true;
+                        return; 
+                    }
+                    echo "failed";
+                    break;
+                case "student":
+                    // wala pang laman, maya konte
+                    break;
+                case "org":
+                    // same
+                    break;
+                default:
+                    die("Someone might be trying to brute-force logging in.");
+            }
+            break;
+        case "logging_out":
+            unset($_SESSION['ajax']);
+            unset($_SESSION['kld_login_expiration']);
+            unset($_COOKIE['kld_login_expiration']);
+            session_destroy();
+            header('location:/login.php');
         case "add_event":
             $venue_id = $_POST['venue_id'];
             $event_start_date = date('Y-m-d H:i:s', strtotime($_POST['event_start_date']));

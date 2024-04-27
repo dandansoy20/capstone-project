@@ -1,4 +1,9 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
+?>
 <!-- begin::User Panel-->
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 
@@ -26,7 +31,7 @@
 			</div>
 			<div class="d-flex flex-column">
 				<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-					Con Marvin Serrano
+					<?php echo $_SESSION['kld_fname']. " ". $_SESSION['kld_lname'] ?>
 				</a>
 				<div class="text-muted mt-1">
 					Head Student Activities
@@ -50,7 +55,7 @@
 							<span class="navi-text text-muted text-hover-primary">cmserrano@kld.edu.ph</span>
 						</span>
 					</a>
-					<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+					<a href="logout.php" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
 				</div>
 			</div>
 		</div>

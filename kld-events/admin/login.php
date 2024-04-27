@@ -1,3 +1,14 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if(array_key_exists('kld_login_expiration', $_SESSION)){
+    include "index.php";
+} else {
+
+?>
+
+
 
 <!DOCTYPE html>
 <!--
@@ -14,7 +25,7 @@ License: You must have a valid license purchased only from themeforest(the above
 -->
 <html lang="en" >
     <!--begin::Head-->
-    <head><base href="../">
+    <head>
                 <meta charset="utf-8"/>
         <title>KLD Events | Login</title>
         <meta name="description" content="Login page example"/>
@@ -25,7 +36,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
                     <!--begin::Page Custom Styles(used by this page)-->
-                             <link href="assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css"/>
+                             <link href="./assets/css/pages/login/login-1.css" rel="stylesheet" type="text/css"/>
                         <!--end::Page Custom Styles-->
 
         <!--begin::Global Theme Styles(used by all pages)-->
@@ -95,8 +106,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <label class="font-size-h6 font-weight-bolder text-dark">KLD Email</label>
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="text" name="username" autocomplete="off"/>
+                        <label class="font-size-h6 font-weight-bolder text-dark">KLD Username</label>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" id="kld_username" type="text" name="username" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
@@ -110,13 +121,13 @@ License: You must have a valid license purchased only from themeforest(the above
         					</a>
                         </div>
 
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" type="password" name="password" autocomplete="off"/>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" id="kld_password" type="password" name="password" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
                     <!--begin::Action-->
                     <div class="pb-lg-0 pb-5">
-                        <button type="button" id="kt_login_signin_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                        <button type="button" id="kld_admin_login_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
 
                        
                     </div>
@@ -145,7 +156,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="email" placeholder="KLD Email" name="email" autocomplete="off"/>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="text" placeholder="KLD Username" name="text" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
@@ -294,6 +305,7 @@ License: You must have a valid license purchased only from themeforest(the above
     	    	   <script src="assets/plugins/global/plugins.bundle.js"></script>
 		    	   <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		    	   <script src="assets/js/scripts.bundle.js"></script>
+		    	   <script src="control/js/login.js"></script>
 				<!--end::Global Theme Bundle-->
 
 
@@ -303,3 +315,6 @@ License: You must have a valid license purchased only from themeforest(the above
             </body>
     <!--end::Body-->
 </html>
+<?php
+}
+?>

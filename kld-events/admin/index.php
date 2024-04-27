@@ -1,3 +1,12 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if(!array_key_exists('kld_login_expiration', $_SESSION)){
+    include "login.php";
+} else {
+
+?>
 <!DOCTYPE html>
 <!--
 Template Name: Metronic - Bootstrap 4 HTML, React, Angular 11 & VueJS Admin Dashboard Theme
@@ -171,3 +180,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!--end::Body-->
 </html>
+
+<?php
+}
+?>
