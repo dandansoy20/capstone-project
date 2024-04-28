@@ -34,6 +34,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
+	
+	<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendors Styles-->
 
 	<!--begin::Global Theme Styles(used by all pages)-->
@@ -149,6 +151,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="assets/js/pages/widgets.js"></script>
 
 	<script src="assets/js/pages/custom/wizard/wizard-1.js"></script>
+	<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
 
 	<script src="assets/js/pages/widgets.js"></script>
 	<script src="assets/js/pages/custom/profile/profile.js"></script>

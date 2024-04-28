@@ -1,147 +1,173 @@
-<!--begin::Content-->
-<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+<!--begin::Entry-->
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class=" container ">
+        <!--begin::Row-->
 
 
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class=" container-fluid ">
-            <!--begin::Card-->
-            <div class="card card-custom gutter-b">
-                <div class="card-body">
-                    <div class="d-flex">
-                        <!--begin: Pic-->
-                        <div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
-                            <div class="symbol symbol-50 symbol-lg-120">
-                                <img alt="Pic" src="assets/media/project-logos/3.png" />
+
+        <!--end::Row-->
+        <div class="row">
+            <div class="col-xl-12">
+
+                <!--begin::Engage Widget 1-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <div class="card-body d-flex p-0">
+                        <div class="flex-grow-1 p-8 card-rounded bgi-no-repeat d-flex"
+                            style="background-color: #FFF; background-position: center bottom; background-size: auto 100%; background-image: url(assets/media/svg/humans/custom-88.png)">
+
+                            <div class="col-3 col-xl-3" style="text-align: center;">
+                                <img src="assets/media/svg/humans/custom-8.svg"
+                                    style="width: 100%; object-fit: cover;" />
                             </div>
+                            <div class="col-9 col-xl-9">
+                                <a href="#">
+                                    <h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Kantahan sa
+                                        Bahay</h1>
+                                </a>
 
-                            <div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
-                                <span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
+                                <h6 class="text-dark-50 font-weight-bolder m-0">Sila Mama</h6>
+                                <div class="d-flex my-5">
+                                    <span
+                                        class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Stockholm-icons-/-Design-/-Layers" stroke="none" stroke-width="1"
+                                                fill="none" fill-rule="evenodd">
+                                                <polygon id="Bound" points="0 0 24 0 24 24 0 24"></polygon>
+                                                <path
+                                                    d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z"
+                                                    id="Shape" fill="#000000" fill-rule="nonzero"></path>
+                                                <path
+                                                    d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z"
+                                                    id="Path" fill="#000000" opacity="0.3"></path>
+                                            </g>
+                                        </svg></span> <span class="text-dark h4 text-hover-primary">Academic</span>
+
+                                    <a href="#">
+                                        <span
+                                            class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
+                                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g id="Stockholm-icons-/-Map-/-Marker1" stroke="none" stroke-width="1"
+                                                    fill="none" fill-rule="evenodd">
+                                                    <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                                    <path
+                                                        d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z"
+                                                        id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+                                                </g>
+                                            </svg><!--end::Svg Icon--></span> <span
+                                            class="text-dark h4 text-hover-primary ">College Building 1: Gym</span></a>
+                                </div>
+
+                                <div class="d-flex">
+                                    <span><i class="text-dark flaticon2-calendar mr-3"></i></span> <span
+                                        class="text-dark h4">April 25, 2024</span>
+
+                                    <span
+                                        class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
+                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <g id="Stockholm-icons-/-Home-/-Clock" stroke="none" stroke-width="1"
+                                                fill="none" fill-rule="evenodd">
+                                                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                                <path
+                                                    d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z"
+                                                    id="Mask" fill="#000000" opacity="0.3"></path>
+                                                <path
+                                                    d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z"
+                                                    id="Path-107" fill="#000000"></path>
+                                            </g>
+                                        </svg><!--end::Svg Icon--></span> <span class="text-dark h4 ">06:00 PM</span>
+                                </div>
+
+
+
+                                <p class="text-dark-50 my-5 font-size-xl font-weight-bold">
+                                    wala ako malagay na kahit ano dito kase pang testing lang ganun para malaman ko lang
+                                    kung ano itsura nya kapag naka ano, yung ganito na ano may mahabang text
+                                </p>
+
+
+                                <a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
                             </div>
                         </div>
-                        <!--end: Pic-->
 
-                        <!--begin: Info-->
-                        <div class="flex-grow-1">
-                            <!--begin: Title-->
-                            <div class="d-flex align-items-center justify-content-between flex-wrap">
-                                <div class="mr-3">
-                                    <!--begin::Name-->
-                                    <a href="#"
-                                        class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">
-                                        Midwifery Week 2024 <i class="flaticon2-correct text-success icon-md ml-2"></i>
-                                    </a>
-                                    <!--end::Name-->
-
-                                    <!--begin::Contacts-->
-                                    <div class="d-flex flex-wrap my-2">
-                                        <a href="#"
-                                            class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                            <span
-                                                class="svg-icon svg-icon-md svg-icon-gray-500 mr-1"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg--><svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                    height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24" />
-                                                        <path
-                                                            d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z"
-                                                            fill="#000000" />
-                                                        <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5"
-                                                            r="2.5" />
-                                                    </g>
-                                                </svg><!--end::Svg Icon--></span> BS Midwifery | All Year Levels
-                                        </a>
-                                        <a href="#"
-                                            class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                            <span
-                                                class="svg-icon svg-icon-md svg-icon-gray-500 mr-1"><!--begin::Svg Icon | path:assets/media/svg/icons/General/Lock.svg--><svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                    height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <mask fill="white">
-                                                            <use xlink:href="#path-1" />
-                                                        </mask>
-                                                        <g />
-                                                        <path
-                                                            d="M7,10 L7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 L17,10 L18,10 C19.1045695,10 20,10.8954305 20,12 L20,18 C20,19.1045695 19.1045695,20 18,20 L6,20 C4.8954305,20 4,19.1045695 4,18 L4,12 C4,10.8954305 4.8954305,10 6,10 L7,10 Z M12,5 C10.3431458,5 9,6.34314575 9,8 L9,10 L15,10 L15,8 C15,6.34314575 13.6568542,5 12,5 Z"
-                                                            fill="#000000" />
-                                                    </g>
-                                                </svg><!--end::Svg Icon--></span> Institute of Midwifery Student Council
-                                        </a>
-                                        <a href="#" class="text-muted text-hover-primary font-weight-bold">
-                                            <span
-                                                class="svg-icon svg-icon-md svg-icon-gray-500 mr-1"><!--begin::Svg Icon | path:assets/media/svg/icons/Map/Marker2.svg--><svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                                    height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24" />
-                                                        <path
-                                                            d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z"
-                                                            fill="#000000" />
-                                                    </g>
-                                                </svg><!--end::Svg Icon--></span> College Building 1 - Lobby
-                                        </a>
-                                    </div>
-                                    <!--end::Contacts-->
-                                </div>
-                                <div class="my-lg-0 my-1">
-                                    <a href="#"
-                                        class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">Reports</a>
-                                    <a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">New
-                                        Task</a>
-                                </div>
-                            </div>
-                            <!--end: Title-->
-
-                            <!--begin: Content-->
-                            <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                <div class="flex-grow-1 font-weight-bold text-dark-50 py-5 py-lg-2 mr-5">
-                                You are invited to the First Midwifery Week Celebration of the Kolehiyo ng Lungsod ng Dasmariñas - </br>
-                                Institute of Midwifery with the theme "𝐑𝐞𝐚𝐜𝐡𝐢𝐧𝐠 𝐌𝐢𝐧𝐝𝐬 𝐚𝐧𝐝 𝐓𝐨𝐮𝐜𝐡𝐢𝐧𝐠 𝐇𝐞𝐚𝐫𝐭𝐬: 𝐀 𝐁𝐞𝐠𝐢𝐧𝐧𝐢𝐧𝐠 𝐨𝐟 𝐒𝐭𝐮𝐝𝐞𝐧𝐭 𝐌𝐢𝐝𝐰𝐢𝐯𝐞𝐬 </br>
-                                𝐂𝐨𝐦𝐦𝐮𝐧𝐢𝐭𝐲 𝐄𝐧𝐠𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐢𝐧𝐭𝐨 𝐭𝐡𝐞 𝐖𝐨𝐫𝐥𝐝 𝐨𝐟 𝐌𝐢𝐝𝐰𝐢𝐟𝐞𝐫𝐲".
-                                </div>
-
-                                <div class="d-flex flex-wrap align-items-center py-2">
-                                    <div class="d-flex align-items-center mr-10">
-                                        <div class="mr-6">
-                                            <div class="font-weight-bold mb-2">Start Date</div>
-                                            <span
-                                                class="btn btn-sm btn-text btn-light-primary text-uppercase font-weight-bold">20
-                                                May, 2024</span>
-                                        </div>
-                                        <div class="">
-                                            <div class="font-weight-bold mb-2">Due Date</div>
-                                            <span
-                                                class="btn btn-sm btn-text btn-light-danger text-uppercase font-weight-bold">24
-                                                May, 2024</span>
-                                        </div>
-                                    </div>
-
-                                    
-                                    
-                                </div>
-                            </div>
-                            <!--end: Content-->
-                        </div>
-                        <!--end: Info-->
                     </div>
-
-                    <div class="separator separator-solid my-7"></div>
-
-                    <!--begin: Items-->
-                    
-                    <!--begin: Items-->
                 </div>
+                <!--end::Engage Widget 1-->
             </div>
-            <!--end::Card-->
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Con
+                                Marvin Serrano</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">Head of Student Activity</span>
+
+                            <div class="font-weight-bold text-warning mb-3">Pending</div>
+                        </div>
+                        <img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Riza
+                                Mae Alburo</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">Head of Event's Equipment</span>
+
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
+                        </div>
+                        <img src="assets/media/svg/avatars/014-girl-7.svg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Keno
+                                A. Villavicencio</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">IICS Dean</span>
+
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
+                        </div>
+                        <img src="assets/media/svg/avatars/004-boy-1.svg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
 
         </div>
+
+
+
+
+
         <!--end::Container-->
     </div>
     <!--end::Entry-->
 </div>
-<!--end::Content-->

@@ -153,14 +153,15 @@
 
                                     <div class="form-group">
                                         <label>Venue</label>
-                                        <select name="venue_name" id="venue_name" class="form-control form-control-solid form-control-lg">
+                                        <select name="venue_name" id="venue_name"
+                                            class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select venue</option>
                                             <?php
-                                            include('./control/db.php');
+                                            include ('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from venue_tbl");
-                                            while($row = $try->fetch_array()){
+                                            while ($row = $try->fetch_array()) {
                                                 var_dump($row);
-                                                echo '<option value="' .$row['venue_id'].'">'.$row['venue_name'].'</option>';
+                                                echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -176,7 +177,8 @@
                                                     <div class="input-group date" id="kt_datetimepicker_7_1"
                                                         data-target-input="nearest">
                                                         <input type="text" class="form-control datetimepicker-input"
-                                                            placeholder="Start date" name="event_start_date" id="event_start_date"
+                                                            placeholder="Start date" name="event_start_date"
+                                                            id="event_start_date"
                                                             data-target="#kt_datetimepicker_7_1" />
                                                         <div class="input-group-append"
                                                             data-target="#kt_datetimepicker_7_1"
@@ -191,8 +193,8 @@
                                                     <div class="input-group date" id="kt_datetimepicker_7_2"
                                                         data-target-input="nearest">
                                                         <input type="text" class="form-control datetimepicker-input"
-                                                            placeholder="End date" name="event_end_date" id="event_end_date"
-                                                            data-target="#kt_datetimepicker_7_2" />
+                                                            placeholder="End date" name="event_end_date"
+                                                            id="event_end_date" data-target="#kt_datetimepicker_7_2" />
                                                         <div class="input-group-append"
                                                             data-target="#kt_datetimepicker_7_2"
                                                             data-toggle="datetimepicker">
@@ -219,7 +221,8 @@
                                     <div class="form-group">
                                         <label>Event Title</label>
                                         <input type="text" class="form-control form-control-solid form-control-lg"
-                                               name="event_title" id="event_title" placeholder="Event Details" value="KLD - " />
+                                            name="event_title" id="event_title" placeholder="Event Details"
+                                            value="KLD - " />
                                         <span class="form-text text-muted">Please enter your Event Name.</span>
                                     </div>
                                     <!--end::Input-->
@@ -227,20 +230,22 @@
                                     <!--begin::Input-->
                                     <div class="form-group">
                                         <label>Event Description</label>
-                                        <textarea class="form-control" id="event_description" name="event_description" rows="3"></textarea>
+                                        <textarea class="form-control" id="event_description" name="event_description"
+                                            rows="3"></textarea>
                                         <span class="form-text text-muted">Please enter small details about event</span>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Event Category</label>
-                                        <select name="event_category" id="event_category" class="form-control form-control-solid form-control-lg">
+                                        <select name="event_category" id="event_category"
+                                            class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select category</option>
                                             <?php
-                                            include('./control/db.php');
+                                            include ('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from category_tbl");
-                                            while($row = $try->fetch_array()){
+                                            while ($row = $try->fetch_array()) {
                                                 var_dump($row);
-                                                echo '<option value="' .$row['category_id'].'">'.$row['category_name'].'</option>';
+                                                echo '<option value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -248,13 +253,14 @@
 
                                     <div class="form-group">
                                         <label>Event Organizer</label>
-                                        <select name="event_organizer" id="event_organizer" class="form-control form-control-solid form-control-lg">
+                                        <select name="event_organizer" id="event_organizer"
+                                            class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select organizer</option>
                                             <?php
-                                            include('./control/db.php');
+                                            include ('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from org_tbl");
-                                            while($row = $try->fetch_array()){
-                                                echo '<option value="' .$row['org_id'].'">'.$row['org_name'].'</option>';
+                                            while ($row = $try->fetch_array()) {
+                                                echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -291,34 +297,39 @@
                                 <!--begin::Wizard Step 4-->
                                 <div class="pb-5" data-wizard-type="step-content">
                                     <h4 class="mb-10 font-weight-bold text-dark">Select Event Attendees</h4>
+
+                                    <div class="form-group row">
+                                        <label class="col-3  text-right col-form-label">Select All Students</label>
+                                        <div class="col-3">
+                                            <span class="switch switch-icon">
+                                                <label>
+                                                    <input type="checkbox" checked="checked" name="select" />
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
                                     <!--begin::Input-->
-                                    <div class="form-group">
-                                        <label>Multi Select</label>
-                                        <div class="col-lg-12 col-md-9 col-sm-12">
-                                            <select class="form-control select2" id="kt_select2_3_modal" name="param"
-                                                multiple="multiple">
-                                                <optgroup label="Alaskan/Hawaiian Time Zone">
-                                                    <option value="HI">Hawaii</option>
-                                                </optgroup>
-                                                <optgroup label="Pacific Time Zone">
-                                                    <option value="CA">California</option>
-                                                    <option value="OR">Oregon</option>
-                                                    <option value="WA">Washington</option>
-                                                </optgroup>
-                                                <optgroup label="Mountain Time Zone">
-                                                    <option value="AZ">Arizona</option>
-                                                    <option value="CO">Colorado</option>
-                                                </optgroup>
-                                                <optgroup label="Central Time Zone">
-                                                    <option value="AL">Alabama</option>
-                                                    <option value="AR">Arkansas</option>
-                                                    <option value="IL">Illinois</option>
-                                                </optgroup>
-                                                <optgroup label="Eastern Time Zone">
-                                                    <option value="CT">Connecticut</option>
-                                                    <option value="DE">Delaware</option>
-                                                    <option value="FL">Florida</option>
-                                                </optgroup>
+                                    <div class="form-group row">
+                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Select
+                                            Course</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-12">
+                                            <select class="form-control selectpicker" multiple>
+                                                <option>BSIS</option>
+                                                <option>BS PSY</option>
+                                                <option>BS CE</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Select Year
+                                            Level</label>
+                                        <div class="col-lg-4 col-md-9 col-sm-12">
+                                            <select class="form-control selectpicker" multiple>
+                                                <option>1st year</option>
+                                                <option>2nd year</option>
+                                                <option>3rd year</option>
+                                                <option>4th year</option>
                                             </select>
                                         </div>
                                     </div>
@@ -329,27 +340,32 @@
                                 <div class="pb-5" data-wizard-type="step-content">
                                     <!--begin::Section-->
                                     <h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
-                                    <h6 class="font-weight-bolder mb-3">Date:</h6>
+
+                                    
+                                    <h6 class="font-weight-bolder mt-3">Date:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_date"></span>
 
-                                    <h6 class="font-weight-bolder mb-3">Venue:</h6>
+                                    <h6 class="font-weight-bolder mt-3">Venue:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_venue"></span>
 
                                     <div class="separator separator-dashed my-5"></div>
                                     <!--end::Section-->
 
                                     <!--begin::Section-->
-                                    <h6 class="font-weight-bolder mb-3">Event Title:</h6>
+                                    <h6 class="font-weight-bolder mt-3">Event Title:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_title"></span>
 
-                                    <h6 class="font-weight-bolder mb-3">Event Description:</h6>
+                                    <h6 class="font-weight-bolder mt-3">Event Description:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_description"></span>
 
-                                    <h6 class="font-weight-bolder mb-3">Event Category:</h6>
+                                    <h6 class="font-weight-bolder mt-3">Event Category:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_category"></span>
 
-                                    <h6 class="font-weight-bolder mb-3">Event Organizer:</h6>
+                                    <h6 class="font-weight-bolder mt-3">Event Organizer:</h6>
                                     <span class="text-dark-50 line-height-lg" id="review_organizer"></span>
+
+                                    <h6 class="font-weight-bolder mt-3">Event Attendees:</h6>
+                                    <span class="text-dark-50 line-height-lg" id="review_attendees"></span>
                                     <!--end::Section-->
 
                                     <!--end::Section-->
