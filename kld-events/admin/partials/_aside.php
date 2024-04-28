@@ -106,8 +106,9 @@
 										Events</span></a>
 							</li>
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=up-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Pending
+								<a href="?page=proposal-events" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">Proposal
 										Events</span></a>
 							</li>
 						</ul>
@@ -187,8 +188,89 @@
 				</li>
 
 
+				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
+						href="javascript:;" class="menu-link menu-toggle">
+						<span class="svg-icon menu-icon">
+
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+								width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24" />
+									<circle fill="#000000" opacity="0.3" cx="12" cy="9" r="8" />
+									<path
+										d="M14.5297296,11 L9.46184488,11 L11.9758349,17.4645458 L14.5297296,11 Z M10.5679953,19.3624463 L6.53815512,9 L17.4702704,9 L13.3744964,19.3674279 L11.9759405,18.814912 L10.5679953,19.3624463 Z"
+										fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<path
+										d="M10,22 L14,22 L14,22 C14,23.1045695 13.1045695,24 12,24 L12,24 C10.8954305,24 10,23.1045695 10,22 Z"
+										fill="#000000" opacity="0.3" />
+									<path
+										d="M9,20 C8.44771525,20 8,19.5522847 8,19 C8,18.4477153 8.44771525,18 9,18 C8.44771525,18 8,17.5522847 8,17 C8,16.4477153 8.44771525,16 9,16 L15,16 C15.5522847,16 16,16.4477153 16,17 C16,17.5522847 15.5522847,18 15,18 C15.5522847,18 16,18.4477153 16,19 C16,19.5522847 15.5522847,20 15,20 C15.5522847,20 16,20.4477153 16,21 C16,21.5522847 15.5522847,22 15,22 L9,22 C8.44771525,22 8,21.5522847 8,21 C8,20.4477153 8.44771525,20 9,20 Z"
+										fill="#000000" />
+								</g>
+							</svg>
+
+							<!--end::Svg Icon-->
+						</span><span class="menu-text">Organizations</span><i class="menu-arrow"></i></a>
+					<div class="menu-submenu "><i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=category" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">View Organizations</span></a>
+							</li>
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-org" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+										Organization</span></a>
+							</li>
+
+						</ul>
+					</div>
+				</li>
+
 				<li class="menu-section ">
 					<h4 class="menu-text">Users</h4>
+				</li>
+
+				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
+						href="javascript:;" class="menu-link menu-toggle">
+
+						<span class="svg-icon menu-icon">
+							<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+								width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<rect x="0" y="0" width="24" height="24" />
+									<path
+										d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z"
+										fill="#000000" opacity="0.3" />
+									<path
+										d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z"
+										fill="#000000" opacity="0.3" />
+									<path
+										d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z"
+										fill="#000000" opacity="0.3" />
+								</g>
+							</svg>
+							<!--end::Svg Icon-->
+						</span><span class="menu-text">Admin Users</span><i class="menu-arrow"></i></a>
+
+					<div class="menu-submenu "><i class="menu-arrow"></i>
+						<ul class="menu-subnav">
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=admin-users" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">View Admin </span></a>
+							</li>
+
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-admin" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+										Admin</span></a>
+							</li>
+						</ul>
+					</div>
+
 				</li>
 				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
 						href="javascript:;" class="menu-link menu-toggle">
@@ -197,7 +279,7 @@
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 								width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								
+
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<polygon points="0 0 24 0 24 24 0 24" />
 									<path
@@ -211,7 +293,7 @@
 
 							<!--end::Svg Icon-->
 						</span><span class="menu-text">Organizers</span><i class="menu-arrow"></i></a>
-						
+
 					<div class="menu-submenu "><i class="menu-arrow"></i>
 						<ul class="menu-subnav">
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -221,7 +303,7 @@
 							</li>
 
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="#" class="menu-link"><i
+								<a href="?page=add-org-user" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
 										Organizer</span></a>
 							</li>
@@ -263,32 +345,11 @@
 
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=add-std" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Add Students</span></a>
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+										Students</span></a>
 							</li>
 
 
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="javascript:;" class="menu-link menu-toggle"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Year Level</span><i class="menu-arrow"></i></a>
-								<div class="menu-submenu">
-									<i class="menu-arrow"></i>
-									<ul class="menu-subnav">
-										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-1.html" class="menu-link"><i
-													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">View Year Level</span></a>
-										</li>
-										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-2.html" class="menu-link"><i
-													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">Add Add Year Level</span></a>
-										</li>
-
-									</ul>
-								</div>
-							</li>
 
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle"><i
@@ -298,12 +359,12 @@
 									<i class="menu-arrow"></i>
 									<ul class="menu-subnav">
 										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-1.html" class="menu-link"><i
+											<a href="?page=course" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
 													class="menu-text">View Courses</span></a>
 										</li>
 										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-2.html" class="menu-link"><i
+											<a href="?page=add-course" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
 													class="menu-text">Add Courses</span></a>
 										</li>

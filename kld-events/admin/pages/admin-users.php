@@ -8,7 +8,7 @@
         <div class=" container ">
             <!--begin::Row-->
             <div class="row">
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                     <!--begin::Card-->
                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Body-->
@@ -70,10 +70,6 @@
                             <!--begin::Info-->
                             <div class="mb-7">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-dark-75 font-weight-bolder mr-2">Organization</span>
-                                    <span class="text-muted font-weight-bold">Kulto ni satanas</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
                                     <span class="text-dark-75 font-weight-bolder mr-2">KLD Email:</span>
                                     <a href="#" class="text-muted text-hover-primary">example@kld.edu.ph</a>
                                 </div>
@@ -91,7 +87,7 @@
                     <!--end::Card-->
                 </div>
                 <!--end::Col-->
-                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                     <!--begin::Card-->
                     <div class="card card-custom gutter-b card-stretch">
                         <!--begin::Body-->
@@ -150,10 +146,6 @@
                             <!--end::Desc-->
                             <!--begin::Info-->
                             <div class="mb-7">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="text-dark-75 font-weight-bolder mr-2">Organization</span>
-                                    <span class="text-muted font-weight-bold">Kulto ni Sadam</span>
-                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="text-dark-75 font-weight-bolder mr-2">KLD Email:</span>
                                     <a href="#" class="text-muted text-hover-primary">example@kld.edu.ph</a>
