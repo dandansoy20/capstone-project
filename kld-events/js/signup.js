@@ -1,4 +1,5 @@
-$("#kld_submit").click(function (){
+$("#kld_submit").click(function (e){
+    e.preventDefault();
     if(passwordValidator($("#kld_password").val(),$("#kld_password2").val())){
         if($("#kld_signup_fname").val() == ""){
             Swal.fire("Please specify the first name!", "", "error");
@@ -16,7 +17,7 @@ $("#kld_submit").click(function (){
             "&kld_signup_fname="+ $("#kld_signup_fname").val() +
             "&kld_signup_lname="+ $("#kld_signup_lname").val() +
             "&kld_username="+ $("#kld_username").val() +
-            "&kld_password="+ $("#kld_password").val();
+            "&kld_password="+ btoa(btoa($("#kld_password").val()));
         console.log(dataString)
         $.ajax({
             type: "POST",
@@ -41,6 +42,9 @@ $("#kld_submit").click(function (){
                         console.log(html)
 
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
             }
         });
     }

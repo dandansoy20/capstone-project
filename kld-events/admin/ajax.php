@@ -22,7 +22,7 @@ if (!array_key_exists('ajax', $_POST)) {
             $add_std_section = $_POST['add_std_section'];
             $add_std_kldnum = $_POST['add_std_kldnum'];
             $add_std_email = $_POST['add_std_email']. "@kld.edu.ph";
-            $activation_key = generateRandomString();
+            $activation_key = base64_encode(generateRandomString());
 
             require_once 'assets/mail/src/Exception.php';
             require_once 'assets/mail/src/SMTP.php';
@@ -51,7 +51,7 @@ if (!array_key_exists('ajax', $_POST)) {
                     <body>
                     <br><br>Good day '.$add_std_firstname.",<br><br>".
                     "You are reading this to notify you that we successfully added you to KLD Event.
-                    <br><br>Below is the link to activate your account and create password.<br>
+                    <br><br>Below is the link to activate your account and create password.<br><br><br><br>
                     <center>
                         <a style=
                             'text-decoration: none;
@@ -116,6 +116,8 @@ if (!array_key_exists('ajax', $_POST)) {
             $kld_password = $_POST['kld_password'];
             $query_param = " set std_fname = '".$kld_signup_fname."', ";
             $query_param .= " std_lname = '".$kld_signup_lname."', ";
+            $query_param = " kld_username = '".$kld_username."', ";
+            $query_param .= " kld_password = '".$kld_password."', ";
             $query_param .= " std_activation_key = '' ";
             $query_param .= " where std_activation_key = '".$_SESSION['activation_key']."' ";
 

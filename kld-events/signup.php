@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include('admin/control/db.php');
-if (array_key_exists('ajax', $_GET)) {
+if (!array_key_exists('ajax', $_GET)) {
     echo "The page you're trying to access is inaccessible.";
 } else {
     if($_GET['ajax'] =="account_activation"){

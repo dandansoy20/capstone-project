@@ -56,9 +56,9 @@ function imagefileinsert(e){
     if(!string) return false
     var file = new FileReader();
     file.readAsDataURL(string);
-    //$(file).ready(function (){
-    //});
-    return btoa(file.result);
+    $(file).ready(function (){
+        return btoa(file.result);
+    });
 }
 
 function validateForm(){
