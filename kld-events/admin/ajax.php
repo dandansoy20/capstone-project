@@ -37,13 +37,14 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->Port = 587;
             //$mail->Port = 465;
             $mail->SMTPSecure = "TLS";
+            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=".$activation_key;
 
             $mail->Username = 'steven.dale@lucero.cloud';
             $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
             $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
             $mail->addAddress($add_std_email);
-            $mail->addCC= "denzdmagician@gmail.com";
-            $mail->addCC= "shizukura06@gmail.com";
+            $mail->addCC("denzdmagician@gmail.com");
+            $mail->addCC("shizukura06@gmail.com");
             $mail->Subject = "Welcome to KLD Event " .$add_std_firstname;
             $msg = '
                 <html>
@@ -63,7 +64,7 @@ if (!array_key_exists('ajax', $_POST)) {
                             min-height: 50px;
                             font-size:13px;
                             margin-right:7px' 
-                            href=''>Activate</a>
+                            href='$url'>Activate</a>
                     </center>
                     <br>
                     </body>
@@ -107,6 +108,27 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo "failed";
             }
 
+            break;
+        case "add_std_info":
+            $kld_signup_fname = $_POST['kld_signup_fname'];
+            $kld_signup_lname = $_POST['kld_signup_lname'];
+            $kld_username = $_POST['kld_username'];
+            $kld_password = $_POST['kld_password'];
+            $query_param = " set std_fname = '".$kld_signup_fname."', ";
+            $query_param .= " std_lname = '".$kld_signup_lname."', ";
+            $query_param .= " std_activation_key = '' ";
+            $query_param .= " where std_activation_key = '".$_SESSION['activation_key']."' ";
+
+
+
+            $try = mysqli_query($conn,"Update std_acc". $query_param);
+            if($try) {
+                echo "success";
+                session_destroy();
+            }
+            else {
+                echo "error";
+            }
             break;
         case "create_account":
             $username= $_POST['username'];

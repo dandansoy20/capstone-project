@@ -31,8 +31,12 @@ $("#add_std_submit").click(function (){
             success: function (html) {
                 switch(html){
                     case "success":
-                        Swal.fire("Account successfully created!", "Please try again!", "success");
-                        window.open("index.php", "_self")
+                        Swal.fire("Account successfully created!", "Redirecting to homepage...", "success");
+                        setTimeout(function (){
+                            window.open("index.php", "_self")
+                        },5000 // 5 seconds
+                        )
+
                         break;
                     case "failed":
                         alert("Not saved!");

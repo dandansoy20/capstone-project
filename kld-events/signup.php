@@ -3,14 +3,14 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include('admin/control/db.php');
-if (!array_key_exists('ajax', $_GET)) {
+if (array_key_exists('ajax', $_GET)) {
     echo "The page you're trying to access is inaccessible.";
 } else {
     if($_GET['ajax'] =="account_activation"){
-        $activation_key = $_GET['activation_key'];
-        if($activation_key == "") return "failed";
+        $_SESSION['activation_key'] = $_GET['activation_key'];
+        if($_SESSION['activation_key'] == "") die("The page you're trying to access is inaccessible.");
         $_SESSION['kld_email'] = "";
-        $try = mysqli_query($conn,"Select * from std_acc where std_activation_key = '".$activation_key."'");
+        $try = mysqli_query($conn,"Select * from std_acc where std_activation_key = '".$_SESSION['activation_key']."'");
         while ($row = $try->fetch_array()){
             echo "success";
             $_SESSION['kld_id'] = $row['std_kld_id'];
@@ -18,7 +18,7 @@ if (!array_key_exists('ajax', $_GET)) {
             $_SESSION['kld_fname'] = $row['std_fname'];
             $_SESSION['kld_lname'] = $row['std_lname'];
         }
-        if($_SESSION['kld_email'] == "") return "The page you're trying to access is inaccessible.";
+        if($_SESSION['kld_email'] == "") die("The page you're trying to access is inaccessible.");
 ?>
 <!DOCTYPE html>
 <!--
@@ -154,9 +154,9 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="form-text text-muted text-center"></div>
                             </div>
                             <div class="form-group">
-                                <button id="kt_login_signup_submit"
+                                <button id="kld_submit"
                                     class="btn btn-pill btn-primary opacity-90 px-15 py-3 m-2">Sign Up</button>
-                                <button id="kt_login_signup_cancel" href="index.php" class="btn btn-pill btn-outline-white opacity-70 px-15 py-3 m-2">Cancel</button>
+                                <button href="index.php" class="btn btn-pill btn-outline-white opacity-70 px-15 py-3 m-2">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -248,6 +248,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 </html>
 <?php
+    }
+    else {
+        die("The page you're trying to access is inaccessible.");
     }
 }
 ?>
