@@ -22,43 +22,86 @@ if (!array_key_exists('ajax', $_POST)) {
             $add_std_section = $_POST['add_std_section'];
             $add_std_kldnum = $_POST['add_std_kldnum'];
             $add_std_email = $_POST['add_std_email']. "@kld.edu.ph";
+            $activation_key = generateRandomString();
 
             require_once 'assets/mail/src/Exception.php';
             require_once 'assets/mail/src/SMTP.php';
             require_once 'assets/mail/src/PHPMailer.php';
 
             $mail = new PHPMailer();
-            $mail->SMTPDebug = 4;
+            //$mail->SMTPDebug = 4;
             $mail->IsSMTP();
             $mail->SMTPAuth = true;
             $mail->IsHTML(true);
             $mail->Host = 'smtp.hostinger.com';
-            $mail->Port = 465;
-            $mail->SMTPSecure = "SSL";
+            $mail->Port = 587;
+            //$mail->Port = 465;
+            $mail->SMTPSecure = "TLS";
 
             $mail->Username = 'steven.dale@lucero.cloud';
-            $mail->Password = base64_decode("JHRhY3lMMWx5THVjI3Iw");
+            $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
             $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
             $mail->addAddress($add_std_email);
+            $mail->addCC= "denzdmagician@gmail.com";
+            $mail->addCC= "shizukura06@gmail.com";
             $mail->Subject = "Welcome to KLD Event " .$add_std_firstname;
             $msg = '
                 <html>
                     <body>
                     <br><br>Good day '.$add_std_firstname.",<br><br>".
-                    ", You are reading this to notify you that we successfully added you to KLD Event.
+                    "You are reading this to notify you that we successfully added you to KLD Event.
                     <br><br>Below is the link to activate your account and create password.<br>
                     <center>
-                        <a style='text-decoration: none;background:#00bf00;border:1px solid transparent;color:white;border-radius:15px;padding:15px 47px;min-width: 300px;min-height: 50px;font-size:13px;margin-right:7px' href=''>Activate</a>
-                    </center><br>
+                        <a style=
+                            'text-decoration: none;
+                            background:#00bf00;
+                            border:1px solid transparent;
+                            color:white;
+                            border-radius:15px;
+                            padding:15px 47px;
+                            min-width: 300px;
+                            min-height: 50px;
+                            font-size:13px;
+                            margin-right:7px' 
+                            href=''>Activate</a>
+                    </center>
+                    <br>
                     </body>
                 </html>";
             //$mail->Body    = '';
             $mail->Body = $msg;
-            $mail->addCC= "denzdmagician@gmail.com";
-            $mail->addCC= "shizukura06@gmail.com";
 
             if($mail->Send()){
-                echo "success";
+                $query_param = " (  std_kld_id,
+                                    std_kld_email,
+                                    std_fname,
+                                    std_lname,
+                                    yearlvl,
+                                    course_id,
+                                    section_id,
+                                    status,
+                                    std_profilepic,
+                                    std_activation_key) ";
+                $query_param .= "   values (
+                                    '".$add_std_kldnum."',
+                                    '".$add_std_email."',
+                                    '".$add_std_firstname."',
+                                    '".$add_std_lastname."',
+                                    '".$add_std_yearlvl."',
+                                    '".$add_std_course."',
+                                    '".$add_std_section."',
+                                    'inactive',
+                                    '".$add_std_profilepic."',
+                                    '".$activation_key."') ";
+
+                $try = mysqli_query($conn,"Insert into std_acc". $query_param);
+                if($try) {
+                    echo "success";
+                }
+                else {
+                    echo "error";
+                }
+
             }
             else{
                 echo "failed";
@@ -411,8 +454,6 @@ if (!array_key_exists('ajax', $_POST)) {
 
             break;
 
-
-
         case 4:
             include('db.php');
             $name2 = $_POST['name2'];
@@ -504,14 +545,11 @@ if (!array_key_exists('ajax', $_POST)) {
     }
     //unset($_SESSION['ajax']);
 }
-//function save_mail($mail)
-//{
-//    //You can change 'Sent Mail' to any other folder or tag
-//    $path = "{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail";
-//    //Tell your server to open an IMAP connection using the same username and password as you used for SMTP
-//    $imapStream = imap_open($path, 'philchecklist@gmail.com', 'newphhealth20');
-//    $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
-//    imap_close($imapStream);
-//    return $result;
-//}
-//unset($_SESSION['ajax']);
+function generateRandomString($length = 20) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+[]{}|;:,.<>?';
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $randomString;
+}
