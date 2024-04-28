@@ -22,8 +22,8 @@
 
             </div>
             <div class="card-footer">
-                <button id="add_cat_submit" type="reset" class="btn btn-primary mr-2">Submit</button>
-                <button id="add_cat_cancel" type="reset" class="btn btn-secondary">Cancel</button>
+                <button id="add_cat_submit" class="btn btn-primary mr-2">Submit</button>
+                <button id="add_cat_cancel" class="btn btn-secondary">Cancel</button>
             </div>
         </form>
         <!--end::Form-->

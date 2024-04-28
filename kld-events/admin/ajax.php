@@ -2,12 +2,69 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 include('control/db.php');
 if (!array_key_exists('ajax', $_POST)) {
     echo '<script>window.close()</script>';
 } else {
 
     switch ($_POST['ajax']) {
+        case "add_std":
+            $add_std_profilepic = base64_decode($_POST['add_std_profilepic']);
+            $add_std_firstname = $_POST['add_std_firstname'];
+            $add_std_lastname = $_POST['add_std_lastname'];
+            $add_std_course = $_POST['add_std_course'];
+            $add_std_yearlvl = $_POST['add_std_yearlvl'];
+            $add_std_section = $_POST['add_std_section'];
+            $add_std_kldnum = $_POST['add_std_kldnum'];
+            $add_std_email = $_POST['add_std_email']. "@kld.edu.ph";
+
+            require_once 'assets/mail/src/Exception.php';
+            require_once 'assets/mail/src/SMTP.php';
+            require_once 'assets/mail/src/PHPMailer.php';
+
+            $mail = new PHPMailer();
+            $mail->SMTPDebug = 4;
+            $mail->IsSMTP();
+            $mail->SMTPAuth = true;
+            $mail->IsHTML(true);
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->Port = 465;
+            $mail->SMTPSecure = "SSL";
+
+            $mail->Username = 'steven.dale@lucero.cloud';
+            $mail->Password = base64_decode("JHRhY3lMMWx5THVjI3Iw");
+            $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
+            $mail->addAddress($add_std_email);
+            $mail->Subject = "Welcome to KLD Event " .$add_std_firstname;
+            $msg = '
+                <html>
+                    <body>
+                    <br><br>Good day '.$add_std_firstname.",<br><br>".
+                    ", You are reading this to notify you that we successfully added you to KLD Event.
+                    <br><br>Below is the link to activate your account and create password.<br>
+                    <center>
+                        <a style='text-decoration: none;background:#00bf00;border:1px solid transparent;color:white;border-radius:15px;padding:15px 47px;min-width: 300px;min-height: 50px;font-size:13px;margin-right:7px' href=''>Activate</a>
+                    </center><br>
+                    </body>
+                </html>";
+            //$mail->Body    = '';
+            $mail->Body = $msg;
+            $mail->addCC= "denzdmagician@gmail.com";
+            $mail->addCC= "shizukura06@gmail.com";
+
+            if($mail->Send()){
+                echo "success";
+            }
+            else{
+                echo "failed";
+            }
+
+            break;
         case "create_account":
             $username= $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
@@ -38,7 +95,6 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo "error";
             }
             break;
-
         case "logging_in":            
             $username= $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
@@ -52,8 +108,10 @@ if (!array_key_exists('ajax', $_POST)) {
                     while ($row = $try->fetch_array()){
                         echo "success"; //match yung uname at pass
                         $_SESSION['kld_username'] = $row['admin_uname'];
+                        $_SESSION['login_type'] = "Administrator";
                         $_SESSION['kld_fname'] = $row['admin_fname'];
                         $_SESSION['kld_lname'] = $row['admin_lname'];
+                        $_SESSION['kld_email'] = "";
                         $_SESSION['kld_login_expiration'] = true;
                         return; 
                     }
@@ -168,7 +226,6 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo 2;
             }
             break;
-
         case "calendar_init":
             $try = mysqli_query(
                 $conn,
