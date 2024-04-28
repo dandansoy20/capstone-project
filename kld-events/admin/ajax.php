@@ -8,6 +8,37 @@ if (!array_key_exists('ajax', $_POST)) {
 } else {
 
     switch ($_POST['ajax']) {
+        case "create_account":
+            $username= $_POST['username'];
+            $password = base64_encode(base64_encode($_POST['password']));
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $login_type = null;
+            $query_param = null;
+
+            switch($_POST['account_type']){
+                case "admin":
+                    $login_type = " admin_acc ";
+                    $query_param = " (admin_uname,admin_pass,admin_fname,admin_lname) ";
+                    $query_param .= " values ('".$username."','".$password."','".$firstname."','".$lastname."') ";
+                    break;
+                case "student":
+                    $login_type = "std_acc";
+                    break;
+                case "admin":
+                    $login_type = "admin_acc";
+                    break;
+            }
+            
+            $try = mysqli_query($conn,"Insert into ".$login_type . $query_param);
+            if($try) {
+                echo "success";
+            }
+            else {
+                echo "error";
+            }
+            break;
+
         case "logging_in":            
             $username= $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));

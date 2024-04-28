@@ -122,6 +122,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
 
                         <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg" id="kld_password" type="password" name="password" autocomplete="off"/>
+                        <input type="hidden" id="login_type" value="admin" />
                     </div>
                     <!--end::Form group-->
 
@@ -149,26 +150,39 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!--end::Title-->
 
                     <!--begin::Form group-->
-                    <div class="form-group">
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="text" placeholder="Fullname" name="fullname" autocomplete="off"/>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <!--begin::Input-->
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" id="kld_firstname_admin" placeholder="First Name" />
+                            </div>
+                            <!--end::Input-->
+                        </div>
+                        <div class="col-xl-6">
+                            <!--begin::Input-->
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" id="kld_lastname_admin" placeholder="Last Name" />
+                            </div>
+                            <!--end::Input-->
+                        </div>
                     </div>
                     <!--end::Form group-->
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="text" placeholder="KLD Username" name="text" autocomplete="off"/>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" id="kld_username_admin" type="text" placeholder="KLD Username" name="text" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="password" placeholder="Password" name="password" autocomplete="off"/>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" id="kld_username_pass1" type="password" placeholder="Password" name="password" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
                     <!--begin::Form group-->
                     <div class="form-group">
-                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="password" placeholder="Confirm password" name="cpassword" autocomplete="off"/>
+                        <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" id="kld_username_pass2" type="password" placeholder="Confirm password" name="cpassword" autocomplete="off"/>
                     </div>
                     <!--end::Form group-->
 
@@ -183,7 +197,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!--begin::Form group-->
                     <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
-                        <button type="button" id="kt_login_signup_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
+                        <button type="button" id="kld_form_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
                         <button type="button" id="kt_login_signup_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
                     </div>
                     <!--end::Form group-->
