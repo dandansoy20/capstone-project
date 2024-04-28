@@ -237,6 +237,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="org-admin/assets/plugins/global/plugins.bundle.js"></script>
     <script src="org-admin/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
     <script src="org-admin/assets/js/scripts.bundle.js"></script>
+    <script src="js/signup.js"></script>
     <!--end::Global Theme Bundle-->
 
 
