@@ -362,6 +362,15 @@
                                     </div>
                                     <!--begin::Select-->
 
+                                    <div class="form-group row">
+                                        <label>Write your letter</label>
+                                        <div class="col-12">
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1000"
+                                                placeholder="" rows="6"></textarea>
+                                            <span class="form-text text-muted">Maximum of 1,000 characters only</span>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <!--end::Wizard Step 4-->
 
