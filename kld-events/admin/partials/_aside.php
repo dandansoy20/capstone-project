@@ -261,6 +261,12 @@
 										class="menu-text">View Students</span></a>
 							</li>
 
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-std" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">Add Students</span></a>
+							</li>
+
 
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle"><i
