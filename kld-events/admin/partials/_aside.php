@@ -354,7 +354,7 @@
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Courses</span><i class="menu-arrow"></i></a>
+										class="menu-text">Course & Section</span><i class="menu-arrow"></i></a>
 								<div class="menu-submenu">
 									<i class="menu-arrow"></i>
 									<ul class="menu-subnav">
@@ -367,6 +367,11 @@
 											<a href="?page=add-course" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
 													class="menu-text">Add Courses</span></a>
+										</li>
+										<li class="menu-item" aria-haspopup="true">
+											<a href="?page=add-course" class="menu-link"><i
+													class="menu-bullet menu-bullet-dot"><span></span></i><span
+													class="menu-text">Add Section</span></a>
 										</li>
 
 									</ul>

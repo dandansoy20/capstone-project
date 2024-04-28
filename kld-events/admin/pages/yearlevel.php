@@ -50,7 +50,7 @@
             </div>
             <div class="col-xl-3">
                 <!--begin::Stats Widget 13-->
-                <a href="?page=view-course" class="card card-custom bg-warning bg-hover-state-warning card-stretch gutter-b">
+                <a href="?page=sections" class="card card-custom bg-warning bg-hover-state-warning card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
 
