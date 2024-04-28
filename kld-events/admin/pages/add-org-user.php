@@ -80,10 +80,10 @@
                                             <!--end::Group-->
                                             <!--begin::Group-->
                                             <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Course</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                 <div class="col-lg-9 col-xl-9">
                                                 <select class="form-control form-control-solid form-control-lg" name="course" type="text" value="">
-                                                        <option selected disabled>Select Course</option>
+                                                        <option selected disabled>Select Organization</option>
 
                                                     </select>
                                                 </div>
@@ -91,28 +91,10 @@
                                             <!--end::Group-->
                                               <!--begin::Group-->
                                               <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Year Level</label>
+                                                <label class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <select class="form-control form-control-solid form-control-lg" name="yrlvl" type="text" value="">
-                                                        <option selected disabled>Select Year Level</option>
-                                                        <option>1st Year</option>
-                                                        <option>2nd Year</option>
-                                                        <option>3rd Year</option>
-                                                        <option>4th Year</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <!--end::Group-->
-                                            <!--begin::Group-->
-                                            <div class="form-group row">
-                                                <label class="col-xl-3 col-lg-3 col-form-label">Section</label>
-                                                <div class="col-lg-9 col-xl-9">
-                                                    <div class="input-group input-group-solid input-group-lg">
-                                                    <select class="form-control form-control-solid form-control-lg" name="section"  type="text" value="">
-                                                        <option selected disabled>Select Section</option>
-                                                    </select>
-                                                    </div>
+                                                    
+                                                <input class="form-control form-control-solid form-control-lg" name="lastname" placeholder="(Optional)" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -138,6 +120,20 @@
                                             </div>
                                             <!--end::Group-->
                                         </div>
+
+                                        
+                                        <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                                        <div class="mr-2">
+                                                        </div>
+                                                        <div>
+                                                            <button type="button"
+                                                                class="btn btn-success font-weight-bolder px-9 py-4"
+                                                                data-wizard-type="action-submit">
+                                                                Add
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
                                         <!--end::Wizard Step 1-->
 
                                     
