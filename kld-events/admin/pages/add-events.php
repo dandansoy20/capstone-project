@@ -160,7 +160,6 @@
                                             include ('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from venue_tbl");
                                             while ($row = $try->fetch_array()) {
-                                                var_dump($row);
                                                 echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
                                             }
                                             ?>
@@ -243,9 +242,9 @@
                                             <?php
                                             include ('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from category_tbl");
-                                            while ($row = $try->fetch_array()) {
+                                            while($row = $try->fetch_array()){
                                                 var_dump($row);
-                                                echo '<option value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
+                                                echo '<option value="' .$row['category_id'].'">'.$row['category_name'].'</option>';
                                             }
                                             ?>
                                         </select>

@@ -34,9 +34,11 @@ if (session_status() == PHP_SESSION_NONE) {
 					<?php echo $_SESSION['kld_fname']. " ". $_SESSION['kld_lname'] ?>
 				</a>
 				<div class="text-muted mt-1">
-					Head Student Activities
+                    <?php echo $_SESSION['login_type']; ?>
 				</div>
 				<div class="navi mt-2">
+                    <?php
+                    if($_SESSION['kld_email'] != ""){ ?>
 					<a href="#" class="navi-item">
 						<span class="navi-link p-0 pb-2">
 							<span class="navi-icon mr-1">
@@ -52,9 +54,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
 									<!--end::Svg Icon-->
 								</span> </span>
-							<span class="navi-text text-muted text-hover-primary">cmserrano@kld.edu.ph</span>
+							<span class="navi-text text-muted text-hover-primary"><?php echo $_SESSION['kld_email']; ?></span>
 						</span>
 					</a>
+                    <?php } ?>
 					<a href="logout.php" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
 				</div>
 			</div>
