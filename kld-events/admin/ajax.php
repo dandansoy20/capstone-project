@@ -116,8 +116,8 @@ if (!array_key_exists('ajax', $_POST)) {
             $kld_password = $_POST['kld_password'];
             $query_param = " set std_fname = '".$kld_signup_fname."', ";
             $query_param .= " std_lname = '".$kld_signup_lname."', ";
-            $query_param = " kld_username = '".$kld_username."', ";
-            $query_param .= " kld_password = '".$kld_password."', ";
+            $query_param .= " std_uname = '".$kld_username."', ";
+            $query_param .= " std_pass = '".$kld_password."', ";
             $query_param .= " std_activation_key = '' ";
             $query_param .= " where std_activation_key = '".$_SESSION['activation_key']."' ";
 
