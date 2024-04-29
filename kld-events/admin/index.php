@@ -27,7 +27,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<base href="">
 		<meta charset="utf-8" />
 		<title>KLD Events | Admin</title>
-		<meta name="description" content="Metronic admin dashboard live demo. Check out all the features of the admin panel. A large number of settings, additional services and widgets. " />
+		<meta name="description" content="KLD EVENTS MANAGEMENTS SYSTEM FOR ORGANIZERS AND ADMINISTRATION " />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic/demo1/index.html" />
 

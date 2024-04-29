@@ -90,7 +90,7 @@
                                     kung ano itsura nya kapag naka ano, yung ganito na ano may mahabang text
                                 </p>
                                 
-                            <a href="?page=event-view" class="btn btn-light font-weight-bold py-2 px-6">Add Details</a>
+                            <a href="?page=add-details" class="btn btn-light font-weight-bold py-2 px-6">Add Details</a>
                             
                             <a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
                             </div>

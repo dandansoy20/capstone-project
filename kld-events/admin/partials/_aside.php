@@ -369,7 +369,7 @@
 													class="menu-text">Add Courses</span></a>
 										</li>
 										<li class="menu-item" aria-haspopup="true">
-											<a href="?page=add-course" class="menu-link"><i
+											<a href="?page=add-section" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
 													class="menu-text">Add Section</span></a>
 										</li>

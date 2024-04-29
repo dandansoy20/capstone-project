@@ -272,6 +272,29 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
 
+
+<script>
+    // Function to handle smooth scrolling
+    function scrollToElement(element) {
+    window.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: element.offsetTop
+    });
+}
+
+// Add event listeners to links
+document.querySelectorAll('.link a').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        const targetId = this.getAttribute('href'); // Get target ID from href attribute
+        const targetElement = document.querySelector(targetId); // Get target element by ID
+        if (targetElement) {
+            scrollToElement(targetElement); // Scroll to target element
+        }
+    });
+});
+</script>
 </body>
 
 </html>

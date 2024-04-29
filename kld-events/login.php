@@ -1,5 +1,5 @@
-<section class="login-event">
-    <div class="login_body" id="login">
+<section class="login-event" id="login">
+    <div class="login_body" >
       <div class="login_container" id="login_container">
 
         <div class="form-container sign-up-container">
@@ -38,4 +38,5 @@
       </div>
     </div>
 
+   
   </section>

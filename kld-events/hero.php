@@ -50,7 +50,7 @@
                                     and a collective celebration of excellence in every aspect of our foundation.
                                 </p>
                                 <div class="btn-box">
-                                    <a href="fsweek.php" class="btn1">
+                                    <a href="#login" class="btn1">
                                         Read More
                                     </a>
                                 </div>
@@ -82,7 +82,7 @@
                                     of Institute of Engineering Foundation
                                 </p>
                                 <div class="btn-box">
-                                    <a href="fsweek.php" class="btn1">
+                                    <a href="#login" class="btn1">
                                         Read More
                                     </a>
                                 </div>
@@ -119,7 +119,7 @@
                                     committed to a healthier, drug-free future.
                                 </p>
                                 <div class="btn-box">
-                                    <a href="drugs.php" class="btn1">
+                                    <a href="#login" class="btn1">
                                         Read More
                                     </a>
                                 </div>
@@ -155,7 +155,7 @@
                                     showcases the rich and diverse heritage of Filipino culture.
                                 </p>
                                 <div class="btn-box">
-                                    <a href="barrio.php" class="btn1">
+                                    <a href="#login" class="btn1">
                                         Register Now
                                     </a>
                                 </div>
@@ -188,7 +188,7 @@
                                     end of another amazing academic year! All students are invited to join in the fun.
                                 </p>
                                 <div class="btn-box">
-                                    <a href="year-end.php" class="btn1">
+                                    <a href="#login" class="btn1">
                                         Read More
                                     </a>
                                 </div>
@@ -211,5 +211,7 @@
             <li data-target="#customCarousel1" data-slide-to="4"></li>
         </ol>
     </div>
+
+  
 
 </section>
