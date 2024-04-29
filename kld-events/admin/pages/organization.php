@@ -2,7 +2,7 @@
     <div class="row">
         <?php
         include('./control/db.php');
-        $try = mysqli_query($conn, "Select * from category_tbl");
+        $try = mysqli_query($conn, "Select * from org_tbl");
         while ($row = $try->fetch_array()) {
             echo '<div class="col-xl-4">
             <!--begin::Mixed Widget 7-->
@@ -22,17 +22,14 @@
                         <!--begin:Title-->
                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
                             <a href="#" class="text-dark font-weight-bolder text-hover-primary font-size-h5">
-                                ' . $row["category_name"] . '
+                                ' . $row["org_name"] . '
                             </a>
                             <span class="text-muted font-weight-bold font-size-lg">
-                                Date Created: ' . date('M d, Y', strtotime($row["category_created"])) . '
+                                Date Created: ' . date('M d, Y', strtotime($row["org_created"])) . '
                             </span>
                         </div>
                         <!--end:Title-->
                         
-                        <span class="text-dark-50 font-weight-normal font-size-lg mt-6" style="width: 100%">
-                            ' . $row["category_desc"] . '
-                        </span>
                         
                     </div>
                 </div>

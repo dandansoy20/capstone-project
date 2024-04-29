@@ -22,11 +22,10 @@
                             </div>
                             <div class="col-9 col-xl-9">
                                 <a href="#">
-                                    <h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Kantahan sa
-                                        Bahay</h1>
+                                    <h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Sample Events</h1>
                                 </a>
 
-                                <h6 class="text-dark-50 font-weight-bolder m-0">Sila Mama</h6>
+                                <h6 class="text-dark-50 font-weight-bolder m-0">Sample Organization</h6>
                                 <div class="d-flex my-5">
                                     <span
                                         class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
@@ -43,7 +42,7 @@
                                                     d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z"
                                                     id="Path" fill="#000000" opacity="0.3"></path>
                                             </g>
-                                        </svg></span> <span class="text-dark h4 text-hover-primary">Academic</span>
+                                        </svg></span> <span class="text-dark h4 text-hover-primary">Sample category</span>
 
                                     <a href="#">
                                         <span
@@ -59,7 +58,7 @@
                                                         id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
                                                 </g>
                                             </svg><!--end::Svg Icon--></span> <span
-                                            class="text-dark h4 text-hover-primary ">College Building 1: Gym</span></a>
+                                            class="text-dark h4 text-hover-primary ">College Building 1: Venue</span></a>
                                 </div>
 
                                 <div class="d-flex">
