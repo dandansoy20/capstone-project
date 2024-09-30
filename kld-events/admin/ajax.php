@@ -109,6 +109,98 @@ if (!array_key_exists('ajax', $_POST)) {
             }
 
             break;
+            case "add_org_user":
+                $add_org_profilepic = base64_decode($_POST['add_org_profilepic']);
+                $add_org_fname = $_POST['add_org_fname'];
+                $add_org_lname = $_POST['add_org_lname'];
+                $add_org_role = $_POST['add_org_role'];
+                $add_org_organization = $_POST['add_org_organization'];
+                $add_org_kldid = $_POST['add_org_kldid'];
+                $add_org_email = $_POST['add_org_email']. "@kld.edu.ph";
+                $activation_key = base64_encode(generateRandomString());
+    
+                require_once 'assets/mail/src/Exception.php';
+                require_once 'assets/mail/src/SMTP.php';
+                require_once 'assets/mail/src/PHPMailer.php';
+    
+                $mail = new PHPMailer();
+                //$mail->SMTPDebug = 4;
+                $mail->IsSMTP();
+                $mail->SMTPAuth = true;
+                $mail->IsHTML(true);
+                $mail->Host = 'smtp.hostinger.com';
+                $mail->Port = 587;
+                //$mail->Port = 465;
+                $mail->SMTPSecure = "TLS";
+                $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=".$activation_key;
+    
+                $mail->Username = 'steven.dale@lucero.cloud';
+                $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
+                $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
+                $mail->addAddress($add_org_email);
+                $mail->addCC("denzdmagician@gmail.com");
+                $mail->addCC("shizukura06@gmail.com");
+                $mail->Subject = "Welcome to KLD Event, " .$add_org_fname;
+                $msg = '
+                    <html>
+                        <body>
+                        <br><br>Good day '.$add_org_fname.",<br><br>".
+                        "You are reading this to notify you that we successfully added you to KLD Event as an organizer.
+                        <br><br>Below is the link to activate your account and create password.<br><br><br><br>
+                        <center>
+                            <a style=
+                                'text-decoration: none;
+                                background:#00bf00;
+                                border:1px solid transparent;
+                                color:white;
+                                border-radius:15px;
+                                padding:15px 47px;
+                                min-width: 300px;
+                                min-height: 50px;
+                                font-size:13px;
+                                margin-right:7px' 
+                                href='$url'>Activate</a>
+                        </center>
+                        <br>
+                        </body>
+                    </html>";
+                //$mail->Body    = '';
+                $mail->Body = $msg;
+    
+                if($mail->Send()){
+                    $query_param = " (
+                                        org_email,
+                                        org_fname,
+                                        org_lname,
+                                        org_role,
+                                        org_id,
+                                        status,
+                                        org_profile,
+                                        org_activation_key) ";
+                    $query_param .= "   values (
+                                        '".$add_org_email."',
+                                        '".$add_org_fname."',
+                                        '".$add_org_lname."',
+                                        '".$add_org_role."',
+                                        '".$add_org_organization."',
+                                        'NEW',
+                                        '".$add_org_profilepic."',
+                                        '".$activation_key."') ";
+    
+                    $try = mysqli_query($conn,"Insert into org_acc". $query_param);
+                    if($try) {
+                        echo "success";
+                    }
+                    else {
+                        echo "error";
+                    }
+    
+                }
+                else{
+                    echo "failed";
+                }
+    
+                break;
         case "add_std_info":
             $kld_signup_fname = $_POST['kld_signup_fname'];
             $kld_signup_lname = $_POST['kld_signup_lname'];
@@ -314,113 +406,37 @@ if (!array_key_exists('ajax', $_POST)) {
             break;
 
         case "add_cat2":
+            $try = mysqli_query(
+                $conn,
+                "Select * from kld_event
+            ");
+            $json = [];
+            while ($row = $try->fetch_array()){
+                $temp_obj = new stdClass();
+                $temp_obj->title = $row['event_title'];
+                $temp_obj->start = $row['event_start_date'];
+                $temp_obj->end = $row['event_end_date'];
+                $temp_obj->description = $row['event_desc'];
+                $temp_obj->className = $row['event_start_date'] == $row['event_end_date'] ? "fc-event-primary" : "fc-event-solid-info";
 
-            $html = base64_decode(base64_decode(base64_decode(base64_decode($_POST['html']))));
-            $html = file_get_contents($html);
-            $from = $_POST['from'];
-            $to = $_POST['to'];
-            $d1 = base64_decode($_POST['d1']);
-            $d2 = base64_decode($_POST['d2']);
-            $appr = $_POST['approval'];
-            $cc = base64_decode($_POST['cc']);
-            $name = base64_decode($_POST['name']);
-
-
-            require './mail/src/Exception.php';
-            require './mail/src/SMTP.php';
-            require './mail/src/PHPMailer.php';
-
-            $mail = new PHPMailer();
-            //$mail->SMTPDebug = 4;
-            $mail->IsSMTP();
-            $mail->SMTPAuth = true;
-            $mail->IsHTML(true);
-            $mail->Host = 'smtp.gmail.com';
-            //$mail->Host = 'mail.philcopy.net';
-            $mail->Port = 587;
-            $mail->SMTPSecure = "TLS";
-
-            //$mail->Username = 'noreply@philcopy.net';
-            //$mail->Password = 'noreply33philcopy';
-            $mail->Username = 'philchecklist@gmail.com';
-            $mail->Password = 'newphhealth20!';
-            //$mail->addReplyTo($from,'Reply: Philcopy Gatepass');
-            $mail->setFrom ('philchecklist@gmail.com','noreply');
-            //$mail->setFrom ('noreply@philcopy.net','noreply');
-            $mail->addAddress  ($to);
-            //if(trim($cc) != ''){
-            //    $cc = $cc . ';';
-            //    $cc2 = explode(';',$cc);
-            //    $cc3 = array_keys($cc2);
-            //    $cc4= end($cc3);
-            //    for ($i = 0; $i <= $cc4 - 1; $i++) {
-            //        $mail->addCC($cc2[$i]);
-            //    }
-            /*
-
-            */
-            //}
-            $mail->Subject = 'Reply for Philcopy Health Checklist to ' . utf8_encode($name);
-            $msg =     "
-                <html><body>Good day,<br><br>The attached file is the response to your Philcopy Health Checklist. <br>Thank you for your cooperation.
-                <br></body></html>";
-            //$mail->Body    = '';
-            $mail->Body    = $msg;
-            $mail->addStringAttachment($html, 'GATE PASS.pdf', "base64", "application/pdf");
-
-            if($mail->Send()){
-
-                echo $appr == '1' ? 'Approval Sent!' :  'Disapproval Sent!';
-                //save_mail($mail);
-                if(trim($cc) != '') {
-                    $isapprove = $appr == '1' ? '<span style="color:#41bb34">APPROVED</span>' : '<span style="color:#d90300">DISAPPROVED</span>';
-                    $apprmsg = $appr == '1' ? 'ALLOWED' : 'NOT ALLOWED';
-
-                    $mail = new PHPMailer();
-                    //$mail->SMTPDebug = 4;
-                    $mail->IsSMTP();
-                    $mail->SMTPAuth = true;
-                    $mail->IsHTML(true);
-                    //$mail->Host = 'mail.philcopy.net';
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->Port = 587;
-                    $mail->SMTPSecure = "TLS";
-
-                    //$mail->Username = 'noreply@philcopy.net';
-                    //$mail->Password = 'noreply33philcopy';
-                    //$mail->setFrom('noreply@philcopy.net', 'noreply');
-
-                    $mail->Username = 'philchecklist@gmail.com';
-                    $mail->Password = 'newphhealth20!';
-                    $mail->setFrom ('philchecklist@gmail.com','noreply');
-                    if (trim($cc) != '') {
-                        $cc = $cc . ';';
-                        $cc2 = explode(';', $cc);
-                        $cc3 = array_keys($cc2);
-                        $cc4 = end($cc3);
-                        for ($i = 0; $i <= $cc4 - 1; $i++) {
-                            $mail->addAddress($cc2[$i]);
-                        }
-                    }
-                    $mail->Subject = 'Notification to ' . $name;
-                    $msg = "
-                <html><body>Good day,<br><br>FYI, " . $name . " is marked as <big>" . $isapprove . " </big>  and he/she is <big>" . $apprmsg . "</big> to enter the company premises from " . $d1 . " to " . $d2 . "
-                <br><br>Thank you</body></html>";
-                    //$mail->Body    = '';
-                    $mail->Body = $msg;
-                    if (!$mail->Send()) {
-                        echo "\nBut messages to CC emails could not be sent, this error commonly caused by typo emails. Please try again!";
-                    }
-                    else{
-                        //save_mail($mail);
-                    }
-                }
-
-            }
-            else{
-                echo "Message could not be sent. Please try again. Mailer Error: {$mail->ErrorInfo}";
+                array_push($json, $temp_obj);
             }
 
+            echo json_encode($json);
+            break;
+
+        case "hide_org":
+            $org_acc_id = $_POST['org_acc_id'];
+            $try = mysqli_query(
+                $conn,
+                "Update org_acc set status = 'INACTIVE' where org_acc_id = '".$org_acc_id."'
+            ");
+            if($try) {
+                echo 1;
+            }
+            else {
+                echo 2;
+            }
 
             break;
         case 3:

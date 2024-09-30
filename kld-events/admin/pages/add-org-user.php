@@ -51,7 +51,7 @@
 
         												<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
         						                            <i class="fa fa-pen icon-sm text-muted"></i>
-        						                            <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg"/>
+        						                            <input type="file" name="profile_avatar" id="add_org_profilepic" accept=".png, .jpg, .jpeg"/>
         													<input type="hidden" name="profile_avatar_remove"/>
         						                        </label>
 
@@ -66,7 +66,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="firstname"placeholder="(Optional)" type="text" value=""/>
+                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_fname" name="firstname" placeholder="(Optional)" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -74,7 +74,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" name="lastname" placeholder="(Optional)" type="text" value=""/>
+                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_lname" name="lastname" placeholder="(Optional)" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -82,9 +82,15 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                <select class="form-control form-control-solid form-control-lg" name="course" type="text" value="">
+                                                <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
                                                         <option selected disabled>Select Organization</option>
-
+                                                        <?php
+                                                        include ('./control/db.php');
+                                                        $try = mysqli_query($conn, "Select * from org_tbl");
+                                                        while ($row = $try->fetch_array()) {
+                                                            echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -94,7 +100,7 @@
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     
-                                                <input class="form-control form-control-solid form-control-lg" name="lastname" placeholder="(Optional)" type="text" value=""/>
+                                                <input class="form-control form-control-solid form-control-lg" name="role" id="add_org_role" placeholder="(Optional)" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -103,7 +109,7 @@
                                                 <label class="col-xl-3 col-lg-3 col-form-label">KLD ID Number</label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
-                                                        <input type="text" class="form-control form-control-solid form-control-lg" placeholder="Enter ID Number" name="idnum" value=""/>
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" id="add_org_kldid" placeholder="Enter ID Number" name="idnum" value=""/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +119,7 @@
                                                 <label class="col-xl-3 col-lg-3 col-form-label">KLD Email</label>
                                                 <div class="col-lg-9 col-xl-9">
                                                     <div class="input-group input-group-solid input-group-lg">
-                                                        <input type="text" class="form-control form-control-solid form-control-lg" name="email" placeholder="Enter Email" value=""/>
+                                                        <input type="text" class="form-control form-control-solid form-control-lg" id="add_org_email" placeholder="Enter Email" value=""/>
                                                         <div class="input-group-append"><span class="input-group-text">@kld.edu.ph</span></div>
                                                     </div>
                                                 </div>
@@ -126,12 +132,7 @@
                                                         <div class="mr-2">
                                                         </div>
                                                         <div>
-                                                            <button type="button"
-                                                                class="btn btn-success font-weight-bolder px-9 py-4"
-                                                                data-wizard-type="action-submit">
-                                                                Add
-                                                            </button>
-
+                                                            <button id="add_org_submit" type="button" class="btn btn-success font-weight-bolder px-9 py-4">Add</button>
                                                         </div>
                                                     </div>
                                         <!--end::Wizard Step 1-->

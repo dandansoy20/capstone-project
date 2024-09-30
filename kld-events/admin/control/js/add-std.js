@@ -11,10 +11,10 @@ $("#add_std_yearlvl").change(function (){
     section2.val(section2.find("option:first").val())
 })
 
-$("#add_std_submit").click(function (){
+$("#add_std_submit").click(async function (){
     if(validateForm()){
         var dataString = "ajax=add_std"+
-            "&add_std_profilepic="+ imagefileinsert(document.getElementById("add_std_profilepic")) +
+            "&add_std_profilepic="+ await imagefileinsert(document.getElementById("add_std_profilepic")) +
             "&add_std_firstname="+ $("#add_std_firstname").val() +
             "&add_std_lastname="+ $("#add_std_lastname").val() +
             "&add_std_course="+ $("#add_std_course").val() +
@@ -51,14 +51,24 @@ $("#add_std_submit").click(function (){
     }
 })
 
-function imagefileinsert(e){
-    var string = $(e).prop('files')[0];
-    if(!string) return false
-    var file = new FileReader();
-    file.readAsDataURL(string);
-    $(file).ready(function (){
-        return btoa(file.result);
+async function imagefileinsert(e) {
+    var file = $(e).prop('files')[0];
+    if (!file) return false;
+    const result = await new Promise((resolve, reject) => {
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+            // Resolve the promise with the base64 encoded string
+            resolve(btoa(event.target.result)); // Get the base64 part
+        };
+
+        reader.onerror = function(error) {
+            reject(error);
+        };
+
+        reader.readAsDataURL(file);
     });
+    return result
 }
 
 function validateForm(){

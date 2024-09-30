@@ -150,6 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="control/js/add-venue.js"></script>
         <script src="control/js/add-std.js"></script>
         <script src="control/js/calendar.js"></script>
+		<script src="control/js/organizer.js"></script>
 		<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
 		
 
@@ -166,7 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 		
 		<script src="assets/js/pages/custom/user/add-user.js"></script>
-		
+
 		<!--end::Page Vendors-->
 
 		<!--begin::Page Scripts(used by this page)-->
