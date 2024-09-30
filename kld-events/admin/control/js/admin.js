@@ -1,7 +1,7 @@
 
-function hideOrganizer (id) {
+function hideAdmin (id) {
     Swal.fire({
-        title: 'Are you sure to hide this Organizer?',
+        title: 'Are you sure to hide this Admin?',
         showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: 'Yes',
@@ -29,7 +29,7 @@ function hideOrganizer (id) {
       })
 }
 
-function editOrganizer (id) {
+function editAdmin (id) {
 
 }
 
@@ -39,6 +39,7 @@ $("#add_org_submit").click(async function (){
         $(this).text("Submitting")
         $(this).prop("disabled","disabled")
         var profilePic = await imagefileinsert(document.getElementById("add_org_profilepic"))
+        debugger
         var dataString = "ajax=add_org_user"+
             "&add_org_profilepic="+ profilePic +
             "&add_org_fname="+ $("#add_org_fname").val() +

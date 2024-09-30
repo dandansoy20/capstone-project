@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -68,11 +69,12 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-		<?php include("layout.php"); ?>
-
-		<?php include("partials/_extras/offcanvas/quick-user.php"); ?>
-
-		<?php include("partials/_extras/scrolltop.php"); ?>
+		<?php 
+			include("control/api.php");
+			include("layout.php");
+			include("partials/_extras/offcanvas/quick-user.php");
+			include("partials/_extras/scrolltop.php"); 
+		?>
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 		</script>
