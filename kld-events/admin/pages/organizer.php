@@ -50,7 +50,7 @@
                                     <div class="d-flex align-items-center mb-7">
                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                <img src="assets/media/users/default.jpg" alt="image" />
+                                                <img style="object-fit: cover;" src="'.( $row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg').'" alt="" />
                                             </div>
                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                 <span class="font-size-h3 font-weight-boldest">JM</span>

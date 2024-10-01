@@ -109,7 +109,7 @@ if (!array_key_exists('ajax', $_POST)) {
             }
 
             break;
-            case "add_org_user":
+        case "add_org_user":
                 $add_org_profilepic = base64_decode($_POST['add_org_profilepic']);
                 $add_org_fname = $_POST['add_org_fname'];
                 $add_org_lname = $_POST['add_org_lname'];
@@ -174,6 +174,7 @@ if (!array_key_exists('ajax', $_POST)) {
                                         org_lname,
                                         org_role,
                                         org_id,
+                                        org_kld_id,
                                         status,
                                         org_profile,
                                         org_activation_key) ";
@@ -183,6 +184,7 @@ if (!array_key_exists('ajax', $_POST)) {
                                         '".$add_org_lname."',
                                         '".$add_org_role."',
                                         '".$add_org_organization."',
+                                        '".$add_org_kldid."',
                                         'NEW',
                                         '".$add_org_profilepic."',
                                         '".$activation_key."') ";
