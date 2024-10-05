@@ -94,7 +94,7 @@
                                         and features. All Premium blogs include custom CSS.
                                     </p>
 
-                                    <a href="?page=pending-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                    <a href="?page=event-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                                 </div>
                                 <div class="col-3">
                                     <img src="assets/media/kld4.jpg" style="width: 100%"/>                                   

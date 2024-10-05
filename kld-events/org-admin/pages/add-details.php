@@ -101,6 +101,9 @@
             </div>
         </div>
 
+        
+        <h6>Administrator</h6>
+
         <div class="row">
             <div class="col-xl-4">
                 <!--begin::Stats Widget 4-->
@@ -113,7 +116,7 @@
                                 Marvin Serrano</a>
                             <span class="font-weight-bold text-muted  font-size-lg">Head of Student Activity</span>
 
-                            <div class="font-weight-bold text-success mb-3">Approved</div>
+                            <div class="font-weight-bold text-warning mb-3">Pending</div>
                         </div>
                         <img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="align-self-end h-100px" />
                     </div>
@@ -162,6 +165,68 @@
 
         </div>
 
+        <h6>Organization</h6>
+
+        <div class="row">
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Tuesday Medio</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">KLD - Information Systems Society</span>
+
+                            <div class="font-weight-bold text-warning mb-3">Pending</div>
+
+                            
+                        </div>
+                        <img src="assets/media/isoc.jpg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Emmanuel Castro</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">KLD - Supreme Student Council</span>
+
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
+                        </div>
+                        <img src="assets/media/ssc.jpg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 4-->
+                <div class="card card-custom card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex align-items-center py-0 mt-5">
+                        <div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
+                            <a href="#"
+                                class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary">Cha Ladisla</a>
+                            <span class="font-weight-bold text-muted  font-size-lg">KLD - Institute of Midwifery Student Council</span>
+
+                            <div class="font-weight-bold text-danger mb-3">Denied</div>
+                        </div>
+                        <img src="assets/media/kldmw.jpg" alt="" class="align-self-end h-100px" />
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Stats Widget 4-->
+            </div>
+
+        </div>
+
 
         <div class="card card-custom">
             <div class="card-body p-0">
@@ -196,7 +261,7 @@
                                             Event Activities
                                         </h3>
                                         <div class="wizard-desc">
-                                            Setup Your Account Details
+                                            Setup Program
                                         </div>
                                     </div>
                                 </div>

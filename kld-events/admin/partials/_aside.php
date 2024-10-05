@@ -93,24 +93,36 @@
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=calendar" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Calendar</span></a>
+										class="menu-text">Event Calendar</span></a>
 							</li>
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=events" class="menu-link"><i
+								<a href="?page=upcoming-events" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">View Events</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=add-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
-										Events</span></a>
+										class="menu-text">Upcoming Events</span></a>
 							</li>
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=proposal-events" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Proposal
+										class="menu-text">Proposed
 										Events</span></a>
 							</li>
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=completed-events" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">Completed
+										Events</span></a>
+							</li>
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-events" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+										Event</span></a>
+							</li>
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=archived-events" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Archive</span>
+								</a>
+							</li>
+							
 						</ul>
 					</div>
 				</li>
@@ -135,6 +147,11 @@
 					<div class="menu-submenu "><i class="menu-arrow"></i>
 						<ul class="menu-subnav">
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=venue-calendar" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span
+										class="menu-text">Venue Calendar</span></a>
+							</li>
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=venue" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
 										class="menu-text">View Venue</span></a>
@@ -144,11 +161,7 @@
 										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
 										Venue</span></a>
 							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=venue-calendar" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Venue Calendar</span></a>
-							</li>
+							
 						</ul>
 					</div>
 				</li>

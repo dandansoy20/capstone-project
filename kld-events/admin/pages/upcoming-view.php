@@ -19,17 +19,17 @@
 							<div class="row">
 								
 								<div class="col-12 col-md-3" style="text-align: center;">
-									<img src="assets/media/kld4.jpg"
+									<img src="assets/media/acquaintance/poster.png"
 										style="width: 100%; object-fit: cover;" />
 								</div>
 								<div class="col-12 col-md-9">
 									<a href="#" class="d-flex align-items-center">
 										<div class="mr-3 d-flex align-items-center bg-hover-light p-2 rounded">
 											<div class="flex-shrink-0 text-center">
-												<i class="icon-xl fas fa-check text-primary"></i>
+												<i class="fas fa-calendar-alt text-info mr-2"></i>
 											</div>
 										</div>
-										<h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Foundation Week 2024</h1>
+										<h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Acquaintance Party 2024</h1>
 									</a>
 									
 
@@ -71,7 +71,7 @@
 
 									<div class="d-flex">
 										<span><i class="text-dark flaticon2-calendar mr-3"></i></span> <span
-											class="text-dark h4">September 18, 2024</span>
+											class="text-dark h4">October 15, 2024</span>
 
 										<span
 											class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
@@ -94,14 +94,15 @@
 
 
 									<p class="text-dark-50 my-5 font-size-xl font-weight-bold">
-										wala ako malagay na kahit ano dito kase pang testing lang ganun para malaman ko lang
-										kung ano itsura nya kapag naka ano, yung ganito na ano may mahabang text
+									The Kolehiyo ng Lungsod ng Dasmariñas (KLD) Acquaintance Party 2024 is an exciting and much-anticipated annual 
+									event aimed at bringing together students, faculty, and staff for a fun-filled day of socializing and activities. 
+									The event serves as a platform for new and returning students to get to know each other, fostering camaraderie and school spirit.
 									</p>
 
 
 									<a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
 									
-									<a href="?page=memo" class="btn btn-light-primary font-weight-bold py-2 px-6">View Attendance</a>
+									<a href="?page=memo" class="btn btn-light-primary font-weight-bold py-2 px-6">View Registrations</a>
 								</div>
 							
 							</div>
@@ -127,7 +128,7 @@
                                 Marvin Serrano</a>
                             <span class="font-weight-bold text-muted  font-size-lg">Head of Student Activity</span>
 
-                            <div class="font-weight-bold text-warning mb-3">Pending</div>
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
                         </div>
                         <img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="h-100px" />
                     </div>

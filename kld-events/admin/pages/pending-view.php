@@ -26,7 +26,7 @@
 									<a href="#" class="d-flex align-items-center">
 										<div class="mr-3 d-flex align-items-center bg-hover-light p-2 rounded">
 											<div class="flex-shrink-0 text-center">
-												<i class="icon-xl fas fa-check text-primary"></i>
+												<i class="fas fa-hourglass-half text-warning mr-2"></i>
 											</div>
 										</div>
 										<h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">Foundation Week 2024</h1>
