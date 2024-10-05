@@ -113,12 +113,43 @@
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-light-primary font-weight-bold"
                                 onclick="window.print();">Download Memo</button>
-                            <button type="button" class="btn btn-primary font-weight-bold"
+                            <button type="button" class="btn btn-warning font-weight-bold" data-toggle="modal" data-target="#kt_maxlength_modal"
+                                >Comment</button>
+                                <button type="button" class="btn btn-primary font-weight-bold"
                                 >Approve</button>
                         </div>
                     </div>
                 </div>
-                <!-- end: Invoice action-->
+
+                <div class="modal fade" id="kt_maxlength_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i aria-hidden="true" class="ki ki-close"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <textarea class="form-control" id="kt_maxlength_5" maxlength="150" placeholder="Type here..." rows="6" style="width: 100%;"></textarea>
+            <span class="form-text text-muted">This message will return to the organizer</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary font-weight-bold">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+                                    <!-- end: Invoice action-->
 
                 <!-- end: Invoice-->
             </div>

@@ -159,6 +159,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Global Theme Bundle-->
 
 		<!--begin::Page Vendors(used by this page)-->
+		
+		<script src="assets/js/pages/crud/forms/widgets/bootstrap-maxlength.js"></script>
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/js/pages/features/calendar/external-events.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>

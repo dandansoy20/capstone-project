@@ -261,85 +261,58 @@
 
                                     </div>
 
-                                    <div class="form-group">
-
-                                        <label>Select Attendees</label>
-                                        <div>
-                                            <select class="form-control selectpicker" multiple>
-                                                <option>BS IS</option>
-                                                <option>BS PSY</option>
-                                                <option>BS CS</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <!--end::Input-->
-
-                                </div>
-                                <!--end::Wizard Step 2-->
-
-                                <!--begin::Wizard Step 3-->
-                                <div class="pb-5" data-wizard-type="step-content">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Upload the event poster</h4>
-                                    <!--begin::Select-->
-                                    <div class="form-group">
-
-
-                                        <label>Event Poster</label>
-                                        <div class="col-lg-12 col-md-9 col-sm-12">
-                                            <div class="dropzone dropzone-default" id="kt_dropzone_1">
-                                                <div class="dropzone-msg dz-message needsclick">
-                                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.
-                                                    </h3>
-                                                    <span class="dropzone-msg-desc">Less than 20MB | JPG, PNG JPEG
-                                                        ONLY</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Wizard Step 3-->
-
-                                <!--begin::Wizard Step 4-->
-                                <div class="pb-5" data-wizard-type="step-content">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Proposed to who?</h4>
+                                    <h4 class="mb-10 font-weight-bold text-dark">Attendees</h4>
                                     <div id="">
                                         <div class="form-group row">
                                             <div data-repeater-list="" class="col-lg-12">
                                                 <div data-repeater-item class="form-group row align-items-center">
                                                     <div class="col-md-4">
-                                                        <label>Admin Role:</label>
-                                                        <input type="email" class="form-control"
-                                                            value="Head of Student Activity" disabled />
-                                                        <div class="d-md-none mb-2"></div>
+                                                        <label>Program</label>
+                                                        <select class="form-control selectpicker">
+                                                            <option disabled selected>Year Level</option>
+                                                            <option>BSIS</option>
+                                                            <option>BSCE</option>
+                                                            <option>BSPSY</option>
+                                                            <option>BSMW</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label>Name:</label>
-                                                        <input type="email" class="form-control"
-                                                            value="Con Marvin Serrano" disabled />
-                                                        <div class="d-md-none mb-2"></div>
+                                                        <label>Year Level:</label>
+                                                        <select class="form-control selectpicker">
+                                                            <option disabled selected>Year Level</option>
+                                                            <option>1st</option>
+                                                            <option>2nd</option>
+                                                            <option>3rd</option>
+                                                            <option>4th</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div id="kt_repeater_1">
-                                        <div class="form-group row">
+                                       <div class="form-group row">
                                             <div data-repeater-list="" class="col-lg-12">
                                                 <div data-repeater-item class="form-group row align-items-center">
                                                     <div class="col-md-4">
+                                                        <label>Program</label>
                                                         <select class="form-control selectpicker">
-                                                            <option disabled selected>Select Role</option>
-                                                            <option>Dean</option>
-                                                            <option>Adviser</option>
-                                                            <option>Equipment</option>
+                                                            <option disabled selected>Year Level</option>
+                                                            <option>BSIS</option>
+                                                            <option>BSCE</option>
+                                                            <option>BSPSY</option>
+                                                            <option>BSMW</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Specify Full name" />
-                                                        <div class="d-md-none mb-2"></div>
+                                                        <label>Year Level:</label>
+                                                        <select class="form-control selectpicker">
+                                                            <option disabled selected>Year Level</option>
+                                                            <option>1st</option>
+                                                            <option>2nd</option>
+                                                            <option>3rd</option>
+                                                            <option>4th</option>
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <a href="javascript:;" data-repeater-delete=""
@@ -360,7 +333,120 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+                                    <!--end::Input-->
+
+                                </div>
+                                <!--end::Wizard Step 2-->
+
+                                <!--begin::Wizard Step 3-->
+                                <div class="pb-5" data-wizard-type="step-content">
+                                    <h4 class="mb-10 font-weight-bold text-dark">Event Poster</h4>
                                     <!--begin::Select-->
+
+                                    <div class="form-group">
+                                        <label>Event Poster</label>
+                                        <div class="col-lg-12 col-md-9 col-sm-12">
+                                            <div class="dropzone dropzone-default" id="kt_dropzone_1">
+                                                <div class="dropzone-msg dz-message needsclick">
+                                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.
+                                                    </h3>
+                                                    <span class="dropzone-msg-desc">Less than 20MB | JPG, PNG JPEG ONLY</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <h4 class="mb-10 font-weight-bold text-dark">Event Details (optional)</h4>
+                                    <div class="form-group">
+												<label>Multiple File Upload</label>
+												<div class="col-lg-12 col-md-9 col-sm-12">
+													<div class="dropzone dropzone-default dropzone-primary" id="kt_dropzone_2">
+														<div class="dropzone-msg dz-message needsclick">
+															<h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+															<span class="dropzone-msg-desc">Upload up to 10 files</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+                                </div>
+                                <!--end::Wizard Step 3-->
+
+                                <!--begin::Wizard Step 4-->
+                                <div class="pb-5" data-wizard-type="step-content">
+                                    <h4 class="mb-10 font-weight-bold text-dark">Proposed to who?</h4>
+                                    <div id="kt_repeater_1">
+                                        <div class="form-group row">
+                                            <div data-repeater-list="" class="col-lg-12">
+                                                <div data-repeater-item class="form-group row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label>Admin Role:</label>
+                                                        <input type="email" class="form-control"
+                                                            value="Head of Student Activity" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Name:</label>
+                                                        <input type="email" class="form-control"
+                                                            value="Con Marvin Serrano" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-2">
+																<div class="checkbox-inline">
+																	<label class="checkbox checkbox-success">
+																	<input type="checkbox" name="primary" checked="checked" />
+																	<span></span>Primary</label>
+																</div>
+															</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="kt_repeater_1">
+                                        <div class="form-group row">
+                                            <div data-repeater-list="" class="col-lg-12">
+                                                <div data-repeater-item class="form-group row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <select disabled class="form-control selectpicker">
+                                                            <option disabled selected>Select Role</option>
+                                                            <option>Dean</option>
+                                                            <option>Adviser</option>
+                                                            <option>Equipment</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <select class="form-control selectpicker">
+                                                            <option disabled selected>Select Admin</option>
+                                                            <option>Keno Villavicencio</option>
+                                                            <option>Steven Lucero</option>
+                                                            <option>Stacy Lily</option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-2">
+                                                        <a href="javascript:;" data-repeater-delete=""
+                                                            class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                            <i class="la la-trash-o"></i>Delete
+                                                        </a>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right"></label>
+                                            <div class="col-lg-4">
+                                                <a href="javascript:;" data-repeater-create=""
+                                                    class="btn btn-sm font-weight-bolder btn-light-primary">
+                                                    <i class="la la-plus"></i>Add
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group row">
                                         <label>Write your letter</label>
@@ -373,6 +459,8 @@
 
                                 </div>
                                 <!--end::Wizard Step 4-->
+
+                                
 
                                 <!--begin::Wizard Step 5-->
                                 <div class="pb-5" data-wizard-type="step-content">

@@ -107,13 +107,11 @@
                                             class="text-dark h4 ">' . date('h:iA', strtotime($row["event_start_date"])) . '</span>
                                 </div>
 
-
-
                                 <p class="text-dark-50 my-5 font-size-xl font-weight-bold">
                                     ' . $row["event_desc"] . '
                                 </p>
 
-                                <a href="#" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                <a href="?page=upcoming-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                             </div>
                         </div>
                     </div>

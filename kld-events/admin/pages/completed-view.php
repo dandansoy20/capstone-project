@@ -127,7 +127,7 @@
                                 Marvin Serrano</a>
                             <span class="font-weight-bold text-muted  font-size-lg">Head of Student Activity</span>
 
-                            <div class="font-weight-bold text-warning mb-3">Pending</div>
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
                         </div>
                         <img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="h-100px" />
                     </div>
@@ -189,7 +189,7 @@
                                 class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Tuesday Medio</a>
                             <span class="font-weight-bold text-muted  font-size-lg">KLD - Information Systems Society</span>
 
-                            <div class="font-weight-bold text-warning mb-3">Pending</div>
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
 
                             
                         </div>
@@ -227,7 +227,7 @@
                                 class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Cha Ladisla</a>
                             <span class="font-weight-bold text-muted  font-size-lg">KLD - Institute of Midwifery Student Council</span>
 
-                            <div class="font-weight-bold text-danger mb-3">Denied</div>
+                            <div class="font-weight-bold text-success mb-3">Approved</div>
                         </div>
                         <img src="assets/media/kldmw.jpg" alt="" class="h-100px" />
                     </div>
@@ -514,7 +514,7 @@
 													</div>
 													<!--end::Title-->
 													<!--begin::Lable-->
-													<span class="font-weight-bolder text-warning py-1 font-size-lg">28% Registered</span>
+													<span class="font-weight-bolder text-warning py-1 font-size-lg">28% Feedback</span>
 													<!--end::Lable-->
 												</div>
 												<!--end::Item-->
@@ -542,7 +542,7 @@
 													</div>
 													<!--end::Title-->
 													<!--begin::Lable-->
-													<span class="font-weight-bolder text-success py-1 font-size-lg">100% Registered</span>
+													<span class="font-weight-bolder text-success py-1 font-size-lg">100% Feedback</span>
 													<!--end::Lable-->
 												</div>
 												<!--end::Item-->
@@ -570,7 +570,7 @@
 													</div>
 													<!--end::Title-->
 													<!--begin::Lable-->
-													<span class="font-weight-bolder text-danger py-1 font-size-lg">10% Registered</span>
+													<span class="font-weight-bolder text-danger py-1 font-size-lg">10% Feedback</span>
 													<!--end::Lable-->
 												</div>
 												<!--end::Item-->
@@ -600,7 +600,7 @@
 													</div>
 													<!--end::Title-->
 													<!--begin::Lable-->
-													<span class="font-weight-bolder text-info py-1 font-size-lg">73% Registered</span>
+													<span class="font-weight-bolder text-info py-1 font-size-lg">73% Feedback</span>
 													<!--end::Lable-->
 												</div>
 												<!--end::Item-->
