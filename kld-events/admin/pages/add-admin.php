@@ -82,7 +82,7 @@
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="firstname" placeholder="" type="text" value="" />
+                                                                name="firstname" placeholder="Juan" type="text" value="" />
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -93,7 +93,7 @@
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
                                                                 class="form-control form-control-solid form-control-lg"
-                                                                name="lastname" placeholder="" type="text" value="" />
+                                                                name="lastname" placeholder="Dela Cruz" type="text" value="" />
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -104,10 +104,15 @@
                                                         <label
                                                             class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                         <div class="col-lg-9 col-xl-9">
-
-                                                            <input
-                                                                class="form-control form-control-solid form-control-lg"
-                                                                name="lastname" placeholder="" type="text" value="" />
+                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
+                                                                <option selected disabled>Select Role</option>
+                                                                <option>College Administrator</option>
+                                                                <option>VP Administrative Affairs</option>
+                                                                <option>Academic Institue Dean</option>
+                                                                <option>Head of Student Activity</option>
+                                                                <option>Head of Equipments and Venue</option>
+                                                               
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->

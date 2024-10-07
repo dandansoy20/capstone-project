@@ -1,15 +1,15 @@
 <?php
 error_reporting(E_ALL);
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+	session_start();
 }
-if(!array_key_exists('kld_login_expiration', $_SESSION)){
-    include "login.php";
+if (!array_key_exists('kld_login_expiration', $_SESSION)) {
+	include "login.php";
 } else {
 
 ?>
-<!DOCTYPE html>
-<!--
+	<!DOCTYPE html>
+	<!--
 Template Name: Metronic - Bootstrap 4 HTML, React, Angular 11 & VueJS Admin Dashboard Theme
 Author: KeenThemes
 Website: http://www.keenthemes.com/
@@ -21,9 +21,10 @@ Purchase: https://1.envato.market/EA4JP
 Renew Support: https://1.envato.market/EA4JP
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
 -->
-<html lang="en">
+	<html lang="en">
 
 	<!--begin::Head-->
+
 	<head>
 		<base href="">
 		<meta charset="utf-8" />
@@ -39,17 +40,17 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 
-		<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Page Vendors Styles-->
 
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-		
+
 
 		<!--end::Global Theme Styles-->
 
@@ -59,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 
-		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
 	</head>
@@ -67,13 +68,14 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--end::Head-->
 
 	<!--begin::Body-->
+
 	<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-		<?php 
-			include("control/api.php");
-			include("layout.php");
-			include("partials/_extras/offcanvas/quick-user.php");
-			include("partials/_extras/scrolltop.php"); 
+		<?php
+		include("control/api.php");
+		include("layout.php");
+		include("partials/_extras/offcanvas/quick-user.php");
+		include("partials/_extras/scrolltop.php");
 		?>
 		<script>
 			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
@@ -146,20 +148,20 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Global Theme Bundle(used by all pages)-->
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-        <script src="assets/js/scripts.bundle.js"></script>
-        <script src="control/js/add-events.js"></script>
-        <script src="control/js/add-cat.js"></script>
-        <script src="control/js/add-venue.js"></script>
-        <script src="control/js/add-std.js"></script>
-        <script src="control/js/calendar.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="control/js/add-events.js"></script>
+		<script src="control/js/add-cat.js"></script>
+		<script src="control/js/add-venue.js"></script>
+		<script src="control/js/add-std.js"></script>
+		<script src="control/js/calendar.js"></script>
 		<script src="control/js/organizer.js"></script>
 		<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
-		
+
 
 		<!--end::Global Theme Bundle-->
 
 		<!--begin::Page Vendors(used by this page)-->
-		
+
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-maxlength.js"></script>
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/js/pages/features/calendar/external-events.js"></script>
@@ -168,8 +170,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/custom/wizard/wizard-1.js"></script>
 		<script src="assets/js/pages/crud/file-upload/dropzonejs.js"></script>
 		<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
-        <script src="assets/js/pages/crud/file-upload/uppy.js"></script>
-		
+		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
+
+		<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
 		<script src="assets/js/pages/custom/user/add-user.js"></script>
 
 		<!--end::Page Vendors-->
@@ -177,18 +180,19 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
 
-		 <!--begin::Page Vendors(used by this page)-->
-		 <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-                        <!--end::Page Vendors-->
+		<!--begin::Page Vendors(used by this page)-->
+		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Page Vendors-->
 
-                    <!--begin::Page Scripts(used by this page)-->
-                            <script src="assets/js/pages/crud/datatables/basic/paginations.js"></script>
-                        <!--end::Page Scripts-->
+		<!--begin::Page Scripts(used by this page)-->
+		<script src="assets/js/pages/crud/datatables/basic/paginations.js"></script>
+		<!--end::Page Scripts-->
 		<!--end::Page Scripts-->
 	</body>
 
 	<!--end::Body-->
-</html>
+
+	</html>
 
 <?php
 }

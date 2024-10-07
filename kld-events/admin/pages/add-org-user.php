@@ -66,7 +66,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_fname" name="firstname" placeholder="(Optional)" type="text" value=""/>
+                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_fname" name="firstname" placeholder="Juan" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -74,7 +74,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_lname" name="lastname" placeholder="(Optional)" type="text" value=""/>
+                                                    <input class="form-control form-control-solid form-control-lg" id="add_org_lname" name="lastname" placeholder="Dela Cruz" type="text" value=""/>
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -82,7 +82,7 @@
                                             <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
+                                                    <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
                                                         <option selected disabled>Select Organization</option>
                                                         <?php
                                                         include ('./control/db.php');
@@ -99,8 +99,18 @@
                                               <div class="form-group row">
                                                 <label class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                 <div class="col-lg-9 col-xl-9">
-                                                    
-                                                <input class="form-control form-control-solid form-control-lg" name="role" id="add_org_role" placeholder="(Optional)" type="text" value=""/>
+                                                
+                                                    <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
+                                                        <option selected disabled>Select Role</option>
+                                                        <option>Event Manager</option>
+                                                        <option>Event Coordinator</option>
+                                                        <option>Content Creator</option>
+                                                        <option>Registration Manager</option>
+                                                        <option>Volunteer</option>
+                                                        <option>Member</option>
+                                                               
+                                                    </select>
+                                                
                                                 </div>
                                             </div>
                                             <!--end::Group-->
@@ -132,6 +142,7 @@
                                                         <div class="mr-2">
                                                         </div>
                                                         <div>
+                                                            <button onclick="history.back()" type="button" class="btn btn-secondary font-weight-bolder px-9 py-4">Back</button>
                                                             <button id="add_org_submit" type="button" class="btn btn-success font-weight-bolder px-9 py-4">Add</button>
                                                         </div>
                                                     </div>
