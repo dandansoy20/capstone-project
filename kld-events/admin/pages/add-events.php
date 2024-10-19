@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
@@ -17,7 +14,7 @@
                             <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                                 <div class="wizard-label">
                                     <i class="wizard-icon flaticon-bus-stop"></i>
-                                    <h3 class="wizard-title">1. Setup Date & Venue</h3>
+                                    <h3 class="wizard-title">1. Event Basics</h3>
                                 </div>
                                 <span
                                     class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
@@ -61,76 +58,60 @@
                             </div>
                             <!--end::Wizard Step 2 Nav-->
 
+
+                            <div class="wizard-step" data-wizard-type="step">
+                                <div class="wizard-label">
+                                    <i class="wizard-icon flaticon-users"></i>
+                                    <h3 class="wizard-title">3. Attendees</h3>
+                                </div>
+                                <span
+                                    class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <rect fill="#000000" opacity="0.3"
+                                                transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) "
+                                                x="11" y="5" width="2" height="14" rx="1" />
+                                            <path
+                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
+                                                fill="#000000" fill-rule="nonzero"
+                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997) " />
+                                        </g>
+                                    </svg><!--end::Svg Icon--></span>
+                            </div>
+
+                            <div class="wizard-step" data-wizard-type="step">
+                                <div class="wizard-label">
+                                    <i class="wizard-icon flaticon-mail-1"></i>
+                                    <h3 class="wizard-title">4. Proposal</h3>
+                                </div>
+                                <span
+                                    class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <rect fill="#000000" opacity="0.3"
+                                                transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) "
+                                                x="11" y="5" width="2" height="14" rx="1" />
+                                            <path
+                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
+                                                fill="#000000" fill-rule="nonzero"
+                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997) " />
+                                        </g>
+                                    </svg><!--end::Svg Icon--></span>
+                            </div>
+
                             <!--begin::Wizard Step 3 Nav-->
                             <div class="wizard-step" data-wizard-type="step">
                                 <div class="wizard-label">
                                     <i class="wizard-icon flaticon-responsive"></i>
-                                    <h3 class="wizard-title">3. Upload Poster</h3>
+                                    <h3 class="wizard-title">5. Upload Poster</h3>
                                 </div>
-                                <span
-                                    class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <rect fill="#000000" opacity="0.3"
-                                                transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) "
-                                                x="11" y="5" width="2" height="14" rx="1" />
-                                            <path
-                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
-                                                fill="#000000" fill-rule="nonzero"
-                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997) " />
-                                        </g>
-                                    </svg><!--end::Svg Icon--></span>
                             </div>
-                            <!--end::Wizard Step 3 Nav-->
 
-                            <!--begin::Wizard Step 4 Nav-->
-                            <div class="wizard-step" data-wizard-type="step">
-                                <div class="wizard-label">
-                                    <i class="wizard-icon flaticon-users"></i>
-                                    <h3 class="wizard-title">4. Attendees</h3>
-                                </div>
-                                <span
-                                    class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <rect fill="#000000" opacity="0.3"
-                                                transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) "
-                                                x="11" y="5" width="2" height="14" rx="1" />
-                                            <path
-                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
-                                                fill="#000000" fill-rule="nonzero"
-                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997) " />
-                                        </g>
-                                    </svg><!--end::Svg Icon--></span>
-                            </div>
-                            <!--end::Wizard Step 4 Nav-->
 
-                            <!--begin::Wizard Step 5 Nav-->
-                            <div class="wizard-step" data-wizard-type="step">
-                                <div class="wizard-label">
-                                    <i class="wizard-icon flaticon-globe"></i>
-                                    <h3 class="wizard-title">5. Review and Submit</h3>
-                                </div>
-                                <span
-                                    class="svg-icon svg-icon-xl wizard-arrow last"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
-                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <rect fill="#000000" opacity="0.3"
-                                                transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) "
-                                                x="11" y="5" width="2" height="14" rx="1" />
-                                            <path
-                                                d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z"
-                                                fill="#000000" fill-rule="nonzero"
-                                                transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997) " />
-                                        </g>
-                                    </svg><!--end::Svg Icon--></span>
-                            </div>
                             <!--end::Wizard Step 5 Nav-->
                         </div>
                     </div>
@@ -142,30 +123,10 @@
                             <!--begin::Wizard Form-->
                             <form class="form" id="kt_form">
                                 <!--begin::Wizard Step 1-->
+
+
+
                                 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                    <h3 class="mb-10 font-weight-bold text-dark">Select Event Venue</h3>
-
-
-                                    <!--begin::Input-->
-
-
-                                    <!--begin::Select-->
-
-                                    <div class="form-group">
-                                        <label>Venue</label>
-                                        <select name="venue_name" id="venue_name"
-                                            class="form-control form-control-solid form-control-lg">
-                                            <option value="" disabled>Select venue</option>
-                                            <?php
-                                            include ('./control/db.php');
-                                            $try = mysqli_query($conn, "Select * from venue_tbl");
-                                            while ($row = $try->fetch_array()) {
-                                                echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
                                     <h3 class="mb-10 font-weight-bold text-dark">Set Event Date</h3>
 
                                     <label>Select Date</label>
@@ -207,8 +168,92 @@
                                         </div>
                                     </div>
 
+                                    <div class="card card-custom example example-compact">
+
+                                        <h3 class="mb-10 font-weight-bold text-dark">Select Event Type</h3>
+                                        <!--begin::Form-->
+                                        <form class="form">
+                                            <div class="card-body">
+                                                <div class="form-group m-0">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label class="option">
+                                                                <span class="option-control">
+                                                                    <span class="radio">
+                                                                        <input type="radio" name="eventType" value="inPerson" onclick="toggleForm()" checked="checked" />
+                                                                        <span></span>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="option-label">
+                                                                    <span class="option-head">
+                                                                        <span class="option-title">In-Person Event</span>
+                                                                    </span>
+                                                                    <span class="option-body">a traditional, physical gathering where participants attend a specific location to
+                                                                        engage in real-time activities, sessions, or social interactions.</span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <label class="option">
+                                                                <span class="option-control">
+                                                                    <span class="radio">
+                                                                        <input type="radio" name="eventType" value="virtual" onclick="toggleForm()" />
+                                                                        <span></span>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="option-label">
+                                                                    <span class="option-head">
+                                                                        <span class="option-title">Virtual Event</span>
+                                                                    </span>
+                                                                    <span class="option-body">an online gathering where participants join from various locations via the internet.</span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="separator separator-dashed my-8"></div>
+
+                                            </div>
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                    <div id="inPersonForm" style="opacity: 1; transition: opacity 0.5s ease-in-out;">
+                                        <h3 class="mb-10 font-weight-bold text-dark">Select Event Venue</h3>
+                                        <!--begin::Select-->
+
+                                        <div class="form-group">
+                                            <label>Venue</label>
+                                            <select name="venue_name" id="venue_name"
+                                                class="form-control form-control-solid form-control-lg">
+                                                <option value="" disabled>Select venue</option>
+                                                <?php
+                                                include('./control/db.php');
+                                                $try = mysqli_query($conn, "Select * from venue_tbl");
+                                                while ($row = $try->fetch_array()) {
+                                                    echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function toggleForm() {
+                                            const inPersonRadio = document.querySelector('input[name="eventType"][value="inPerson"]');
+                                            const inPersonForm = document.getElementById('inPersonForm');
+
+                                            if (inPersonRadio.checked) {
+                                                inPersonForm.style.opacity = '1';
+                                            } else {
+                                                inPersonForm.style.opacity = '0';
+                                            }
+                                        }
+
+                                        // Initial call to set the correct form visibility on page load
+                                        toggleForm();
+                                    </script>
 
 
+                                    <div class="separator separator-dashed my-8"></div>
 
                                 </div>
                                 <!--end::Wizard Step 1-->
@@ -240,30 +285,16 @@
                                             class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select category</option>
                                             <?php
-                                            include ('./control/db.php');
+                                            include('./control/db.php');
                                             $try = mysqli_query($conn, "Select * from category_tbl");
-                                            while($row = $try->fetch_array()){
+                                            while ($row = $try->fetch_array()) {
                                                 var_dump($row);
-                                                echo '<option value="' .$row['category_id'].'">'.$row['category_name'].'</option>';
+                                                echo '<option value="' . $row['category_id'] . '">' . $row['category_name'] . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Event Organizer</label>
-                                        <select name="event_organizer" id="event_organizer"
-                                            class="form-control form-control-solid form-control-lg">
-                                            <option value="" disabled>Select organizer</option>
-                                            <?php
-                                            include ('./control/db.php');
-                                            $try = mysqli_query($conn, "Select * from org_tbl");
-                                            while ($row = $try->fetch_array()) {
-                                                echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
 
 
                                     <!--end::Input-->
@@ -272,6 +303,224 @@
                                 <!--end::Wizard Step 2-->
 
                                 <!--begin::Wizard Step 3-->
+                                <div class="pb-5" data-wizard-type="step-content">
+                                    <h4 class="mb-10 font-weight-bold text-dark">Select Event Attendees</h4>
+
+                                    <div class="form-group row">
+                                        <label class="col-4 text-right col-form-label">Select All KLD Members</label>
+                                        <div class="col-8">
+                                            <span class="switch switch-icon">
+                                                <label>
+                                                    <input type="checkbox" id="toggleForms" name="select" />
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <!--begin::Input-->
+
+                                    <div id="studentForms">
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label text-right col-sm-12">Select Program</label>
+                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                                <select class="form-control select2" id="kt_select2_11" multiple="multiple" name="param" style="width: 100%;" data-placeholder="Select programs...">
+                                                    <optgroup label="KLD Courses">
+                                                        <?php
+                                                        include('./control/db.php');
+                                                        $try = mysqli_query($conn, "Select * from course_tbl");
+                                                        while ($row = $try->fetch_array()) {
+                                                            echo '<option value="' . $row['course_id'] . '">' . $row['course_name'] . '</option>';
+                                                        }
+                                                        ?>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-right col-lg-4 col-sm-12">Select Year
+                                                Level</label>
+                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                                <select class="form-control selectpicker" multiple id="yrlevel">
+                                                    <option value="1">1st year</option>
+                                                    <option value="2">2nd year</option>
+                                                    <option value="3">3rd year</option>
+                                                    <option value="4">4th year</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        if (isset($_POST['action']) && $_POST['action'] == 'fetch_sections') {
+                                            include('./control/db.php');
+
+                                            $courses = $_POST['courses'];
+                                            $yearlevels = $_POST['yearlevels'];
+
+                                            $courses = implode(',', array_map('intval', $courses));
+                                            $yearlevels = implode(',', array_map('intval', $yearlevels));
+
+                                            $query = "SELECT * FROM section_tbl WHERE course_id IN ($courses) AND year_level IN ($yearlevels)";
+                                            $result = mysqli_query($conn, $query);
+
+                                            $options = '';
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $options .= '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                                            }
+
+                                            echo $options;
+                                            exit;
+                                        }
+                                        ?>
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-right col-lg-4 col-sm-12">Select Section</label>
+                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                                <select class="form-control select2" id="kt_select2_3" multiple="multiple" name="section" style="width: 100%;" data-placeholder="Select section...">
+                                                    <optgroup label="Course / Year">
+                                                        <option value=""></option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <!--begin::Wizard Step 4-->
+                                <div class="pb-5" data-wizard-type="step-content">
+                                    <h4 class="mb-10 font-weight-bold text-dark">Letter to the Admin</h4>
+                                    <div class="form-group">
+                                        <div data-repeater-item="" class="form-group row align-items-center">
+                                            <div class="col-md-4">
+                                                <label>Name:</label>
+                                                <input type="email" class="form-control" value="Jet Geronimo" disabled />
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Role:</label>
+                                                <input type="email" class="form-control" value="Head of Student Activity" disabled />
+                                                <div class="d-md-none mb-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="kt_repeater_1">
+                                        <div class="form-group row">
+                                            <div data-repeater-list="" class="col-lg-12">
+                                                <div data-repeater-item="" class="form-group row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <select class="form-control admin-select" placeholder="Enter full name">
+                                                            <option value="" disabled selected>Choose Admin</option>
+                                                            <?php
+                                                            include('./control/db.php');
+                                                            $try = mysqli_query($conn, "SELECT * FROM admin_acc");
+                                                            while ($row = $try->fetch_array()) {
+                                                                echo '<option value="' . $row['admin_id'] . '" data-role="' . $row['admin_role'] . '">' . $row['admin_fname'] . ' ' . $row['admin_lname'] . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control admin-role" placeholder="Administrator Role" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                            <i class="la la-trash-o"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-2 col-form-label text-right"></label>
+                                            <div class="col-lg-4">
+                                                <a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+                                                    <i class="la la-plus"></i>Add</a>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const repeaterList = document.querySelector('[data-repeater-list]');
+                                                const addButton = document.querySelector('[data-repeater-create]');
+
+                                                function updateOptions() {
+                                                    const selectedValues = Array.from(repeaterList.querySelectorAll('.admin-select'))
+                                                        .map(select => select.value)
+                                                        .filter(value => value !== '');
+
+                                                    repeaterList.querySelectorAll('.admin-select').forEach(select => {
+                                                        const options = select.querySelectorAll('option');
+                                                        options.forEach(option => {
+                                                            if (selectedValues.includes(option.value) && option.value !== select.value) {
+                                                                option.style.display = 'none';
+                                                            } else {
+                                                                option.style.display = 'block';
+                                                            }
+                                                        });
+                                                    });
+
+                                                    // Disable add button if all options are selected
+                                                    const allOptions = repeaterList.querySelector('.admin-select').querySelectorAll('option');
+                                                    const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
+                                                    if (availableOptions.length <= 1) {
+                                                        addButton.style.display = 'none';
+                                                    } else {
+                                                        addButton.style.display = 'block';
+                                                    }
+                                                }
+
+                                                function updateRoleInput(selectElement) {
+                                                    const selectedOption = selectElement.options[selectElement.selectedIndex];
+                                                    const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.admin-role');
+                                                    roleInput.value = selectedOption.getAttribute('data-role');
+                                                }
+
+                                                repeaterList.addEventListener('change', function(event) {
+                                                    if (event.target.classList.contains('admin-select')) {
+                                                        updateOptions();
+                                                        updateRoleInput(event.target);
+                                                    }
+                                                });
+
+                                                repeaterList.addEventListener('click', function(event) {
+                                                    if (event.target.closest('[data-repeater-delete]')) {
+                                                        setTimeout(updateOptions, 100);
+                                                    }
+                                                });
+
+                                                addButton.addEventListener('click', function() {
+                                                    setTimeout(updateOptions, 100);
+                                                });
+
+                                                updateOptions();
+                                            });
+                                        </script>
+                                    </div>
+
+
+
+
+
+                                    <div class="form-group row">
+                                        <label>Write your purpose</label>
+                                        <div class="col-12">
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1000"
+                                                placeholder="" rows="6"></textarea>
+                                            <span class="form-text text-muted">Maximum of 1,000 characters only</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end::Wizard Step 4-->
+
+                                <!--end::Wizard Step 3-->
+
                                 <div class="pb-5" data-wizard-type="step-content">
                                     <h4 class="mb-10 font-weight-bold text-dark">Event Poster</h4>
                                     <!--begin::Select-->
@@ -291,85 +540,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end::Wizard Step 3-->
-
-                                <!--begin::Wizard Step 4-->
-                                <div class="pb-5" data-wizard-type="step-content">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Select Event Attendees</h4>
-
-                                    <div class="form-group row">
-                                        <label class="col-3  text-right col-form-label">Select All Students</label>
-                                        <div class="col-3">
-                                            <span class="switch switch-icon">
-                                                <label>
-                                                    <input type="checkbox" checked="checked" name="select" />
-                                                    <span></span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <!--begin::Input-->
-                                    <div class="form-group row">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Select
-                                            Course</label>
-                                        <div class="col-lg-4 col-md-9 col-sm-12">
-                                            <select class="form-control selectpicker" multiple>
-                                                <option>BSIS</option>
-                                                <option>BS PSY</option>
-                                                <option>BS CE</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Select Year
-                                            Level</label>
-                                        <div class="col-lg-4 col-md-9 col-sm-12">
-                                            <select class="form-control selectpicker" multiple>
-                                                <option>1st year</option>
-                                                <option>2nd year</option>
-                                                <option>3rd year</option>
-                                                <option>4th year</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end::Wizard Step 4-->
 
                                 <!--begin::Wizard Step 5-->
-                                <div class="pb-5" data-wizard-type="step-content">
-                                    <!--begin::Section-->
-                                    <h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
-
-                                    
-                                    <h6 class="font-weight-bolder mt-3">Date:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_date"></span>
-
-                                    <h6 class="font-weight-bolder mt-3">Venue:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_venue"></span>
-
-                                    <div class="separator separator-dashed my-5"></div>
-                                    <!--end::Section-->
-
-                                    <!--begin::Section-->
-                                    <h6 class="font-weight-bolder mt-3">Event Title:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_title"></span>
-
-                                    <h6 class="font-weight-bolder mt-3">Event Description:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_description"></span>
-
-                                    <h6 class="font-weight-bolder mt-3">Event Category:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_category"></span>
-
-                                    <h6 class="font-weight-bolder mt-3">Event Organizer:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_organizer"></span>
-
-                                    <h6 class="font-weight-bolder mt-3">Event Attendees:</h6>
-                                    <span class="text-dark-50 line-height-lg" id="review_attendees"></span>
-                                    <!--end::Section-->
-
-                                    <!--end::Section-->
-                                </div>
                                 <!--end::Wizard Step 5-->
+
 
                                 <!--begin::Wizard Actions-->
                                 <div class="d-flex justify-content-between border-top mt-5 pt-10">
@@ -382,9 +556,9 @@
                                     </div>
                                     <div>
                                         <button type="button" id="event_submit" name="event_submit"
-                                            class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
+                                            class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit">
-                                            Submit
+                                            Preview
                                         </button>
                                         <button type="button" id="event_next_button" name="event_next_button"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"

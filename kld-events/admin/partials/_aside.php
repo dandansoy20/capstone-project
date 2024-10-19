@@ -346,24 +346,11 @@
 					<div class="menu-submenu">
 						<i class="menu-arrow"></i>
 						<ul class="menu-subnav">
-							<li class="menu-item menu-item-parent" aria-haspopup="true">
-								<span class="menu-link"><span class="menu-text">Student</span></span>
-							</li>
-
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=std" class="menu-link"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">View Students</span></a>
+										class="menu-text">Overview</span></a>
 							</li>
-
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=add-std" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
-										Students</span></a>
-							</li>
-
-
-
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle"><i
 										class="menu-bullet menu-bullet-dot"><span></span></i><span
@@ -374,7 +361,7 @@
 										<li class="menu-item" aria-haspopup="true">
 											<a href="?page=course" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">View Courses</span></a>
+													class="menu-text">Overview</span></a>
 										</li>
 										<li class="menu-item" aria-haspopup="true">
 											<a href="?page=add-course" class="menu-link"><i
@@ -390,28 +377,21 @@
 									</ul>
 								</div>
 							</li>
-
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="javascript:;" class="menu-link menu-toggle"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Sections</span><i class="menu-arrow"></i></a>
-								<div class="menu-submenu">
-									<i class="menu-arrow"></i>
-									<ul class="menu-subnav">
-										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-1.html" class="menu-link"><i
-													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">View Sections</span></a>
-										</li>
-										<li class="menu-item" aria-haspopup="true">
-											<a href="custom/pages/login/login-2.html" class="menu-link"><i
-													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">Add Sections</span></a>
-										</li>
-
-									</ul>
-								</div>
+							<li class="menu-item menu-item-parent" aria-haspopup="true">
+								<span class="menu-link"><span class="menu-text">Student</span></span>
 							</li>
+
+							
+
+							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-std" class="menu-link"><i
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+										Students</span></a>
+							</li>
+
+
+
+							
 
 						</ul>
 					</div>
