@@ -186,7 +186,7 @@
                                                                 </span>
                                                                 <span class="option-label">
                                                                     <span class="option-head">
-                                                                        <span class="option-title">In-Person Event</span>
+                                                                        <span class="option-title">On-site Event</span>
                                                                     </span>
                                                                     <span class="option-body">a traditional, physical gathering where participants attend a specific location to
                                                                         engage in real-time activities, sessions, or social interactions.</span>
@@ -311,15 +311,14 @@
                                         <div class="col-8">
                                             <span class="switch switch-icon">
                                                 <label>
-                                                    <input type="checkbox" id="toggleForms" name="select" />
+                                                    <input type="checkbox" id="toggleForms" name="select" checked="checked" />
                                                     <span></span>
                                                 </label>
                                             </span>
                                         </div>
                                     </div>
-                                    <!--begin::Input-->
 
-                                    <div id="studentForms">
+                                    <div id="formContainer" style="display: none;">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label text-right col-sm-12">Select Program</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
@@ -327,9 +326,9 @@
                                                     <optgroup label="KLD Courses">
                                                         <?php
                                                         include('./control/db.php');
-                                                        $try = mysqli_query($conn, "Select * from course_tbl");
+                                                        $try = mysqli_query($conn, "SELECT * FROM course_tbl");
                                                         while ($row = $try->fetch_array()) {
-                                                            echo '<option value="' . $row['course_id'] . '">' . $row['course_name'] . '</option>';
+                                                            echo '<option value="' . $row['course_id'] . '" data-acronym="' . $row['course_acronym'] . '">' . $row['course_name'] . '</option>';
                                                         }
                                                         ?>
                                                     </optgroup>
@@ -338,8 +337,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-form-label text-right col-lg-4 col-sm-12">Select Year
-                                                Level</label>
+                                            <label class="col-form-label text-right col-lg-4 col-sm-12">Select Year Level</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <select class="form-control selectpicker" multiple id="yrlevel">
                                                     <option value="1">1st year</option>
@@ -350,41 +348,101 @@
                                             </div>
                                         </div>
 
-                                        <?php
-                                        if (isset($_POST['action']) && $_POST['action'] == 'fetch_sections') {
-                                            include('./control/db.php');
-
-                                            $courses = $_POST['courses'];
-                                            $yearlevels = $_POST['yearlevels'];
-
-                                            $courses = implode(',', array_map('intval', $courses));
-                                            $yearlevels = implode(',', array_map('intval', $yearlevels));
-
-                                            $query = "SELECT * FROM section_tbl WHERE course_id IN ($courses) AND year_level IN ($yearlevels)";
-                                            $result = mysqli_query($conn, $query);
-
-                                            $options = '';
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $options .= '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
-                                            }
-
-                                            echo $options;
-                                            exit;
-                                        }
-                                        ?>
+                                        <script>
+                                            document.getElementById('toggleForms').addEventListener('change', function() {
+                                                var formContainer = document.getElementById('formContainer');
+                                                formContainer.style.display = this.checked ? 'none' : 'block';
+                                            });
+                                        </script>
 
                                         <div class="form-group row">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Section</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <select class="form-control select2" id="kt_select2_3" multiple="multiple" name="section" style="width: 100%;" data-placeholder="Select section...">
-                                                    <optgroup label="Course / Year">
-                                                        <option value=""></option>
+                                                    <optgroup label="Bachelor of Science Information Systems">
+                                                    <optgroup label="1st Year">
+                                                        <option value="">BSIS 101</option>
+                                                        <option value="">BSIS 102</option>
+                                                        <option value="">BSIS 103</option>
+                                                        <option value="">BSIS 104</option>
+                                                    </optgroup>
                                                     </optgroup>
                                                 </select>
                                             </div>
                                         </div>
+
+
+                                        <div class="separator separator-dashed my-8"></div>
+
+
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-right col-lg-4 col-sm-12">Select Organization</label>
+                                            <div class="col-lg-8 col-md-9 col-sm-12">
+                                                <select class="form-control selectpicker" multiple>
+                                                    <option value="0" selected>N/A</option>
+                                                    <option value="1">Select All</option>
+                                                    <?php
+                                                    include('./control/db.php');
+                                                    $try = mysqli_query($conn, "Select * from org_tbl");
+                                                    while ($row = $try->fetch_array()) {
+                                                        var_dump($row);
+                                                        echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                     </div>
+
+                                    <div class="form-group row mb-6">
+                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Event Capacity</label>
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Quantity" />
+                                                </div>
+                                                <div class="col-9">
+                                                    <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
+                                                </div>
+                                            </div>
+                                            <span class="form-text text-muted mt-6">Input control is attached to slider</span>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        var demo1 = function() {
+                                            // init slider
+                                            var slider = document.getElementById("kt_nouislider_1");
+
+                                            noUiSlider.create(slider, {
+                                                start: [2],
+                                                step: 2,
+                                                range: {
+                                                    min: [2],
+                                                    max: [5000],
+                                                },
+                                                format: wNumb({
+                                                    decimals: 0,
+                                                }),
+                                            });
+
+                                            // init slider input
+                                            var sliderInput = document.getElementById("kt_nouislider_1_input");
+
+                                            slider.noUiSlider.on("update", function(values, handle) {
+                                                sliderInput.value = values[handle];
+                                            });
+
+                                            sliderInput.addEventListener("change", function() {
+                                                slider.noUiSlider.set(this.value);
+                                            });
+                                        };
+                                    </script>
+
+
                                 </div>
+
 
 
 
@@ -510,11 +568,134 @@
                                     <div class="form-group row">
                                         <label>Write your purpose</label>
                                         <div class="col-12">
-                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1000"
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1500"
                                                 placeholder="" rows="6"></textarea>
-                                            <span class="form-text text-muted">Maximum of 1,000 characters only</span>
+                                            <span class="form-text text-muted">Maximum of 1,500 characters only</span>
                                         </div>
                                     </div>
+
+                                    <div class="separator separator-dashed my-8"></div>
+
+
+                                    <h4 class="mb-10 font-weight-bold text-dark">Letter to the Organizer</h4>
+
+                                    <div id="kt_repeater_2">
+                                        <div class="form-group row">
+                                            <div data-repeater-list="another_list" class="col-lg-12">
+                                                <div data-repeater-item class="form-group row align-items-center">
+                                                    <div class="col-lg-4">
+                                                        <select class="form-control another-org-select" placeholder="Choose Another Organizer">
+                                                            <option value="" disabled selected>Choose Organizer</option>
+                                                            <?php
+                                                            // Fetching organizer details including org_name
+                                                            $try = mysqli_query($conn, "SELECT org_acc.org_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_tbl.org_id = org_acc.org_id");
+                                                            while ($row = $try->fetch_array()) {
+                                                                echo '<option value="' . $row['org_id'] . '" data-role="' . $row['org_role'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <input type="text" class="form-control another-org-role" placeholder="Role" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <input type="text" class="form-control another-org-name" placeholder="Organization" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger">
+                                                            <i class="la la-trash-o"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="col-lg-12 pt-5">
+                                                        <textarea class="form-control" id="kt_maxlength_6" maxlength="1500"
+                                                            placeholder="Write your purpose" rows="6"></textarea>
+                                                        <span class="form-text text-muted">Maximum of 1,500 characters only</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+
+                                            <label class="col-lg-2 col-form-label text-right"></label>
+                                            <div class="col-lg-4">
+                                                <a href="javascript:;" data-repeater-create class="btn btn-sm font-weight-bolder btn-light-primary">
+                                                    <i class="la la-plus"></i> Add
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const repeaterList2 = document.querySelector('#kt_repeater_2 [data-repeater-list]');
+                                                const addButton2 = document.querySelector('#kt_repeater_2 [data-repeater-create]');
+
+                                                function updateOptions() {
+                                                    const selectedValues = Array.from(repeaterList2.querySelectorAll('.another-org-select'))
+                                                        .map(select => select.value)
+                                                        .filter(value => value !== '');
+
+                                                    repeaterList2.querySelectorAll('.another-org-select').forEach(select => {
+                                                        const options = select.querySelectorAll('option');
+                                                        options.forEach(option => {
+                                                            if (selectedValues.includes(option.value) && option.value !== select.value) {
+                                                                option.style.display = 'none';
+                                                            } else {
+                                                                option.style.display = 'block';
+                                                            }
+                                                        });
+                                                    });
+
+                                                    // Disable add button if all options are selected
+                                                    const allOptions = repeaterList2.querySelector('.another-org-select').querySelectorAll('option');
+                                                    const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
+                                                    addButton2.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
+                                                }
+
+                                                function updateRoleAndOrgNameInput(selectElement) {
+                                                    const selectedOption = selectElement.options[selectElement.selectedIndex];
+                                                    const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-role');
+                                                    const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
+                                                    roleInput.value = selectedOption.getAttribute('data-role');
+                                                    orgNameInput.value = selectedOption.getAttribute('data-org');
+                                                }
+
+                                                repeaterList2.addEventListener('change', function(event) {
+                                                    if (event.target.classList.contains('another-org-select')) {
+                                                        updateOptions();
+                                                        updateRoleAndOrgNameInput(event.target);
+                                                    }
+                                                });
+
+                                                repeaterList2.addEventListener('click', function(event) {
+                                                    if (event.target.closest('[data-repeater-delete]')) {
+                                                        // Instantly delete the item without confirmation
+                                                        event.target.closest('[data-repeater-item]').remove();
+                                                        updateOptions();
+                                                    }
+                                                });
+
+                                                addButton2.addEventListener('click', function() {
+                                                    setTimeout(updateOptions, 100);
+                                                });
+
+                                                updateOptions();
+                                            });
+                                        </script>
+                                    </div>
+
+
+
+
+
+
+
+
 
                                 </div>
                                 <!--end::Wizard Step 4-->

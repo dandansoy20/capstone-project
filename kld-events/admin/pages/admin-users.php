@@ -8,13 +8,13 @@
         <div class=" container ">
             <!--begin::Row-->
             <div class="row">
-                
+
                 <?php
-                    include('./control/db.php');
-                    $try = mysqli_query($conn, "Select * from admin_acc where status != 'INACTIVE' ");
-                    while($row = $try->fetch_array()){
-                        echo '
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" id="admin_acc_container'.$row['admin_id'].'">
+                include('./control/db.php');
+                $try = mysqli_query($conn, "Select * from admin_acc where status != 'INACTIVE' ");
+                while ($row = $try->fetch_array()) {
+                    echo '
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" id="admin_acc_container' . $row['admin_id'] . '">
                             <div class="card card-custom gutter-b card-stretch">
                                 <div class="card-body pt-4">
                                     <!--begin::Toolbar-->
@@ -28,13 +28,13 @@
                                             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
                                                 <ul class="navi navi-hover py-5">
                                                     <li class="navi-item">
-                                                        <a href="#" onclick="hideOrganizer('.$row['admin_id'].')" class="navi-link">
+                                                        <a href="#" onclick="hideOrganizer(' . $row['admin_id'] . ')" class="navi-link">
                                                             <span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
                                                             <span class="navi-text">Archive</span>
                                                         </a>
                                                     </li>
                                                     <li class="navi-item">
-                                                        <a href="#" onclick="editOrganizer('.$row['admin_id'].')" class="navi-link">
+                                                        <a href="#" onclick="editOrganizer(' . $row['admin_id'] . ')" class="navi-link">
                                                             <span class="navi-icon"><i class="flaticon2-gear"></i></span>
                                                             <span class="navi-text">Edit</span>
                                                         </a>
@@ -56,25 +56,25 @@
                                         <!--begin::Title-->
                                         <div class="d-flex flex-column">
                                             <a href="#"
-                                                class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">'.$row['admin_fname'].' '.$row['admin_lname'].'
+                                                class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">' . $row['admin_fname'] . ' ' . $row['admin_lname'] . '
                                             </a>
-                                            <span class="text-muted font-weight-bold">Administrator</span>
+                                            <span class="text-muted font-weight-bold">' . $row['admin_role'] . '</span>
                                         </div>
                                         <!--end::Title-->
                                     </div>
                                     <div class="mb-7">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
-                                            <a href="#" class="text-muted text-hover-primary">'.$row['admin_email'].'</a>
+                                            <a href="#" class="text-muted text-hover-primary">' . $row['admin_email'] . '</a>
                                         </div>
                                     </div>
                                     <div 
-                                        class="btn btn-block disabled btn-sm btn-'.($row['status'] === "ACTIVE" ? "light-success" : "light-danger").' font-weight-bolder text-uppercase py-4" >'.($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated").'</div>
+                                        class="btn btn-block disabled btn-sm btn-' . ($row['status'] === "ACTIVE" ? "light-success" : "light-danger") . ' font-weight-bolder text-uppercase py-4" >' . ($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated") . '</div>
                                 </div>
                             </div>
                         </div>
                         ';
-                    } ?>
+                } ?>
                 <!--end::Col-->
             </div>
             <!--end::Row-->

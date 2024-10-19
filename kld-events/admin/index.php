@@ -60,6 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 
+		<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
@@ -172,6 +173,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
 		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 
+		<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
+		<script src="assets/js/pages/crud/forms/widgets/nouislider.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
 		<script src="assets/js/pages/custom/user/add-user.js"></script>
 

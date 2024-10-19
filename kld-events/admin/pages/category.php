@@ -9,7 +9,9 @@
             <div class="card card-custom gutter-b card-stretch">
                 <!--begin::Body-->
                 <div class="card-body">
+                
                     <div class="d-flex flex-wrap align-items-center py-1">
+                   
                         <!--begin:Pic-->
                         <div class="symbol symbol-80 symbol-light-danger mr-5">
                             <span class="symbol-label">

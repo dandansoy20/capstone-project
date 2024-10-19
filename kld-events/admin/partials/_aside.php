@@ -119,10 +119,10 @@
 							</li>
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=archived-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Archive</span>
+										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Archives</span>
 								</a>
 							</li>
-							
+
 						</ul>
 					</div>
 				</li>
@@ -161,7 +161,7 @@
 										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
 										Venue</span></a>
 							</li>
-							
+
 						</ul>
 					</div>
 				</li>
@@ -381,7 +381,7 @@
 								<span class="menu-link"><span class="menu-text">Student</span></span>
 							</li>
 
-							
+
 
 							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=add-std" class="menu-link"><i
@@ -391,7 +391,7 @@
 
 
 
-							
+
 
 						</ul>
 					</div>
