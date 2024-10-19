@@ -94,14 +94,15 @@
 
 
 									<p class="text-dark-50 my-5 font-size-xl font-weight-bold">
-										wala ako malagay na kahit ano dito kase pang testing lang ganun para malaman ko lang
-										kung ano itsura nya kapag naka ano, yung ganito na ano may mahabang text
+										Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto magni aspernatur aliquam tenetur,
+										asperiores iure ipsam assumenda nesciunt ducimus debitis maiores corporis facere! Praesentium a
+										iste nisi delectus similique totam.
 									</p>
 
 
-									<a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
+									<a href="?page=memo" class="btn btn-light-primary font-weight-bold py-2 px-6">View Memo</a>
 
-									<a href="?page=memo" class="btn btn-light-primary font-weight-bold py-2 px-6">Live Now</a>
+									<a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">Live Now!</a>
 								</div>
 
 							</div>
@@ -119,6 +120,14 @@
 			<div class="col-xl-4">
 				<!--begin::Stats Widget 4-->
 				<div class="card card-custom card-stretch gutter-b">
+					<div class="card-header ribbon ribbon-top ribbon-ver">
+						<div class="ribbon-target bg-danger" style="top: -2px; right: 20px;">
+							<i class="icon-2x text-white flaticon2-reply"></i>
+						</div>
+						<h3 class="card-title">
+							Rejected
+						</h3>
+					</div>
 					<!--begin::Body-->
 					<div class="card-body d-flex align-items-center py-0 mt-5">
 						<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
@@ -127,7 +136,6 @@
 								Marvin Serrano</a>
 							<span class="font-weight-bold text-muted  font-size-lg">Head of Student Activity</span>
 
-							<div class="font-weight-bold text-warning mb-3">Pending</div>
 						</div>
 						<img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="h-100px" />
 					</div>
@@ -138,17 +146,24 @@
 			<div class="col-xl-4">
 				<!--begin::Stats Widget 4-->
 				<div class="card card-custom card-stretch gutter-b">
+					<div class="card-header ribbon ribbon-top ribbon-ver">
+						<div class="ribbon-target bg-warning" style="top: -2px; right: 20px;">
+							<i class="icon-2x text-white flaticon2-reload"></i>
+						</div>
+						<h3 class="card-title">
+							Pending
+						</h3>
+					</div>
 					<!--begin::Body-->
 					<div class="card-body d-flex align-items-center py-0 mt-5">
 						<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
 							<a href="#"
-								class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Riza
-								Mae Alburo</a>
+								class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Rayben
+								Legaspi</a>
 							<span class="font-weight-bold text-muted  font-size-lg">Head of Event's Equipment</span>
 
-							<div class="font-weight-bold text-success mb-3">Approved</div>
 						</div>
-						<img src="assets/media/svg/avatars/014-girl-7.svg" alt="" class="h-100px" />
+						<img src="assets/media/svg/avatars/031-boy-12.svg" alt="" class="h-100px" />
 					</div>
 					<!--end::Body-->
 				</div>
@@ -157,6 +172,14 @@
 			<div class="col-xl-4">
 				<!--begin::Stats Widget 4-->
 				<div class="card card-custom card-stretch gutter-b">
+					<div class="card-header ribbon ribbon-top ribbon-ver">
+						<div class="ribbon-target bg-success" style="top: -2px; right: 20px;">
+							<i class="fa fa-star text-white"></i>
+						</div>
+						<h3 class="card-title">
+							Approved
+						</h3>
+					</div>
 					<!--begin::Body-->
 					<div class="card-body d-flex align-items-center py-0 mt-5">
 						<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
@@ -165,7 +188,6 @@
 								A. Villavicencio</a>
 							<span class="font-weight-bold text-muted  font-size-lg">IICS Dean</span>
 
-							<div class="font-weight-bold text-success mb-3">Approved</div>
 						</div>
 						<img src="assets/media/svg/avatars/004-boy-1.svg" alt="" class="h-100px" />
 					</div>
@@ -244,15 +266,13 @@
 			<div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
-						<div class="alert alert-primary mb-5 p-5" role="alert">
+						<div class="alert alert-info mb-5 p-5" role="alert">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<i aria-hidden="true" class="ki ki-close"></i>
 							</button>
 							<h4 class="alert-heading">Well done!</h4>
 
 							<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-							<div class="border-bottom border-white opacity-20 mb-5"></div>
-							<p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
 						</div>
 					</div>
 				</div>
@@ -267,13 +287,14 @@
 
 
 
+		<h5>Pre-Event Information</h5>
 
 
 
 		<div class="card card-custom">
 			<div class="card-body p-0">
 				<!--begin: Wizard-->
-				<div class="wizard wizard-2" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="false">
+				<div class="wizard wizard-2" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
 					<!--begin: Wizard Nav-->
 					<div class="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">
 						<!--begin::Wizard Step 1 Nav-->
@@ -281,21 +302,19 @@
 							<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
 								<div class="wizard-wrapper">
 									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Design/Image.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 													<polygon points="0 0 24 0 24 24 0 24" />
-													<path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-													<path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+													<path d="M6,5 L18,5 C19.6568542,5 21,6.34314575 21,8 L21,17 C21,18.6568542 19.6568542,20 18,20 L6,20 C4.34314575,20 3,18.6568542 3,17 L3,8 C3,6.34314575 4.34314575,5 6,5 Z M5,17 L14,17 L9.5,11 L5,17 Z M16,14 C17.6568542,14 19,12.6568542 19,11 C19,9.34314575 17.6568542,8 16,8 C14.3431458,8 13,9.34314575 13,11 C13,12.6568542 14.3431458,14 16,14 Z" fill="#000000" />
 												</g>
-											</svg>
-											<!--end::Svg Icon-->
+											</svg><!--end::Svg Icon--></span>
+										<!--end::Svg Icon-->
 										</span>
 									</div>
 									<div class="wizard-label">
-										<h3 class="wizard-title">Account Settings</h3>
-										<div class="wizard-desc">Setup Your Account Details</div>
+										<h3 class="wizard-title">Event Guidelines</h3>
+										<div class="wizard-desc">Policies, FAQs, and other informations</div>
 									</div>
 								</div>
 							</div>
@@ -304,20 +323,18 @@
 							<div class="wizard-step" data-wizard-type="step">
 								<div class="wizard-wrapper">
 									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/Map/Compass.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Code/Time-schedule.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 													<rect x="0" y="0" width="24" height="24" />
-													<path d="M12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 Z M14.1654881,7.35483745 L9.61055177,10.3622525 C9.47921741,10.4489666 9.39637436,10.592455 9.38694497,10.7495509 L9.05991526,16.197949 C9.04337012,16.4735952 9.25341309,16.7104632 9.52905936,16.7270083 C9.63705011,16.7334903 9.74423017,16.7047714 9.83451193,16.6451626 L14.3894482,13.6377475 C14.5207826,13.5510334 14.6036256,13.407545 14.613055,13.2504491 L14.9400847,7.80205104 C14.9566299,7.52640477 14.7465869,7.28953682 14.4709406,7.27299168 C14.3629499,7.26650974 14.2557698,7.29522855 14.1654881,7.35483745 Z" fill="#000000" />
+													<path d="M10.9630156,7.5 L11.0475062,7.5 C11.3043819,7.5 11.5194647,7.69464724 11.5450248,7.95024814 L12,12.5 L15.2480695,14.3560397 C15.403857,14.4450611 15.5,14.6107328 15.5,14.7901613 L15.5,15 C15.5,15.2109164 15.3290185,15.3818979 15.1181021,15.3818979 C15.0841582,15.3818979 15.0503659,15.3773725 15.0176181,15.3684413 L10.3986612,14.1087258 C10.1672824,14.0456225 10.0132986,13.8271186 10.0316926,13.5879956 L10.4644883,7.96165175 C10.4845267,7.70115317 10.7017474,7.5 10.9630156,7.5 Z" fill="#000000" />
+													<path d="M7.38979581,2.8349582 C8.65216735,2.29743306 10.0413491,2 11.5,2 C17.2989899,2 22,6.70101013 22,12.5 C22,18.2989899 17.2989899,23 11.5,23 C5.70101013,23 1,18.2989899 1,12.5 C1,11.5151324 1.13559454,10.5619345 1.38913364,9.65805651 L3.31481075,10.1982117 C3.10672013,10.940064 3,11.7119264 3,12.5 C3,17.1944204 6.80557963,21 11.5,21 C16.1944204,21 20,17.1944204 20,12.5 C20,7.80557963 16.1944204,4 11.5,4 C10.54876,4 9.62236069,4.15592757 8.74872191,4.45446326 L9.93948308,5.87355717 C10.0088058,5.95617272 10.0495583,6.05898805 10.05566,6.16666224 C10.0712834,6.4423623 9.86044965,6.67852665 9.5847496,6.69415008 L4.71777931,6.96995273 C4.66931162,6.97269931 4.62070229,6.96837279 4.57348157,6.95710938 C4.30487471,6.89303938 4.13906482,6.62335149 4.20313482,6.35474463 L5.33163823,1.62361064 C5.35654118,1.51920756 5.41437908,1.4255891 5.49660017,1.35659741 C5.7081375,1.17909652 6.0235153,1.2066885 6.2010162,1.41822583 L7.38979581,2.8349582 Z" fill="#000000" opacity="0.3" />
 												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
+											</svg><!--end::Svg Icon--></span>
 									</div>
 									<div class="wizard-label">
-										<h3 class="wizard-title">Setup Locations</h3>
-										<div class="wizard-desc">Choose Your Location Map</div>
+										<h3 class="wizard-title">Program Agenda</h3>
+										<div class="wizard-desc">Event timeline</div>
 									</div>
 								</div>
 							</div>
@@ -326,21 +343,22 @@
 							<div class="wizard-step" data-wizard-type="step">
 								<div class="wizard-wrapper">
 									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/General/Thunder-move.svg-->
+										<span class="svg-icon svg-icon-primary svg-icon-2x">
 											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24" />
-													<path d="M16.3740377,19.9389434 L22.2226499,11.1660251 C22.4524142,10.8213786 22.3592838,10.3557266 22.0146373,10.1259623 C21.8914367,10.0438285 21.7466809,10 21.5986122,10 L17,10 L17,4.47708173 C17,4.06286817 16.6642136,3.72708173 16.25,3.72708173 C15.9992351,3.72708173 15.7650616,3.85240758 15.6259623,4.06105658 L9.7773501,12.8339749 C9.54758575,13.1786214 9.64071616,13.6442734 9.98536267,13.8740377 C10.1085633,13.9561715 10.2533191,14 10.4013878,14 L15,14 L15,19.5229183 C15,19.9371318 15.3357864,20.2729183 15.75,20.2729183 C16.0007649,20.2729183 16.2349384,20.1475924 16.3740377,19.9389434 Z" fill="#000000" />
-													<path d="M4.5,5 L9.5,5 C10.3284271,5 11,5.67157288 11,6.5 C11,7.32842712 10.3284271,8 9.5,8 L4.5,8 C3.67157288,8 3,7.32842712 3,6.5 C3,5.67157288 3.67157288,5 4.5,5 Z M4.5,17 L9.5,17 C10.3284271,17 11,17.6715729 11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L4.5,20 C3.67157288,20 3,19.3284271 3,18.5 C3,17.6715729 3.67157288,17 4.5,17 Z M2.5,11 L6.5,11 C7.32842712,11 8,11.6715729 8,12.5 C8,13.3284271 7.32842712,14 6.5,14 L2.5,14 C1.67157288,14 1,13.3284271 1,12.5 C1,11.6715729 1.67157288,11 2.5,11 Z" fill="#000000" opacity="0.3" />
+													<polygon points="0 0 24 0 24 24 0 24" />
+													<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+													<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+													<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+
+
 												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
+											</svg><!--end::Svg Icon--></span>
 									</div>
 									<div class="wizard-label">
-										<h3 class="wizard-title">Support Channels</h3>
-										<div class="wizard-desc">Add Your Support Agents</div>
+										<h3 class="wizard-title">Event Attachments</h3>
+										<div class="wizard-desc">Forms, documents, printables, and such.</div>
 									</div>
 								</div>
 							</div>
@@ -349,73 +367,23 @@
 							<div class="wizard-step" data-wizard-type="step">
 								<div class="wizard-wrapper">
 									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/Map/Position.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+										<span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/General/User.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
 												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24" />
-													<path d="M19,11 L21,11 C21.5522847,11 22,11.4477153 22,12 C22,12.5522847 21.5522847,13 21,13 L19,13 C18.4477153,13 18,12.5522847 18,12 C18,11.4477153 18.4477153,11 19,11 Z M3,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L3,13 C2.44771525,13 2,12.5522847 2,12 C2,11.4477153 2.44771525,11 3,11 Z M12,2 C12.5522847,2 13,2.44771525 13,3 L13,5 C13,5.55228475 12.5522847,6 12,6 C11.4477153,6 11,5.55228475 11,5 L11,3 C11,2.44771525 11.4477153,2 12,2 Z M12,18 C12.5522847,18 13,18.4477153 13,19 L13,21 C13,21.5522847 12.5522847,22 12,22 C11.4477153,22 11,21.5522847 11,21 L11,19 C11,18.4477153 11.4477153,18 12,18 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-													<circle fill="#000000" opacity="0.3" cx="12" cy="12" r="2" />
-													<path d="M12,17 C14.7614237,17 17,14.7614237 17,12 C17,9.23857625 14.7614237,7 12,7 C9.23857625,7 7,9.23857625 7,12 C7,14.7614237 9.23857625,17 12,17 Z M12,19 C8.13400675,19 5,15.8659932 5,12 C5,8.13400675 8.13400675,5 12,5 C15.8659932,5 19,8.13400675 19,12 C19,15.8659932 15.8659932,19 12,19 Z" fill="#000000" fill-rule="nonzero" />
+													<polygon points="0 0 24 0 24 24 0 24" />
+													<path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+													<path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
 												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
+											</svg><!--end::Svg Icon--></span>
 									</div>
 									<div class="wizard-label">
-										<h3 class="wizard-title">Set Your Delivery Address</h3>
-										<div class="wizard-desc">Address, Street, City, State</div>
+										<h3 class="wizard-title">Event Checklist</h3>
+										<div class="wizard-desc">Keep organizers on top of tasks.</div>
+										<div class="wizard-desc"></div>
 									</div>
 								</div>
 							</div>
 							<!--end::Wizard Step 4 Nav-->
-							<!--begin::Wizard Step 5 Nav-->
-							<div class="wizard-step" data-wizard-type="step">
-								<div class="wizard-wrapper">
-									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Credit-card.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24" />
-													<rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2" />
-													<rect fill="#000000" x="2" y="8" width="20" height="3" />
-													<rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1" />
-												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
-									</div>
-									<div class="wizard-label">
-										<h3 class="wizard-title">Make Payment</h3>
-										<div class="wizard-desc">Use Credit or Debit Cards</div>
-									</div>
-								</div>
-							</div>
-							<!--end::Wizard Step 5 Nav-->
-							<!--begin::Wizard Step 6 Nav-->
-							<div class="wizard-step" data-wizard-type="step">
-								<div class="wizard-wrapper">
-									<div class="wizard-icon">
-										<span class="svg-icon svg-icon-2x">
-											<!--begin::Svg Icon | path:assets/media/svg/icons/General/Like.svg-->
-											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-													<rect x="0" y="0" width="24" height="24" />
-													<path d="M9,10 L9,19 L10.1525987,19.3841996 C11.3761964,19.7920655 12.6575468,20 13.9473319,20 L17.5405883,20 C18.9706314,20 20.2018758,18.990621 20.4823303,17.5883484 L21.231529,13.8423552 C21.5564648,12.217676 20.5028146,10.6372006 18.8781353,10.3122648 C18.6189212,10.260422 18.353992,10.2430672 18.0902299,10.2606513 L14.5,10.5 L14.8641964,6.49383981 C14.9326895,5.74041495 14.3774427,5.07411874 13.6240179,5.00562558 C13.5827848,5.00187712 13.5414031,5 13.5,5 L13.5,5 C12.5694044,5 11.7070439,5.48826024 11.2282564,6.28623939 L9,10 Z" fill="#000000" />
-													<rect fill="#000000" opacity="0.3" x="2" y="9" width="5" height="11" rx="1" />
-												</g>
-											</svg>
-											<!--end::Svg Icon-->
-										</span>
-									</div>
-									<div class="wizard-label">
-										<h3 class="wizard-title">Completed!</h3>
-										<div class="wizard-desc">Review and Submit</div>
-									</div>
-								</div>
-							</div>
-							<!--end::Wizard Step 6 Nav-->
 						</div>
 					</div>
 					<!--end: Wizard Nav-->
@@ -425,310 +393,255 @@
 						<div class="row">
 							<div class="offset-xxl-2 col-xxl-8">
 								<form class="form" id="kt_form">
-									<!--begin: Wizard Step 1-->
 									<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-										<h4 class="mb-10 font-weight-bold text-dark">Enter your Account Details</h4>
-										<!--begin::Input-->
-										<div class="form-group">
-											<label>First Name</label>
-											<input type="text" class="form-control form-control-solid form-control-lg" name="fname" placeholder="First Name" value="" />
-											<span class="form-text text-muted">Please enter your first name.</span>
-										</div>
-										<!--end::Input-->
-										<!--begin::Input-->
-										<div class="form-group">
-											<label>Last Name</label>
-											<input type="text" class="form-control form-control-solid form-control-lg" name="lname" placeholder="Last Name" value="" />
-											<span class="form-text text-muted">Please enter your last name.</span>
-										</div>
-										<!--end::Input-->
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Phone</label>
-													<input type="tel" class="form-control form-control-solid form-control-lg" name="phone" placeholder="phone" value="+61412345678" />
-													<span class="form-text text-muted">Please enter your phone number.</span>
+										<h4 class="mb-10 font-weight-bold text-dark">Event Contents</h4>
+										<div id="kt_repeater_1" class="kt-repeater">
+											<div data-repeater-list="image_list" class="col-lg-12">
+												<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+													<!-- Input Field -->
+													<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+														<input type="text" class="form-control" placeholder="Insert Title Here" />
+													</div>
+
+													<!-- Dropzone -->
+													<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+														<div class="dropzone dropzone-default" id="kt_dropzone_1">
+															<div class="dropzone-msg dz-message needsclick">
+																<h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+																<span class="dropzone-msg-desc">Less than 10MB | JPG, PNG, JPEG ONLY</span>
+															</div>
+														</div>
+													</div>
+
+													<!-- Description -->
+													<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+														<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
+													</div>
+
+													<!-- Delete Button -->
+													<div class="col-lg-4 col-md-6 col-sm-12">
+														<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+															<i class="la la-trash-o"></i> Delete
+														</a>
+													</div>
 												</div>
-												<!--end::Input-->
 											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Email</label>
-													<input type="email" class="form-control form-control-solid form-control-lg" name="email" placeholder="Email" value="john.wick@reeves.com" />
-													<span class="form-text text-muted">Please enter your email address.</span>
+
+											<!-- Add Button -->
+											<div class="form-group row">
+												<div class="col-lg-4 col-md-6 col-sm-12">
+													<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+														<i class="la la-plus"></i> Add
+													</a>
 												</div>
-												<!--end::Input-->
 											</div>
 										</div>
 									</div>
-									<!--end: Wizard Step 1-->
-									<!--begin: Wizard Step 2-->
+
+									<!-- Second Repeater for Event Program -->
 									<div class="pb-5" data-wizard-type="step-content">
-										<h4 class="mb-10 font-weight-bold text-dark">Setup Your Current Location</h4>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Address Line 1</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="address1" placeholder="Address Line 1" value="Address Line 1" />
-													<span class="form-text text-muted">Please enter your Address.</span>
+										<h4 class="mb-10 font-weight-bold text-dark">Set Event Program</h4>
+										<div id="kt_repeater_2" class="kt-repeater">
+											<div data-repeater-list="program_list" class="col-lg-12">
+												<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+													<!-- Timepicker -->
+													<div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+														<div class="input-group timepicker">
+															<div class="input-group-prepend">
+																<span class="input-group-text">
+																	<i class="la la-exclamation-circle"></i>
+																</span>
+															</div>
+															<input class="form-control" id="kt_timepicker_4" readonly="readonly" value="08:00:00 AM" type="text" />
+														</div>
+													</div>
+
+													<!-- Title -->
+													<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+														<input type="text" class="form-control" placeholder="Insert Title Here" />
+													</div>
+
+													<!-- Delete Button -->
+													<div class="col-lg-2 col-md-12 col-sm-12 mb-3">
+														<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+															<i class="la la-trash-o"></i>
+														</a>
+													</div>
+
+													<!-- Description -->
+													<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+														<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
+													</div>
 												</div>
-												<!--end::Input-->
 											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Address Line 2</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="address2" placeholder="Address Line 2" value="Address Line 2" />
-													<span class="form-text text-muted">Please enter your Address.</span>
+
+											<!-- Add Button -->
+											<div class="form-group row">
+												<div class="col-12 col-md-6 col-sm-12">
+													<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+														<i class="la la-plus"></i> Add
+													</a>
 												</div>
-												<!--end::Input-->
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Postcode</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="postcode" placeholder="Postcode" value="3000" />
-													<span class="form-text text-muted">Please enter your Postcode.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="city" placeholder="City" value="Melbourne" />
-													<span class="form-text text-muted">Please enter your City.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>State</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="state" placeholder="State" value="VIC" />
-													<span class="form-text text-muted">Please enter your State.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-6">
-												<!--begin::Select-->
-												<div class="form-group">
-													<label>Country</label>
-													<select name="country" class="form-control form-control-solid form-control-lg">
-														<option value="">Select</option>
-														<option value="AF">Afghanistan</option>
-													</select>
-												</div>
-												<!--end::Input-->
 											</div>
 										</div>
+
+
 									</div>
+
+
 									<!--end: Wizard Step 2-->
 									<!--begin: Wizard Step 3-->
 									<div class="pb-5" data-wizard-type="step-content">
-										<h4 class="mb-10 font-weight-bold text-dark">Select your Services</h4>
-										<!--begin::Select-->
-										<div class="form-group">
-											<label>Delivery Type:</label>
-											<select name="delivery" class="form-control form-control-solid form-control-lg">
-												<option value="">Select a Service Type Option</option>
-												<option value="overnight" selected="selected">Overnight Delivery (within 48 hours)</option>
-												<option value="express">Express Delivery (within 5 working days)</option>
-												<option value="basic">Basic Delivery (within 5 - 10 working days)</option>
-											</select>
+										<h4 class="mb-10 font-weight-bold text-dark">Attachment File(s)</h4>
+
+										<div class="form-group row">
+											<div class="col-lg-9 mb-3">
+												<div class="dropzone dropzone-multi" id="kt_dropzone_4">
+
+													<div class="dropzone-panel mb-lg-0 mb-2">
+														<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm">Attach files</a>
+														<a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm">Upload All</a>
+														<a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm">Remove All</a>
+													</div>
+													<div class="dropzone-items">
+														<div class="dropzone-item" style="display:none">
+															<div class="dropzone-file">
+																<div class="dropzone-filename" title="some_image_file_name.jpg">
+																	<span data-dz-name="">some_image_file_name.jpg</span>
+																	<strong>(
+																		<span data-dz-size="">340kb</span>)</strong>
+																</div>
+																<div class="dropzone-error" data-dz-errormessage=""></div>
+															</div>
+															<div class="dropzone-progress">
+																<div class="progress">
+																	<div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress=""></div>
+																</div>
+															</div>
+															<div class="dropzone-toolbar">
+																<span class="dropzone-start">
+																	<i class="flaticon2-arrow"></i>
+																</span>
+																<span class="dropzone-cancel" data-dz-remove="" style="display: none;">
+																	<i class="flaticon2-cross"></i>
+																</span>
+																<span class="dropzone-delete" data-dz-remove="">
+																	<i class="flaticon2-cross"></i>
+																</span>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+												<textarea class="form-control" placeholder="Enter short description" rows="3"></textarea>
+											</div>
+
 										</div>
-										<!--end::Select-->
-										<!--begin::Select-->
-										<div class="form-group">
-											<label>Packaging Type:</label>
-											<select name="packaging" class="form-control form-control-solid form-control-lg">
-												<option value="">Select a Packaging Type Option</option>
-												<option value="regular" selected="selected">Regular Packaging</option>
-												<option value="oversized">Oversized Packaging</option>
-												<option value="fragile">Fragile Packaging</option>
-												<option value="frozen">Frozen Packaging</option>
-											</select>
+
+
+										<div class="separator separator-solid my-5"></div>
+
+
+										<h4 class="mb-10 font-weight-bold text-dark">Event Link</h4>
+
+
+
+
+										<div id="kt_repeater_3" class="kt-repeater">
+											<div data-repeater-list="attachment" class="col-lg-12">
+												<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+													<!-- Timepicker -->
+													<div class="form-group row">
+														<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+															<input type="text" class="form-control" placeholder="Insert Title Here" />
+														</div>
+														<div class="col-lg-3 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+
+														<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+															<textarea class="form-control" placeholder="https://kld.edu.ph/kld-events" rows="3"></textarea>
+														</div>
+
+
+													</div>
+												</div>
+
+												<!-- Add Button -->
+
+											</div>
+											<div class="form-group row">
+												<div class="col-12 col-md-6 col-sm-12">
+													<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+														<i class="la la-plus"></i> Add
+													</a>
+												</div>
+											</div>
+
+
 										</div>
-										<!--end::Select-->
-										<!--begin::Select-->
-										<div class="form-group">
-											<label>Preferred Delivery Window:</label>
-											<select name="preferreddelivery" class="form-control form-control-solid form-control-lg">
-												<option value="">Select a Preferred Delivery Option</option>
-												<option value="morning" selected="selected">Morning Delivery (8:00AM - 11:00AM)</option>
-												<option value="afternoon">Afternoon Delivery (11:00AM - 3:00PM)</option>
-												<option value="evening">Evening Delivery (3:00PM - 7:00PM)</option>
-											</select>
-										</div>
-										<!--end::Select-->
 									</div>
 									<!--end: Wizard Step 3-->
 									<!--begin: Wizard Step 4-->
 									<div class="pb-5" data-wizard-type="step-content">
-										<h4 class="mb-10 font-weight-bold text-dark">Setup Your Delivery Location</h4>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Address Line 1</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="locaddress1" placeholder="Address Line 1" value="Address Line 1" />
-													<span class="form-text text-muted">Please enter your Address.</span>
+										<h4 class="mb-10 font-weight-bold text-dark">To-Do List</h4>
+
+										<div id="kt_repeater_4" class="kt-repeater">
+											<div data-repeater-list="attachment" class="col-lg-12">
+												<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+													<!-- Timepicker -->
+													<div class="form-group row">
+
+														<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+															<textarea class="form-control" placeholder="Enter Task Here..." rows="3"></textarea>
+														</div>
+														<label class="col-lg-2 col-form-label text-right">Due Date:</label>
+														<div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+															<div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+																<input type="text" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_1" />
+																<div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+																	<span class="input-group-text">
+																		<i class="ki ki-calendar"></i>
+																	</span>
+																</div>
+															</div>
+														</div>
+														<div class="col-lg-3 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+
+
+
+													</div>
 												</div>
-												<!--end::Input-->
+
+												<!-- Add Button -->
+
 											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Address Line 2</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="locaddress2" placeholder="Address Line 2" value="Address Line 2" />
-													<span class="form-text text-muted">Please enter your Address.</span>
+											<div class="form-group row">
+												<div class="col-12 col-md-6 col-sm-12">
+													<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+														<i class="la la-plus"></i> Add
+													</a>
 												</div>
-												<!--end::Input-->
 											</div>
+
+
 										</div>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Postcode</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="locpostcode" placeholder="Postcode" value="3072" />
-													<span class="form-text text-muted">Please enter your Postcode.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>City</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="loccity" placeholder="City" value="Preston" />
-													<span class="form-text text-muted">Please enter your City.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>State</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="locstate" placeholder="State" value="VIC" />
-													<span class="form-text text-muted">Please enter your state.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-6">
-												<!--begin::Select-->
-												<div class="form-group">
-													<label>Country</label>
-													<select name="loccountry" class="form-control form-control-solid form-control-lg">
-														<option value="">Select</option>
-														<option value="AF">Afghanistan</option>
-													</select>
-												</div>
-												<!--end::Select-->
-											</div>
-										</div>
+
 									</div>
 									<!--end: Wizard Step 4-->
 									<!--begin: Wizard Step 5-->
-									<div class="pb-5" data-wizard-type="step-content">
-										<h4 class="mb-10 font-weight-bold text-dark">Enter your Payment Details</h4>
-										<div class="row">
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Name on Card</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="ccname" placeholder="Card Name" value="John Wick" />
-													<span class="form-text text-muted">Please enter your Card Name.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-6">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Card Number</label>
-													<input type="text" class="form-control form-control-solid form-control-lg" name="ccnumber" placeholder="Card Number" value="4444 3333 2222 1111" />
-													<span class="form-text text-muted">Please enter your Address.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xl-4">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Card Expiry Month</label>
-													<input type="number" class="form-control form-control-solid form-control-lg" name="ccmonth" placeholder="Card Expiry Month" value="01" />
-													<span class="form-text text-muted">Please enter your Card Expiry Month.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-4">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Card Expiry Year</label>
-													<input type="number" class="form-control form-control-solid form-control-lg" name="ccyear" placeholder="Card Expire Year" value="21" />
-													<span class="form-text text-muted">Please enter your Card Expiry Year.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-											<div class="col-xl-4">
-												<!--begin::Input-->
-												<div class="form-group">
-													<label>Card CVV Number</label>
-													<input type="password" class="form-control form-control-solid form-control-lg" name="cccvv" placeholder="Card CVV Number" value="123" />
-													<span class="form-text text-muted">Please enter your Card CVV Number.</span>
-												</div>
-												<!--end::Input-->
-											</div>
-										</div>
-									</div>
 									<!--end: Wizard Step 5-->
 									<!--begin: Wizard Step 6-->
-									<div class="pb-5" data-wizard-type="step-content">
-										<!--begin::Section-->
-										<h4 class="mb-10 font-weight-bold text-dark">Review your Details and Submit</h4>
-										<h6 class="font-weight-bolder mb-3">Current Address:</h6>
-										<div class="text-dark-50 line-height-lg">
-											<div>Address Line 1</div>
-											<div>Address Line 2</div>
-											<div>Melbourne 3000, VIC, Australia</div>
-										</div>
-										<div class="separator separator-dashed my-5"></div>
-										<!--end::Section-->
-										<!--begin::Section-->
-										<h6 class="font-weight-bolder mb-3">Delivery Details:</h6>
-										<div class="text-dark-50 line-height-lg">
-											<div>Package: Complete Workstation (Monitor, Computer, Keyboard &amp; Mouse)</div>
-											<div>Weight: 25kg</div>
-											<div>Dimensions: 110cm (w) x 90cm (h) x 150cm (L)</div>
-										</div>
-										<div class="separator separator-dashed my-5"></div>
-										<!--end::Section-->
-										<!--begin::Section-->
-										<h6 class="font-weight-bolder mb-3">Delivery Service Type:</h6>
-										<div class="text-dark-50 line-height-lg">
-											<div>Overnight Delivery with Regular Packaging</div>
-											<div>Preferred Morning (8:00AM - 11:00AM) Delivery</div>
-										</div>
-										<div class="separator separator-dashed my-5"></div>
-										<!--end::Section-->
-										<!--begin::Section-->
-										<h6 class="font-weight-bolder mb-3">Delivery Address:</h6>
-										<div class="text-dark-50 line-height-lg">
-											<div>Address Line 1</div>
-											<div>Address Line 2</div>
-											<div>Preston 3072, VIC, Australia</div>
-										</div>
-										<!--end::Section-->
-									</div>
+
 									<!--end: Wizard Step 6-->
 									<!--begin: Wizard Actions-->
 									<div class="d-flex justify-content-between border-top mt-5 pt-10">
@@ -736,7 +649,7 @@
 											<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
 										</div>
 										<div>
-											<button type="button" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
+											<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">Save Changes</button>
 											<button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
 										</div>
 									</div>
@@ -759,3 +672,59 @@
 	</div>
 	<!--end::Entry-->
 </div>
+
+<script>
+	// Initialize kt_repeater_1 for the image upload section
+	$('#kt_repeater_1').repeater({
+		initEmpty: false,
+		defaultValues: {
+			'text-input': ''
+		},
+		show: function() {
+			$(this).slideDown();
+		},
+		hide: function(deleteElement) {
+			$(this).slideUp(deleteElement);
+		}
+	});
+
+	// Initialize kt_repeater_2 for the event program section
+	$('#kt_repeater_2').repeater({
+		initEmpty: false,
+		defaultValues: {
+			'text-input': ''
+		},
+		show: function() {
+			$(this).slideDown();
+		},
+		hide: function(deleteElement) {
+			$(this).slideUp(deleteElement);
+		}
+	});
+
+	$('#kt_repeater_3').repeater({
+		initEmpty: false,
+		defaultValues: {
+			'text-input': ''
+		},
+		show: function() {
+			$(this).slideDown();
+		},
+		hide: function(deleteElement) {
+			$(this).slideUp(deleteElement);
+		}
+	});
+
+	$('#kt_repeater_4').repeater({
+		initEmpty: false,
+		defaultValues: {
+			'text-input': ''
+		},
+		show: function() {
+			$(this).slideDown();
+		},
+		hide: function(deleteElement) {
+			$(this).slideUp(deleteElement);
+		}
+	});
+</script>

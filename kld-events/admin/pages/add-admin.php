@@ -111,7 +111,7 @@
                                                                 <option>Academic Institue Dean</option>
                                                                 <option>Head of Student Activity</option>
                                                                 <option>Head of Equipments and Venue</option>
-                                                               
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -124,7 +124,7 @@
                                                             <div class="input-group input-group-solid input-group-lg">
                                                                 <input type="text"
                                                                     class="form-control form-control-solid form-control-lg"
-                                                                    placeholder="Enter ID Number" name="idnum"
+                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
                                                                     value="" />
                                                             </div>
                                                         </div>

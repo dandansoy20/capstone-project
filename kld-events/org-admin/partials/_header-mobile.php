@@ -1,4 +1,3 @@
-
 <!--begin::Header Mobile-->
 <div id="kt_header_mobile" class="header-mobile ">
 

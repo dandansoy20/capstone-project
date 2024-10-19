@@ -90,7 +90,7 @@
 												<!--end::Svg Icon-->
 											</span><span class="menu-text">Pending Events</span></a></li>
 
-											<li class="menu-item " aria-haspopup="true"><a href="?page=proposed"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=proposed"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="flaticon flaticon2-checking text-dark-50 ki ki-reload"></i>

@@ -35,7 +35,7 @@
                                 <span class="opacity-70">Celebrations</span>
                             </div>
                             <div class="d-flex flex-column flex-root">
-                                <span class="font-weight-bolder mb-2">Organization</span>
+                                <span class="font-weight-bolder mb-2">Organizer</span>
                                 <span class="opacity-70">Institute of Information and Computing Science<br />Juan V. Dela Cruz</span>
                             </div>
                         </div>
@@ -46,36 +46,31 @@
                 <!-- begin: Invoice body-->
                 <div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
                     <div class="col-md-9">
-                        <h5>April 25, 2024</h5>
-                        <p>To whom it may concern,</p>
-                        <p>Regal Day! I hope this letter finds you in good health and high spirits.
-                            As a member of the KLD community, it brings me great pleasure to present to you
-                            an exciting proposal for an upcoming event that promises to enrich the academic
-                            and social experiences of our students.</p>
-                        <p>We are proposing to organize IS Week 2024, a week of full innovative experience.
-                            The event aims to deliver a fun and memorable moment of IS college life.</p>
+                        <h4>October 21, 2024</h4><br>
+                        <h6>Hello, Con Marvin Serrano,</h6><br>
+                        <p class="lead" style="text-align: justify;">
 
-                        <p>We propose to hold the event on May 2nd at 8:00 AM in KLD Open Grounds. We have carefully selected
-                            this date and venue to ensure maximum participation and convenience for all stakeholders.</p>
+                            Regal Day! I hope this letter finds you in good health and high spirits. As a member of the KLD community, it brings me great pleasure to present to you an exciting proposal for an upcoming event that promises to enrich the academic and social experiences of our students.
 
-                        <p>The event includes a bunch of activities to cater various of event category such as Mobile Sports, Band Performaces, and a Memorable Night Gathering.</p>
+                            We are proposing to organize IS Week 2024, a week of full innovative experience. The event aims to deliver a fun and memorable moment of IS college life.
 
-                        <p>This event invites all the BS Information Systems from all year levels.</p>
+                            We propose to hold the event on May 2nd at 8:00 AM in KLD Open Grounds. We have carefully selected this date and venue to ensure maximum participation and convenience for all stakeholders.
 
-                        <p>As we execute this event, we would like to request an assistance from the Multimedia Team, Coordinators, and Supreme Student Officers.</p>
+                            The event includes a bunch of activities to cater various of event category such as Mobile Sports, Band Performaces, and a Memorable Night Gathering.
 
+                            This event invites all the BS Information Systems from all year levels.
 
-                        <p>We believe that IS Week 2024 has the potential to make a significant positive impact on
-                            our school community, and we are committed to ensuring its success. We eagerly await your
-                            feedback and support in making this event a reality.</p>
+                            As we execute this event, we would like to request an assistance from the Multimedia Team, Coordinators, and Supreme Student Officers.
 
-                        <p>Thank you for considering our proposal.</p>
+                            We believe that IS Week 2024 has the potential to make a significant positive impact on our school community, and we are committed to ensuring its success. We eagerly await your feedback and support in making this event a reality.
+
+                            Thank you for considering our proposal.</p>
                     </div>
                 </div>
                 <!-- end: Invoice body-->
 
                 <!-- begin: Invoice footer-->
-                <div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
+                <div class=" row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
                     <div class="col-md-9">
                         <div class="d-flex justify-content-between flex-column flex-md-row font-size-lg">
                             <div class="d-flex flex-column mb-10 mb-md-0">
@@ -91,10 +86,6 @@
                                     <span class="text-right">Keno A. Villavicencio</span></span>
                                 </div>
 
-                                <div class="d-flex justify-content-between">
-                                    <span class="mr-15 font-weight-bold">Head of Event Equipment:</span>
-                                    <span class="text-right">N/A</span></span>
-                                </div>
                             </div>
                             <div class="d-flex flex-column text-md-right">
                                 <span class="font-size-lg font-weight-bolder mb-1">Status</span>

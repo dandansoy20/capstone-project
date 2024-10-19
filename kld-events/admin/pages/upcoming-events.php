@@ -6,7 +6,8 @@
 
         <?php
         include('./control/db.php');
-        $try = mysqli_query($conn,
+        $try = mysqli_query(
+            $conn,
             "SELECT 
                             venue_tbl.venue_name,
                             venue_tbl.venue_desc,
@@ -23,7 +24,8 @@
                             FROM `kld_event`
                             left join venue_tbl on kld_event.venue_id = venue_tbl.venue_id
                             left join org_tbl on kld_event.event_org_id = org_tbl.org_id
-                            left join category_tbl on kld_event.category_id = category_tbl.category_id");
+                            left join category_tbl on kld_event.category_id = category_tbl.category_id"
+        );
         while ($row = $try->fetch_array()) {
 
             $date_start_time = explode(" ", $row['event_start_date']);
@@ -42,8 +44,10 @@
                     <div class="card card-custom card-stretch gutter-b">
                         <div class="card-body d-flex p-0">
                             <div class="flex-grow-1 p-12 card-rounded bgi-no-repeat d-flex flex-column justify-content-center align-items-start"
-                                 style="background-color: #FFF; background-position: right bottom; background-size: auto 100%; background-image: url('.base64_decode($row["event_poster"]).')">
+                                 style="background-color: #FFF; background-position: right bottom; background-size: auto 100%; background-image: ">
 
+                                 <div class="row">
+                                    <div class="col-9">
                                 <a href="#">
                                     <h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">' . $row["event_title"] . '</h1>
                                 </a>
@@ -112,6 +116,12 @@
                                 </p>
 
                                 <a href="?page=upcoming-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                 </div>
+                                <div class="col-3">
+                                    <img src="' . base64_decode($row["event_poster"]) . '" style="width: 100%"/>                                   
+                                
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>

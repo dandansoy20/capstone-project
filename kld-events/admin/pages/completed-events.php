@@ -3,12 +3,6 @@
     <!--begin::Container-->
     <div class=" container ">
         <!--begin::Row-->
-
-
-
-        <!--end::Row-->
-
-        <!--begin::Row-->
         <div class="row">
             <div class="col-xl-12">
 
@@ -97,7 +91,7 @@
                                     <a href="?page=completed-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                                 </div>
                                 <div class="col-3">
-                                    <img src="assets/media/kld4.jpg" style="width: 100%"/>                                   
+                                    <img src="assets/media/kld4.jpg" style="width: 100%" />
                                 </div>
                             </div>
                         </div>
@@ -110,7 +104,7 @@
             <!--end::Row-->
 
             <!--begin::Row-->
-           
+
 
         </div>
         <!--end::Row-->

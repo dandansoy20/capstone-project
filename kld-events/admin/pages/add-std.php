@@ -123,7 +123,7 @@
                                                                     include('./control/db.php');
                                                                     $try = mysqli_query($conn, "Select * from section_tbl");
                                                                     while ($row = $try->fetch_array()) {
-                                                                        echo '<option value="' . $row['section_id'] . '" data-yrlvl="' . $row['yearlvl'] . '">' . $row['section_name'] . '</option>';
+                                                                        echo '<option value="' . $row['section_id'] . '" data-yrlvl="' . $row['yearlvl'] . '" data-course="' . $row['course_id'] . '">' . $row['section_name'] . '</option>';
                                                                     }
                                                                     ?>
                                                                 </select>
@@ -133,10 +133,14 @@
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">KLD ID Number</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">KLD ID
+                                                            Number</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="input-group input-group-solid input-group-lg">
-                                                                <input type="text" class="form-control form-control-solid form-control-lg" id="add_std_kldnum" placeholder="Enter ID Number" name="idnum" />
+                                                                <input type="text"
+                                                                    class="form-control form-control-solid form-control-lg"
+                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
+                                                                    value="" />
                                                             </div>
                                                         </div>
                                                     </div>

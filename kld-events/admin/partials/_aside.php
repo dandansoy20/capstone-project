@@ -48,7 +48,7 @@
 
 			<!--begin::Menu Nav-->
 			<ul class="menu-nav ">
-				<li class="menu-item  menu-item-active" aria-haspopup="true"><a href="index.php"
+				<li class="menu-item  <?php echo ($current_page == '') ? 'menu-item-active' : ''; ?>" aria-haspopup="true"><a href="index.php"
 						class="menu-link "><span class="svg-icon menu-icon">
 
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg
@@ -70,62 +70,63 @@
 				<li class="menu-section ">
 					<h4 class="menu-text">Event Management</h4>
 				</li>
-				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
-						href="javascript:;" class="menu-link menu-toggle">
-						<span class="svg-icon menu-icon">
 
-							<!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg-->
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-								width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
+				<li class="menu-item menu-item-submenu <?php echo $submenu_active ? 'menu-item-open' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+					<a href="javascript:;" class="menu-link menu-toggle">
+						<span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Files/Selected-file.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24" />
-									<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-									<path
-										d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-										fill="#000000" opacity="0.3" />
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M4.85714286,1 L11.7364114,1 C12.0910962,1 12.4343066,1.12568431 12.7051108,1.35473959 L17.4686994,5.3839416 C17.8056532,5.66894833 18,6.08787823 18,6.52920201 L18,19.0833333 C18,20.8738751 17.9795521,21 16.1428571,21 L4.85714286,21 C3.02044787,21 3,20.8738751 3,19.0833333 L3,2.91666667 C3,1.12612489 3.02044787,1 4.85714286,1 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<path d="M6.85714286,3 L14.7364114,3 C15.0910962,3 15.4343066,3.12568431 15.7051108,3.35473959 L20.4686994,7.3839416 C20.8056532,7.66894833 21,8.08787823 21,8.52920201 L21,21.0833333 C21,22.8738751 20.9795521,23 19.1428571,23 L6.85714286,23 C5.02044787,23 5,22.8738751 5,21.0833333 L5,4.91666667 C5,3.12612489 5.02044787,3 6.85714286,3 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z" fill="#000000" fill-rule="nonzero" />
 								</g>
-							</svg>
-
-							<!--end::Svg Icon-->
-						</span><span class="menu-text">Events</span><i class="menu-arrow"></i></a>
-					<div class="menu-submenu "><i class="menu-arrow"></i>
+							</svg><!--end::Svg Icon--></span>
+						<span class="menu-text">Events</span>
+						<i class="menu-arrow"></i>
+					</a>
+					<div class="menu-submenu ">
+						<i class="menu-arrow"></i>
 						<ul class="menu-subnav">
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=calendar" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Event Calendar</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=upcoming-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Upcoming Events</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=proposal-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Proposed
-										Events</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=completed-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Completed
-										Events</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=add-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
-										Event</span></a>
-							</li>
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=archived-events" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Archives</span>
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'calendar') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=calendar" class="menu-link" data-title="Event Calendar" data-breadcrumb="Events > Event Calendar" onclick="updateSubheader(this)">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Event Calendar</span>
 								</a>
 							</li>
-
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'upcoming-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=upcoming-events" class="menu-link">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Upcoming Events<span class="label label-danger ml-2">5</span></span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'proposal-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=proposal-events" class="menu-link">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Pending Events<span class="label label-info ml-2">69</span></span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'completed-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=completed-events" class="menu-link">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Completed Events</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'add-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=add-events" class="menu-link">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Add Event</span>
+								</a>
+							</li>
+							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'archived-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="?page=archived-events" class="menu-link">
+									<i class="menu-bullet menu-bullet-dot"><span></span></i>
+									<span class="menu-text">Archives</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
+
 
 				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
 						href="javascript:;" class="menu-link menu-toggle">
@@ -325,6 +326,7 @@
 
 				</li>
 
+
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span
@@ -341,58 +343,124 @@
 										d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
 										fill="#000000" fill-rule="nonzero" />
 								</g>
-							</svg><!--end::Svg Icon--></span></span><span class="menu-text">Students</span><i
+							</svg><!--end::Svg Icon--></span></span><span class="menu-text">KLD Members</span><i
 							class="menu-arrow"></i></a>
 					<div class="menu-submenu">
 						<i class="menu-arrow"></i>
 						<ul class="menu-subnav">
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=std" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Overview</span></a>
-							</li>
 							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="javascript:;" class="menu-link menu-toggle"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span
-										class="menu-text">Course & Section</span><i class="menu-arrow"></i></a>
+								<a href="javascript:;" class="menu-link menu-toggle">
+									<span
+										class="svg-icon menu-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<polygon points="0 0 24 0 24 24 0 24" />
+												<path
+													d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+													fill="#000000" fill-rule="nonzero" opacity="0.3" />
+												<path
+													d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+													fill="#000000" fill-rule="nonzero" />
+											</g>
+										</svg><!--end::Svg Icon--></span></span><span class="menu-text">Students</span><i
+										class="menu-arrow"></i></a>
 								<div class="menu-submenu">
 									<i class="menu-arrow"></i>
 									<ul class="menu-subnav">
-										<li class="menu-item" aria-haspopup="true">
-											<a href="?page=course" class="menu-link"><i
+										<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+											<a href="?page=std" class="menu-link"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
 													class="menu-text">Overview</span></a>
 										</li>
-										<li class="menu-item" aria-haspopup="true">
-											<a href="?page=add-course" class="menu-link"><i
+										<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+											<a href="javascript:;" class="menu-link menu-toggle"><i
 													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">Add Courses</span></a>
+													class="menu-text">Course & Section</span><i class="menu-arrow"></i></a>
+											<div class="menu-submenu">
+												<i class="menu-arrow"></i>
+												<ul class="menu-subnav">
+													<li class="menu-item" aria-haspopup="true">
+														<a href="?page=course" class="menu-link"><i
+																class="menu-bullet menu-bullet-dot"><span></span></i><span
+																class="menu-text">Overview</span></a>
+													</li>
+													<li class="menu-item" aria-haspopup="true">
+														<a href="?page=add-course" class="menu-link"><i
+																class="menu-bullet menu-bullet-dot"><span></span></i><span
+																class="menu-text">Add Courses</span></a>
+													</li>
+													<li class="menu-item" aria-haspopup="true">
+														<a href="?page=add-section" class="menu-link"><i
+																class="menu-bullet menu-bullet-dot"><span></span></i><span
+																class="menu-text">Add Section</span></a>
+													</li>
+
+												</ul>
+											</div>
 										</li>
-										<li class="menu-item" aria-haspopup="true">
-											<a href="?page=add-section" class="menu-link"><i
-													class="menu-bullet menu-bullet-dot"><span></span></i><span
-													class="menu-text">Add Section</span></a>
+										<li class="menu-item menu-item-parent" aria-haspopup="true">
+											<span class="menu-link"><span class="menu-text">Student</span></span>
 										</li>
+
+
+
+										<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+											<a href="?page=add-std" class="menu-link"><i
+													class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+													Students</span></a>
+										</li>
+
+
+
+
 
 									</ul>
 								</div>
 							</li>
-							<li class="menu-item menu-item-parent" aria-haspopup="true">
-								<span class="menu-link"><span class="menu-text">Student</span></span>
+							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								<a href="javascript:;" class="menu-link menu-toggle">
+									<span
+										class="svg-icon menu-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Barcode-read.svg-->
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+											width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
+											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+												<polygon points="0 0 24 0 24 24 0 24" />
+												<path
+													d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z"
+													fill="#000000" fill-rule="nonzero" opacity="0.3" />
+												<path
+													d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z"
+													fill="#000000" fill-rule="nonzero" />
+											</g>
+										</svg><!--end::Svg Icon--></span></span><span class="menu-text">Employees</span><i
+										class="menu-arrow"></i></a>
+								<div class="menu-submenu">
+									<i class="menu-arrow"></i>
+									<ul class="menu-subnav">
+										<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+											<a href="?page=std" class="menu-link"><i
+													class="menu-bullet menu-bullet-dot"><span></span></i><span
+													class="menu-text">Overview</span></a>
+										</li>
+
+
+
+										<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+											<a href="?page=add-employee" class="menu-link"><i
+													class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
+													Employee</span></a>
+										</li>
+
+
+
+
+
+									</ul>
+								</div>
 							</li>
-
-
-
-							<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=add-std" class="menu-link"><i
-										class="menu-bullet menu-bullet-dot"><span></span></i><span class="menu-text">Add
-										Students</span></a>
-							</li>
-
-
-
-
-
 						</ul>
 					</div>
 				</li>
@@ -418,3 +486,33 @@
 </div>
 
 <!--end::Aside-->
+
+<script>
+	function updateSubheader(element) {
+		// Update the subheader title
+		const subheaderTitle = document.getElementById('subheaderTitle');
+		subheaderTitle.textContent = element.getAttribute('data-title');
+
+		// Update the breadcrumb
+		const breadcrumb = document.getElementById('breadcrumb');
+		breadcrumb.innerHTML = ''; // Clear existing breadcrumb items
+
+		// Create new breadcrumb items
+		const breadcrumbText = element.getAttribute('data-breadcrumb');
+		const breadcrumbs = breadcrumbText.split(' > '); // Splits breadcrumb string into parts
+
+		breadcrumbs.forEach((crumb) => {
+			const li = document.createElement('li');
+			li.classList.add('breadcrumb-item');
+
+			// Create anchor element for each breadcrumb
+			const anchor = document.createElement('a');
+			anchor.href = '#'; // Adjust as needed for each page
+			anchor.classList.add('text-muted');
+			anchor.textContent = crumb;
+
+			li.appendChild(anchor);
+			breadcrumb.appendChild(li);
+		});
+	}
+</script>

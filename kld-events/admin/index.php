@@ -59,7 +59,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
-
 		<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
@@ -70,7 +69,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!--begin::Body-->
 
-	<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+	<body id="kt_body" class="page-loading-enabled page-loading header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+
+
+		<?php include("partials/_page-loader.php"); ?>
 
 		<?php
 		include("control/api.php");
@@ -172,13 +174,18 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/crud/file-upload/dropzonejs.js"></script>
 		<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
 		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
+		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
 
+		<script src="assets/js/pages/crud/forms/widgets/input-mask.js"></script>
+		<script src="assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js"></script>
 		<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/nouislider.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
 		<script src="assets/js/pages/custom/user/add-user.js"></script>
 
 		<!--end::Page Vendors-->
+
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> <!----Special---->
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>

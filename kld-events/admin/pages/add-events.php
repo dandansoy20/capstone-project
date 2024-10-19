@@ -83,8 +83,8 @@
 
                             <div class="wizard-step" data-wizard-type="step">
                                 <div class="wizard-label">
-                                    <i class="wizard-icon flaticon-mail-1"></i>
-                                    <h3 class="wizard-title">4. Proposal</h3>
+                                    <i class="wizard-icon flaticon-responsive"></i>
+                                    <h3 class="wizard-title">4. Upload Poster</h3>
                                 </div>
                                 <span
                                     class="svg-icon svg-icon-xl wizard-arrow"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg
@@ -103,13 +103,16 @@
                                     </svg><!--end::Svg Icon--></span>
                             </div>
 
-                            <!--begin::Wizard Step 3 Nav-->
                             <div class="wizard-step" data-wizard-type="step">
                                 <div class="wizard-label">
-                                    <i class="wizard-icon flaticon-responsive"></i>
-                                    <h3 class="wizard-title">5. Upload Poster</h3>
+                                    <i class="wizard-icon flaticon-mail-1"></i>
+                                    <h3 class="wizard-title">5. Proposal</h3>
                                 </div>
+
                             </div>
+
+                            <!--begin::Wizard Step 3 Nav-->
+
 
 
                             <!--end::Wizard Step 5 Nav-->
@@ -279,6 +282,24 @@
                                         <span class="form-text text-muted">Please enter small details about event</span>
                                     </div>
 
+
+                                    <div class="form-group">
+                                        <label>Event Host</label>
+                                        <select name="event_category" id="event_category"
+                                            class="form-control form-control-solid form-control-lg">
+                                            <option value="" disabled>Select Host</option>
+                                            <option value="0">KLD Events</option>
+                                            <?php
+                                            include('./control/db.php');
+                                            $try = mysqli_query($conn, "Select * from org_tbl");
+                                            while ($row = $try->fetch_array()) {
+                                                var_dump($row);
+                                                echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <label>Event Category</label>
                                         <select name="event_category" id="event_category"
@@ -334,6 +355,8 @@
                                                     </optgroup>
                                                 </select>
                                             </div>
+
+
                                         </div>
 
                                         <div class="form-group row">
@@ -348,12 +371,6 @@
                                             </div>
                                         </div>
 
-                                        <script>
-                                            document.getElementById('toggleForms').addEventListener('change', function() {
-                                                var formContainer = document.getElementById('formContainer');
-                                                formContainer.style.display = this.checked ? 'none' : 'block';
-                                            });
-                                        </script>
 
                                         <div class="form-group row">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Section</label>
@@ -379,7 +396,6 @@
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Organization</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <select class="form-control selectpicker" multiple>
-                                                    <option value="0" selected>N/A</option>
                                                     <option value="1">Select All</option>
                                                     <?php
                                                     include('./control/db.php');
@@ -393,24 +409,62 @@
                                             </div>
                                         </div>
 
+
+                                        <div class="separator separator-dashed my-8"></div>
+
+
+                                        <div class="form-group row">
+                                            <label class="col-4 text-right col-form-label">Set Event Capacity</label>
+                                            <div class="col-8">
+                                                <span class="switch switch-icon">
+                                                    <label>
+                                                        <input type="checkbox" id="toggleCap" name="select" />
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row" id="formCapacity" style="display: none;">
+                                            <label class="col-4 text-right col-form-label">Number of Attendees</label>
+                                            <div class="col-8">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Quantity" />
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
+                                                    </div>
+                                                </div>
+                                                <span class="form-text text-muted mt-2">Move slider or input a number</span>
+                                            </div>
+                                        </div>
+
+
+
+
+
                                     </div>
 
-                                    <div class="form-group row mb-6">
-                                        <label class="col-form-label text-right col-lg-3 col-sm-12">Event Capacity</label>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <div class="row align-items-center">
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Quantity" />
-                                                </div>
-                                                <div class="col-9">
-                                                    <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
-                                                </div>
-                                            </div>
-                                            <span class="form-text text-muted mt-6">Input control is attached to slider</span>
-                                        </div>
-                                    </div>
 
                                     <script>
+                                        document.getElementById('toggleForms').addEventListener('change', function() {
+                                            var formContainer = document.getElementById('formContainer');
+                                            formContainer.style.display = this.checked ? 'none' : 'block';
+                                        });
+
+                                        document.getElementById('toggleCap').addEventListener('change', function() {
+                                            var formCapacity = document.getElementById('formCapacity');
+                                            var formCapacityText = document.getElementById('formCapacityText');
+                                            if (this.checked) {
+                                                formCapacity.style.display = 'flex';
+                                                formCapacityText.style.display = 'block';
+                                            } else {
+                                                formCapacity.style.display = 'none';
+                                                formCapacityText.style.display = 'none';
+                                            }
+                                        });
+
                                         var demo1 = function() {
                                             // init slider
                                             var slider = document.getElementById("kt_nouislider_1");
@@ -444,13 +498,41 @@
                                 </div>
 
 
+                                <div class="pb-5" data-wizard-type="step-content">
+                                    <h4 class="mb-10 font-weight-bold text-dark">Event Poster</h4>
+                                    <!--begin::Select-->
+                                    <div class="form-group">
+
+
+                                        <label></label>
+                                        <div class="col-lg-12 col-md-9 col-sm-12">
+                                            <div class="dropzone dropzone-default" id="kt_dropzone_1">
+                                                <div class="dropzone-msg dz-message needsclick">
+                                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.
+                                                    </h3>
+                                                    <span class="dropzone-msg-desc">Less than 10MB | JPG, PNG JPEG
+                                                        ONLY</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
 
                                 <!--begin::Wizard Step 4-->
                                 <div class="pb-5" data-wizard-type="step-content">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Letter to the Admin</h4>
+
+                                    <h4 class="mb-10 font-weight-bold text-dark">Letter Proposal</h4>
+                                    <div class="form-group row">
+                                        <div class="col-12 pt-4">
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1500"
+                                                placeholder="Write your purpose" rows="6"></textarea>
+                                            <span class="form-text text-muted">Maximum of 1,500 characters only</span>
+                                        </div>
+                                    </div>
+                                    <h4 class="mb-10 font-weight-bold text-dark">Admin</h4>
                                     <div class="form-group">
                                         <div data-repeater-item="" class="form-group row align-items-center">
                                             <div class="col-md-4">
@@ -487,10 +569,11 @@
                                                         <input type="text" class="form-control admin-role" placeholder="Administrator Role" disabled />
                                                         <div class="d-md-none mb-2"></div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-2">
                                                         <a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
                                                             <i class="la la-trash-o"></i>Delete</a>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -565,19 +648,11 @@
 
 
 
-                                    <div class="form-group row">
-                                        <label>Write your purpose</label>
-                                        <div class="col-12">
-                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1500"
-                                                placeholder="" rows="6"></textarea>
-                                            <span class="form-text text-muted">Maximum of 1,500 characters only</span>
-                                        </div>
-                                    </div>
 
                                     <div class="separator separator-dashed my-8"></div>
 
 
-                                    <h4 class="mb-10 font-weight-bold text-dark">Letter to the Organizer</h4>
+                                    <h4 class="mb-10 font-weight-bold text-dark">Organizer</h4>
 
                                     <div id="kt_repeater_2">
                                         <div class="form-group row">
@@ -590,32 +665,24 @@
                                                             // Fetching organizer details including org_name
                                                             $try = mysqli_query($conn, "SELECT org_acc.org_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_tbl.org_id = org_acc.org_id");
                                                             while ($row = $try->fetch_array()) {
-                                                                echo '<option value="' . $row['org_id'] . '" data-role="' . $row['org_role'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
+                                                                echo '<option value="' . $row['org_id'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
                                                             }
                                                             ?>
                                                         </select>
                                                         <div class="d-md-none mb-2"></div>
                                                     </div>
                                                     <div class="col-lg-4">
-                                                        <input type="text" class="form-control another-org-role" placeholder="Role" disabled />
-                                                        <div class="d-md-none mb-2"></div>
-                                                    </div>
-                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control another-org-name" placeholder="Organization" disabled />
                                                         <div class="d-md-none mb-2"></div>
                                                     </div>
 
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-2">
                                                         <a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger">
-                                                            <i class="la la-trash-o"></i>
+                                                            <i class="la la-trash-o"></i>Delete
                                                         </a>
                                                     </div>
 
-                                                    <div class="col-lg-12 pt-5">
-                                                        <textarea class="form-control" id="kt_maxlength_6" maxlength="1500"
-                                                            placeholder="Write your purpose" rows="6"></textarea>
-                                                        <span class="form-text text-muted">Maximum of 1,500 characters only</span>
-                                                    </div>
+
                                                 </div>
                                             </div>
 
@@ -659,9 +726,7 @@
 
                                                 function updateRoleAndOrgNameInput(selectElement) {
                                                     const selectedOption = selectElement.options[selectElement.selectedIndex];
-                                                    const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-role');
                                                     const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
-                                                    roleInput.value = selectedOption.getAttribute('data-role');
                                                     orgNameInput.value = selectedOption.getAttribute('data-org');
                                                 }
 
@@ -687,7 +752,11 @@
                                                 updateOptions();
                                             });
                                         </script>
+
+
+
                                     </div>
+
 
 
 
@@ -702,25 +771,6 @@
 
                                 <!--end::Wizard Step 3-->
 
-                                <div class="pb-5" data-wizard-type="step-content">
-                                    <h4 class="mb-10 font-weight-bold text-dark">Event Poster</h4>
-                                    <!--begin::Select-->
-                                    <div class="form-group">
-
-
-                                        <label></label>
-                                        <div class="col-lg-12 col-md-9 col-sm-12">
-                                            <div class="dropzone dropzone-default" id="kt_dropzone_1">
-                                                <div class="dropzone-msg dz-message needsclick">
-                                                    <h3 class="dropzone-msg-title">Drop files here or click to upload.
-                                                    </h3>
-                                                    <span class="dropzone-msg-desc">Less than 10MB | JPG, PNG JPEG
-                                                        ONLY</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <!--begin::Wizard Step 5-->
                                 <!--end::Wizard Step 5-->
@@ -737,10 +787,16 @@
                                     </div>
                                     <div>
                                         <button type="button" id="event_submit" name="event_submit"
-                                            class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
+                                            class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit">
-                                            Preview
+                                            Save as Draft
                                         </button>
+                                        <a href="?page=memo">
+                                            <button type="button" id="event_submit" name="event_submit"
+                                                class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
+                                                data-wizard-type="action-submit">
+                                                Preview
+                                            </button></a>
                                         <button type="button" id="event_next_button" name="event_next_button"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-next">

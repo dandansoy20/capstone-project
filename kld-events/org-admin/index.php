@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
-	
+
 	<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Vendors Styles-->
 
@@ -58,15 +58,15 @@ License: You must have a valid license purchased only from themeforest(the above
 <body id="kt_body" style="background-image: url(assets/media/bg/bg-10.jpg)"
 	class="page-loading-enabled page-loading quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
 
-	<?php include ("partials/_page-loader.php"); ?>
+	<?php include("partials/_page-loader.php"); ?>
 
-	<?php include ("layout.php"); ?>
+	<?php include("layout.php"); ?>
 
-	<?php include ("partials/_extras/offcanvas/quick-user.php"); ?>
+	<?php include("partials/_extras/offcanvas/quick-user.php"); ?>
 
-	<?php include ("partials/_extras/offcanvas/quick-panel.php"); ?>
+	<?php include("partials/_extras/offcanvas/quick-panel.php"); ?>
 
-	<?php include ("partials/_extras/scrolltop.php"); ?>
+	<?php include("partials/_extras/scrolltop.php"); ?>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>

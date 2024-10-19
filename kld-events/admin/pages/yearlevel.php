@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xl-3">
                 <!--begin::Stats Widget 13-->
-                <a href="?page=view-course" class="card card-custom bg-info bg-hover-state-info card-stretch gutter-b">
+                <a href="?page=sections" class="card card-custom bg-info bg-hover-state-info card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
 
@@ -20,7 +20,7 @@
             </div>
             <div class="col-xl-3">
                 <!--begin::Stats Widget 13-->
-                <a href="?page=view-course" class="card card-custom bg-dark bg-hover-state-dark card-stretch gutter-b">
+                <a href="?page=sections" class="card card-custom bg-dark bg-hover-state-dark card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
 
@@ -35,7 +35,7 @@
             </div>
             <div class="col-xl-3">
                 <!--begin::Stats Widget 13-->
-                <a href="?page=view-course" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
+                <a href="?page=sections" class="card card-custom bg-danger bg-hover-state-danger card-stretch gutter-b">
                     <!--begin::Body-->
                     <div class="card-body">
 

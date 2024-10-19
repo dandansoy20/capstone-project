@@ -32,7 +32,7 @@
 				</div>
 			</div>
 
-				<div class="col-xl-4">
+			<div class="col-xl-4">
 				<div class="card card-custom card-stretch gutter-b">
 					<!--begin::Body-->
 					<div class="card-body d-flex align-items-center py-0 mt-8">

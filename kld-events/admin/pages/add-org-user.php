@@ -116,10 +116,14 @@
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">KLD ID Number</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">KLD ID
+                                                            Number</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="input-group input-group-solid input-group-lg">
-                                                                <input type="text" class="form-control form-control-solid form-control-lg" id="add_org_kldid" placeholder="Enter ID Number" name="idnum" value="" />
+                                                                <input type="text"
+                                                                    class="form-control form-control-solid form-control-lg"
+                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
+                                                                    value="" />
                                                             </div>
                                                         </div>
                                                     </div>
