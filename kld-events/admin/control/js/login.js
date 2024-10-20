@@ -10,6 +10,7 @@ $("#kld_admin_login_button").click(function (){
         data: dataString,
         cache: false,
         success: function (html) {
+            console.log(html)
             switch(html){
                 case "success":
                     //Swal.fire("Incorrect Username/Password", "Please try again!", "success");

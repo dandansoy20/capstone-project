@@ -23,6 +23,7 @@
             LEFT JOIN venue_tbl ON kld_event.venue_id = venue_tbl.venue_id
             LEFT JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id
             LEFT JOIN category_tbl ON kld_event.category_id = category_tbl.category_id
+            
             WHERE kld_event.status = 'pending'
             "
         );

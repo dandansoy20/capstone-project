@@ -260,15 +260,16 @@ if (!array_key_exists('ajax', $_POST)) {
             $username= $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
             $login_type = $_POST['login_type'];
-
             switch ($login_type){
                 case "admin":
                     
-                    $try = mysqli_query($conn,"Select * from admin_acc where admin_uname = '".$username."' and admin_pass = '".$password."'");
+                    $query = "Select * from admin_acc where admin_uname = '".$username."' and admin_pass = '".$password."'";
+                    $try = mysqli_query($conn,$query);
                     $json = [];
                     while ($row = $try->fetch_array()){
                         echo "success"; //match yung uname at pass
                         $_SESSION['kld_username'] = $row['admin_uname'];
+                        $_SESSION['kld_admin_role'] = $row['admin_role'];
                         $_SESSION['login_type'] = "Administrator";
                         $_SESSION['kld_fname'] = $row['admin_fname'];
                         $_SESSION['kld_lname'] = $row['admin_lname'];
@@ -282,7 +283,21 @@ if (!array_key_exists('ajax', $_POST)) {
                     // wala pang laman, maya konte
                     break;
                 case "org":
-                    // same
+                    $query = "Select * from org_acc where org_uname = '".$username."' and org_pass = '".$password."'";
+                    $try = mysqli_query($conn,$query);
+                    $json = [];
+                    while ($row = $try->fetch_array()){
+                        echo "success"; //match yung uname at pass
+                        $_SESSION['kld_username'] = $row['org_uname'];
+                        $_SESSION['kld_org_role'] = $row['org_role'];
+                        $_SESSION['login_type'] = "Organizer";
+                        $_SESSION['kld_fname'] = $row['org_fname'];
+                        $_SESSION['kld_lname'] = $row['org_lname'];
+                        $_SESSION['kld_email'] = $row['org_email'];
+                        $_SESSION['kld_login_expiration'] = true;
+                        return; 
+                    }
+                    echo "failed";
                     break;
                 default:
                     die("Someone might be trying to brute-force logging in.");
@@ -294,6 +309,7 @@ if (!array_key_exists('ajax', $_POST)) {
             unset($_COOKIE['kld_login_expiration']);
             session_destroy();
             header('location:/login.php');
+        break;
         case "add_event":
             $venue_id = $_POST['venue_id'];
             $event_start_date = date('Y-m-d H:i:s', strtotime($_POST['event_start_date']));
@@ -330,6 +346,24 @@ if (!array_key_exists('ajax', $_POST)) {
                             '".$event_poster."'
                         )
             ");
+            if($try) {
+                echo 1;
+            }
+            else {
+                echo 2;
+            }
+            break;
+        case "add_event_check_sections":
+            $selectedPrograms = explode(",",base64_decode($_POST['selectedPrograms']));
+            $selectedYearLevels = explode(",",base64_decode($_POST['selectedYearLevels']));
+            $query = "Select * from section_tbl where course_id in (".implode(",",$selectedPrograms).")";
+            $query .= " and yearlvl in (".implode(",",$selectedYearLevels).")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()){
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
             if($try) {
                 echo 1;
             }

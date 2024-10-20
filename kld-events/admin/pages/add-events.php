@@ -183,7 +183,7 @@
                                                             <label class="option">
                                                                 <span class="option-control">
                                                                     <span class="radio">
-                                                                        <input type="radio" name="eventType" value="inPerson" onclick="toggleForm()" checked="checked" />
+                                                                        <input type="radio" name="eventType" id="inPerson_radio" value="inPerson" onclick="toggleForm()" checked="checked" />
                                                                         <span></span>
                                                                     </span>
                                                                 </span>
@@ -200,7 +200,7 @@
                                                             <label class="option">
                                                                 <span class="option-control">
                                                                     <span class="radio">
-                                                                        <input type="radio" name="eventType" value="virtual" onclick="toggleForm()" />
+                                                                        <input type="radio" name="eventType" id="virtual_radio" value="virtual" onclick="toggleForm()" />
                                                                         <span></span>
                                                                     </span>
                                                                 </span>
@@ -285,7 +285,7 @@
 
                                     <div class="form-group">
                                         <label>Event Host</label>
-                                        <select name="event_category" id="event_category"
+                                        <select name="event_org" id="event_organization"
                                             class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select Host</option>
                                             <option value="0">KLD Events</option>
@@ -362,7 +362,7 @@
                                         <div class="form-group row">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Year Level</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
-                                                <select class="form-control selectpicker" multiple id="yrlevel">
+                                                <select class="form-control selectpicker"  multiple="multiple" id="yrlevel">
                                                     <option value="1">1st year</option>
                                                     <option value="2">2nd year</option>
                                                     <option value="3">3rd year</option>
@@ -373,17 +373,20 @@
 
 
                                         <div class="form-group row">
+                                            <label class="col-4 text-right col-form-label">Select All Sections</label>
+                                            <div class="col-8">
+                                                <span class="switch switch-icon">
+                                                    <label>
+                                                        <input type="checkbox" id="toggleAllSections" name="select" checked="checked" />
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" id="select_sections_container" style="display: none">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Section</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
                                                 <select class="form-control select2" id="kt_select2_3" multiple="multiple" name="section" style="width: 100%;" data-placeholder="Select section...">
-                                                    <optgroup label="Bachelor of Science Information Systems">
-                                                    <optgroup label="1st Year">
-                                                        <option value="">BSIS 101</option>
-                                                        <option value="">BSIS 102</option>
-                                                        <option value="">BSIS 103</option>
-                                                        <option value="">BSIS 104</option>
-                                                    </optgroup>
-                                                    </optgroup>
                                                 </select>
                                             </div>
                                         </div>
@@ -393,15 +396,24 @@
 
 
                                         <div class="form-group row">
+                                            <label class="col-4 text-right col-form-label">Select All Organization</label>
+                                            <div class="col-8">
+                                                <span class="switch switch-icon">
+                                                    <label>
+                                                        <input type="checkbox" id="toggleAllOrganization" name="select" checked="checked" />
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row" id="select_organization_container" style="display: none">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Organization</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
-                                                <select class="form-control selectpicker" multiple>
-                                                    <option value="1">Select All</option>
+                                                <select class="form-control selectpicker" multiple="multiple" id="kt_select_2_4">
                                                     <?php
                                                     include('./control/db.php');
                                                     $try = mysqli_query($conn, "Select * from org_tbl");
                                                     while ($row = $try->fetch_array()) {
-                                                        var_dump($row);
                                                         echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
                                                     }
                                                     ?>
@@ -439,62 +451,7 @@
                                                 <span class="form-text text-muted mt-2">Move slider or input a number</span>
                                             </div>
                                         </div>
-
-
-
-
-
                                     </div>
-
-
-                                    <script>
-                                        document.getElementById('toggleForms').addEventListener('change', function() {
-                                            var formContainer = document.getElementById('formContainer');
-                                            formContainer.style.display = this.checked ? 'none' : 'block';
-                                        });
-
-                                        document.getElementById('toggleCap').addEventListener('change', function() {
-                                            var formCapacity = document.getElementById('formCapacity');
-                                            var formCapacityText = document.getElementById('formCapacityText');
-                                            if (this.checked) {
-                                                formCapacity.style.display = 'flex';
-                                                formCapacityText.style.display = 'block';
-                                            } else {
-                                                formCapacity.style.display = 'none';
-                                                formCapacityText.style.display = 'none';
-                                            }
-                                        });
-
-                                        var demo1 = function() {
-                                            // init slider
-                                            var slider = document.getElementById("kt_nouislider_1");
-
-                                            noUiSlider.create(slider, {
-                                                start: [2],
-                                                step: 2,
-                                                range: {
-                                                    min: [2],
-                                                    max: [5000],
-                                                },
-                                                format: wNumb({
-                                                    decimals: 0,
-                                                }),
-                                            });
-
-                                            // init slider input
-                                            var sliderInput = document.getElementById("kt_nouislider_1_input");
-
-                                            slider.noUiSlider.on("update", function(values, handle) {
-                                                sliderInput.value = values[handle];
-                                            });
-
-                                            sliderInput.addEventListener("change", function() {
-                                                slider.noUiSlider.set(this.value);
-                                            });
-                                        };
-                                    </script>
-
-
                                 </div>
 
 
@@ -502,8 +459,6 @@
                                     <h4 class="mb-10 font-weight-bold text-dark">Event Poster</h4>
                                     <!--begin::Select-->
                                     <div class="form-group">
-
-
                                         <label></label>
                                         <div class="col-lg-12 col-md-9 col-sm-12">
                                             <div class="dropzone dropzone-default" id="kt_dropzone_1">
@@ -518,9 +473,6 @@
                                     </div>
                                 </div>
 
-
-
-
                                 <!--begin::Wizard Step 4-->
                                 <div class="pb-5" data-wizard-type="step-content">
 
@@ -533,20 +485,26 @@
                                         </div>
                                     </div>
                                     <h4 class="mb-10 font-weight-bold text-dark">Admin</h4>
-                                    <div class="form-group">
-                                        <div data-repeater-item="" class="form-group row align-items-center">
-                                            <div class="col-md-4">
-                                                <label>Name:</label>
-                                                <input type="email" class="form-control" value="Jet Geronimo" disabled />
-                                                <div class="d-md-none mb-2"></div>
+                                    <?php
+                                    if ($_SESSION['login_type'] === "Administrator") {
+                                        echo '
+                                        <div class="form-group">
+                                            <div data-repeater-item="" class="form-group row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label>Name:</label>
+                                                    <input type="hidden" value="'.$_SESSION['kld_uname'].'" class="event-admin-fixed" />
+                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_fname'].' '.$_SESSION['kld_lname'].'" disabled />
+                                                    <div class="d-md-none mb-2"></div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Role:</label>
+                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_admin_role'].'" disabled />
+                                                    <div class="d-md-none mb-2"></div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>Role:</label>
-                                                <input type="email" class="form-control" value="Head of Student Activity" disabled />
-                                                <div class="d-md-none mb-2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        </div>';
+                                    }
+                                    ?>
 
                                     <div id="kt_repeater_1">
                                         <div class="form-group row">
@@ -557,7 +515,7 @@
                                                             <option value="" disabled selected>Choose Admin</option>
                                                             <?php
                                                             include('./control/db.php');
-                                                            $try = mysqli_query($conn, "SELECT * FROM admin_acc");
+                                                            $try = mysqli_query($conn, "SELECT * FROM admin_acc where admin_uname != '".$_SESSION['kld_username']."'");
                                                             while ($row = $try->fetch_array()) {
                                                                 echo '<option value="' . $row['admin_id'] . '" data-role="' . $row['admin_role'] . '">' . $row['admin_fname'] . ' ' . $row['admin_lname'] . '</option>';
                                                             }
@@ -584,82 +542,36 @@
                                                     <i class="la la-plus"></i>Add</a>
                                             </div>
                                         </div>
-
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', function() {
-                                                const repeaterList = document.querySelector('[data-repeater-list]');
-                                                const addButton = document.querySelector('[data-repeater-create]');
-
-                                                function updateOptions() {
-                                                    const selectedValues = Array.from(repeaterList.querySelectorAll('.admin-select'))
-                                                        .map(select => select.value)
-                                                        .filter(value => value !== '');
-
-                                                    repeaterList.querySelectorAll('.admin-select').forEach(select => {
-                                                        const options = select.querySelectorAll('option');
-                                                        options.forEach(option => {
-                                                            if (selectedValues.includes(option.value) && option.value !== select.value) {
-                                                                option.style.display = 'none';
-                                                            } else {
-                                                                option.style.display = 'block';
-                                                            }
-                                                        });
-                                                    });
-
-                                                    // Disable add button if all options are selected
-                                                    const allOptions = repeaterList.querySelector('.admin-select').querySelectorAll('option');
-                                                    const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-                                                    if (availableOptions.length <= 1) {
-                                                        addButton.style.display = 'none';
-                                                    } else {
-                                                        addButton.style.display = 'block';
-                                                    }
-                                                }
-
-                                                function updateRoleInput(selectElement) {
-                                                    const selectedOption = selectElement.options[selectElement.selectedIndex];
-                                                    const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.admin-role');
-                                                    roleInput.value = selectedOption.getAttribute('data-role');
-                                                }
-
-                                                repeaterList.addEventListener('change', function(event) {
-                                                    if (event.target.classList.contains('admin-select')) {
-                                                        updateOptions();
-                                                        updateRoleInput(event.target);
-                                                    }
-                                                });
-
-                                                repeaterList.addEventListener('click', function(event) {
-                                                    if (event.target.closest('[data-repeater-delete]')) {
-                                                        setTimeout(updateOptions, 100);
-                                                    }
-                                                });
-
-                                                addButton.addEventListener('click', function() {
-                                                    setTimeout(updateOptions, 100);
-                                                });
-
-                                                updateOptions();
-                                            });
-                                        </script>
                                     </div>
-
-
-
-
-
-
                                     <div class="separator separator-dashed my-8"></div>
-
-
                                     <h4 class="mb-10 font-weight-bold text-dark">Organizer</h4>
+                                    <?php
+                                    if ($_SESSION['login_type'] === "Organizer") {
+                                        echo '
+                                        <div class="form-group">
+                                            <div data-repeater-item="" class="form-group row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label>Name:</label>
+                                                    <input type="hidden" value="'.$_SESSION['kld_uname'].'" class="event-org-fixed" />
+                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_fname'].' '.$_SESSION['kld_lname'].'" disabled />
+                                                    <div class="d-md-none mb-2"></div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Role:</label>
+                                                    <input type="email" class="form-control" value="'.$_SESSION['org_role'].'" disabled />
+                                                    <div class="d-md-none mb-2"></div>
+                                                </div>
+                                            </div>
+                                        </div>';
+                                    }
+                                    ?>
 
                                     <div id="kt_repeater_2">
                                         <div class="form-group row">
                                             <div data-repeater-list="another_list" class="col-lg-12">
                                                 <div data-repeater-item class="form-group row align-items-center">
                                                     <div class="col-lg-4">
-                                                        <select class="form-control another-org-select" placeholder="Choose Another Organizer">
+                                                        <select id="event_organizer" class="form-control another-org-select" placeholder="Choose Another Organizer">
                                                             <option value="" disabled selected>Choose Organizer</option>
                                                             <?php
                                                             // Fetching organizer details including org_name
@@ -681,11 +593,8 @@
                                                             <i class="la la-trash-o"></i>Delete
                                                         </a>
                                                     </div>
-
-
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="form-group row">
 
@@ -696,76 +605,7 @@
                                                 </a>
                                             </div>
                                         </div>
-
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', function() {
-                                                const repeaterList2 = document.querySelector('#kt_repeater_2 [data-repeater-list]');
-                                                const addButton2 = document.querySelector('#kt_repeater_2 [data-repeater-create]');
-
-                                                function updateOptions() {
-                                                    const selectedValues = Array.from(repeaterList2.querySelectorAll('.another-org-select'))
-                                                        .map(select => select.value)
-                                                        .filter(value => value !== '');
-
-                                                    repeaterList2.querySelectorAll('.another-org-select').forEach(select => {
-                                                        const options = select.querySelectorAll('option');
-                                                        options.forEach(option => {
-                                                            if (selectedValues.includes(option.value) && option.value !== select.value) {
-                                                                option.style.display = 'none';
-                                                            } else {
-                                                                option.style.display = 'block';
-                                                            }
-                                                        });
-                                                    });
-
-                                                    // Disable add button if all options are selected
-                                                    const allOptions = repeaterList2.querySelector('.another-org-select').querySelectorAll('option');
-                                                    const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-                                                    addButton2.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
-                                                }
-
-                                                function updateRoleAndOrgNameInput(selectElement) {
-                                                    const selectedOption = selectElement.options[selectElement.selectedIndex];
-                                                    const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
-                                                    orgNameInput.value = selectedOption.getAttribute('data-org');
-                                                }
-
-                                                repeaterList2.addEventListener('change', function(event) {
-                                                    if (event.target.classList.contains('another-org-select')) {
-                                                        updateOptions();
-                                                        updateRoleAndOrgNameInput(event.target);
-                                                    }
-                                                });
-
-                                                repeaterList2.addEventListener('click', function(event) {
-                                                    if (event.target.closest('[data-repeater-delete]')) {
-                                                        // Instantly delete the item without confirmation
-                                                        event.target.closest('[data-repeater-item]').remove();
-                                                        updateOptions();
-                                                    }
-                                                });
-
-                                                addButton2.addEventListener('click', function() {
-                                                    setTimeout(updateOptions, 100);
-                                                });
-
-                                                updateOptions();
-                                            });
-                                        </script>
-
-
-
                                     </div>
-
-
-
-
-
-
-
-
-
-
                                 </div>
                                 <!--end::Wizard Step 4-->
 
@@ -786,17 +626,18 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button type="button" id="event_submit" name="event_submit"
+                                        <button hidden type="button" id="event_submit" name="event_submit"
                                             class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit">
                                             Save as Draft
                                         </button>
                                         <a href="?page=memo">
-                                            <button type="button" id="event_submit" name="event_submit"
+                                            <button type="button" id="event_preview" name="event_submit"
                                                 class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                                 data-wizard-type="action-submit">
                                                 Preview
-                                            </button></a>
+                                            </button>
+                                        </a>
                                         <button type="button" id="event_next_button" name="event_next_button"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-next">
@@ -819,3 +660,170 @@
     <!--end::Container-->
 </div>
 <!--end::Entry-->
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const repeaterList = document.querySelector('[data-repeater-list]');
+        const repeaterList2 = document.querySelector('#kt_repeater_2 [data-repeater-list]');
+        const addButton = document.querySelector('[data-repeater-create]');
+        const addButton2 = document.querySelector('#kt_repeater_2 [data-repeater-create]');
+
+        function updateOptions() {
+            const selectedValues = Array.from(repeaterList.querySelectorAll('.admin-select'))
+                .map(select => select.value)
+                .filter(value => value !== '');
+
+            repeaterList.querySelectorAll('.admin-select').forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (selectedValues.includes(option.value) && option.value !== select.value) {
+                        option.style.display = 'none';
+                    } else {
+                        option.style.display = 'block';
+                    }
+                });
+            });
+
+            // Disable add button if all options are selected
+            const allOptions = repeaterList.querySelector('.admin-select').querySelectorAll('option');
+            const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
+            if (availableOptions.length <= 1) {
+                addButton.style.display = 'none';
+            } else {
+                addButton.style.display = 'block';
+            }
+        }
+
+        function updateRoleInput(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.admin-role');
+            roleInput.value = selectedOption.getAttribute('data-role');
+        }
+
+        repeaterList.addEventListener('change', function(event) {
+            if (event.target.classList.contains('admin-select')) {
+                updateOptions();
+                updateRoleInput(event.target);
+            }
+        });
+
+        repeaterList.addEventListener('click', function(event) {
+            if (event.target.closest('[data-repeater-delete]')) {
+                setTimeout(updateOptions, 100);
+            }
+        });
+
+        addButton.addEventListener('click', function() {
+            setTimeout(updateOptions, 100);
+        });
+
+        updateOptions();
+        
+
+        function updateOptions2() {
+            const selectedValues = Array.from(repeaterList2.querySelectorAll('.another-org-select'))
+                .map(select => select.value)
+                .filter(value => value !== '');
+
+            repeaterList2.querySelectorAll('.another-org-select').forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (selectedValues.includes(option.value) && option.value !== select.value) {
+                        option.style.display = 'none';
+                    } else {
+                        option.style.display = 'block';
+                    }
+                });
+            });
+
+            // Disable add button if all options are selected
+            const allOptions = repeaterList2.querySelector('.another-org-select').querySelectorAll('option');
+            const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
+            addButton2.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
+        }
+
+        function updateRoleAndOrgNameInput(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
+            orgNameInput.value = selectedOption.getAttribute('data-org');
+        }
+
+        repeaterList2.addEventListener('change', function(event) {
+            if (event.target.classList.contains('another-org-select')) {
+                updateOptions2();
+                updateRoleAndOrgNameInput(event.target);
+            }
+        });
+
+        repeaterList2.addEventListener('click', function(event) {
+            if (event.target.closest('[data-repeater-delete]')) {
+                // Instantly delete the item without confirmation
+                event.target.closest('[data-repeater-item]').remove();
+                updateOptions2();
+            }
+        });
+
+        addButton2.addEventListener('click', function() {
+            setTimeout(updateOptions, 100);
+        });
+
+        updateOptions2();
+    });
+    
+    document.getElementById('toggleForms').addEventListener('change', function() {
+        var formContainer = document.getElementById('formContainer');
+        formContainer.style.display = this.checked ? 'none' : 'block';
+    });
+
+    document.getElementById('toggleAllOrganization').addEventListener('change', function() {
+        var formContainer = document.getElementById('select_organization_container');
+        formContainer.style.display = this.checked ? 'none' : 'flex';
+    });
+
+    document.getElementById('toggleAllSections').addEventListener('change', function() {
+        var formContainer = document.getElementById('select_sections_container');
+        formContainer.style.display = this.checked ? 'none' : 'flex';
+    });
+
+    document.getElementById('toggleCap').addEventListener('change', function() {
+        var formCapacity = document.getElementById('formCapacity');
+        var formCapacityText = document.getElementById('formCapacityText');
+        if (this.checked) {
+            formCapacity.style.display = 'flex';
+            formCapacityText.style.display = 'block';
+        } else {
+            formCapacity.style.display = 'none';
+            formCapacityText.style.display = 'none';
+        }
+    });
+
+    var demo1 = function() {
+        // init slider
+        var slider = document.getElementById("kt_nouislider_1");
+
+        noUiSlider.create(slider, {
+            start: [2],
+            step: 2,
+            range: {
+                min: [2],
+                max: [5000],
+            },
+            format: wNumb({
+                decimals: 0,
+            }),
+        });
+
+        // init slider input
+        var sliderInput = document.getElementById("kt_nouislider_1_input");
+
+        slider.noUiSlider.on("update", function(values, handle) {
+            sliderInput.value = values[handle];
+        });
+
+        sliderInput.addEventListener("change", function() {
+            slider.noUiSlider.set(this.value);
+        });
+    };
+</script>

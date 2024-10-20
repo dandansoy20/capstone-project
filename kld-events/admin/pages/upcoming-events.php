@@ -24,7 +24,9 @@
                             FROM `kld_event`
                             left join venue_tbl on kld_event.venue_id = venue_tbl.venue_id
                             left join org_tbl on kld_event.event_org_id = org_tbl.org_id
-                            left join category_tbl on kld_event.category_id = category_tbl.category_id"
+                            left join category_tbl on kld_event.category_id = category_tbl.category_id
+                            
+                            WHERE kld_event.status = 'upcoming'"
         );
         while ($row = $try->fetch_array()) {
 

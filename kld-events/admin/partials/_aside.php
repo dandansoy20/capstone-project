@@ -1,3 +1,6 @@
+<?php
+include('control/db.php');
+?>
 <!--begin::Aside-->
 <div class="aside aside-left  aside-fixed  d-flex flex-column flex-row-auto" id="kt_aside">
 
@@ -96,13 +99,31 @@
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'upcoming-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=upcoming-events" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
-									<span class="menu-text">Upcoming Events<span class="label label-danger ml-2">5</span></span>
+									<span class="menu-text">Upcoming Events
+										<span class="label label-danger ml-2">
+											<?php 
+												$try = mysqli_query($conn, "SELECT COUNT(status) FROM `kld_event` where status = 'upcoming'");
+												while ($row = $try->fetch_array()) {
+													echo $row[0];
+												}
+											?>
+										</span>
+									</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'proposal-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="?page=proposal-events" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
-									<span class="menu-text">Pending Events<span class="label label-info ml-2">69</span></span>
+									<span class="menu-text">Pending Events
+										<span class="label label-info ml-2">
+											<?php 
+												$try = mysqli_query($conn, "SELECT COUNT(status) FROM `kld_event` where status = 'pending'");
+												while ($row = $try->fetch_array()) {
+													echo $row[0];
+												}
+											?>
+										</span>
+									</span>
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'completed-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
