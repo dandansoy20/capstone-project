@@ -31,10 +31,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<title>KLD Events | Admin</title>
 		<meta name="description" content="KLD EVENTS MANAGEMENTS SYSTEM FOR ORGANIZERS AND ADMINISTRATION " />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic/demo1/index.html" />
 
 		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<link rel="stylesheet" href="assets/css/pages/googleapisPoppins.css" />
 
 		<!--end::Fonts-->
 
@@ -60,7 +59,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
 	</head>
@@ -80,9 +78,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		include("partials/_extras/offcanvas/quick-user.php");
 		include("partials/_extras/scrolltop.php");
 		?>
-		<script>
-			var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
-		</script>
 
 		<!--begin::Global Config(global config for global JS scripts)-->
 		<script>
@@ -158,7 +153,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="control/js/add-std.js"></script>
 		<script src="control/js/calendar.js"></script>
 		<script src="control/js/organizer.js"></script>
-		<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
 
 
 		<!--end::Global Theme Bundle-->
@@ -185,7 +179,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--end::Page Vendors-->
 
-		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> <!----Special---->
+		<script src="assets/js/pages/apexcharts.js"></script> <!----Special---->
 
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/js/pages/widgets.js"></script>
