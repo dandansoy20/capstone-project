@@ -130,7 +130,7 @@
 		<div class="row">
 			<div class="col-xl-3">
 				<!--begin::Stats Widget 25-->
-				<div class="card card-custom bg-light-success card-stretch gutter-b">
+				<div class="card card-custom bg-light-success gutter-b">
 					<!--begin::Body-->
 					<div class="card-body">
 						<span class="svg-icon svg-icon-2x svg-icon-success">
@@ -153,7 +153,7 @@
 			</div>
 			<div class="col-xl-3">
 				<!--begin::Stats Widget 26-->
-				<div class="card card-custom bg-light-danger card-stretch gutter-b">
+				<div class="card card-custom bg-light-danger gutter-b">
 					<!--begin::ody-->
 					<div class="card-body">
 						<span class="svg-icon svg-icon-2x svg-icon-danger">

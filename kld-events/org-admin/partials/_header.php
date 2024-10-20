@@ -21,8 +21,7 @@
 			<div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
 
 				<!--begin::Header Menu-->
-				<div id="kt_header_menu"
-					class="header-menu header-menu-left header-menu-mobile  header-menu-layout-default ">
+				<div id="kt_header_menu" class="header-menu header-menu-left header-menu-mobile  header-menu-layout-default ">
 
 					<!--begin::Header Nav-->
 					<ul class="menu-nav ">
@@ -48,55 +47,49 @@
 
 
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=events"
-											class="menu-link "><span class="svg-icon menu-icon">
+									<li class="menu-item " aria-haspopup="true"><a href="?page=completed-events"
+											class="menu-link ">
+											<span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Navigation/Double-check.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 
-												<svg xmlns="http://www.w3.org/2000/svg"
-													xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-													height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24" />
-														<path
-															d="M10.5,5 L19.5,5 C20.3284271,5 21,5.67157288 21,6.5 C21,7.32842712 20.3284271,8 19.5,8 L10.5,8 C9.67157288,8 9,7.32842712 9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,10 L19.5,10 C20.3284271,10 21,10.6715729 21,11.5 C21,12.3284271 20.3284271,13 19.5,13 L10.5,13 C9.67157288,13 9,12.3284271 9,11.5 C9,10.6715729 9.67157288,10 10.5,10 Z M10.5,15 L19.5,15 C20.3284271,15 21,15.6715729 21,16.5 C21,17.3284271 20.3284271,18 19.5,18 L10.5,18 C9.67157288,18 9,17.3284271 9,16.5 C9,15.6715729 9.67157288,15 10.5,15 Z"
-															fill="#000000" />
-														<path
-															d="M5.5,8 C4.67157288,8 4,7.32842712 4,6.5 C4,5.67157288 4.67157288,5 5.5,5 C6.32842712,5 7,5.67157288 7,6.5 C7,7.32842712 6.32842712,8 5.5,8 Z M5.5,13 C4.67157288,13 4,12.3284271 4,11.5 C4,10.6715729 4.67157288,10 5.5,10 C6.32842712,10 7,10.6715729 7,11.5 C7,12.3284271 6.32842712,13 5.5,13 Z M5.5,18 C4.67157288,18 4,17.3284271 4,16.5 C4,15.6715729 4.67157288,15 5.5,15 C6.32842712,15 7,15.6715729 7,16.5 C7,17.3284271 6.32842712,18 5.5,18 Z"
-															fill="#000000" opacity="0.3" />
-													</g>
-												</svg><!--end::Svg Icon--></span>
-
-											<!--end::Svg Icon-->
-											</span><span class="menu-text">View Events</span></a></li>
-									<li class="menu-item " aria-haspopup="true"><a href="?page=add-event"
-											class="menu-link "><span class="svg-icon menu-icon">
-												<svg xmlns="http://www.w3.org/2000/svg"
-													xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-													height="24px" viewBox="0 0 24 24" version="1.1">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 														<polygon points="0 0 24 0 24 24 0 24" />
-														<path
-															d="M12,18 L7.91561963,20.1472858 C7.42677504,20.4042866 6.82214789,20.2163401 6.56514708,19.7274955 C6.46280801,19.5328351 6.42749334,19.309867 6.46467018,19.0931094 L7.24471742,14.545085 L3.94038429,11.3241562 C3.54490071,10.938655 3.5368084,10.3055417 3.92230962,9.91005817 C4.07581822,9.75257453 4.27696063,9.65008735 4.49459766,9.61846284 L9.06107374,8.95491503 L11.1032639,4.81698575 C11.3476862,4.32173209 11.9473121,4.11839309 12.4425657,4.36281539 C12.6397783,4.46014562 12.7994058,4.61977315 12.8967361,4.81698575 L14.9389263,8.95491503 L19.5054023,9.61846284 C20.0519472,9.69788046 20.4306287,10.2053233 20.351211,10.7518682 C20.3195865,10.9695052 20.2170993,11.1706476 20.0596157,11.3241562 L16.7552826,14.545085 L17.5353298,19.0931094 C17.6286908,19.6374458 17.263103,20.1544017 16.7187666,20.2477627 C16.5020089,20.2849396 16.2790408,20.2496249 16.0843804,20.1472858 L12,18 Z"
-															fill="#000000" />
+														<path d="M9.26193932,16.6476484 C8.90425297,17.0684559 8.27315905,17.1196257 7.85235158,16.7619393 C7.43154411,16.404253 7.38037434,15.773159 7.73806068,15.3523516 L16.2380607,5.35235158 C16.6013618,4.92493855 17.2451015,4.87991302 17.6643638,5.25259068 L22.1643638,9.25259068 C22.5771466,9.6195087 22.6143273,10.2515811 22.2474093,10.6643638 C21.8804913,11.0771466 21.2484189,11.1143273 20.8356362,10.7474093 L17.0997854,7.42665306 L9.26193932,16.6476484 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(14.999995, 11.000002) rotate(-180.000000) translate(-14.999995, -11.000002) " />
+														<path d="M4.26193932,17.6476484 C3.90425297,18.0684559 3.27315905,18.1196257 2.85235158,17.7619393 C2.43154411,17.404253 2.38037434,16.773159 2.73806068,16.3523516 L11.2380607,6.35235158 C11.6013618,5.92493855 12.2451015,5.87991302 12.6643638,6.25259068 L17.1643638,10.2525907 C17.5771466,10.6195087 17.6143273,11.2515811 17.2474093,11.6643638 C16.8804913,12.0771466 16.2484189,12.1143273 15.8356362,11.7474093 L12.0997854,8.42665306 L4.26193932,17.6476484 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.999995, 12.000002) rotate(-180.000000) translate(-9.999995, -12.000002) " />
 													</g>
 												</svg><!--end::Svg Icon--></span>
 
 											<!--end::Svg Icon-->
-											</span><span class="menu-text">Add Events</span></a></li>
-									<li class="menu-item " aria-haspopup="true"><a href="?page=pending"
+											</span><span class="menu-text">Completed Events</span></a>
+									</li>
+
+									<li class="menu-item " aria-haspopup="true"><a href="?page=proposal-events"
+											class="menu-link "><span class="svg-icon menu-icon">
+
+												<i class="icon text-dark-50 la la-calendar-check"></i>
+
+
+											</span><span class="menu-text">Upcoming Events</span></a></li>
+
+									<li class="menu-item " aria-haspopup="true"><a href="?page=upcoming-events"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="icon text-dark-50 ki ki-reload"></i>
 
 												<!--end::Svg Icon-->
-											</span><span class="menu-text">Pending Events</span></a></li>
+											</span><span class="menu-text">Pending Events</span></a>
+									</li>
+									<li class="menu-item " aria-haspopup="true"><a href="?page=add-events"
+											class="menu-link ">
+											<span class="svg-icon menu-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=proposed"
-											class="menu-link "><span class="svg-icon menu-icon">
-
-												<i class="flaticon flaticon2-checking text-dark-50 ki ki-reload"></i>
-
-												<!--end::Svg Icon-->
-											</span><span class="menu-text">Proposed Events</span></a></li>
+													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+														<rect fill="#000000" x="4" y="11" width="16" height="2" rx="1" />
+														<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1" />
+													</g>
+												</svg><!--end::Svg Icon--></span>
+											<!--end::Svg Icon-->
+											</span><span class="menu-text">Add Events</span></a>
+									</li>
 								</ul>
 							</div>
 						</li>

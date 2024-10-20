@@ -48,7 +48,7 @@
 
 			<!--begin::Menu Nav-->
 			<ul class="menu-nav ">
-				<li class="menu-item  <?php echo ($current_page == '') ? 'menu-item-active' : ''; ?>" aria-haspopup="true"><a href="index.php"
+				<li class="menu-item  <?php echo ($current_page == 'index.php') ? 'menu-item-active' : ''; ?>" aria-haspopup="true"><a href="index.php"
 						class="menu-link "><span class="svg-icon menu-icon">
 
 							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg

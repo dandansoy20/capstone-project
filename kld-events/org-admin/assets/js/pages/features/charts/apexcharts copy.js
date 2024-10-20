@@ -1120,7 +1120,13 @@ var KTApexChartsDemo = (function () {
         width: 380,
         type: "pie",
       },
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
       responsive: [
         {
           breakpoint: 480,
@@ -1134,7 +1140,77 @@ var KTApexChartsDemo = (function () {
           },
         },
       ],
-      colors: [primary, success, warning, danger, info],
+      colors: [primary, success, info, warning, danger],
+    };
+
+    var chart = new ApexCharts(document.querySelector(apexChart), options);
+    chart.render();
+  };
+
+  var _demo112 = function () {
+    const apexChart = "#chart_112";
+    var options = {
+      series: [61, 22, 32, 5, 3],
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      colors: [primary, success, info, warning, danger],
+    };
+
+    var chart = new ApexCharts(document.querySelector(apexChart), options);
+    chart.render();
+  };
+
+  var _demo212 = function () {
+    const apexChart = "#chart_212";
+    var options = {
+      series: [61, 22, 32, 5, 3],
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      colors: [primary, success, info, warning, danger],
     };
 
     var chart = new ApexCharts(document.querySelector(apexChart), options);
@@ -1238,6 +1314,8 @@ var KTApexChartsDemo = (function () {
       _demo10();
       _demo11();
       _demo12();
+      _demo112();
+      _demo212();
       _demo13();
       _demo14();
     },

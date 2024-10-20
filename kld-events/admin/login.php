@@ -78,8 +78,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <!--begin::Aside title-->
                         <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #fdfe03;">
-                            Be Part of KLD<br />
-                            Event Management Systems
+                            Hello, Admin! Welcome to<br />
+                            KLD Events
                         </h3>
                         <!--end::Aside title-->
                     </div>

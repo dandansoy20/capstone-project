@@ -84,7 +84,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				"theme": {
 					"base": {
 						"white": "#ffffff",
-						"primary": "#6993FF",
+						"primary": "#0f6c29",
 						"secondary": "#E5EAEE",
 						"success": "#1BC5BD",
 						"info": "#8950FC",
