@@ -3132,7 +3132,7 @@ var KTWidgets = (function () {
     }
 
     var options = {
-      series: [74],
+      series: [24],
       chart: {
         height: height,
         type: "radialBar",
@@ -3330,7 +3330,7 @@ var KTWidgets = (function () {
     }
 
     var options = {
-      series: [0, 0, 0, 0],
+      series: [60, 50, 75, 80],
       chart: {
         height: height,
         type: "radialBar",
@@ -3339,7 +3339,7 @@ var KTWidgets = (function () {
         radialBar: {
           hollow: {
             margin: 0,
-            size: "0%",
+            size: "30%",
           },
           dataLabels: {
             showOn: "always",
@@ -3360,7 +3360,7 @@ var KTWidgets = (function () {
               fontWeight: "bold",
               formatter: function (w) {
                 // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                return "0%";
+                return "60%";
               },
             },
           },
@@ -3534,7 +3534,7 @@ var KTWidgets = (function () {
     }
 
     var options = {
-      series: [0],
+      series: [74],
       chart: {
         height: height,
         type: "radialBar",
@@ -3547,7 +3547,7 @@ var KTWidgets = (function () {
 
           hollow: {
             margin: 0,
-            size: "0%",
+            size: "70%",
           },
           dataLabels: {
             showOn: "always",
@@ -3577,7 +3577,7 @@ var KTWidgets = (function () {
       stroke: {
         lineCap: "round",
       },
-      labels: ["321 Attendees"],
+      labels: ["Progress"],
     };
 
     var chart = new ApexCharts(element, options);

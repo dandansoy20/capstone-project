@@ -17,44 +17,46 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Head-->
 
 <head>
-		<base href="">
-		<meta charset="utf-8" />
-		<title>KLD Events | Admin</title>
-		<meta name="description" content="KLD EVENTS MANAGEMENTS SYSTEM FOR ORGANIZERS AND ADMINISTRATION " />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<link rel="canonical" href="https://preview.keenthemes.com/metronic/demo1/index.html" />
+	<base href="">
+	<meta charset="utf-8" />
+	<title>KLD Events | Organizer</title>
+	<meta name="description" content="KLD EVENTS MANAGEMENTS SYSTEM FOR ORGANIZERS AND ADMINISTRATION " />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="canonical" href="https://preview.keenthemes.com/metronic/demo1/index.html" />
 
-		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+	<link rel="stylesheet" href="assets/css/pages/googleapisPoppins.css" />
 
-		<!--end::Fonts-->
+	<!--begin::Fonts-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
-		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
-		<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Fonts-->
 
-		<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css" />
-		<!--end::Page Vendors Styles-->
+	<!--begin::Page Vendors Styles(used by this page)-->
+	<link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/pages/wizard/wizard-1.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 
-		<!--begin::Global Theme Styles(used by all pages)-->
-		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/custom/uppy/uppy.bundle.css" rel="stylesheet" type="text/css" />
+	<!--end::Page Vendors Styles-->
+
+	<!--begin::Global Theme Styles(used by all pages)-->
+	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
 
-		<!--end::Global Theme Styles-->
+	<!--end::Global Theme Styles-->
 
-		<!--begin::Layout Themes(used by all pages)-->
-		<link href="assets/css/themes/layout/header/base/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
-		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
-	</head>
+	<!--begin::Layout Themes(used by all pages)-->
+	<link href="assets/css/themes/layout/header/base/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
+	<!--end::Layout Themes-->
+	<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
+</head>
 
 <!--end::Head-->
 
@@ -140,54 +142,54 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!--end::Global Config-->
 	<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
-		<script src="control/js/add-events.js"></script>
-		<script src="control/js/add-cat.js"></script>
-		<script src="control/js/add-venue.js"></script>
-		<script src="control/js/add-std.js"></script>
-		<script src="control/js/calendar.js"></script>
-		<script src="control/js/organizer.js"></script>
-		<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
+	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+	<script src="assets/js/scripts.bundle.js"></script>
+	<script src="control/js/add-events.js"></script>
+	<script src="control/js/add-cat.js"></script>
+	<script src="control/js/add-venue.js"></script>
+	<script src="control/js/add-std.js"></script>
+	<script src="control/js/calendar.js"></script>
+	<script src="control/js/organizer.js"></script>
+	<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
 
 
-		<!--end::Global Theme Bundle-->
+	<!--end::Global Theme Bundle-->
 
-		<!--begin::Page Vendors(used by this page)-->
+	<!--begin::Page Vendors(used by this page)-->
 
-		<script src="assets/js/pages/crud/forms/widgets/bootstrap-maxlength.js"></script>
-		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-		<script src="assets/js/pages/features/calendar/external-events.js"></script>
-		<script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
-		<script src="assets/js/pages/crud/forms/widgets/select2.js"></script>
-		<script src="assets/js/pages/custom/wizard/wizard-1.js"></script>
-		<script src="assets/js/pages/crud/file-upload/dropzonejs.js"></script>
-		<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
-		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
-		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/bootstrap-maxlength.js"></script>
+	<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+	<script src="assets/js/pages/features/calendar/external-events.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/bootstrap-datetimepicker.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/select2.js"></script>
+	<script src="assets/js/pages/custom/wizard/wizard-1.js"></script>
+	<script src="assets/js/pages/crud/file-upload/dropzonejs.js"></script>
+	<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
+	<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
+	<script src="assets/js/pages/features/charts/apexcharts.js"></script>
 
-		<script src="assets/js/pages/crud/forms/widgets/input-mask.js"></script>
-		<script src="assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js"></script>
-		<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
-		<script src="assets/js/pages/crud/forms/widgets/nouislider.js"></script>
-		<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
-		<script src="assets/js/pages/custom/user/add-user.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/input-mask.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js"></script>
+	<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/nouislider.js"></script>
+	<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
+	<script src="assets/js/pages/custom/user/add-user.js"></script>
 
-		<!--end::Page Vendors-->
+	<!--end::Page Vendors-->
 
-		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> <!----Special---->
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> <!----Special---->
 
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="assets/js/pages/widgets.js"></script>
+	<!--begin::Page Scripts(used by this page)-->
+	<script src="assets/js/pages/widgets.js"></script>
 
-		<!--begin::Page Vendors(used by this page)-->
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-		<!--end::Page Vendors-->
+	<!--begin::Page Vendors(used by this page)-->
+	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<!--end::Page Vendors-->
 
-		<!--begin::Page Scripts(used by this page)-->
-		<script src="assets/js/pages/crud/datatables/basic/paginations.js"></script>
-		<!--end::Page Scripts-->
-		<!--end::Page Scripts-->
+	<!--begin::Page Scripts(used by this page)-->
+	<script src="assets/js/pages/crud/datatables/basic/paginations.js"></script>
+	<!--end::Page Scripts-->
+	<!--end::Page Scripts-->
 </body>
 
 <!--end::Body-->

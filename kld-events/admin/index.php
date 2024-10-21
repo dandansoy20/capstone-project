@@ -170,6 +170,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
 
+		<script src="assets/js/pages/features/miscellaneous/blockui.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/input-mask.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js"></script>
 		<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>

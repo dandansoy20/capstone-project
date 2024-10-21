@@ -2,7 +2,7 @@
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class=" container ">
-        <div class="card card-custom">
+        <div class="card card-custom" id="kt_blockui_content">
             <div class="card-body p-0">
                 <!--begin::Wizard-->
                 <div class="wizard wizard-1" id="kt_wizard_v1" data-wizard-state="step-first"
@@ -355,14 +355,12 @@
                                                     </optgroup>
                                                 </select>
                                             </div>
-
-
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-form-label text-right col-lg-4 col-sm-12">Select Year Level</label>
                                             <div class="col-lg-8 col-md-9 col-sm-12">
-                                                <select class="form-control selectpicker"  multiple="multiple" id="yrlevel">
+                                                <select class="form-control selectpicker" multiple="multiple" id="yrlevel">
                                                     <option value="1">1st year</option>
                                                     <option value="2">2nd year</option>
                                                     <option value="3">3rd year</option>
@@ -492,13 +490,12 @@
                                             <div data-repeater-item="" class="form-group row align-items-center">
                                                 <div class="col-md-4">
                                                     <label>Name:</label>
-                                                    <input type="hidden" value="'.$_SESSION['kld_uname'].'" class="event-admin-fixed" />
-                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_fname'].' '.$_SESSION['kld_lname'].'" disabled />
+                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
                                                     <div class="d-md-none mb-2"></div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Role:</label>
-                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_admin_role'].'" disabled />
+                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_admin_role'] . '" disabled />
                                                     <div class="d-md-none mb-2"></div>
                                                 </div>
                                             </div>
@@ -515,7 +512,7 @@
                                                             <option value="" disabled selected>Choose Admin</option>
                                                             <?php
                                                             include('./control/db.php');
-                                                            $try = mysqli_query($conn, "SELECT * FROM admin_acc where admin_uname != '".$_SESSION['kld_username']."'");
+                                                            $try = mysqli_query($conn, "SELECT * FROM admin_acc where admin_uname != '" . $_SESSION['kld_username'] . "'");
                                                             while ($row = $try->fetch_array()) {
                                                                 echo '<option value="' . $row['admin_id'] . '" data-role="' . $row['admin_role'] . '">' . $row['admin_fname'] . ' ' . $row['admin_lname'] . '</option>';
                                                             }
@@ -552,13 +549,13 @@
                                             <div data-repeater-item="" class="form-group row align-items-center">
                                                 <div class="col-md-4">
                                                     <label>Name:</label>
-                                                    <input type="hidden" value="'.$_SESSION['kld_uname'].'" class="event-org-fixed" />
-                                                    <input type="email" class="form-control" value="'.$_SESSION['kld_fname'].' '.$_SESSION['kld_lname'].'" disabled />
+                                                    <input type="hidden" value="' . $_SESSION['kld_uname'] . '" class="event-org-fixed" />
+                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
                                                     <div class="d-md-none mb-2"></div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label>Role:</label>
-                                                    <input type="email" class="form-control" value="'.$_SESSION['org_role'].'" disabled />
+                                                    <input type="email" class="form-control" value="' . $_SESSION['org_role'] . '" disabled />
                                                     <div class="d-md-none mb-2"></div>
                                                 </div>
                                             </div>
@@ -720,7 +717,7 @@
         });
 
         updateOptions();
-        
+
 
         function updateOptions2() {
             const selectedValues = Array.from(repeaterList2.querySelectorAll('.another-org-select'))
@@ -771,7 +768,7 @@
 
         updateOptions2();
     });
-    
+
     document.getElementById('toggleForms').addEventListener('change', function() {
         var formContainer = document.getElementById('formContainer');
         formContainer.style.display = this.checked ? 'none' : 'block';
