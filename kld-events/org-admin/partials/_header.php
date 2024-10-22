@@ -62,7 +62,7 @@
 											</span><span class="menu-text">Completed Events</span></a>
 									</li>
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=proposal-events"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=upcoming-events"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="icon text-dark-50 la la-calendar-check"></i>
@@ -70,7 +70,7 @@
 
 											</span><span class="menu-text">Upcoming Events</span></a></li>
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=upcoming-events"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=proposal-events"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="icon text-dark-50 ki ki-reload"></i>

@@ -119,7 +119,7 @@ include "./control/db.php";
 			<!--begin::Header-->
 			<div class="card-header border-0 py-5">
 				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Attendees</span>
+					<span class="card-label font-weight-bolder text-dark">Registered</span>
 					<span class="text-muted mt-3 font-weight-bold font-size-sm">Kolehiyo ng Lungsod ng Dasmariñas</span>
 				</h3>
 			</div>
@@ -261,7 +261,7 @@ include "./control/db.php";
 
 								// Status
 								$status = strtoupper($row['status']);
-								$status_text = ($status == 'ACTIVE') ? 'Present' : 'Absent';
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';
 								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
 								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
 
@@ -321,7 +321,7 @@ include "./control/db.php";
 
 								// Status
 								$status = strtoupper($row['status']);
-								$status_text = ($status == 'ACTIVE') ? 'Present' : 'Absent';
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';;
 								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
 								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
 
@@ -381,7 +381,7 @@ include "./control/db.php";
 
 								// Status
 								$status = strtoupper($row['status']);
-								$status_text = ($status == 'ACTIVE') ? 'Present' : 'Absent';
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';
 								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
 								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
 
@@ -504,14 +504,14 @@ include "./control/db.php";
 				const studentId = this.value;
 				Swal.fire({
 					title: "Are you sure?",
-					text: isChecked ? "Mark this student as present?" : "Mark this student as absent?",
+					text: isChecked ? "Mark this user as Registered?" : "Mark this user as Not Registered?",
 					icon: "warning",
 					showCancelButton: true,
 					confirmButtonText: "Yes"
 				}).then(function(result) {
 					if (result.value) {
 						console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-						Swal.fire("Updated!", "Attendance has been updated.", "success");
+						Swal.fire("Updated!", "Registration has been updated.", "success");
 					} else {
 						switchElement.checked = !isChecked;
 					}
