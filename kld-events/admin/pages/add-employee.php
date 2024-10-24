@@ -51,7 +51,7 @@
 
                                                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                    <input type="file" id="add_std_profilepic" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                                                    <input type="file" id="add_emp_profilepic" name="profile_avatar" accept=".png, .jpg, .jpeg" />
                                                                     <input type="hidden" name="profile_avatar_remove" />
                                                                 </label>
 
@@ -66,7 +66,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <input class="form-control form-control-solid form-control-lg" id="add_std_firstname" name="firstname" placeholder="Juan" type="text" value="" />
+                                                            <input class="form-control form-control-solid form-control-lg" id="add_emp_firstname" name="firstname" placeholder="Juan" type="text" value="" />
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -74,7 +74,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <input class="form-control form-control-solid form-control-lg" id="add_std_lastname" name="lastname" placeholder="Dela Cruz" type="text" value="" />
+                                                            <input class="form-control form-control-solid form-control-lg" id="add_emp_lastname" name="lastname" placeholder="Dela Cruz" type="text" value="" />
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
@@ -82,8 +82,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control form-control-solid form-control-lg" name="course" type="text" id="add_std_course">
-                                                                <option selected disabled>Select Course</option>
+                                                            <select class="form-control form-control-solid form-control-lg" name="org" type="text" id="add_emp_org">
+                                                                <option selected disabled>Select Organization</option>
                                                                 <?php
                                                                 include('./control/db.php');
                                                                 $try = mysqli_query($conn, "Select * from org_tbl");
@@ -114,7 +114,7 @@
                                                         <label class="col-xl-3 col-lg-3 col-form-label">KLD Email</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="input-group input-group-solid input-group-lg">
-                                                                <input type="text" id="add_std_email" class="form-control form-control-solid form-control-lg" placeholder="Enter Email" />
+                                                                <input type="text" id="add_emp_email" class="form-control form-control-solid form-control-lg" placeholder="Enter Email" />
                                                                 <div class="input-group-append"><span class="input-group-text">@kld.edu.ph</span></div>
                                                             </div>
                                                         </div>
@@ -125,8 +125,8 @@
                                                 <!--begin::Wizard Actions-->
                                                 <div class="d-flex justify-content-end border-top pt-10 mt-15">
                                                     <div>
-                                                        <a href="?page=std" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4">Cancel</a>
-                                                        <button id="add_std_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Submit</button>
+                                                        <a href="?page=emp" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4">Cancel</a>
+                                                        <button id="add_emp_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Submit</button>
                                                     </div>
                                                 </div>
                                                 <!--end::Wizard Actions-->

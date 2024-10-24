@@ -503,7 +503,7 @@
                                     }
                                     ?>
 
-                                    <div id="kt_repeater_1">
+                                    <div id="admin_repeater">
                                         <div class="form-group row">
                                             <div data-repeater-list="" class="col-lg-12">
                                                 <div data-repeater-item="" class="form-group row align-items-center">
@@ -563,7 +563,7 @@
                                     }
                                     ?>
 
-                                    <div id="kt_repeater_2">
+                                    <div id="org_repeater">
                                         <div class="form-group row">
                                             <div data-repeater-list="another_list" class="col-lg-12">
                                                 <div data-repeater-item class="form-group row align-items-center">
@@ -662,112 +662,113 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const repeaterList = document.querySelector('[data-repeater-list]');
-        const repeaterList2 = document.querySelector('#kt_repeater_2 [data-repeater-list]');
-        const addButton = document.querySelector('[data-repeater-create]');
-        const addButton2 = document.querySelector('#kt_repeater_2 [data-repeater-create]');
+        const adminRepeater = document.querySelector('#admin_repeater [data-repeater-list]');
+        const adminAddButton = document.querySelector('#admin_repeater [data-repeater-create]');
+        const orgRepeater = document.querySelector('#org_repeater [data-repeater-list]');
+        const orgAddButton = document.querySelector('#org_repeater [data-repeater-create]');
 
-        function updateOptions() {
-            const selectedValues = Array.from(repeaterList.querySelectorAll('.admin-select'))
+        // Function to update available options for Admin Repeater
+        function updateAdminOptions() {
+            const selectedValues = Array.from(adminRepeater.querySelectorAll('.admin-select'))
                 .map(select => select.value)
                 .filter(value => value !== '');
 
-            repeaterList.querySelectorAll('.admin-select').forEach(select => {
+            adminRepeater.querySelectorAll('.admin-select').forEach(select => {
                 const options = select.querySelectorAll('option');
                 options.forEach(option => {
-                    if (selectedValues.includes(option.value) && option.value !== select.value) {
-                        option.style.display = 'none';
-                    } else {
-                        option.style.display = 'block';
-                    }
+                    option.style.display = selectedValues.includes(option.value) && option.value !== select.value ? 'none' : 'block';
                 });
             });
 
             // Disable add button if all options are selected
-            const allOptions = repeaterList.querySelector('.admin-select').querySelectorAll('option');
+            const allOptions = adminRepeater.querySelector('.admin-select').querySelectorAll('option');
             const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-            if (availableOptions.length <= 1) {
-                addButton.style.display = 'none';
-            } else {
-                addButton.style.display = 'block';
-            }
+            adminAddButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
         }
 
-        function updateRoleInput(selectElement) {
+        // Function to update role input for Admin
+        function updateAdminRoleInput(selectElement) {
             const selectedOption = selectElement.options[selectElement.selectedIndex];
             const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.admin-role');
             roleInput.value = selectedOption.getAttribute('data-role');
         }
 
-        repeaterList.addEventListener('change', function(event) {
+        // Event listeners for Admin Repeater
+        adminRepeater.addEventListener('change', function(event) {
             if (event.target.classList.contains('admin-select')) {
-                updateOptions();
-                updateRoleInput(event.target);
+                updateAdminOptions();
+                updateAdminRoleInput(event.target);
             }
         });
 
-        repeaterList.addEventListener('click', function(event) {
+        adminRepeater.addEventListener('click', function(event) {
             if (event.target.closest('[data-repeater-delete]')) {
-                setTimeout(updateOptions, 100);
+                setTimeout(updateAdminOptions, 100);
             }
         });
 
-        addButton.addEventListener('click', function() {
-            setTimeout(updateOptions, 100);
+        adminAddButton.addEventListener('click', function() {
+            setTimeout(updateAdminOptions, 100);
         });
 
-        updateOptions();
+        updateAdminOptions(); // Initial options update for Admin Repeater
 
 
-        function updateOptions2() {
-            const selectedValues = Array.from(repeaterList2.querySelectorAll('.another-org-select'))
+        // Function to update available options for Org Repeater
+        function updateOrgOptions() {
+            const selectedValues = Array.from(orgRepeater.querySelectorAll('.another-org-select'))
                 .map(select => select.value)
                 .filter(value => value !== '');
 
-            repeaterList2.querySelectorAll('.another-org-select').forEach(select => {
+            orgRepeater.querySelectorAll('.another-org-select').forEach(select => {
                 const options = select.querySelectorAll('option');
                 options.forEach(option => {
+                    // Hide option if it's selected in another select
                     if (selectedValues.includes(option.value) && option.value !== select.value) {
-                        option.style.display = 'none';
+                        option.style.display = 'none'; // Hide if selected elsewhere
                     } else {
-                        option.style.display = 'block';
+                        option.style.display = 'block'; // Show if not selected
                     }
                 });
             });
 
             // Disable add button if all options are selected
-            const allOptions = repeaterList2.querySelector('.another-org-select').querySelectorAll('option');
+            const allOptions = orgRepeater.querySelector('.another-org-select').querySelectorAll('option');
             const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-            addButton2.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
+            orgAddButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
         }
 
-        function updateRoleAndOrgNameInput(selectElement) {
+
+        // Function to update organization input for Org Repeater
+        function updateOrgNameInput(selectElement) {
             const selectedOption = selectElement.options[selectElement.selectedIndex];
             const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
             orgNameInput.value = selectedOption.getAttribute('data-org');
         }
 
-        repeaterList2.addEventListener('change', function(event) {
+        // Event listeners for Org Repeater
+        orgRepeater.addEventListener('change', function(event) {
             if (event.target.classList.contains('another-org-select')) {
-                updateOptions2();
-                updateRoleAndOrgNameInput(event.target);
+                updateOrgOptions();
+                updateOrgNameInput(event.target);
             }
         });
 
-        repeaterList2.addEventListener('click', function(event) {
+        orgRepeater.addEventListener('click', function(event) {
             if (event.target.closest('[data-repeater-delete]')) {
-                // Instantly delete the item without confirmation
-                event.target.closest('[data-repeater-item]').remove();
-                updateOptions2();
+                setTimeout(updateOrgOptions, 100);
             }
         });
 
-        addButton2.addEventListener('click', function() {
-            setTimeout(updateOptions, 100);
+        orgAddButton.addEventListener('click', function() {
+            setTimeout(updateOrgOptions, 100);
         });
 
-        updateOptions2();
+        updateOrgOptions(); // Initial options update for Org Repeater
     });
+
+
+
 
     document.getElementById('toggleForms').addEventListener('change', function() {
         var formContainer = document.getElementById('formContainer');

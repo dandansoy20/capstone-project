@@ -197,9 +197,20 @@
 					</div>
 					<!--end::Header-->
 					<!--begin::Body-->
+
+
+
+
 					<div class="card-body pt-2 pb-0 mt-n3">
+
+
 						<div class="tab-content mt-5" id="myTabTables10">
 							<!--begin::Tap pane-->
+							<div class="alert alert-custom alert-primary" role="alert">
+								<div class="alert-icon"><i class="flaticon2-check-mark"></i></div>
+								<div class="alert-text">No Upcoming Event Today!</div>
+							</div>
+
 							<div class="tab-pane fade" id="kt_tab_pane_10_1" role="tabpanel" aria-labelledby="kt_tab_pane_10_1">
 								<!--begin::Table-->
 								<div class="table-responsive">
