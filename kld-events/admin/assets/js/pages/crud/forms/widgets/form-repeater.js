@@ -2,24 +2,6 @@
 var KTFormRepeater = (function () {
   // Private functions
 
-  var demo8 = function () {
-    $("#admin_repeater").repeater({
-      initEmpty: false,
-
-      defaultValues: {
-        "text-input": "foo",
-      },
-
-      show: function () {
-        $(this).slideDown();
-      },
-
-      hide: function (deleteElement) {
-        $(this).slideUp(deleteElement);
-      },
-    });
-  };
-
   var demo1 = function () {
     $("#kt_repeater_1").repeater({
       initEmpty: false,
@@ -252,6 +234,23 @@ var KTFormRepeater = (function () {
     initializeDropzone("kt_dropzone_6");
   };
 
+  var demo8 = function () {
+    $("#admin_repeater").repeater({
+      initEmpty: false,
+
+      defaultValues: {
+        "text-input": "foo",
+      },
+
+      show: function () {
+        $(this).slideDown();
+      },
+
+      hide: function (deleteElement) {
+        $(this).slideUp(deleteElement);
+      },
+    });
+  };
   var demo9 = function () {
     $("#org_repeater").repeater({
       initEmpty: false,
@@ -269,6 +268,7 @@ var KTFormRepeater = (function () {
       },
     });
   };
+
   // var demo1 = function () {
   //   $("#add_info_todo").repeater({
   //     initEmpty: false,
@@ -297,12 +297,61 @@ var KTFormRepeater = (function () {
       demo5();
       demo6();
       demo7();
-      demo8();
-      demo9();
     },
   };
 })();
 
 jQuery(document).ready(function () {
   KTFormRepeater.init();
+});
+
+var FeedbackRepeater = function () {
+  // Initialize the outer repeater for feedback categories
+  $(".feedback-cat").repeater({
+    initEmpty: false, // Keeps the first item initialized
+
+    defaultValues: {
+      "text-input": "",
+    },
+
+    show: function () {
+      $(this).slideDown();
+
+      // Reinitialize the inner question repeater for this newly added category
+      initQuestionRepeater($(this));
+    },
+
+    hide: function (deleteElement) {
+      $(this).slideUp(deleteElement);
+    },
+  });
+
+  // Initialize the question repeater for each category (call this once initially)
+  $(".kt-repeater-item").each(function () {
+    initQuestionRepeater($(this));
+  });
+};
+
+// Function to initialize the question repeater for a given category element
+function initQuestionRepeater(categoryElement) {
+  categoryElement.find(".feedback-question").repeater({
+    initEmpty: false, // Keeps the first question initialized
+
+    defaultValues: {
+      "text-input": "",
+    },
+
+    show: function () {
+      $(this).slideDown();
+    },
+
+    hide: function (deleteElement) {
+      $(this).slideUp(deleteElement);
+    },
+  });
+}
+
+// Ensure the repeaters are initialized when the document is ready
+jQuery(document).ready(function () {
+  FeedbackRepeater();
 });

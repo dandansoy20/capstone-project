@@ -135,7 +135,7 @@
 						<li class="nav-item">
 							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4">
 								<span class="nav-icon">
-									<i class="flaticon2-layers-1"></i>
+									<i class="flaticon2-user-1"></i>
 								</span>
 								<span class="nav-text">Event Approval</span>
 							</a>
@@ -151,7 +151,7 @@
 						<li class="nav-item">
 							<a class="nav-link" id="feedback-tab-4" data-toggle="tab" href="#feedback-4" aria-controls="feedback-4">
 								<span class="nav-icon">
-									<i class="flaticon2-layers-1"></i>
+									<i class="flaticon2-sheet"></i>
 								</span>
 								<span class="nav-text">Feedback Form</span>
 							</a>
@@ -170,6 +170,8 @@
 											<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
 												<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Con Marvin Serrano</a>
 												<span class="font-weight-bold text-muted font-size-lg">Head of Student Activity</span>
+
+												<div class="font-weight-bold text-warning mb-3">Pending</div>
 											</div>
 											<img src="assets/media/svg/avatars/029-boy-11.svg" alt="" class="h-100px" />
 										</div>
@@ -182,6 +184,8 @@
 											<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
 												<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Riza Mae Alburo</a>
 												<span class="font-weight-bold text-muted font-size-lg">Head of Event's Equipment</span>
+
+												<div class="font-weight-bold text-warning mb-3">Pending</div>
 											</div>
 											<img src="assets/media/svg/avatars/014-girl-7.svg" alt="" class="h-100px" />
 										</div>
@@ -194,6 +198,8 @@
 											<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
 												<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Keno A. Villavicencio</a>
 												<span class="font-weight-bold text-muted font-size-lg">IICS Dean</span>
+
+												<div class="font-weight-bold text-warning mb-3">Pending</div>
 											</div>
 											<img src="assets/media/svg/avatars/004-boy-1.svg" alt="" class="h-100px" />
 										</div>
@@ -210,6 +216,8 @@
 											<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
 												<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="tooltip" data-theme="dark" title="View Comment">Tuesday Medio</a>
 												<span class="font-weight-bold text-muted font-size-lg">KLD - Information Systems Society</span>
+
+												<div class="font-weight-bold text-warning mb-3">Pending</div>
 											</div>
 											<img src="assets/media/isoc.jpg" alt="" class="h-100px" />
 										</div>
@@ -239,7 +247,7 @@
 													class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="modal" data-target="#exampleModalCenter" data-toggle="tooltip" data-theme="dark" title="View Comment">Cha Ladisla</a>
 												<span class="font-weight-bold text-muted  font-size-lg">KLD - Institute of Midwifery Student Council</span>
 
-												<div class="font-weight-bold text-danger mb-3">Returned</div>
+												<div class="font-weight-bold text-warning mb-3">Pending</div>
 											</div>
 											<img src="assets/media/kldmw.jpg" alt="" class="h-100px" />
 										</div>
@@ -433,8 +441,6 @@
 																</div>
 															</div>
 														</div>
-
-
 														<!-- Second Repeater for Event Program -->
 														<div class="pb-5" data-wizard-type="step-content">
 															<h4 class="mb-10 font-weight-bold text-dark">Set Event Program</h4>
@@ -634,11 +640,6 @@
 
 														</div>
 														<!--end: Wizard Step 4-->
-														<!--begin: Wizard Step 5-->
-														<!--end: Wizard Step 5-->
-														<!--begin: Wizard Step 6-->
-
-														<!--end: Wizard Step 6-->
 														<!--begin: Wizard Actions-->
 														<div class="d-flex justify-content-between border-top mt-5 pt-10">
 															<div class="mr-2">
@@ -666,31 +667,73 @@
 
 						<div class="tab-pane fade" id="feedback-4" role="tabpanel" aria-labelledby="feedback-tab-4">
 							<div class="row justify-content-center">
-								<div id="kt_repeater_7" class="kt-repeater">
-									<div data-repeater-list="feedback" class="col-xl-12">
+								<div class="kt-repeater feedback-cat col-lg-8"> <!-- Changed ID to class -->
+									<div data-repeater-list="feedback">
 										<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+											<div class="col-12">
+												<!--begin::Card-->
+												<div class="card card-custom gutter-b example example-compact">
+													<div class="card-header">
+														<h3 class="card-title">Feedback Form</h3>
+													</div>
+													<form class="form">
+														<div class="card-body">
+															<div class="form-group">
+																<label>Category:</label>
+																<input type="text" class="form-control" placeholder="Venue Management" />
+															</div>
 
-
-											<div class="col-6 col-md-6 col-sm-12">
-												<a href="javascript:;" data-repeater-create="" class="btn btn-lg font-weight-bolder btn-light-primary">
-													<i class="la la-plus"></i> Likert
-												</a>
+															<label>Questions:</label>
+															<div class="kt-repeater feedback-question"> <!-- Changed ID to class -->
+																<div data-repeater-list="questions">
+																	<div data-repeater-item class="form-group kt-repeater-item">
+																		<div class="form-group row">
+																			<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+																				<input type="text" class="form-control" placeholder="The answer to the question is quite good." />
+																			</div>
+																			<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+																				<select class="form-control">
+																					<option>Likert Scale</option>
+																					<option>Essay Type</option>
+																				</select>
+																			</div>
+																			<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+																				<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger">
+																					<i class="la la-trash-o"></i>
+																				</a>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="col-12 d-flex mt-3">
+																	<a href="javascript:;" data-repeater-create class="btn font-weight-bolder btn-primary">
+																		<i class="la la-plus"></i> Add Question
+																	</a>
+																</div>
+															</div>
+														</div>
+														<div class="card-footer">
+															<div class="row">
+																<div class="col text-right">
+																	<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
 											</div>
-											<div class="col-6 col-md-6 col-sm-12">
-												<a href="javascript:;" data-repeater-create="" class="btn btn-lg font-weight-bolder btn-light-primary">
-													<i class="la la-plus"></i> Essay
-												</a>
-											</div>
-
 										</div>
+									</div>
+									<div class="col-12 d-flex justify-content-around mt-3">
+										<a href="javascript:;" data-repeater-create class="btn btn-lg font-weight-bolder btn-light-primary">
+											<i class="la la-plus"></i> Add Category
+										</a>
+										<a href="" data-repeater-create class="btn btn-lg font-weight-bolder btn-success">
+											<i class="la la-save"></i> Save Changes
+										</a>
 									</div>
 								</div>
 							</div>
-
-
-
-
-
 						</div>
 					</div>
 				</div>

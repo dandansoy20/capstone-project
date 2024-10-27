@@ -1,3 +1,7 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
@@ -126,139 +130,143 @@
                             <!--begin::Wizard Form-->
                             <form class="form" id="kt_form">
                                 <!--begin::Wizard Step 1-->
-
-
-
                                 <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-                                    <h3 class="mb-10 font-weight-bold text-dark">Set Event Date</h3>
-
-                                    <label>Select Date</label>
-                                    <div class="form-group row">
-                                        <div class="col-lg-12 col-md-9 col-sm-12">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="input-group date" id="kt_datetimepicker_7_1"
-                                                        data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input"
-                                                            placeholder="Start date" name="event_start_date"
-                                                            id="event_start_date"
-                                                            data-target="#kt_datetimepicker_7_1" />
-                                                        <div class="input-group-append"
-                                                            data-target="#kt_datetimepicker_7_1"
-                                                            data-toggle="datetimepicker">
-                                                            <span class="input-group-text">
-                                                                <i class="ki ki-calendar"></i>
+                                    <h3 class="font-weight-bold text-dark">Select Event Type</h3>
+                                    <!--begin::Form-->
+                                    <form class="form">
+                                        <div class="card-body">
+                                            <div class="form-group m-0">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label class="option">
+                                                            <span class="option-control">
+                                                                <span class="radio">
+                                                                    <input type="radio" name="eventType" id="inPerson_radio" value="inPerson" onclick="toggleForm()" checked="checked" />
+                                                                    <span></span>
+                                                                </span>
                                                             </span>
-                                                        </div>
+                                                            <span class="option-label">
+                                                                <span class="option-head">
+                                                                    <span class="option-title">On-site Event</span>
+                                                                </span>
+                                                                <span class="option-body">A traditional, physical gathering where participants attend a specific location to engage in real-time activities, sessions, or social interactions.</span>
+                                                            </span>
+                                                        </label>
                                                     </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="input-group date" id="kt_datetimepicker_7_2"
-                                                        data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input"
-                                                            placeholder="End date" name="event_end_date"
-                                                            id="event_end_date" data-target="#kt_datetimepicker_7_2" />
-                                                        <div class="input-group-append"
-                                                            data-target="#kt_datetimepicker_7_2"
-                                                            data-toggle="datetimepicker">
-                                                            <span class="input-group-text">
-                                                                <i class="ki ki-calendar"></i>
+                                                    <div class="col-lg-6">
+                                                        <label class="option">
+                                                            <span class="option-control">
+                                                                <span class="radio">
+                                                                    <input type="radio" name="eventType" id="virtual_radio" value="virtual" onclick="toggleForm()" />
+                                                                    <span></span>
+                                                                </span>
                                                             </span>
-                                                        </div>
+                                                            <span class="option-label">
+                                                                <span class="option-head">
+                                                                    <span class="option-title">Virtual Event</span>
+                                                                </span>
+                                                                <span class="option-body">An online gathering where participants join from various locations via the internet.</span>
+                                                            </span>
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="separator separator-dashed my-8"></div>
                                         </div>
-                                    </div>
+                                    </form>
+                                    <!--end::Form-->
 
-                                    <div class="card card-custom example example-compact">
-
-                                        <h3 class="mb-10 font-weight-bold text-dark">Select Event Type</h3>
-                                        <!--begin::Form-->
-                                        <form class="form">
-                                            <div class="card-body">
-                                                <div class="form-group m-0">
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <label class="option">
-                                                                <span class="option-control">
-                                                                    <span class="radio">
-                                                                        <input type="radio" name="eventType" id="inPerson_radio" value="inPerson" onclick="toggleForm()" checked="checked" />
-                                                                        <span></span>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="option-label">
-                                                                    <span class="option-head">
-                                                                        <span class="option-title">On-site Event</span>
-                                                                    </span>
-                                                                    <span class="option-body">a traditional, physical gathering where participants attend a specific location to
-                                                                        engage in real-time activities, sessions, or social interactions.</span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <label class="option">
-                                                                <span class="option-control">
-                                                                    <span class="radio">
-                                                                        <input type="radio" name="eventType" id="virtual_radio" value="virtual" onclick="toggleForm()" />
-                                                                        <span></span>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="option-label">
-                                                                    <span class="option-head">
-                                                                        <span class="option-title">Virtual Event</span>
-                                                                    </span>
-                                                                    <span class="option-body">an online gathering where participants join from various locations via the internet.</span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="separator separator-dashed my-8"></div>
-
-                                            </div>
-                                        </form>
-                                        <!--end::Form-->
-                                    </div>
                                     <div id="inPersonForm" style="opacity: 1; transition: opacity 0.5s ease-in-out;">
                                         <h3 class="mb-10 font-weight-bold text-dark">Select Event Venue</h3>
                                         <!--begin::Select-->
-
                                         <div class="form-group">
                                             <label>Venue</label>
-                                            <select name="venue_name" id="venue_name"
-                                                class="form-control form-control-solid form-control-lg">
-                                                <option value="" disabled>Select venue</option>
+                                            <select name="venue_name" id="venue_name" class="form-control form-control-solid form-control-lg">
+                                                <option value="" disabled selected>Select venue</option>
                                                 <?php
                                                 include('./control/db.php');
-                                                $try = mysqli_query($conn, "Select * from venue_tbl");
+                                                $try = mysqli_query($conn, "SELECT * FROM venue_tbl");
                                                 while ($row = $try->fetch_array()) {
                                                     echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
                                                 }
                                                 ?>
                                             </select>
                                         </div>
+                                        <div class="separator separator-dashed my-8"></div>
                                     </div>
+
+                                    <h3 class="mb-10 font-weight-bold text-dark">Set Event Date</h3>
+                                    <label>Select Date</label>
+                                    <div class="form-group row">
+                                        <div class="col-lg-12 col-md-9 col-sm-12">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input" placeholder="Start date" name="event_start_date" id="event_start_date" data-target="#kt_datetimepicker_start" />
+                                                        <div class="input-group-append" data-target="#kt_datetimepicker_7_1" data-toggle="datetimepicker">
+                                                            <span class="input-group-text">
+                                                                <i class="ki ki-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="input-group date" id="kt_datetimepicker_7_2" data-target-input="nearest">
+                                                        <input type="text" class="form-control datetimepicker-input" placeholder="End date" name="event_end_date" id="event_end_date" data-target="#kt_datetimepicker_7_1" />
+                                                        <div class="input-group-append" data-target="#kt_datetimepicker_7_2" data-toggle="datetimepicker">
+                                                            <span class="input-group-text">
+                                                                <i class="ki ki-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <script>
+                                        $(document).ready(function() {
+                                            // Function to initialize datetimepicker
+                                            function initializeDateTimePicker(pickerId, disabledDates) {
+                                                $(pickerId).datetimepicker('destroy'); // Destroy existing picker if any
+                                                $(pickerId).datetimepicker({
+                                                    format: 'MM/DD/YYYY HH:mm', // Ensure both date and time formats are consistent
+                                                    disabledDates: disabledDates,
+                                                    useCurrent: false,
+                                                });
+                                            }
+
+                                            // Static disabled dates based on the venue
+                                            let staticDisabledDates = [
+                                                moment("10/02/2024").toDate(), // 2024-10-02
+                                                moment("10/07/2024").toDate(), // 2024-10-07
+                                                moment("10/03/2024").toDate(), // 2024-10-02
+                                                moment("10/08/2024").toDate() // 2024-10-07
+                                            ];
+
+                                            // Initialize datetimepickers with static disabled dates
+                                            initializeDateTimePicker("#kt_datetimepicker_7_1", staticDisabledDates);
+                                            initializeDateTimePicker("#kt_datetimepicker_7_2", staticDisabledDates);
+                                        });
+
+                                        // Existing toggleForm function remains unchanged
                                         function toggleForm() {
                                             const inPersonRadio = document.querySelector('input[name="eventType"][value="inPerson"]');
                                             const inPersonForm = document.getElementById('inPersonForm');
 
                                             if (inPersonRadio.checked) {
-                                                inPersonForm.style.opacity = '1';
+                                                inPersonForm.style.display = 'block';
                                             } else {
-                                                inPersonForm.style.opacity = '0';
+                                                inPersonForm.style.display = 'none';
                                             }
                                         }
 
                                         // Initial call to set the correct form visibility on page load
                                         toggleForm();
                                     </script>
-
-
-                                    <div class="separator separator-dashed my-8"></div>
-
                                 </div>
+
+
                                 <!--end::Wizard Step 1-->
 
                                 <!--begin::Wizard Step 2-->
@@ -423,31 +431,32 @@
                                         <div class="separator separator-dashed my-8"></div>
 
 
-                                        <div class="form-group row">
-                                            <label class="col-4 text-right col-form-label">Set Event Capacity</label>
-                                            <div class="col-8">
-                                                <span class="switch switch-icon">
-                                                    <label>
-                                                        <input type="checkbox" id="toggleCap" name="select" />
-                                                        <span></span>
-                                                    </label>
-                                                </span>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group row" id="formCapacity" style="display: none;">
-                                            <label class="col-4 text-right col-form-label">Number of Attendees</label>
-                                            <div class="col-8">
-                                                <div class="row">
-                                                    <div class="col-4">
-                                                        <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Quantity" />
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
-                                                    </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-4 text-right col-form-label">Set Event Capacity</label>
+                                        <div class="col-8">
+                                            <span class="switch switch-icon">
+                                                <label>
+                                                    <input type="checkbox" id="toggleCap" name="select" />
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row" id="formCapacity" style="display: none;">
+                                        <label class="col-4 text-right col-form-label">Number of Attendees</label>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="kt_nouislider_1_input" placeholder="Quantity" />
                                                 </div>
-                                                <span class="form-text text-muted mt-2">Move slider or input a number</span>
+                                                <div class="col-8">
+                                                    <div id="kt_nouislider_1" class="nouislider-drag-danger"></div>
+                                                </div>
                                             </div>
+                                            <span class="form-text text-muted mt-2">Move slider or input a number</span>
                                         </div>
                                     </div>
                                 </div>
@@ -504,7 +513,7 @@
                                     ?>
 
                                     <div id="admin_repeater">
-                                        <div class="form-group row">
+                                        <div class="form-group row ">
                                             <div data-repeater-list="" class="col-lg-12">
                                                 <div data-repeater-item="" class="form-group row align-items-center">
                                                     <div class="col-md-4">
@@ -542,26 +551,7 @@
                                     </div>
                                     <div class="separator separator-dashed my-8"></div>
                                     <h4 class="mb-10 font-weight-bold text-dark">Organizer</h4>
-                                    <?php
-                                    if ($_SESSION['login_type'] === "Organizer") {
-                                        echo '
-                                        <div class="form-group">
-                                            <div data-repeater-item="" class="form-group row align-items-center">
-                                                <div class="col-md-4">
-                                                    <label>Name:</label>
-                                                    <input type="hidden" value="' . $_SESSION['kld_uname'] . '" class="event-org-fixed" />
-                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
-                                                    <div class="d-md-none mb-2"></div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>Role:</label>
-                                                    <input type="email" class="form-control" value="' . $_SESSION['org_role'] . '" disabled />
-                                                    <div class="d-md-none mb-2"></div>
-                                                </div>
-                                            </div>
-                                        </div>';
-                                    }
-                                    ?>
+
 
                                     <div id="org_repeater">
                                         <div class="form-group row">
@@ -572,12 +562,13 @@
                                                             <option value="" disabled selected>Choose Organizer</option>
                                                             <?php
                                                             // Fetching organizer details including org_name
-                                                            $try = mysqli_query($conn, "SELECT org_acc.org_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_tbl.org_id = org_acc.org_id");
+                                                            $try = mysqli_query($conn, "SELECT org_acc.org_acc_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_tbl.org_id = org_acc.org_id");
                                                             while ($row = $try->fetch_array()) {
-                                                                echo '<option value="' . $row['org_id'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
+                                                                echo '<option value="' . $row['org_acc_id'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
                                                             }
                                                             ?>
                                                         </select>
+                                                        .
                                                         <div class="d-md-none mb-2"></div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -662,109 +653,95 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        var demo8 = function() {
+            $("#admin_repeater").repeater({
+                initEmpty: false,
+                defaultValues: {
+                    "text-input": "foo",
+                },
+                show: function() {
+                    $(this).slideDown();
+                    updateOptions(adminRepeater, '.admin-select', adminAddButton);
+                },
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                    setTimeout(() => updateOptions(adminRepeater, '.admin-select', adminAddButton), 100);
+                },
+            });
+        };
+
+        var demo9 = function() {
+            $("#org_repeater").repeater({
+                initEmpty: false,
+                defaultValues: {
+                    "text-input": "foo",
+                },
+                show: function() {
+                    $(this).slideDown();
+                    updateOptions(orgRepeater, '.another-org-select', orgAddButton);
+                },
+                hide: function(deleteElement) {
+                    $(this).slideUp(deleteElement);
+                    setTimeout(() => updateOptions(orgRepeater, '.another-org-select', orgAddButton), 100);
+                },
+            });
+        };
+
         const adminRepeater = document.querySelector('#admin_repeater [data-repeater-list]');
         const adminAddButton = document.querySelector('#admin_repeater [data-repeater-create]');
         const orgRepeater = document.querySelector('#org_repeater [data-repeater-list]');
         const orgAddButton = document.querySelector('#org_repeater [data-repeater-create]');
 
-        // Function to update available options for Admin Repeater
-        function updateAdminOptions() {
-            const selectedValues = Array.from(adminRepeater.querySelectorAll('.admin-select'))
+        function updateOptions(repeater, selectClass, addButton) {
+            const selectedValues = Array.from(repeater.querySelectorAll(selectClass))
                 .map(select => select.value)
                 .filter(value => value !== '');
 
-            adminRepeater.querySelectorAll('.admin-select').forEach(select => {
-                const options = select.querySelectorAll('option');
-                options.forEach(option => {
-                    option.style.display = selectedValues.includes(option.value) && option.value !== select.value ? 'none' : 'block';
+            repeater.querySelectorAll(selectClass).forEach(select => {
+                const currentValue = select.value;
+                select.querySelectorAll('option').forEach(option => {
+                    option.style.display = (!selectedValues.includes(option.value) || option.value === currentValue) ? 'block' : 'none';
                 });
             });
 
-            // Disable add button if all options are selected
-            const allOptions = adminRepeater.querySelector('.admin-select').querySelectorAll('option');
-            const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-            adminAddButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
+            const availableOptions = Array.from(repeater.querySelector(`${selectClass}:last-of-type`).querySelectorAll('option'))
+                .filter(option => option.style.display !== 'none' && option.value !== '');
+
+            addButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
         }
 
-        // Function to update role input for Admin
-        function updateAdminRoleInput(selectElement) {
+        function updateInput(selectElement, inputClass) {
             const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const roleInput = selectElement.closest('[data-repeater-item]').querySelector('.admin-role');
-            roleInput.value = selectedOption.getAttribute('data-role');
+            const input = selectElement.closest('[data-repeater-item]').querySelector(inputClass);
+            input.value = selectedOption.getAttribute('data-role') || selectedOption.getAttribute('data-org');
         }
 
-        // Event listeners for Admin Repeater
-        adminRepeater.addEventListener('change', function(event) {
-            if (event.target.classList.contains('admin-select')) {
-                updateAdminOptions();
-                updateAdminRoleInput(event.target);
-            }
-        });
-
-        adminRepeater.addEventListener('click', function(event) {
-            if (event.target.closest('[data-repeater-delete]')) {
-                setTimeout(updateAdminOptions, 100);
-            }
-        });
-
-        adminAddButton.addEventListener('click', function() {
-            setTimeout(updateAdminOptions, 100);
-        });
-
-        updateAdminOptions(); // Initial options update for Admin Repeater
-
-
-        // Function to update available options for Org Repeater
-        function updateOrgOptions() {
-            const selectedValues = Array.from(orgRepeater.querySelectorAll('.another-org-select'))
-                .map(select => select.value)
-                .filter(value => value !== '');
-
-            orgRepeater.querySelectorAll('.another-org-select').forEach(select => {
-                const options = select.querySelectorAll('option');
-                options.forEach(option => {
-                    // Hide option if it's selected in another select
-                    if (selectedValues.includes(option.value) && option.value !== select.value) {
-                        option.style.display = 'none'; // Hide if selected elsewhere
-                    } else {
-                        option.style.display = 'block'; // Show if not selected
-                    }
-                });
+        function setupRepeater(repeater, selectClass, addButton, inputClass) {
+            repeater.addEventListener('change', function(event) {
+                if (event.target.classList.contains(selectClass.slice(1))) {
+                    updateOptions(repeater, selectClass, addButton);
+                    updateInput(event.target, inputClass);
+                }
             });
 
-            // Disable add button if all options are selected
-            const allOptions = orgRepeater.querySelector('.another-org-select').querySelectorAll('option');
-            const availableOptions = Array.from(allOptions).filter(option => option.style.display !== 'none' && option.value !== '');
-            orgAddButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
+            repeater.addEventListener('click', function(event) {
+                if (event.target.closest('[data-repeater-delete]')) {
+                    setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
+                }
+            });
+
+            addButton.addEventListener('click', function() {
+                setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
+            });
+
+            updateOptions(repeater, selectClass, addButton);
         }
 
+        setupRepeater(adminRepeater, '.admin-select', adminAddButton, '.admin-role');
+        setupRepeater(orgRepeater, '.another-org-select', orgAddButton, '.another-org-name');
 
-        // Function to update organization input for Org Repeater
-        function updateOrgNameInput(selectElement) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const orgNameInput = selectElement.closest('[data-repeater-item]').querySelector('.another-org-name');
-            orgNameInput.value = selectedOption.getAttribute('data-org');
-        }
-
-        // Event listeners for Org Repeater
-        orgRepeater.addEventListener('change', function(event) {
-            if (event.target.classList.contains('another-org-select')) {
-                updateOrgOptions();
-                updateOrgNameInput(event.target);
-            }
-        });
-
-        orgRepeater.addEventListener('click', function(event) {
-            if (event.target.closest('[data-repeater-delete]')) {
-                setTimeout(updateOrgOptions, 100);
-            }
-        });
-
-        orgAddButton.addEventListener('click', function() {
-            setTimeout(updateOrgOptions, 100);
-        });
-
-        updateOrgOptions(); // Initial options update for Org Repeater
+        demo8();
+        demo9();
     });
 
 

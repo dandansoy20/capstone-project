@@ -2,7 +2,7 @@
     <div class="row">
         <?php
         include('./control/db.php');
-        $try = mysqli_query($conn, "Select * from venue_tbl");
+        $try = mysqli_query($conn, "SELECT * FROM venue_tbl");
         while ($row = $try->fetch_array()) {
             echo '<div class="col-xl-4">
             <!--begin::Mixed Widget 7-->
@@ -13,17 +13,17 @@
                         <!--begin:Pic-->
                         <div class="symbol symbol-80 symbol-light-danger mr-5">
                             <span class="symbol-label">
-                                <img src="assets/media/svg/misc/008-infography.svg" class="h-50 align-self-center"
-                                     alt="" />
+                                <img src="assets/media/svg/misc/008-infography.svg" class="h-50 align-self-center" alt="" />
                             </span>
                         </div>
                         <!--end:Pic-->
 
                         <!--begin:Title-->
                         <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
-                            <a href="#" class="text-dark font-weight-bolder text-hover-primary font-size-h5">
-                                ' . $row["venue_name"] . '
+                            <a href="?page=venue-view&venue_id=' . htmlspecialchars($row["venue_id"]) . '" class="text-dark font-weight-bolder text-hover-primary font-size-h5">
+                                ' . htmlspecialchars($row["venue_name"]) . '
                             </a>
+
                             <span class="text-muted font-weight-bold font-size-lg">
                                 Date Created: ' . date('M d, Y', strtotime($row["venue_created"])) . '
                             </span>
@@ -43,7 +43,5 @@
         </div>';
         }
         ?>
-
     </div>
-
 </div>

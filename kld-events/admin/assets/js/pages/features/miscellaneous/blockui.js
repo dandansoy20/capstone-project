@@ -77,11 +77,23 @@ var KTBlockUIDemo = (function () {
 
         setTimeout(function () {
           KTApp.unblock("#kt_blockui_content");
-        }, 2000);
+        }, 1000);
       });
 
       // Add event listener for Bootstrap Select dropdown selection
       $("#yrlevel").on("change", function () {
+        KTApp.block("#kt_blockui_content", {
+          overlayColor: "#000000",
+          state: "primary",
+          message: "Processing...",
+        });
+
+        setTimeout(function () {
+          KTApp.unblock("#kt_blockui_content");
+        }, 1000);
+      });
+
+      $("#venue_name").on("change", function () {
         KTApp.block("#kt_blockui_content", {
           overlayColor: "#000000",
           state: "primary",
