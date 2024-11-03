@@ -3,21 +3,29 @@ include('./control/db.php');
 
 // Check if the 'id' parameter exists in the URL
 if (isset($_GET['id'])) {
-    $adminId = $_GET['id'];
+    $organizerId = $_GET['id'];
 
-    // Prepare the SQL query to fetch the admin's data based on the provided ID
+    // Prepare the SQL query to fetch the student's data based on the provided ID
     $query = "
         SELECT 
-            admin_acc.*
+            org_acc.org_fname, 
+            org_acc.org_lname, 
+            org_acc.org_email,
+            org_acc.org_kld_id,  
+            org_acc.org_profile, 
+            org_acc.org_uname,
+            org_tbl.org_name
         FROM 
-            admin_acc
+            org_acc
+        JOIN 
+            org_tbl ON org_acc.org_id = org_tbl.org_id 
         WHERE 
-            admin_acc.admin_id = ?
+            org_acc.org_acc_id = ?
     ";
 
     // Initialize a statement and prepare the SQL query
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $adminId);
+    $stmt->bind_param("i", $organizerId);
 
     // Execute the query
     $stmt->execute();
@@ -30,16 +38,17 @@ if (isset($_GET['id'])) {
         $row = $result->fetch_assoc();
 
         // Store the retrieved values in variables
-        $fullName = $row['admin_fname'] . ' ' . $row['admin_lname'];
-        $profilePic = $row['admin_profile'];
+        $fullName = $row['org_fname'] . ' ' . $row['org_lname'];
+        $profilePic = $row['org_profile'];
+        $org = $row['org_name'];
     } else {
-        echo "No record found for this admin.";
+        echo "No record found for this organizer.";
     }
 
     // Close the statement
     $stmt->close();
 } else {
-    echo "No admin ID provided.";
+    echo "No student ID provided.";
 }
 
 // Close the database connection
@@ -70,9 +79,6 @@ $conn->close();
                                 <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
                                     <?php echo $fullName; ?>
                                 </a>
-                                <div class="text-muted">
-                                    <?php echo $row['admin_role']; ?>
-                                </div>
                             </div>
                         </div>
                         <!--end::User-->
@@ -81,9 +87,16 @@ $conn->close();
                         <div class="py-9">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">KLD Email:</span>
-                                <a href="#" class="text-muted text-hover-primary"><?php echo $row['admin_email']; ?></a>
+                                <a href="#" class="text-muted text-hover-primary"><?php echo $row['org_email']; ?></a>
                             </div>
-
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold mr-2">KLD-ID:</span>
+                                <span class="text-muted"><?php echo $row['org_kld_id']; ?></span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="font-weight-bold mr-2">Organization:</span>
+                                <span class="text-muted text-right"><?php echo $org ?></span>
+                            </div>
                         </div>
                         <!--end::Contact-->
 
@@ -91,7 +104,7 @@ $conn->close();
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
 
                             <div class="navi-item mb-2">
-                                <a href="?page=overview-admin" class="navi-link py-4">
+                                <a href="?page=overview-org" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
@@ -110,7 +123,7 @@ $conn->close();
                             </div>
 
                             <div class="navi-item mb-2">
-                                <a href="custom/apps/profile/profile-1/personal-information.html"
+                                <a href="#"
                                     class="navi-link py-4 active">
                                     <span class="navi-icon mr-2">
                                         <span
@@ -135,7 +148,7 @@ $conn->close();
                             </div>
 
                             <div class="navi-item mb-2">
-                                <a href="?page=cpass-admin" class="navi-link py-4 ">
+                                <a href="?page=cpass-org" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span
                                             class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg--><svg
@@ -182,7 +195,8 @@ $conn->close();
                         </div>
                         <div class="card-toolbar">
                             <button type="reset" class="btn btn-success mr-2">Save Changes</button>
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                            <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancel</button>
+
                         </div>
                     </div>
                     <!--end::Header-->
@@ -198,56 +212,42 @@ $conn->close();
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Display Profile Picture</label>
-                                <div class="col-lg-9 col-xl-6">
-                                    <div class="image-input image-input-outline" id="kt_profile_avatar"
-                                        style="background-image: url(<?php echo $profilePic; ?>)">
-                                        <div class="image-input-wrapper"
-                                            style="background-image: url(assets/media/users/300_21.jpg)"></div>
+                                <label class="col-xl-3 col-lg-3 col-form-label text-left">Profile Picture</label>
+                                <div class="col-lg-9 col-xl-9">
+                                    <div class="image-input image-input-outline" id="kt_profile_avatar">
+                                        <div class="image-input-wrapper" style="background-image: url(assets/media/users/default.jpg)"></div>
 
-                                        <label
-                                            class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                            data-action="change" data-toggle="tooltip" title=""
-                                            data-original-title="Change DP">
+                                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                             <i class="fa fa-pen icon-sm text-muted"></i>
-                                            <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" name="profile_avatar" id="update_org_profilepic" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="profile_avatar_remove" />
                                         </label>
 
-                                        <span
-                                            class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                            data-action="cancel" data-toggle="tooltip" title="Cancel Picture">
-                                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                                        </span>
-
-                                        <span
-                                            class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                                            data-action="remove" data-toggle="tooltip" title="Remove Picture">
+                                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
                                             <i class="ki ki-bold-close icon-xs text-muted"></i>
                                         </span>
                                     </div>
-                                    <span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="<?php echo $row['admin_fname']; ?>" />
+                                        value="<?php echo $row['org_fname']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="<?php echo $row['admin_lname']; ?>" />
+                                        value="<?php echo $row['org_lname']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">Username Account</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="<?php echo $row['admin_uname']; ?>" />
+                                        value="<?php echo $row['org_uname']; ?>" />
                                 </div>
                             </div>
                             <div class="row">
@@ -263,29 +263,11 @@ $conn->close();
                                         <div class="input-group-prepend"><span class="input-group-text"><i
                                                     class="flaticon-email"></i></span></div>
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            value="<?php echo strtok($row['admin_email'], '@'); ?>" disabled placeholder="Email" />
+                                            value="<?php echo strtok($row['org_email'], '@'); ?>" disabled placeholder="Email" />
                                         <div class="input-group-append"><span class="input-group-text">@kld.edu.ph</span></div>
                                     </div>
                                     <span class="form-text text-muted">We'll never share your email with anyone
                                         else.</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Admin Role</label>
-                                <div class="col-lg-9 col-xl-6">
-                                    <div class="input-group input-group-lg input-group-solid">
-                                        <select type="text" class="form-control form-control-lg form-control-solid"
-                                            placeholder="Organization" value="">
-                                            <option value="" selected><?php echo $row['admin_role']; ?></option>
-                                            <option>College Administrator</option>
-                                            <option>VP Administrative Affairs</option>
-                                            <option>Academic Institue Dean</option>
-                                            <option>Head of Student Activity</option>
-                                            <option>Head of Equipments and Venue</option>
-
-                                        </select>
-                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -295,7 +277,16 @@ $conn->close();
                                         <div class="input-group-prepend"><span class="input-group-text"><i
                                                     class="la la-address-card"></i></span></div>
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            value="" disabled placeholder="ID Number" />
+                                            value="<?php echo $row['org_kld_id']; ?>" disabled placeholder="ID Number" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group input-group-lg input-group-solid">
+                                        <input type="text" class="form-control form-control-lg form-control-solid"
+                                            placeholder="Organization" disabled value="<?php echo $org; ?>" />
                                     </div>
                                 </div>
                             </div>

@@ -44,7 +44,7 @@
                                                     <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:</h5>
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Profile Picture</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                                                 <div class="image-input-wrapper" style="background-image: url(assets/media/users/default.jpg)"></div>
@@ -82,7 +82,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
+                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="organization" type="text" value="">
                                                                 <option selected disabled>Select Organization</option>
                                                                 <?php
                                                                 include('./control/db.php');
@@ -100,14 +100,15 @@
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                         <div class="col-lg-9 col-xl-9">
 
-                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
-                                                                <option selected disabled>Select Role</option>
-                                                                <option>Event Manager</option>
-                                                                <option>Event Coordinator</option>
-                                                                <option>Content Creator</option>
-                                                                <option>Registration Manager</option>
-                                                                <option>Volunteer</option>
-                                                                <option>Member</option>
+                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_role" name="role" type="text" value="">
+                                                                <option value="" selected disabled>Select Role</option>
+                                                                <option value="Event Manager">Event Manager</option>
+                                                                <option value="Event Coordinator">Event Coordinator</option>
+                                                                <option value="Content Creator">Content Creator</option>
+                                                                <option value="Registration Manager">Registration Manager</option>
+                                                                <option value="Volunteer">Volunteer</option>
+                                                                <option value="Member">Member</option>
+
 
                                                             </select>
 
@@ -122,7 +123,7 @@
                                                             <div class="input-group input-group-solid input-group-lg">
                                                                 <input type="text"
                                                                     class="form-control form-control-solid form-control-lg"
-                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
+                                                                    placeholder="Enter ID Number" name="idnum" id="add_org_kldid"
                                                                     value="" />
                                                             </div>
                                                         </div>

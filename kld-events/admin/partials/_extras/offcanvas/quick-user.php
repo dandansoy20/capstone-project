@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 	<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
 		<h3 class="font-weight-bold m-0">
 			My Profile
-			<small class="text-muted font-size-sm ml-2">12 messages</small>
+			<small class="text-muted font-size-sm ml-2">0 messages</small>
 		</h3>
 		<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 			<i class="ki ki-close icon-xs text-muted"></i>
@@ -26,15 +26,15 @@ if (session_status() == PHP_SESSION_NONE) {
 		<!--begin::Header-->
 		<div class="d-flex align-items-center mt-5">
 			<div class="symbol symbol-100 mr-5">
-				<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+				<div class="symbol-label" style="background-image:url('<?php echo $_SESSION['kld_profile']; ?>')"></div>
 				<i class="symbol-badge bg-success"></i>
 			</div>
 			<div class="d-flex flex-column">
-				<a href="?page=profile" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
+				<a href="?page=profile&id=<?php echo $_SESSION['kld_id']; ?>" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
 					<?php echo $_SESSION['kld_fname'] . " " . $_SESSION['kld_lname'] ?>
 				</a>
 				<div class="text-muted mt-1">
-					<?php echo $_SESSION['login_type']; ?>
+					<?php echo $_SESSION['kld_admin_role']; ?>
 				</div>
 				<div class="navi mt-2">
 					<?php

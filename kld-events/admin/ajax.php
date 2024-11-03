@@ -21,7 +21,7 @@ if (!array_key_exists('ajax', $_POST)) {
             $add_std_yearlvl = $_POST['add_std_yearlvl'];
             $add_std_section = $_POST['add_std_section'];
             $add_std_kldnum = $_POST['add_std_kldnum'];
-            $add_std_email = $_POST['add_std_email']. "@kld.edu.ph";
+            $add_std_email = $_POST['add_std_email'] . "@kld.edu.ph";
             $activation_key = base64_encode(generateRandomString());
 
             require_once 'assets/mail/src/Exception.php';
@@ -37,20 +37,20 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->Port = 587;
             //$mail->Port = 465;
             $mail->SMTPSecure = "TLS";
-            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=".$activation_key;
+            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key;
 
             $mail->Username = 'steven.dale@lucero.cloud';
             $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
-            $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
+            $mail->setFrom('noreply@lucero.cloud', 'KLD noreply');
             $mail->addAddress($add_std_email);
             $mail->addCC("denzdmagician@gmail.com");
             $mail->addCC("shizukura06@gmail.com");
-            $mail->Subject = "Welcome to KLD Event " .$add_std_firstname;
+            $mail->Subject = "Welcome to KLD Event " . $add_std_firstname;
             $msg = '
                 <html>
                     <body>
-                    <br><br>Good day '.$add_std_firstname.",<br><br>".
-                    "You are reading this to notify you that we successfully added you to KLD Event.
+                    <br><br>Good day ' . $add_std_firstname . ",<br><br>" .
+                "You are reading this to notify you that we successfully added you to KLD Event.
                     <br><br>Below is the link to activate your account and create password.<br><br><br><br>
                     <center>
                         <a style=
@@ -72,7 +72,7 @@ if (!array_key_exists('ajax', $_POST)) {
             //$mail->Body    = '';
             $mail->Body = $msg;
 
-            if($mail->Send()){
+            if ($mail->Send()) {
                 $query_param = " (  std_kld_id,
                                     std_kld_email,
                                     std_fname,
@@ -84,68 +84,65 @@ if (!array_key_exists('ajax', $_POST)) {
                                     std_profilepic,
                                     std_activation_key) ";
                 $query_param .= "   values (
-                                    '".$add_std_kldnum."',
-                                    '".$add_std_email."',
-                                    '".$add_std_firstname."',
-                                    '".$add_std_lastname."',
-                                    '".$add_std_yearlvl."',
-                                    '".$add_std_course."',
-                                    '".$add_std_section."',
+                                    '" . $add_std_kldnum . "',
+                                    '" . $add_std_email . "',
+                                    '" . $add_std_firstname . "',
+                                    '" . $add_std_lastname . "',
+                                    '" . $add_std_yearlvl . "',
+                                    '" . $add_std_course . "',
+                                    '" . $add_std_section . "',
                                     'inactive',
-                                    '".$add_std_profilepic."',
-                                    '".$activation_key."') ";
+                                    '" . $add_std_profilepic . "',
+                                    '" . $activation_key . "') ";
 
-                $try = mysqli_query($conn,"Insert into std_acc". $query_param);
-                if($try) {
+                $try = mysqli_query($conn, "Insert into std_acc" . $query_param);
+                if ($try) {
                     echo "success";
-                }
-                else {
+                } else {
                     echo "error";
                 }
-
-            }
-            else{
+            } else {
                 echo "failed";
             }
 
             break;
         case "add_org_user":
-                $add_org_profilepic = base64_decode($_POST['add_org_profilepic']);
-                $add_org_fname = $_POST['add_org_fname'];
-                $add_org_lname = $_POST['add_org_lname'];
-                $add_org_role = $_POST['add_org_role'];
-                $add_org_organization = $_POST['add_org_organization'];
-                $add_org_kldid = $_POST['add_org_kldid'];
-                $add_org_email = $_POST['add_org_email']. "@kld.edu.ph";
-                $activation_key = base64_encode(generateRandomString());
-    
-                require_once 'assets/mail/src/Exception.php';
-                require_once 'assets/mail/src/SMTP.php';
-                require_once 'assets/mail/src/PHPMailer.php';
-    
-                $mail = new PHPMailer();
-                //$mail->SMTPDebug = 4;
-                $mail->IsSMTP();
-                $mail->SMTPAuth = true;
-                $mail->IsHTML(true);
-                $mail->Host = 'smtp.hostinger.com';
-                $mail->Port = 587;
-                //$mail->Port = 465;
-                $mail->SMTPSecure = "TLS";
-                $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=".$activation_key;
-    
-                $mail->Username = 'steven.dale@lucero.cloud';
-                $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
-                $mail->setFrom ('noreply@lucero.cloud','KLD noreply');
-                $mail->addAddress($add_org_email);
-                $mail->addCC("denzdmagician@gmail.com");
-                $mail->addCC("shizukura06@gmail.com");
-                $mail->Subject = "Welcome to KLD Event, " .$add_org_fname;
-                $msg = '
+            $add_org_profilepic = base64_decode($_POST['add_org_profilepic']);
+            $add_org_fname = $_POST['add_org_fname'];
+            $add_org_lname = $_POST['add_org_lname'];
+            $add_org_role = $_POST['add_org_role'];
+            $add_org_organization = $_POST['add_org_organization'];
+            $add_org_kldid = $_POST['add_org_kldid'];
+            $add_org_email = $_POST['add_org_email'] . "@kld.edu.ph";
+            $activation_key = base64_encode(generateRandomString());
+
+            require_once 'assets/mail/src/Exception.php';
+            require_once 'assets/mail/src/SMTP.php';
+            require_once 'assets/mail/src/PHPMailer.php';
+
+            $mail = new PHPMailer();
+            //$mail->SMTPDebug = 4;
+            $mail->IsSMTP();
+            $mail->SMTPAuth = true;
+            $mail->IsHTML(true);
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->Port = 587;
+            //$mail->Port = 465;
+            $mail->SMTPSecure = "TLS";
+            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key;
+
+            $mail->Username = 'steven.dale@lucero.cloud';
+            $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
+            $mail->setFrom('noreply@lucero.cloud', 'KLD noreply');
+            $mail->addAddress($add_org_email);
+            $mail->addCC("denzdmagician@gmail.com");
+            $mail->addCC("shizukura06@gmail.com");
+            $mail->Subject = "Welcome to KLD Event, " . $add_org_fname;
+            $msg = '
                     <html>
                         <body>
-                        <br><br>Good day '.$add_org_fname.",<br><br>".
-                        "You are reading this to notify you that we successfully added you to KLD Event as an organizer.
+                        <br><br>Good day ' . $add_org_fname . ",<br><br>" .
+                "You are reading this to notify you that we successfully added you to KLD Event as an organizer.
                         <br><br>Below is the link to activate your account and create password.<br><br><br><br>
                         <center>
                             <a style=
@@ -164,11 +161,11 @@ if (!array_key_exists('ajax', $_POST)) {
                         <br>
                         </body>
                     </html>";
-                //$mail->Body    = '';
-                $mail->Body = $msg;
-    
-                if($mail->Send()){
-                    $query_param = " (
+            //$mail->Body    = '';
+            $mail->Body = $msg;
+
+            if ($mail->Send()) {
+                $query_param = " (
                                         org_email,
                                         org_fname,
                                         org_lname,
@@ -178,67 +175,63 @@ if (!array_key_exists('ajax', $_POST)) {
                                         status,
                                         org_profile,
                                         org_activation_key) ";
-                    $query_param .= "   values (
-                                        '".$add_org_email."',
-                                        '".$add_org_fname."',
-                                        '".$add_org_lname."',
-                                        '".$add_org_role."',
-                                        '".$add_org_organization."',
-                                        '".$add_org_kldid."',
+                $query_param .= "   values (
+                                        '" . $add_org_email . "',
+                                        '" . $add_org_fname . "',
+                                        '" . $add_org_lname . "',
+                                        '" . $add_org_role . "',
+                                        '" . $add_org_organization . "',
+                                        '" . $add_org_kldid . "',
                                         'NEW',
-                                        '".$add_org_profilepic."',
-                                        '".$activation_key."') ";
-    
-                    $try = mysqli_query($conn,"Insert into org_acc". $query_param);
-                    if($try) {
-                        echo "success";
-                    }
-                    else {
-                        echo "error";
-                    }
-    
+                                        '" . $add_org_profilepic . "',
+                                        '" . $activation_key . "') ";
+
+                $try = mysqli_query($conn, "Insert into org_acc" . $query_param);
+                if ($try) {
+                    echo "success";
+                } else {
+                    echo "error";
                 }
-                else{
-                    echo "failed";
-                }
-    
-                break;
+            } else {
+                echo "failed";
+            }
+
+            break;
         case "add_std_info":
             $kld_signup_fname = $_POST['kld_signup_fname'];
             $kld_signup_lname = $_POST['kld_signup_lname'];
             $kld_username = $_POST['kld_username'];
             $kld_password = $_POST['kld_password'];
-            $query_param = " set std_fname = '".$kld_signup_fname."', ";
-            $query_param .= " std_lname = '".$kld_signup_lname."', ";
-            $query_param .= " std_uname = '".$kld_username."', ";
-            $query_param .= " std_pass = '".$kld_password."', ";
+            $query_param = " set std_fname = '" . $kld_signup_fname . "', ";
+            $query_param .= " std_lname = '" . $kld_signup_lname . "', ";
+            $query_param .= " std_uname = '" . $kld_username . "', ";
+            $query_param .= " std_pass = '" . $kld_password . "', ";
             $query_param .= " std_activation_key = '' ";
-            $query_param .= " where std_activation_key = '".$_SESSION['activation_key']."' ";
+            $query_param .= " where std_activation_key = '" . $_SESSION['activation_key'] . "' ";
 
 
 
-            $try = mysqli_query($conn,"Update std_acc". $query_param);
-            if($try) {
+            $try = mysqli_query($conn, "Update std_acc" . $query_param);
+            if ($try) {
                 echo "success";
                 session_destroy();
-            }
-            else {
+            } else {
                 echo "error";
             }
             break;
         case "create_account":
-            $username= $_POST['username'];
+            $username = $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
             $firstname = $_POST['firstname'];
             $lastname = $_POST['lastname'];
             $login_type = null;
             $query_param = null;
 
-            switch($_POST['account_type']){
+            switch ($_POST['account_type']) {
                 case "admin":
                     $login_type = " admin_acc ";
                     $query_param = " (admin_uname,admin_pass,admin_fname,admin_lname) ";
-                    $query_param .= " values ('".$username."','".$password."','".$firstname."','".$lastname."') ";
+                    $query_param .= " values ('" . $username . "','" . $password . "','" . $firstname . "','" . $lastname . "') ";
                     break;
                 case "student":
                     $login_type = "std_acc";
@@ -247,35 +240,36 @@ if (!array_key_exists('ajax', $_POST)) {
                     $login_type = "admin_acc";
                     break;
             }
-            
-            $try = mysqli_query($conn,"Insert into ".$login_type . $query_param);
-            if($try) {
+
+            $try = mysqli_query($conn, "Insert into " . $login_type . $query_param);
+            if ($try) {
                 echo "success";
-            }
-            else {
+            } else {
                 echo "error";
             }
             break;
-        case "logging_in":            
-            $username= $_POST['username'];
+        case "logging_in":
+            $username = $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
             $login_type = $_POST['login_type'];
-            switch ($login_type){
+            switch ($login_type) {
                 case "admin":
-                    
-                    $query = "Select * from admin_acc where admin_uname = '".$username."' and admin_pass = '".$password."'";
-                    $try = mysqli_query($conn,$query);
+
+                    $query = "Select * from admin_acc where admin_uname = '" . $username . "' and admin_pass = '" . $password . "'";
+                    $try = mysqli_query($conn, $query);
                     $json = [];
-                    while ($row = $try->fetch_array()){
+                    while ($row = $try->fetch_array()) {
                         echo "success"; //match yung uname at pass
+                        $_SESSION['kld_id'] = $row['admin_id'];
                         $_SESSION['kld_username'] = $row['admin_uname'];
                         $_SESSION['kld_admin_role'] = $row['admin_role'];
+                        $_SESSION['kld_profile'] = $row['admin_profile'];
                         $_SESSION['login_type'] = "Administrator";
                         $_SESSION['kld_fname'] = $row['admin_fname'];
                         $_SESSION['kld_lname'] = $row['admin_lname'];
-                        $_SESSION['kld_email'] = "";
+                        $_SESSION['kld_email'] = $row['admin_email'];
                         $_SESSION['kld_login_expiration'] = true;
-                        return; 
+                        return;
                     }
                     echo "failed";
                     break;
@@ -283,10 +277,10 @@ if (!array_key_exists('ajax', $_POST)) {
                     // wala pang laman, maya konte
                     break;
                 case "org":
-                    $query = "Select * from org_acc where org_uname = '".$username."' and org_pass = '".$password."'";
-                    $try = mysqli_query($conn,$query);
+                    $query = "Select * from org_acc where org_uname = '" . $username . "' and org_pass = '" . $password . "'";
+                    $try = mysqli_query($conn, $query);
                     $json = [];
-                    while ($row = $try->fetch_array()){
+                    while ($row = $try->fetch_array()) {
                         echo "success"; //match yung uname at pass
                         $_SESSION['kld_username'] = $row['org_uname'];
                         $_SESSION['kld_org_role'] = $row['org_role'];
@@ -295,7 +289,7 @@ if (!array_key_exists('ajax', $_POST)) {
                         $_SESSION['kld_lname'] = $row['org_lname'];
                         $_SESSION['kld_email'] = $row['org_email'];
                         $_SESSION['kld_login_expiration'] = true;
-                        return; 
+                        return;
                     }
                     echo "failed";
                     break;
@@ -309,68 +303,218 @@ if (!array_key_exists('ajax', $_POST)) {
             unset($_COOKIE['kld_login_expiration']);
             session_destroy();
             header('location:/login.php');
-        break;
+            break;
         case "add_event":
+            $eventType = $_POST['eventType'];
             $venue_id = $_POST['venue_id'];
             $event_start_date = date('Y-m-d H:i:s', strtotime($_POST['event_start_date']));
             $event_end_date = date('Y-m-d H:i:s', strtotime($_POST['event_end_date']));
+            $event_cap = $_POST['capacity']; // Capture the event capacity
             $event_title = $_POST['event_title'];
             $event_description = $_POST['event_description'];
             $event_category = $_POST['event_category'];
-            $event_organizer = $_POST['event_organizer'];
+            $event_organization = $_POST['event_organization'];
             $event_poster = $_POST['event_poster'];
 
-
+            // Insert into kld_event
             $try = mysqli_query(
                 $conn,
-                "Insert into kld_event
-                       ( 
-                            venue_id,
-                            event_start_date,
-                            event_end_date,
-                            event_title,
-                            category_id,
-                            event_desc,
-                            event_org_id,
-                            event_poster
-                        )
-                        values
+                "INSERT INTO kld_event
+                        (event_type, 
+                        venue_id, 
+                        event_start_date, 
+                        event_end_date, 
+                        event_cap,  
+                        event_title, 
+                        category_id, 
+                        event_desc, 
+                        event_org_id, 
+                        event_poster,
+                        status)
+                    VALUES
                         (
-                            '".$venue_id."',
-                            '".$event_start_date."',
-                            '".$event_end_date."',
-                            '".$event_title."',
-                            '".$event_category."',
-                            '".$event_description."',
-                            '".$event_organizer."',
-                            '".$event_poster."'
-                        )
-            ");
-            if($try) {
-                echo 1;
+                            '" . $eventType . "',
+                            '" . $venue_id . "',
+                            '" . $event_start_date . "',
+                            '" . $event_end_date . "',
+                            '" . $event_cap . "',  
+                            '" . $event_title . "',
+                            '" . $event_category . "',
+                            '" . $event_description . "',
+                            '" . $event_organization . "',
+                            '" . $event_poster . "',
+                            'pending'
+                        )"
+            );
+
+            if ($try) {
+                // Get the last inserted event_id
+                $event_id = mysqli_insert_id($conn);
+                $proposal_letter = $_POST['proposal_letter'];
+
+                // Decode admin and organizer arrays
+                $event_admins = json_decode($_POST['event_admins'], true) ?? []; // Use null coalescing
+                $event_organizers = json_decode($_POST['event_organizers'], true) ?? []; // Use null coalescing
+
+                // Insert stakeholders (admins)
+                foreach ($event_admins as $admin_id) {
+                    $insert_stakeholder = "INSERT INTO stakeholder_tbl (event_id, admin_id, status) VALUES ('$event_id', '$admin_id', 'pending')";
+                    if (!mysqli_query($conn, $insert_stakeholder)) {
+                        error_log("Error inserting admin stakeholder: " . mysqli_error($conn));
+                    }
+                }
+
+                // Insert stakeholders (organizers)
+                foreach ($event_organizers as $org_acc_id) {
+                    $insert_stakeholder = "INSERT INTO stakeholder_tbl (event_id, org_acc_id, status) VALUES ('$event_id', '$org_acc_id', 'pending')";
+                    if (!mysqli_query($conn, $insert_stakeholder)) {
+                        error_log("Error inserting organizer stakeholder: " . mysqli_error($conn));
+                    }
+                }
+
+                // Handle inserting attendees into the event_invitation table
+                $attendees = [
+                    'course_ids' => json_decode($_POST['course_ids'], true),
+                    'yearlvl_ids' => json_decode($_POST['yearlvl_ids'], true),
+                    'section_ids' => json_decode($_POST['section_ids'], true),
+                    'org_ids' => json_decode($_POST['org_ids'], true)
+                ];
+
+                // Use null coalescing operator to handle potential null values
+                foreach ($attendees['course_ids'] ?? [] as $course_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, course_id) VALUES ('$event_id', '$course_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['yearlvl_ids'] ?? [] as $yearlvl_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, yearlvl_id) VALUES ('$event_id', '$yearlvl_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['section_ids'] ?? [] as $section_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, section_id) VALUES ('$event_id', '$section_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['org_ids'] ?? [] as $org_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, org_id) VALUES ('$event_id', '$org_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                // Insert the proposal letter
+                $insert_letter = "INSERT INTO letter_tbl (event_id, letter_content) VALUES ('$event_id', '$proposal_letter')";
+                if (mysqli_query($conn, $insert_letter)) {
+                    // Successfully inserted letter
+                } else {
+                    error_log("Error inserting letter: " . mysqli_error($conn));
+                }
+
+                // Return success response with event_id
+                echo json_encode([
+                    "status" => "success",
+                    "event_id" => $event_id // Send the event ID back to the client
+                ]);
+            } else {
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Failed to add event. Reason: " . mysqli_error($conn)
+                ]);
             }
-            else {
-                echo 2;
-            }
+
             break;
+
+        case "admin_approve":
+            // Include database connection
+            include('control/db.php');
+
+            // Check if the session variable exists
+            if (!isset($_SESSION['kld_id'])) {
+                echo json_encode(['status' => 'error', 'message' => 'Admin ID not found in session.']);
+                exit;
+            }
+
+            // Get the admin_id from the session
+            $admin_id = $_SESSION['kld_id'];
+
+            // Prepare the SQL query to update the status in stakeholder_tbl
+            $query = "UPDATE stakeholder_tbl SET status = 'approved' WHERE admin_id = ?";
+
+            // Prepare the statement
+            if ($stmt = $conn->prepare($query)) {
+                // Bind the admin_id parameter to the query
+                $stmt->bind_param("i", $admin_id);
+
+                // Execute the statement and check if it was successful
+                if ($stmt->execute()) {
+                    // Check if any rows were affected
+                    if ($stmt->affected_rows > 0) {
+                        echo json_encode(['status' => 'success', 'message' => 'Status updated successfully.']);
+                    } else {
+                        echo json_encode(['status' => 'warning', 'message' => 'No records were updated.']);
+                    }
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error updating status: ' . $stmt->error]);
+                }
+
+                // Close the statement
+                $stmt->close();
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error preparing statement: ' . $conn->error]);
+            }
+
+            // Close the database connection
+            $conn->close();
+            break;
+
+
+
+
+
+        case "venue_name":
+            ob_start(); // Start output buffering to prevent unwanted output
+
+            if (array_key_exists('ajax', $_POST)) {
+                switch ($_POST['ajax']) {
+                    case "venue_name":
+                        if (isset($_POST['venue_id'])) {
+                            $venue_id = $_POST['venue_id'];
+                            $result = mysqli_query($conn, "SELECT event_start_date FROM kld_event WHERE venue_id = '$venue_id'");
+
+                            $dates = [];
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $dates[] = date('m/d/Y', strtotime($row['event_start_date']));  // Format date as MM/DD/YYYY
+                            }
+
+                            ob_clean(); // Clean buffer before outputting JSON
+                            echo json_encode($dates);  // Send JSON-encoded array
+                        }
+                        break;
+                }
+            }
+
+            ob_end_flush(); // End buffering and send the output
+            break;
+
+
+
         case "add_event_check_sections":
-            $selectedPrograms = explode(",",base64_decode($_POST['selectedPrograms']));
-            $selectedYearLevels = explode(",",base64_decode($_POST['selectedYearLevels']));
-            $query = "Select * from section_tbl where course_id in (".implode(",",$selectedPrograms).")";
-            $query .= " and yearlvl in (".implode(",",$selectedYearLevels).")";
+            $selectedPrograms = explode(",", base64_decode($_POST['selectedPrograms']));
+            $selectedYearLevels = explode(",", base64_decode($_POST['selectedYearLevels']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $selectedPrograms) . ")";
+            $query .= " and yearlvl in (" . implode(",", $selectedYearLevels) . ")";
 
             $try = mysqli_query($conn, $query);
-            while ($row = $try->fetch_array()){
+            while ($row = $try->fetch_array()) {
                 $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
                 echo $result;
             }
-            if($try) {
+            if ($try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
             break;
+
         case "add_cat":
             $add_cat_category = $_POST['add_cat_category'];
             $add_cat_description = $_POST['add_cat_description'];
@@ -385,14 +529,14 @@ if (!array_key_exists('ajax', $_POST)) {
                         )
                         values
                         (
-                            '".$add_cat_category."',
-                            '".$add_cat_description."'
+                            '" . $add_cat_category . "',
+                            '" . $add_cat_description . "'
                         )
-            ");
-            if($try) {
+            "
+            );
+            if ($try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
             break;
@@ -410,14 +554,14 @@ if (!array_key_exists('ajax', $_POST)) {
                         )
                         values
                         (
-                            '".$add_venue."',
-                            '".$add_venue_description."'
+                            '" . $add_venue . "',
+                            '" . $add_venue_description . "'
                         )
-            ");
-            if($try) {
+            "
+            );
+            if ($try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
             break;
@@ -425,9 +569,10 @@ if (!array_key_exists('ajax', $_POST)) {
             $try = mysqli_query(
                 $conn,
                 "Select * from kld_event
-            ");
+            "
+            );
             $json = [];
-            while ($row = $try->fetch_array()){
+            while ($row = $try->fetch_array()) {
                 $temp_obj = new stdClass();
                 $temp_obj->title = $row['event_title'];
                 $temp_obj->start = $row['event_start_date'];
@@ -445,9 +590,10 @@ if (!array_key_exists('ajax', $_POST)) {
             $try = mysqli_query(
                 $conn,
                 "Select * from kld_event
-            ");
+            "
+            );
             $json = [];
-            while ($row = $try->fetch_array()){
+            while ($row = $try->fetch_array()) {
                 $temp_obj = new stdClass();
                 $temp_obj->title = $row['event_title'];
                 $temp_obj->start = $row['event_start_date'];
@@ -465,12 +611,12 @@ if (!array_key_exists('ajax', $_POST)) {
             $org_acc_id = $_POST['org_acc_id'];
             $try = mysqli_query(
                 $conn,
-                "Update org_acc set status = 'INACTIVE' where org_acc_id = '".$org_acc_id."'
-            ");
-            if($try) {
+                "Update org_acc set status = 'INACTIVE' where org_acc_id = '" . $org_acc_id . "'
+            "
+            );
+            if ($try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
 
@@ -493,18 +639,18 @@ if (!array_key_exists('ajax', $_POST)) {
             $a6 = (trim($_POST['a6']) == "false" ? "1" : "0");
             $a7 = (trim($_POST['a7']) == "false" ? "1" : "0");
             $a8 = (trim($_POST['a8']) == "false" ? "1" : "0");
-            $a  = str_replace("'","\'",$_POST['a']);
-            $b  = str_replace("'","\'",$_POST['b']);
-            $c  = str_replace("'","\'",$_POST['c']);
-            $d  = str_replace("'","\'",$_POST['d']);
-            $e  = str_replace("'","\'",$_POST['e']);
-            $f  = str_replace("'","\'",$_POST['f']);
-            $g  = str_replace("'","\'",$_POST['g']);
-            $h  = str_replace("'","\'",$_POST['h']);
-            $i  = str_replace("'","\'",$_POST['i']);
-            $j  = str_replace("'","\'",$_POST['j']);
-            $k  = str_replace("'","\'",$_POST['k']);
-            $l  = str_replace("'","\'",$_POST['l']);
+            $a  = str_replace("'", "\'", $_POST['a']);
+            $b  = str_replace("'", "\'", $_POST['b']);
+            $c  = str_replace("'", "\'", $_POST['c']);
+            $d  = str_replace("'", "\'", $_POST['d']);
+            $e  = str_replace("'", "\'", $_POST['e']);
+            $f  = str_replace("'", "\'", $_POST['f']);
+            $g  = str_replace("'", "\'", $_POST['g']);
+            $h  = str_replace("'", "\'", $_POST['h']);
+            $i  = str_replace("'", "\'", $_POST['i']);
+            $j  = str_replace("'", "\'", $_POST['j']);
+            $k  = str_replace("'", "\'", $_POST['k']);
+            $l  = str_replace("'", "\'", $_POST['l']);
             $a9  = (trim($_POST['a9']) == "false" ? "1" : "0");
             $a10 = (trim($_POST['a10']) == "false" ? "1" : "0");
             $a11 = (trim($_POST['a11']) == "false" ? "1" : "0");
@@ -519,12 +665,11 @@ if (!array_key_exists('ajax', $_POST)) {
             $qb1 = trim($_POST['qb1']);
             $adaname2 = $_POST['adaname2'];
 
-            $try = mysqli_query($conn,"Insert Into Hlogs (`name`,  street, brgy,   city,  dept,  temp, sex,  age, blood, a, b, c, d, e, r2, r3, r4, r5, r6, r7, a5, b5, c5, d5, e5, f5, g5, h5, i5, j5, k5, l5,  adaname, `date`, a1, b1, adaname2, version) values ('$name2', '$addr', '$brgy', '$city', '$dep',  '$temp', '$sex', '$age', '$bloodtype', '$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a', '$b', '$c', '$d', '$e', '$f', '$g', '$h', '$i', '$j', '$k', '$l', '$adaname', '$date2', '$qa1', '$qb1', '$adaname2', '4.0')");
+            $try = mysqli_query($conn, "Insert Into Hlogs (`name`,  street, brgy,   city,  dept,  temp, sex,  age, blood, a, b, c, d, e, r2, r3, r4, r5, r6, r7, a5, b5, c5, d5, e5, f5, g5, h5, i5, j5, k5, l5,  adaname, `date`, a1, b1, adaname2, version) values ('$name2', '$addr', '$brgy', '$city', '$dep',  '$temp', '$sex', '$age', '$bloodtype', '$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a', '$b', '$c', '$d', '$e', '$f', '$g', '$h', '$i', '$j', '$k', '$l', '$adaname', '$date2', '$qa1', '$qb1', '$adaname2', '4.0')");
 
-            if(!$try) {
+            if (!$try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
 
@@ -548,18 +693,18 @@ if (!array_key_exists('ajax', $_POST)) {
             $a6 = (trim($_POST['a6']) == "false" ? "1" : "0");
             $a7 = (trim($_POST['a7']) == "false" ? "1" : "0");
             $a8 = (trim($_POST['a8']) == "false" ? "1" : "0");
-            $a  = str_replace("'","\'",$_POST['a']);
-            $b  = str_replace("'","\'",$_POST['b']);
-            $c  = str_replace("'","\'",$_POST['c']);
-            $d  = str_replace("'","\'",$_POST['d']);
-            $e  = str_replace("'","\'",$_POST['e']);
-            $f  = str_replace("'","\'",$_POST['f']);
-            $g  = str_replace("'","\'",$_POST['g']);
-            $h  = str_replace("'","\'",$_POST['h']);
-            $i  = str_replace("'","\'",$_POST['i']);
-            $j  = str_replace("'","\'",$_POST['j']);
-            $k  = str_replace("'","\'",$_POST['k']);
-            $l  = str_replace("'","\'",$_POST['l']);
+            $a  = str_replace("'", "\'", $_POST['a']);
+            $b  = str_replace("'", "\'", $_POST['b']);
+            $c  = str_replace("'", "\'", $_POST['c']);
+            $d  = str_replace("'", "\'", $_POST['d']);
+            $e  = str_replace("'", "\'", $_POST['e']);
+            $f  = str_replace("'", "\'", $_POST['f']);
+            $g  = str_replace("'", "\'", $_POST['g']);
+            $h  = str_replace("'", "\'", $_POST['h']);
+            $i  = str_replace("'", "\'", $_POST['i']);
+            $j  = str_replace("'", "\'", $_POST['j']);
+            $k  = str_replace("'", "\'", $_POST['k']);
+            $l  = str_replace("'", "\'", $_POST['l']);
             $a9  = (trim($_POST['a9']) == "false" ? "1" : "0");
             $a10 = (trim($_POST['a10']) == "false" ? "1" : "0");
             $a11 = (trim($_POST['a11']) == "false" ? "1" : "0");
@@ -573,55 +718,53 @@ if (!array_key_exists('ajax', $_POST)) {
             $qb1 = trim($_POST['qb1']);
             $adaname2 = $_POST['adaname2'];
 
-            $try = mysqli_query($conn,"Insert Into Hlogs (`name`,  street, brgy,   city,  dept,  temp, sex,  age, blood, a, b, c, d, e, r2, r3, r4, r5, r6, r7, a5, b5, c5, d5, e5, f5, g5, h5, i5, j5, k5, l5,  adaname, `date`, a1, b1, adaname2, version) values ('$name2', '$addr', '$brgy', '$city', '$dep',  '$temp', '$sex', '$age', '$bloodtype', '$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a', '$b', '$c', '$d', '$e', '$f', '$g', '$h', '$i', '$j', '$k', '$l', '$adaname', '$date2', '$qa1', '$qb1', '$adaname2', '4.0')");
+            $try = mysqli_query($conn, "Insert Into Hlogs (`name`,  street, brgy,   city,  dept,  temp, sex,  age, blood, a, b, c, d, e, r2, r3, r4, r5, r6, r7, a5, b5, c5, d5, e5, f5, g5, h5, i5, j5, k5, l5,  adaname, `date`, a1, b1, adaname2, version) values ('$name2', '$addr', '$brgy', '$city', '$dep',  '$temp', '$sex', '$age', '$bloodtype', '$a1', '$a2', '$a3', '$a4', '$a5', '$a6', '$a7', '$a8', '$a9', '$a10', '$a11', '$a', '$b', '$c', '$d', '$e', '$f', '$g', '$h', '$i', '$j', '$k', '$l', '$adaname', '$date2', '$qa1', '$qb1', '$adaname2', '4.0')");
 
-            if(!$try) {
+            if (!$try) {
                 echo 1;
-            }
-            else {
+            } else {
                 echo 2;
             }
 
             break;
         case 5:
-            $html = base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode($_POST['html'])))))))). ';';
-            $names = base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode($_POST['names'])))))))). ';';
+            $html = base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode($_POST['html'])))))))) . ';';
+            $names = base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode(base64_decode($_POST['names'])))))))) . ';';
             $a = explode(';', $html);
             $b = array_keys($a);
             $c = explode(';', $names);
 
             date_default_timezone_set('Asia/Manila');
             $zip = new ZipArchive;
-            $file = 'Health_Checklist_'.date('Y-m-d_gis').'.zip';
-            $newfile = __DIR__.'/temp/'.$file;
+            $file = 'Health_Checklist_' . date('Y-m-d_gis') . '.zip';
+            $newfile = __DIR__ . '/temp/' . $file;
             echo $newfile;
 
             if ($zip->open($newfile, ZipArchive::CREATE) === TRUE) {
                 for ($i = 0; $i <= end($b) - 1; $i++) {
-                    $zip->addFromString($a[$i],$c[$i]);
+                    $zip->addFromString($a[$i], $c[$i]);
                 }
                 $zip->close();
                 $file = ("temp/$file");
-                $filetype=filetype($file);
-                $filename=basename($file);
-                header ("Content-Type: ".$filetype);
-                header ("Content-Length: ".filesize($file));
-                header ("Content-Disposition: attachment; filename=".$filename);
+                $filetype = filetype($file);
+                $filename = basename($file);
+                header("Content-Type: " . $filetype);
+                header("Content-Length: " . filesize($file));
+                header("Content-Disposition: attachment; filename=" . $filename);
                 readfile($file);
-            }
-            else{
-                die ("An error occurred creating your ZIP file.");
+            } else {
+                die("An error occurred creating your ZIP file.");
             }
 
 
             break;
 
         default:
-
     }
     //unset($_SESSION['ajax']);
 }
-function generateRandomString($length = 20) {
+function generateRandomString($length = 20)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+[]{}|;:,.<>?';
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {

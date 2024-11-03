@@ -2,152 +2,153 @@
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
 
 
-    <!--begin::Entry-->
-    <div class="d-flex flex-column-fluid">
-        <!--begin::Container-->
-        <div class=" container ">
+	<!--begin::Entry-->
+	<div class="d-flex flex-column-fluid">
+		<!--begin::Container-->
+		<div class=" container ">
 
-        
-                        <div class="card card-custom gutter-b">
-									<!--begin::Header-->
-									<div class="card-header border-0 py-5">
-										<h3 class="card-title align-items-start flex-column">
-											<span class="card-label font-weight-bolder text-dark">All Organization Users</span>
-											<span class="text-muted mt-3 font-weight-bold font-size-sm">Kolehiyo ng Lungsod ng Dasmariñas</span>
-										</h3>
 
-                                        
-										<div class="card-toolbar">
-													<div class="dropdown dropdown-inline pr-5">
-														<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</a>
-														<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-															<!--begin::Navigation-->
-															<ul class="navi navi-hover">
-																<li class="navi-header pb-1">
-																	<span class="text-primary text-uppercase font-weight-bold font-size-sm">Filter</span>
-																</li>
-																<li class="navi-item">
-																	<a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-shopping-cart-1"></i>
-																		</span>
-																		<span class="navi-text">Roles</span>
-																	</a>
-																</li>
-																<li class="navi-item">
-																	<a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-calendar-8"></i>
-																		</span>
-																		<span class="navi-text">Status</span>
-																	</a>
-																</li>
-																<li class="navi-item">
-																	<a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-graph-1"></i>
-																		</span>
-																		<span class="navi-text">Organization</span>
-																	</a>
-																</li>
-																<li class="navi-item">
-																	<a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-rocket-1"></i>
-																		</span>
-																		<span class="navi-text">Edit</span>
-																	</a>
-																</li>
-																<li class="navi-item">
-																	<a href="#" class="navi-link">
-																		<span class="navi-icon">
-																			<i class="flaticon2-writing"></i>
-																		</span>
-																		<span class="navi-text">Archive</span>
-																	</a>
-																</li>
-															</ul>
-															<!--end::Navigation-->
-														</div>
-													</div>
-												
-											<a href="?page=add-org-user" class="btn btn-success font-weight-bolder font-size-sm">
-											<span class="svg-icon svg-icon-md svg-icon-white">
-												<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<polygon points="0 0 24 0 24 24 0 24" />
-														<path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-														<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
-													</g>
-												</svg>
-												<!--end::Svg Icon-->
-											</span>Add New Member</a>
-                                            
-										</div>
-									</div>
-									<!--end::Header-->
-									<!--begin::Body-->
-									<div class="card-body py-0">
-										<!--begin::Table-->
-										<div class="table-responsive">
-											<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
-												<thead>
-													<tr class="text-left">
-														<th class="pl-0" style="width: 20px">
-															<label class="checkbox checkbox-lg checkbox-inline">
-																<input type="checkbox" value="1" />
-																<span></span>
-															</label>
-														</th>
-														<th class="pr-0" style="width: 50px">Users</th>
-														<th style="min-width: 200px"></th>
-														<th style="min-width: 150px">Email</th>
-														<th style="min-width: 150px">Organization</th>
-														<th style="min-width: 150px">Status</th>
-														<th class="pr-0 text-right" style="min-width: 150px">Action</th>
-													</tr>
-												</thead>
-                                                <?php
-                                                    include('./control/db.php');
-                                                    $try = mysqli_query($conn, 
-                                                        "Select * from org_acc  
+			<div class="card card-custom gutter-b">
+				<!--begin::Header-->
+				<div class="card-header border-0 py-5">
+					<h3 class="card-title align-items-start flex-column">
+						<span class="card-label font-weight-bolder text-dark">All Organization Users</span>
+						<span class="text-muted mt-3 font-weight-bold font-size-sm">Kolehiyo ng Lungsod ng Dasmariñas</span>
+					</h3>
+
+
+					<div class="card-toolbar">
+						<div class="dropdown dropdown-inline pr-5">
+							<a href="#" class="btn btn-light-primary btn-sm font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</a>
+							<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+								<!--begin::Navigation-->
+								<ul class="navi navi-hover">
+									<li class="navi-header pb-1">
+										<span class="text-primary text-uppercase font-weight-bold font-size-sm">Filter</span>
+									</li>
+									<li class="navi-item">
+										<a href="#" class="navi-link">
+											<span class="navi-icon">
+												<i class="flaticon2-shopping-cart-1"></i>
+											</span>
+											<span class="navi-text">Roles</span>
+										</a>
+									</li>
+									<li class="navi-item">
+										<a href="#" class="navi-link">
+											<span class="navi-icon">
+												<i class="flaticon2-calendar-8"></i>
+											</span>
+											<span class="navi-text">Status</span>
+										</a>
+									</li>
+									<li class="navi-item">
+										<a href="#" class="navi-link">
+											<span class="navi-icon">
+												<i class="flaticon2-graph-1"></i>
+											</span>
+											<span class="navi-text">Organization</span>
+										</a>
+									</li>
+									<li class="navi-item">
+										<a href="#" class="navi-link">
+											<span class="navi-icon">
+												<i class="flaticon2-rocket-1"></i>
+											</span>
+											<span class="navi-text">Edit</span>
+										</a>
+									</li>
+									<li class="navi-item">
+										<a href="#" class="navi-link">
+											<span class="navi-icon">
+												<i class="flaticon2-writing"></i>
+											</span>
+											<span class="navi-text">Archive</span>
+										</a>
+									</li>
+								</ul>
+								<!--end::Navigation-->
+							</div>
+						</div>
+
+						<a href="?page=add-org-user" class="btn btn-success font-weight-bolder font-size-sm">
+							<span class="svg-icon svg-icon-md svg-icon-white">
+								<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24" />
+										<path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+										<path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+									</g>
+								</svg>
+								<!--end::Svg Icon-->
+							</span>Add New Member</a>
+
+					</div>
+				</div>
+				<!--end::Header-->
+				<!--begin::Body-->
+				<div class="card-body py-0">
+					<!--begin::Table-->
+					<div class="table-responsive">
+						<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+							<thead>
+								<tr class="text-left">
+									<th class="pl-0" style="width: 20px">
+										<label class="checkbox checkbox-lg checkbox-inline">
+											<input type="checkbox" value="1" />
+											<span></span>
+										</label>
+									</th>
+									<th class="pr-0" style="width: 64px">Users</th>
+									<th style="min-width: 200px"></th>
+									<th style="min-width: 150px">Email</th>
+									<th style="min-width: 150px">Organization</th>
+									<th style="min-width: 150px">Status</th>
+									<th class="pr-0 text-right" style="min-width: 150px">Action</th>
+								</tr>
+							</thead>
+							<?php
+							include('./control/db.php');
+							$try = mysqli_query(
+								$conn,
+								"Select * from org_acc  
                                                         left join org_tbl
                                                         on org_acc.org_id = org_tbl.org_id
-                                                        where org_acc.status != 'INACTIVE' ");
-                                                    while($row = $try->fetch_array()){
-                                                        echo '
+                                                        where org_acc.status != 'INACTIVE' "
+							);
+							while ($row = $try->fetch_array()) {
+								echo '
 												<tbody>
 													<tr>
 														<td class="pl-0">
 															<label class="checkbox checkbox-lg checkbox-inline">
-																<input type="checkbox" value="'.$row['org_acc_id'].'" />
+																<input type="checkbox" value="' . $row['org_acc_id'] . '" />
 																<span></span>
 															</label>
 														</td>
 														<td class="pr-0">
-															<div class="symbol symbol-50 symbol-light mt-1">
-																<span class="symbol-label">
-																	<img src="'.( $row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg').'" class="h-75 align-self-end" alt="" />
-																</span>
+															<div class="symbol symbol-40 symbol-sm flex-shrink-0">
+															 	<img src="' . ($row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt="" />
+																
 															</div>
 														</td>
 														<td class="pl-0">
-															<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">'.$row['org_fname'].' '.$row['org_lname'].'</a>
-															<span class="text-muted font-weight-bold text-muted d-block">'.$row['org_kld_id'].'</span>
+															<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</a>
+															<span class="text-muted font-weight-bold text-muted d-block">' . $row['org_kld_id'] . '</span>
 														</td>
 														<td>
-															<span class="text-muted font-weight-bold">'.$row['org_email'].'</span>
+															<span class="text-muted font-weight-bold">' . $row['org_email'] . '</span>
 														</td>
 														<td>
-															<span class="text-dark-75 font-weight-bolder d-block font-size-lg">'.$row['org_name'].'</span>
-															<span class="text-muted font-weight-bold">'.$row['org_role'].'</span>
+															<span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['org_name'] . '</span>
+															<span class="text-muted font-weight-bold">' . $row['org_role'] . '</span>
 														</td>
 														<td>
-                                                            <span class="label label-lg label-inline label-'.($row['status'] === "ACTIVE" ? "light-success" : "light-danger").'">'.($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated").'</span>
+                                                            <span class="label label-lg label-inline label-' . ($row['status'] === "ACTIVE" ? "light-success" : "light-danger") . '">' . ($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated") . '</span>
 														</td>
 														<td class="pr-0 text-right">
-															<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+															<a href="?page=overview-organizer&id=' . $row['org_acc_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm">
 																<span class="svg-icon svg-icon-md svg-icon-primary">
 																	<!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -160,7 +161,7 @@
 																	<!--end::Svg Icon-->
 																</span>
 															</a>
-															<a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+															<a href="?page=edit-organizer&id=' . $row['org_acc_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
 																<span class="svg-icon svg-icon-md svg-icon-primary">
 																	<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -190,27 +191,29 @@
 													</tr>
 												</tbody>
                                                 ';
-                    } ?>
-											</table>
-										</div>
-										<!--end::Table-->
-									</div>
-									<!--end::Body-->
-								</div>
-                                 
-            <!--begin::Row-->
-            <div class="row">
-                
-                <?php
-                    include('./control/db.php');
-                    $try = mysqli_query($conn, 
-                        "Select * from org_acc  
+							} ?>
+						</table>
+					</div>
+					<!--end::Table-->
+				</div>
+				<!--end::Body-->
+			</div>
+
+			<!--begin::Row-->
+			<div class="row">
+
+				<?php
+				include('./control/db.php');
+				$try = mysqli_query(
+					$conn,
+					"Select * from org_acc  
                         left join org_tbl
                         on org_acc.org_id = org_tbl.org_id
-                        where org_acc.status != 'INACTIVE' ");
-                    while($row = $try->fetch_array()){
-                        echo '
-                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" id="org_acc_container'.$row['org_acc_id'].'">
+                        where org_acc.status != 'INACTIVE' "
+				);
+				while ($row = $try->fetch_array()) {
+					echo '
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" id="org_acc_container' . $row['org_acc_id'] . '">
                             <div class="card card-custom gutter-b card-stretch">
                                 <div class="card-body pt-4">
                                     <!--begin::Toolbar-->
@@ -224,13 +227,13 @@
                                             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
                                                 <ul class="navi navi-hover py-5">
                                                     <li class="navi-item">
-                                                        <a href="#" onclick="hideOrganizer('.$row['org_acc_id'].')" class="navi-link">
+                                                        <a href="#" onclick="hideOrganizer(' . $row['org_acc_id'] . ')" class="navi-link">
                                                             <span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
                                                             <span class="navi-text">Archive</span>
                                                         </a>
                                                     </li>
                                                     <li class="navi-item">
-                                                        <a href="#" onclick="editOrganizer('.$row['org_acc_id'].')" class="navi-link">
+                                                        <a href="#" onclick="editOrganizer(' . $row['org_acc_id'] . ')" class="navi-link">
                                                             <span class="navi-icon"><i class="flaticon2-gear"></i></span>
                                                             <span class="navi-text">Edit</span>
                                                         </a>
@@ -242,7 +245,7 @@
                                     <div class="d-flex align-items-center mb-7">
                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                <img style="object-fit: cover;" src="'.( $row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg').'" alt="" />
+                                                <img style="object-fit: cover;" src="' . ($row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg') . '" alt="" />
                                             </div>
                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                 <span class="font-size-h3 font-weight-boldest">JM</span>
@@ -252,38 +255,38 @@
                                         <!--begin::Title-->
                                         <div class="d-flex flex-column">
                                             <a href="#"
-                                                class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">'.$row['org_fname'].' '.$row['org_lname'].'</a>
-                                            <span class="text-muted font-weight-bold">'.$row['org_role'].'</span>
+                                                class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</a>
+                                            <span class="text-muted font-weight-bold">' . $row['org_role'] . '</span>
                                         </div>
                                         <!--end::Title-->
                                     </div>
                                     <div class="mb-7">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="text-dark-75 font-weight-bolder mr-2">Organization</span>
-                                            <span class="text-muted font-weight-bold">'.$row['org_name'].'</span>
+                                            <span class="text-muted font-weight-bold">' . $row['org_name'] . '</span>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="text-dark-75 font-weight-bolder mr-2">KLD Email:</span>
-                                            <a href="#" class="text-muted text-hover-primary">'.$row['org_email'].'</a>
+                                            <a href="#" class="text-muted text-hover-primary">' . $row['org_email'] . '</a>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-cente my-1">
                                             <span class="text-dark-75 font-weight-bolder mr-2">KLD ID Number:</span>
-                                            <a href="#" class="text-muted text-hover-primary">'.$row['org_kld_id'].'</a>
+                                            <a href="#" class="text-muted text-hover-primary">' . $row['org_kld_id'] . '</a>
                                         </div>
                                     </div>
                                     <div 
-                                        class="btn btn-block disabled btn-sm btn-'.($row['status'] === "ACTIVE" ? "light-success" : "light-danger").' font-weight-bolder text-uppercase py-4" >'.($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated").'</div>
+                                        class="btn btn-block disabled btn-sm btn-' . ($row['status'] === "ACTIVE" ? "light-success" : "light-danger") . ' font-weight-bolder text-uppercase py-4" >' . ($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated") . '</div>
                                 </div>
                             </div>
                         </div>
                         ';
-                    } ?>
-                <!--end::Col-->
-            </div>
-            <!--end::Row-->
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Entry-->
+				} ?>
+				<!--end::Col-->
+			</div>
+			<!--end::Row-->
+		</div>
+		<!--end::Container-->
+	</div>
+	<!--end::Entry-->
 </div>
 <!--end::Content-->

@@ -1,3 +1,8 @@
+<?php
+// Set custom page title and breadcrumb
+$pageTitle = "Admin"; // Dynamic title for this page
+$breadcrumb = ["Admin", "User"]; // Dynamic breadcrumb for this page
+?>
 <!--begin::Content-->
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -46,7 +51,7 @@
                                     <div class="d-flex align-items-center mb-7">
                                         <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
                                             <div class="symbol symbol-circle symbol-lg-75">
-                                                <img src="assets/media/users/default.jpg" alt="image" />
+                                                <img src="' . (!empty($row['admin_profile']) ? $row['admin_profile'] : 'assets/media/users/default.jpg') . '" alt="image" />
                                             </div>
                                             <div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
                                                 <span class="font-size-h3 font-weight-boldest">JM</span>

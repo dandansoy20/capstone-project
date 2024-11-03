@@ -173,82 +173,59 @@
                                             </div>
                                             <div class="separator separator-dashed my-8"></div>
                                         </div>
-                                    </form>
-                                    <!--end::Form-->
 
-                                    <div id="inPersonForm" style="opacity: 1; transition: opacity 0.5s ease-in-out;">
-                                        <h3 class="mb-10 font-weight-bold text-dark">Select Event Venue</h3>
-                                        <!--begin::Select-->
-                                        <div class="form-group">
-                                            <label>Venue</label>
-                                            <select name="venue_name" id="venue_name" class="form-control form-control-solid form-control-lg">
-                                                <option value="" disabled selected>Select venue</option>
-                                                <?php
-                                                include('./control/db.php');
-                                                $try = mysqli_query($conn, "SELECT * FROM venue_tbl");
-                                                while ($row = $try->fetch_array()) {
-                                                    echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
-                                                }
-                                                ?>
-                                            </select>
+
+                                        <div id="inPersonForm" style="opacity: 1; transition: opacity 0.5s ease-in-out;">
+                                            <h3 class="mb-10 font-weight-bold text-dark">Select Event Venue</h3>
+                                            <!--begin::Select-->
+                                            <div class="form-group">
+                                                <label>Venue</label>
+                                                <select name="venue_name" id="venue_name" value="" class="form-control form-control-solid form-control-lg">
+                                                    <option value="" disabled selected>Select venue</option>
+                                                    <?php
+                                                    include('./control/db.php');
+                                                    $try = mysqli_query($conn, "SELECT * FROM venue_tbl");
+                                                    while ($row = $try->fetch_array()) {
+                                                        echo '<option value="' . $row['venue_id'] . '">' . $row['venue_name'] . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="separator separator-dashed my-8"></div>
                                         </div>
-                                        <div class="separator separator-dashed my-8"></div>
-                                    </div>
 
-                                    <h3 class="mb-10 font-weight-bold text-dark">Set Event Date</h3>
-                                    <label>Select Date</label>
-                                    <div class="form-group row">
-                                        <div class="col-lg-12 col-md-9 col-sm-12">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" placeholder="Start date" name="event_start_date" id="event_start_date" data-target="#kt_datetimepicker_start" />
-                                                        <div class="input-group-append" data-target="#kt_datetimepicker_7_1" data-toggle="datetimepicker">
-                                                            <span class="input-group-text">
-                                                                <i class="ki ki-calendar"></i>
-                                                            </span>
+                                        <h3 class="mb-10 font-weight-bold text-dark">Set Event Date</h3>
+                                        <label>Select Date</label>
+                                        <div class="form-group row">
+                                            <div class="col-lg-12 col-md-9 col-sm-12">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+                                                            <input type="text" class="form-control datetimepicker-input" placeholder="Start date" value="" name="event_start_date" id="event_start_date" data-target="#kt_datetimepicker_start" />
+                                                            <div class="input-group-append" data-target="#kt_datetimepicker_7_1" data-toggle="datetimepicker">
+                                                                <span class="input-group-text">
+                                                                    <i class="ki ki-calendar"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="input-group date" id="kt_datetimepicker_7_2" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" placeholder="End date" name="event_end_date" id="event_end_date" data-target="#kt_datetimepicker_7_1" />
-                                                        <div class="input-group-append" data-target="#kt_datetimepicker_7_2" data-toggle="datetimepicker">
-                                                            <span class="input-group-text">
-                                                                <i class="ki ki-calendar"></i>
-                                                            </span>
+                                                    <div class="col">
+                                                        <div class="input-group date" id="kt_datetimepicker_7_2" data-target-input="nearest">
+                                                            <input type="text" class="form-control datetimepicker-input" placeholder="End date" name="event_end_date" value="" id="event_end_date" data-target="#kt_datetimepicker_7_1" />
+                                                            <div class="input-group-append" data-target="#kt_datetimepicker_7_2" data-toggle="datetimepicker">
+                                                                <span class="input-group-text">
+                                                                    <i class="ki ki-calendar"></i>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                    <!--end::Form-->
 
                                     <script>
-                                        $(document).ready(function() {
-                                            // Function to initialize datetimepicker
-                                            function initializeDateTimePicker(pickerId, disabledDates) {
-                                                $(pickerId).datetimepicker('destroy'); // Destroy existing picker if any
-                                                $(pickerId).datetimepicker({
-                                                    format: 'MM/DD/YYYY HH:mm', // Ensure both date and time formats are consistent
-                                                    disabledDates: disabledDates,
-                                                    useCurrent: false,
-                                                });
-                                            }
-
-                                            // Static disabled dates based on the venue
-                                            let staticDisabledDates = [
-                                                moment("10/02/2024").toDate(), // 2024-10-02
-                                                moment("10/07/2024").toDate(), // 2024-10-07
-                                                moment("10/03/2024").toDate(), // 2024-10-02
-                                                moment("10/08/2024").toDate() // 2024-10-07
-                                            ];
-
-                                            // Initialize datetimepickers with static disabled dates
-                                            initializeDateTimePicker("#kt_datetimepicker_7_1", staticDisabledDates);
-                                            initializeDateTimePicker("#kt_datetimepicker_7_2", staticDisabledDates);
-                                        });
-
                                         // Existing toggleForm function remains unchanged
                                         function toggleForm() {
                                             const inPersonRadio = document.querySelector('input[name="eventType"][value="inPerson"]');
@@ -264,6 +241,7 @@
                                         // Initial call to set the correct form visibility on page load
                                         toggleForm();
                                     </script>
+
                                 </div>
 
 
@@ -276,7 +254,7 @@
                                     <div class="form-group">
                                         <label>Event Title</label>
                                         <input type="text" class="form-control form-control-solid form-control-lg"
-                                            name="event_title" id="event_title" placeholder="Event Details"
+                                            name="event_title" id="event_title" placeholder="Input Title"
                                             value="KLD - " />
                                         <span class="form-text text-muted">Please enter your Event Name.</span>
                                     </div>
@@ -293,7 +271,7 @@
 
                                     <div class="form-group">
                                         <label>Event Host</label>
-                                        <select name="event_org" id="event_organization"
+                                        <select name="event_organization" id="event_organization"
                                             class="form-control form-control-solid form-control-lg">
                                             <option value="" disabled>Select Host</option>
                                             <option value="0">KLD Events</option>
@@ -480,13 +458,13 @@
                                     </div>
                                 </div>
 
-                                <!--begin::Wizard Step 4-->
+                                <!--begin::Wizard Step 5-->
                                 <div class="pb-5" data-wizard-type="step-content">
 
                                     <h4 class="mb-10 font-weight-bold text-dark">Letter Proposal</h4>
                                     <div class="form-group row">
                                         <div class="col-12 pt-4">
-                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1500"
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="1500" name="proposal_letter"
                                                 placeholder="Write your purpose" rows="6"></textarea>
                                             <span class="form-text text-muted">Maximum of 1,500 characters only</span>
                                         </div>
@@ -495,20 +473,21 @@
                                     <?php
                                     if ($_SESSION['login_type'] === "Administrator") {
                                         echo '
-                                        <div class="form-group">
-                                            <div data-repeater-item="" class="form-group row align-items-center">
-                                                <div class="col-md-4">
-                                                    <label>Name:</label>
-                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
-                                                    <div class="d-md-none mb-2"></div>
+                                            <div class="form-group">
+                                                <div data-repeater-item="" class="form-group row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label>Name:</label>
+                                                        <input id="admin" type="text" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
+                                                        <input type="hidden" name="admin_id" id="admin_id" value="' . $_SESSION['kld_id'] . '" /> <!-- Hidden input for admin ID -->
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label>Role:</label>
+                                                        <input type="text" class="form-control" value="' . $_SESSION['kld_admin_role'] . '" disabled />
+                                                        <div class="d-md-none mb-2"></div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <label>Role:</label>
-                                                    <input type="email" class="form-control" value="' . $_SESSION['kld_admin_role'] . '" disabled />
-                                                    <div class="d-md-none mb-2"></div>
-                                                </div>
-                                            </div>
-                                        </div>';
+                                            </div>';
                                     }
                                     ?>
 
@@ -562,13 +541,16 @@
                                                             <option value="" disabled selected>Choose Organizer</option>
                                                             <?php
                                                             // Fetching organizer details including org_name
-                                                            $try = mysqli_query($conn, "SELECT org_acc.org_acc_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_tbl.org_id = org_acc.org_id");
+                                                            $try = mysqli_query($conn, "SELECT org_acc.org_acc_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name 
+                                                                        FROM org_acc 
+                                                                        JOIN org_tbl ON org_tbl.org_id = org_acc.org_id 
+                                                                        WHERE org_role = 'Event Manager'");
                                                             while ($row = $try->fetch_array()) {
                                                                 echo '<option value="' . $row['org_acc_id'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
                                                             }
                                                             ?>
                                                         </select>
-                                                        .
+
                                                         <div class="d-md-none mb-2"></div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -595,7 +577,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--end::Wizard Step 4-->
+                                <!--end::Wizard Step 5-->
 
                                 <!--end::Wizard Step 3-->
 
@@ -614,18 +596,19 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button hidden type="button" id="event_submit" name="event_submit"
-                                            class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
-                                            data-wizard-type="action-submit">
-                                            Save as Draft
-                                        </button>
-                                        <a href="?page=memo">
-                                            <button type="button" id="event_preview" name="event_submit"
-                                                class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
+                                        <a href="?page=letter">
+                                            <button type="button"
+                                                class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
                                                 data-wizard-type="action-submit">
                                                 Preview
                                             </button>
                                         </a>
+                                        <button type="button" id="event_submit" name="event_submit"
+                                            class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
+                                            data-wizard-type="action-submit">
+                                            Submit
+                                        </button>
+
                                         <button type="button" id="event_next_button" name="event_next_button"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-next">
@@ -648,157 +631,3 @@
     <!--end::Container-->
 </div>
 <!--end::Entry-->
-
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var demo8 = function() {
-            $("#admin_repeater").repeater({
-                initEmpty: false,
-                defaultValues: {
-                    "text-input": "foo",
-                },
-                show: function() {
-                    $(this).slideDown();
-                    updateOptions(adminRepeater, '.admin-select', adminAddButton);
-                },
-                hide: function(deleteElement) {
-                    $(this).slideUp(deleteElement);
-                    setTimeout(() => updateOptions(adminRepeater, '.admin-select', adminAddButton), 100);
-                },
-            });
-        };
-
-        var demo9 = function() {
-            $("#org_repeater").repeater({
-                initEmpty: false,
-                defaultValues: {
-                    "text-input": "foo",
-                },
-                show: function() {
-                    $(this).slideDown();
-                    updateOptions(orgRepeater, '.another-org-select', orgAddButton);
-                },
-                hide: function(deleteElement) {
-                    $(this).slideUp(deleteElement);
-                    setTimeout(() => updateOptions(orgRepeater, '.another-org-select', orgAddButton), 100);
-                },
-            });
-        };
-
-        const adminRepeater = document.querySelector('#admin_repeater [data-repeater-list]');
-        const adminAddButton = document.querySelector('#admin_repeater [data-repeater-create]');
-        const orgRepeater = document.querySelector('#org_repeater [data-repeater-list]');
-        const orgAddButton = document.querySelector('#org_repeater [data-repeater-create]');
-
-        function updateOptions(repeater, selectClass, addButton) {
-            const selectedValues = Array.from(repeater.querySelectorAll(selectClass))
-                .map(select => select.value)
-                .filter(value => value !== '');
-
-            repeater.querySelectorAll(selectClass).forEach(select => {
-                const currentValue = select.value;
-                select.querySelectorAll('option').forEach(option => {
-                    option.style.display = (!selectedValues.includes(option.value) || option.value === currentValue) ? 'block' : 'none';
-                });
-            });
-
-            const availableOptions = Array.from(repeater.querySelector(`${selectClass}:last-of-type`).querySelectorAll('option'))
-                .filter(option => option.style.display !== 'none' && option.value !== '');
-
-            addButton.style.display = (availableOptions.length <= 1) ? 'none' : 'block';
-        }
-
-        function updateInput(selectElement, inputClass) {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const input = selectElement.closest('[data-repeater-item]').querySelector(inputClass);
-            input.value = selectedOption.getAttribute('data-role') || selectedOption.getAttribute('data-org');
-        }
-
-        function setupRepeater(repeater, selectClass, addButton, inputClass) {
-            repeater.addEventListener('change', function(event) {
-                if (event.target.classList.contains(selectClass.slice(1))) {
-                    updateOptions(repeater, selectClass, addButton);
-                    updateInput(event.target, inputClass);
-                }
-            });
-
-            repeater.addEventListener('click', function(event) {
-                if (event.target.closest('[data-repeater-delete]')) {
-                    setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
-                }
-            });
-
-            addButton.addEventListener('click', function() {
-                setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
-            });
-
-            updateOptions(repeater, selectClass, addButton);
-        }
-
-        setupRepeater(adminRepeater, '.admin-select', adminAddButton, '.admin-role');
-        setupRepeater(orgRepeater, '.another-org-select', orgAddButton, '.another-org-name');
-
-        demo8();
-        demo9();
-    });
-
-
-
-
-    document.getElementById('toggleForms').addEventListener('change', function() {
-        var formContainer = document.getElementById('formContainer');
-        formContainer.style.display = this.checked ? 'none' : 'block';
-    });
-
-    document.getElementById('toggleAllOrganization').addEventListener('change', function() {
-        var formContainer = document.getElementById('select_organization_container');
-        formContainer.style.display = this.checked ? 'none' : 'flex';
-    });
-
-    document.getElementById('toggleAllSections').addEventListener('change', function() {
-        var formContainer = document.getElementById('select_sections_container');
-        formContainer.style.display = this.checked ? 'none' : 'flex';
-    });
-
-    document.getElementById('toggleCap').addEventListener('change', function() {
-        var formCapacity = document.getElementById('formCapacity');
-        var formCapacityText = document.getElementById('formCapacityText');
-        if (this.checked) {
-            formCapacity.style.display = 'flex';
-            formCapacityText.style.display = 'block';
-        } else {
-            formCapacity.style.display = 'none';
-            formCapacityText.style.display = 'none';
-        }
-    });
-
-    var demo1 = function() {
-        // init slider
-        var slider = document.getElementById("kt_nouislider_1");
-
-        noUiSlider.create(slider, {
-            start: [2],
-            step: 2,
-            range: {
-                min: [2],
-                max: [5000],
-            },
-            format: wNumb({
-                decimals: 0,
-            }),
-        });
-
-        // init slider input
-        var sliderInput = document.getElementById("kt_nouislider_1_input");
-
-        slider.noUiSlider.on("update", function(values, handle) {
-            sliderInput.value = values[handle];
-        });
-
-        sliderInput.addEventListener("change", function() {
-            slider.noUiSlider.set(this.value);
-        });
-    };
-</script>
