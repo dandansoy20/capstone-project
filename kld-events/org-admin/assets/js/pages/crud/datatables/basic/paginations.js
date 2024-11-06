@@ -91,7 +91,7 @@ var KTDatatablesBasicPaginations = function() {
 					},
 				},
 				{
-					targets: 8,
+					targets: 7,
 					width: '75px',
 					render: function(data, type, full, meta) {
 						var status = {
@@ -110,7 +110,7 @@ var KTDatatablesBasicPaginations = function() {
 					},
 				},
 				{
-					targets: 9,
+					targets: 8,
 					width: '75px',
 					render: function(data, type, full, meta) {
 						var status = {

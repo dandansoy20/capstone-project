@@ -191,8 +191,19 @@ if (isset($_GET['event_id'])) {
                                 $allApproved = true; // Flag to track if all statuses are approved
 
                                 foreach ($stakeholders as $stakeholder):
-                                    // Determine if the status is pending or approved
-                                    $statusClass = ($stakeholder['status'] === 'approved') ? 'text-success' : 'text-warning';
+                                    // Determine if the status is pending or approved$statusClass = 'text-warning'; // Default to warning for pending status
+
+                                    $statusClass = 'text-warning'; // Default to warning for pending status
+
+                                    if ($stakeholder['status'] === 'approved') {
+                                        $statusClass = 'text-success';
+                                    } elseif ($stakeholder['status'] === 'rejected') {
+                                        $statusClass = 'text-danger';
+                                    }
+                                    // No need for else if for pending, as it's already set to warning above
+
+                                    // No need for else if for pending, as it's already set to warning above
+
                                     if ($stakeholder['status'] !== 'approved') {
                                         $allApproved = false; // If any status is not approved, set flag to false
                                     }
@@ -200,13 +211,20 @@ if (isset($_GET['event_id'])) {
                                     <div class="d-flex justify-content-between mb-3">
                                         <span class="font-weight-bold"><?php echo htmlspecialchars($stakeholder['role']); ?>: </span>
                                         <span class="ml-5 text-left"><?php echo htmlspecialchars($stakeholder['name']); ?></span>
-                                        <span class="<?php echo $statusClass; ?> ml-5 text-uppercase"><?php echo htmlspecialchars($stakeholder['status']); ?></span> <!-- Display status -->
 
-                                        <!-- Conditionally display the date_approved only if status is 'approved' -->
-                                        <?php if ($stakeholder['status'] === 'approved'): ?>
-                                            <span class="<?php echo $statusClass; ?> ml-5 text-uppercase"><?php echo htmlspecialchars($stakeholder['date_approved']); ?></span>
+                                        <?php if ($stakeholder['status'] === 'approved' || $stakeholder['status'] === 'rejected'): ?>
+                                            <span class="<?php echo $statusClass; ?> ml-5 text-uppercase">
+                                                <?php
+                                                // Format the date to show only the date part (YYYY-MM-DD)
+                                                echo htmlspecialchars(date("Y-m-d", strtotime($stakeholder['date_approved'])));
+                                                ?>
+                                            </span>
                                         <?php endif; ?>
+
+                                        <span class="<?php echo $statusClass; ?> ml-5 text-uppercase"><?php echo htmlspecialchars($stakeholder['status']); ?></span>
                                     </div>
+
+
                                 <?php endforeach; ?>
 
                             </div>
@@ -232,43 +250,61 @@ if (isset($_GET['event_id'])) {
                             <a href="pages/letter/?event_id=<?php echo $eventId ?>">
                                 <button type="button" class="btn btn-light-primary font-weight-bold mr-5">View Letter</button></a>
                             <button type="button" class="btn btn-light-warning font-weight-bold mr-5" data-toggle="modal" data-target="#kt_maxlength_modal">Comment</button>
+                            <?php
+                            include('./control/db.php');
+                            // Query to select status based on event_id and admin_id
+                            $try = mysqli_query($conn, "SELECT status FROM `stakeholder_tbl` WHERE event_id = $eventId AND admin_id = {$_SESSION['kld_id']}");
+
+                            // Fetch the status
+                            $status = 'pending'; // Default status if none found
+                            if ($row = $try->fetch_array()) {
+                                $status = $row['status']; // Get the actual status
+                            }
+                            ?>
+
                             <form method="post">
-                                <button type="button" id="admin_reject_btn" name="admin_reject" class="btn btn-light-danger font-weight-bold mr-5">Reject</button>
-                                <button type="button" id="admin_approve_btn" name="admin_approve" class="btn btn-primary font-weight-bold">Approve</button>
+                                <input type="hidden" id="session_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
+                                <input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
+                                <button type="button" id="admin_reject_btn" name="admin_reject" class="btn btn-light-danger font-weight-bold mr-5" <?php echo ($status === 'rejected') ? 'disabled' : ''; ?>>Reject</button>
+                                <button type="button" id="admin_approve_btn" name="admin_approve" class="btn btn-primary font-weight-bold" <?php echo ($status === 'approved') ? 'disabled' : ''; ?>>Approve</button>
                             </form>
-
-
-
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="kt_maxlength_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i aria-hidden="true" class="ki ki-close"></i>
-                                </button>
-                            </div>
+                <form id="commentForm">
+                    <div class="modal fade" id="kt_maxlength_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Comment</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                    </button>
+                                </div>
 
-                            <div class="modal-body">
-                                <div class="form-group row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <textarea class="form-control" id="kt_maxlength_5" maxlength="150" placeholder="Type here..." rows="6" style="width: 100%;"></textarea>
-                                        <span class="form-text text-muted">This message will return to the organizer</span>
+                                <div class="modal-body">
+                                    <div class="form-group row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <textarea class="form-control" id="kt_maxlength_5" maxlength="150" placeholder="Type here..." rows="6" style="width: 100%;"></textarea>
+                                            <span class="form-text text-muted">This message will return to the organizer</span>
+                                        </div>
                                     </div>
+                                    <!-- Hidden Inputs -->
+                                    <input type="hidden" id="event_id" value="<?php echo $eventId; ?>" />
+                                    <input type="hidden" id="session_id" value="<?php echo $_SESSION['kld_id']; ?>" />
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary font-weight-bold" id="sendCommentBtn">Send</button>
                                 </div>
                             </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal">Send</button>
-                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+
+
 
 
                 <!-- end: Invoice action-->

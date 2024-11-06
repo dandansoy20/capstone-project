@@ -52,8 +52,8 @@ var KTAppsUsersListDatatable = function() {
 						return '<span class="font-weight-bolder">' + data.RecordID + '</span>';
 					}
 				}, {
-					field: 'OrderID',
-					title: 'Customer',
+					field: 'OID',
+					title: 'Student Name',
 					width: 250,
 					template: function(data) {
 						var number = KTUtil.getRandomInt(1, 14);

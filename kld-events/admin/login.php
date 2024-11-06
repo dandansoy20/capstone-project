@@ -7,9 +7,6 @@ if (array_key_exists('kld_login_expiration', $_SESSION)) {
 } else {
 
 ?>
-
-
-
     <!DOCTYPE html>
     <!--
 Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
@@ -62,6 +59,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
+        <?php include("partials/_page-loader.php"); ?>
         <!--begin::Main-->
         <div class="d-flex flex-column flex-root">
             <!--begin::Login-->
@@ -220,7 +218,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                 <!--begin::Form group-->
                                 <div class="form-group">
-                                    <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="email" placeholder="Email" name="email" autocomplete="off" />
+                                    <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6" type="email" placeholder="Email" name="email" autocomplete="off" value="@kld.edu.ph" />
                                 </div>
                                 <!--end::Form group-->
 

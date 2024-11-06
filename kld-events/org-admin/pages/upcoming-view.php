@@ -139,7 +139,7 @@
 						<li class="nav-item">
 							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4">
 								<span class="nav-icon">
-									<i class="flaticon2-layers-1"></i>
+									<i class="flaticon2-pie-chart-4"></i>
 								</span>
 								<span class="nav-text">Statistics</span>
 							</a>
@@ -147,15 +147,15 @@
 						<li class="nav-item">
 							<a class="nav-link" id="proposal-tab-4" data-toggle="tab" href="#proposal" aria-controls="proposal">
 								<span class="nav-icon">
-									<i class="flaticon2-chat-1"></i>
+									<i class="flaticon2-user-1"></i>
 								</span>
-								<span class="nav-text">Proposal</span>
+								<span class="nav-text">Event Proposal</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" id="attendance-tab-4" data-toggle="tab" href="#attendance-4" aria-controls="attendance-4">
 								<span class="nav-icon">
-									<i class="flaticon2-layers-1"></i>
+									<i class="flaticon-presentation"></i>
 								</span>
 								<span class="nav-text">Discussion</span>
 							</a>
@@ -163,7 +163,7 @@
 						<li class="nav-item">
 							<a class="nav-link" id="guide-tab-4" data-toggle="tab" href="#guide-4" aria-controls="guide-4">
 								<span class="nav-icon">
-									<i class="flaticon2-layers-1"></i>
+									<i class="flaticon2-sheet"></i>
 								</span>
 								<span class="nav-text">Guidelines</span>
 							</a>
@@ -171,7 +171,7 @@
 						<li class="nav-item">
 							<a class="nav-link" id="gallery-tab-4" data-toggle="tab" href="#gallery-4" aria-controls="gallery-4">
 								<span class="nav-icon">
-									<i class="flaticon2-rocket-1"></i>
+									<i class="flaticon2-image-file"></i>
 								</span>
 								<span class="nav-text">Gallery</span>
 							</a>

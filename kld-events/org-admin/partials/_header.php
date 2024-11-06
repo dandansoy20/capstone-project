@@ -125,10 +125,15 @@
 						<span
 							class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
 						<span
-							class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">Juan</span>
+							class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4"><?php echo $_SESSION['kld_fname'] ?></span>
 						<span class="symbol symbol-35">
-							<span class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">J</span>
+							<img
+								src="<?php echo !empty($_SESSION['kld_profile']) ? $_SESSION['kld_profile'] : 'assets/default.jpg'; ?>"
+								alt=""
+								class="symbol-label"
+								style="object-fit: cover; width: 100%; height: 100%; border-radius: 50%;" />
 						</span>
+
 					</div>
 				</div>
 

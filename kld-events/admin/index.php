@@ -147,12 +147,15 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
+
 		<script src="control/js/add-events.js"></script>
+		<script src="control/js/edit-events.js"></script>
 		<script src="control/js/add-cat.js"></script>
 		<script src="control/js/add-venue.js"></script>
 		<script src="control/js/add-std.js"></script>
 		<script src="control/js/calendar.js"></script>
 		<script src="control/js/organizer.js"></script>
+		<script src="control/js/letter.js"></script>
 
 
 		<!--end::Global Theme Bundle-->

@@ -1,5 +1,7 @@
 <?php
-
+if (session_status() == PHP_SESSION_NONE) {
+	session_start();
+}
 include "./control/db.php";
 ?>
 <!--begin::Entry-->
@@ -117,10 +119,12 @@ include "./control/db.php";
 			<!--begin::Header-->
 			<div class="card-header border-0 py-5">
 				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Attendees</span>
+					<span class="card-label font-weight-bolder text-dark">Registered</span>
 					<span class="text-muted mt-3 font-weight-bold font-size-sm">Kolehiyo ng Lungsod ng Dasmariñas</span>
 				</h3>
 			</div>
+
+
 
 
 			<div class="card-body">
@@ -132,45 +136,76 @@ include "./control/db.php";
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block">Type:</label>
 										<select class="form-control" id="kt_datatable_search_status">
-											<option value="">Student</option>
-											<option value="1">Employee</option>
-											<option value="2">Admin</option>
+											<option value="std">Student</option>
+											<option value="emp">Employee</option>
+											<option value="adm">Admin</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-md-3 my-2">
+								<div id="student-fields" class="col-md-9 my-2 d-none">
+									<div class="row align-items-center">
+										<div class="col-md-4 my-2">
+											<div class="d-flex align-items-center">
+												<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
+												<select class="form-control" id="kt_datatable_search_program">
+													<option value="">BSIS</option>
+													<option value="1">BSCE</option>
+													<option value="2">BSIT</option>
+													<option value="3">BSN</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4 my-2">
+											<div class="d-flex align-items-center">
+												<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
+												<select class="form-control" id="kt_datatable_search_year">
+													<option value="">1st</option>
+													<option value="1">2nd</option>
+													<option value="2">3rd</option>
+													<option value="3">4th</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4 my-2">
+											<div class="d-flex align-items-center">
+												<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
+												<select class="form-control" id="kt_datatable_search_section">
+													<option value="">BSIS 101</option>
+													<option value="1">BSIS 103</option>
+													<option value="2">BSIS 102</option>
+													<option value="3">BSIS 106</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="employee-fields" class="col-md-3 my-2 d-none">
 									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
-										<select class="form-control" id="kt_datatable_search_type">
-											<option value="">BSIS</option>
-											<option value="1">BSCE</option>
-											<option value="2">BSIT</option>
-											<option value="3">BSN</option>
+										<label class="mr-3 mb-0 d-none d-md-block">Organization:</label>
+										<select class="form-control" id="kt_datatable_search_org">
+											<!-- Add your organization options here -->
+											<option value="org1">Organization 1</option>
+											<option value="org2">Organization 2</option>
+											<option value="org3">Organization 3</option>
 										</select>
 									</div>
 								</div>
-								<div class="col-md-3 my-2">
-									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
-										<select class="form-control" id="kt_datatable_search_type">
-											<option value="">1st</option>
-											<option value="1">2nd</option>
-											<option value="2">3rd</option>
-											<option value="3">4th</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-3 my-2">
-									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
-										<select class="form-control" id="kt_datatable_search_type">
-											<option value="">BSIS 101</option>
-											<option value="1">BSIS 103</option>
-											<option value="2">BSIS 102</option>
-											<option value="3">BSIS 106</option>
-										</select>
-									</div>
-								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="mb-5 collapse" id="kt_datatable_group_action_form">
+					<div class="d-flex align-items-center">
+						<div class="font-weight-bold text-danger mr-3">Selected <span id="kt_datatable_selected_records">0</span> records:</div>
+						<div class="dropdown mr-2">
+							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Update status</button>
+							<div class="dropdown-menu dropdown-menu-sm">
+								<ul class="nav nav-hover flex-column">
+									<li class="nav-item"><a href="#" class="nav-link"><span class="nav-text">Present</span></a></li>
+									<li class="nav-item"><a href="#" class="nav-link"><span class="nav-text">Absent</span></a></li>
+									<li class="nav-item"><a href="#" class="nav-link"><span class="nav-text">Pending</span></a></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -179,7 +214,8 @@ include "./control/db.php";
 
 
 
-			<div class="card-body py-0">
+
+			<div class="card-body py-0 d-none" id="student-table">
 				<!--begin::Table-->
 				<div class="table-responsive">
 					<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
@@ -197,92 +233,167 @@ include "./control/db.php";
 								<th style="min-width: 150px">Program</th>
 								<th style="min-width: 150px">Section</th>
 								<th style="min-width: 150px">Status</th>
-								<th class="pr-0 text-right" style="min-width: 150px">Action</th>
+								<th class="min-width: 150px" style="min-width: 150px">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$try = mysqli_query($conn, "SELECT 
-									std_acc.*, 
-									course_tbl.course_acronym, 
-									section_tbl.section_name, 
-									yearlvl_tbl.yearlvl_name 
-								FROM 
-									std_acc 
-								JOIN 
-									course_tbl ON std_acc.course_id = course_tbl.course_id 
-								JOIN 
-									section_tbl ON std_acc.section_id = section_tbl.section_id 
-								JOIN 
-									yearlvl_tbl ON std_acc.yearlvl = yearlvl_tbl.yearlvl_id");
+							$try = mysqli_query($conn, "SELECT std_acc.*, course_tbl.course_acronym, section_tbl.section_name, yearlvl_tbl.yearlvl_name FROM std_acc JOIN course_tbl ON std_acc.course_id = course_tbl.course_id JOIN section_tbl ON std_acc.section_id = section_tbl.section_id JOIN yearlvl_tbl ON std_acc.yearlvl = yearlvl_tbl.yearlvl_id");
 							while ($row = $try->fetch_array()) {
+								echo '<tr>';
+								// Checkbox
+								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['std_kld_id'] . '" /><span></span></label></td>';
 
+								// Profile Image
+								echo '<td class="pr-0"><div class="symbol symbol-50 symbol-light mt-1"><span class="symbol-label"><img src="' . ($row['std_profilepic'] ? $row['std_profilepic'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/></span></div></td>';
 
-								echo '<td class="pl-0">
-									<label class="checkbox checkbox-lg checkbox-inline">
-										<input type="checkbox" value="' . $row['std_kld_id'] . '" />
-										<span></span>
-									</label>
-								</td>';
+								// Name and ID
+								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['std_fname'] . ' ' . $row['std_lname'] . '</a><span class="text-muted font-weight-bold text-muted d-block">' . $row['std_kld_id'] . '</span></td>';
 
-								echo '<td class="pr-0">
-									<div class="symbol symbol-50 symbol-light mt-1">
-										<span class="symbol-label">
-											<img src="' . ($row['std_profilepic'] ? $row['std_profilepic'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/>
-										</span>
-									</div>
-								</td>
+								// Email
+								echo '<td><span class="text-muted font-weight-bold">' . $row['std_kld_email'] . '</span></td>';
 
-									';
+								// Program and Year Level
+								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['course_acronym'] . '</span><span class="text-muted font-weight-bold">' . $row['yearlvl_name'] . '</span></td>';
 
+								// Section
+								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['section_name'] . '</span></td>';
 
-								echo '<td class="pl-0">
-
-									<a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['std_fname'] . ' ' . $row['std_lname'] . '</a>
-									<span class="text-muted font-weight-bold text-muted d-block">' . $row['std_kld_id'] . '</span>
-								</td>
-
-								';
-
-								echo '<td>
-									<span class="text-muted font-weight-bold">' . $row['std_kld_email'] . '</span>
-								</td>
-								';
-								echo '<td>
-									<span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['course_acronym'] . '</span>
-									<span class="text-muted font-weight-bold">' . $row['yearlvl_name'] . '</span>
-								</td>
-
-								';
-
-								echo '<td>
-									<span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['section_name'] . '</span>
-								</td>
-								';
+								// Status
 								$status = strtoupper($row['status']);
-								$label_class = $row['status'] == 'active' ? 'label-light-primary' : 'label-light-danger';
-								echo '<td>
-									 <span class="label label-lg ' . $label_class . ' label-inline">' . $status . '</span>
-								</td>
-								';
-								$_status = $row['status'] == 'active' ?  'checked="checked"' : '';
-								echo '<td class="pr-0 text-right">
-									
-									
-										<span class="switch switch-outline switch-icon switch-success">
-											<label>
-												<input type="checkbox" ' . $_status . ' name="select"/>
-												<span></span>
-											</label>
-										</span>
-																
-								</td>
-								</tr>
-								';
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';
+								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
+								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
+
+								// Switch
+								$_status = ($status == 'ACTIVE') ? 'checked="checked"' : '';
+								echo '<td class="pr-0 text-right"><span class="switch switch-outline switch-icon switch-success"><label><input type="checkbox" ' . $_status . ' name="select"/><span></span></label></span></td>';
+
+								echo '</tr>';
 							}
 							?>
-
 						</tbody>
+
+					</table>
+				</div>
+				<!--end::Table-->
+			</div>
+
+			<div class="card-body py-0 d-none" id="employee-table">
+				<!--begin::Table-->
+				<div class="table-responsive">
+					<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+						<thead>
+							<tr class="text-left">
+								<th class="pl-0" style="width: 20px">
+									<label class="checkbox checkbox-lg checkbox-inline">
+										<input type="checkbox" value="1" />
+										<span></span>
+									</label>
+								</th>
+								<th class="pr-0" style="width: 50px">Employee</th>
+								<th style="min-width: 200px"></th>
+								<th style="min-width: 150px">Email</th>
+								<th style="min-width: 150px">Role</th>
+								<th style="min-width: 150px">Status</th>
+								<th class="min-width: 150px" style="min-width: 150px">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$try = mysqli_query($conn, "SELECT org_acc.*, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_acc.org_id = org_tbl.org_id");
+							while ($row = $try->fetch_array()) {
+								echo '<tr>';
+								// Checkbox
+								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['org_acc_id'] . '" /><span></span></label></td>';
+
+								// Profile Image
+								echo '<td class="pr-0"><div class="symbol symbol-50 symbol-light mt-1"><span class="symbol-label"><img src="' . ($row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/></span></div></td>';
+
+								// Name and ID
+								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</a><span class="text-muted font-weight-bold text-muted d-block">' . $row['org_kld_id'] . '</span></td>';
+
+								// Email
+								echo '<td><span class="text-muted font-weight-bold">' . $row['org_email'] . '</span></td>';
+
+								// Section
+								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['org_role'] . '</span></td>';
+
+								// Status
+								$status = strtoupper($row['status']);
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';;
+								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
+								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
+
+								// Switch
+								$_status = ($status == 'ACTIVE') ? 'checked="checked"' : '';
+								echo '<td class="pr-0 text-right"><span class="switch switch-outline switch-icon switch-success"><label><input type="checkbox" ' . $_status . ' name="select"/><span></span></label></span></td>';
+
+								echo '</tr>';
+							}
+							?>
+						</tbody>
+
+					</table>
+				</div>
+				<!--end::Table-->
+			</div>
+
+			<div class="card-body py-0 d-none" id="admin-table">
+				<!--begin::Table-->
+				<div class="table-responsive">
+					<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
+						<thead>
+							<tr class="text-left">
+								<th class="pl-0" style="width: 20px">
+									<label class="checkbox checkbox-lg checkbox-inline">
+										<input type="checkbox" value="1" />
+										<span></span>
+									</label>
+								</th>
+								<th class="pr-0" style="width: 50px">Admins</th>
+								<th style="min-width: 200px"></th>
+								<th style="min-width: 150px">Email</th>
+								<th style="min-width: 150px">Role</th>
+								<th style="min-width: 150px">Status</th>
+								<th class="min-width: 150px" style="min-width: 150px">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							$try = mysqli_query($conn, "SELECT * FROM admin_acc");
+							while ($row = $try->fetch_array()) {
+								echo '<tr>';
+								// Checkbox
+								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['admin_id'] . '" /><span></span></label></td>';
+
+								// Profile Image
+								echo '<td class="pr-0"><div class="symbol symbol-50 symbol-light mt-1"><span class="symbol-label"><img src="' . ($row['admin_profile'] ? $row['admin_profile'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/></span></div></td>';
+
+								// Name and ID
+								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['admin_fname'] . ' ' . $row['admin_lname'] . '</a></td>';
+
+								// Email
+								echo '<td><span class="text-muted font-weight-bold">' . $row['admin_email'] . '</span></td>';
+
+								// Section
+								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['admin_role'] . '</span></td>';
+
+								// Status
+								$status = strtoupper($row['status']);
+								$status_text = ($status == 'ACTIVE') ? 'Registered' : 'Not Registered';
+								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
+								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
+
+								// Switch
+								$_status = ($status == 'ACTIVE') ? 'checked="checked"' : '';
+								echo '<td class="pr-0 text-right"><span class="switch switch-outline switch-icon switch-success"><label><input type="checkbox" ' . $_status . ' name="select"/><span></span></label></span></td>';
+
+								echo '</tr>';
+							}
+							?>
+						</tbody>
+
 					</table>
 				</div>
 				<!--end::Table-->
@@ -298,27 +409,109 @@ include "./control/db.php";
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
-		const switches = document.querySelectorAll('.switch input[type="checkbox"]');
+		const typeSelect = document.getElementById('kt_datatable_search_status');
+		const studentFields = document.getElementById('student-fields');
+		const employeeFields = document.getElementById('employee-fields');
+		const studentTable = document.getElementById('student-table');
+		const employeeTable = document.getElementById('employee-table');
+		const adminTable = document.getElementById('admin-table');
 
+		// Function to show/hide fields based on selected type
+		function updateFields(selectedType) {
+			studentFields.classList.add('d-none');
+			employeeFields.classList.add('d-none');
+
+			if (selectedType === 'std') {
+				studentFields.classList.remove('d-none');
+			} else if (selectedType === 'emp') {
+				employeeFields.classList.remove('d-none');
+			}
+		}
+
+		// Function to show/hide tables based on selected type
+		function updateTables(selectedType) {
+			studentTable.classList.add('d-none');
+			employeeTable.classList.add('d-none');
+			adminTable.classList.add('d-none');
+
+			if (selectedType === 'std') {
+				studentTable.classList.remove('d-none');
+			} else if (selectedType === 'emp') {
+				employeeTable.classList.remove('d-none');
+			} else if (selectedType === 'adm') {
+				adminTable.classList.remove('d-none');
+			}
+		}
+
+		// Function to manage selected checkboxes and display the action form
+		function manageCheckboxes() {
+			const checkboxes = document.querySelectorAll(`${getVisibleTable()} tbody input[type="checkbox"]:not(.switch input[type="checkbox"])`);
+			const mainCheckbox = document.querySelector(`${getVisibleTable()} thead input[type="checkbox"]`);
+			let selectedCount = 0;
+
+			checkboxes.forEach(checkbox => {
+				checkbox.addEventListener('change', function() {
+					this.checked ? selectedCount++ : selectedCount--;
+					updateSelectedCount(selectedCount);
+				});
+			});
+
+			mainCheckbox.addEventListener('change', function() {
+				const isChecked = this.checked;
+				checkboxes.forEach(checkbox => {
+					checkbox.checked = isChecked;
+					selectedCount = isChecked ? checkboxes.length : 0;
+				});
+				updateSelectedCount(selectedCount);
+			});
+		}
+
+		function getVisibleTable() {
+			if (!studentTable.classList.contains('d-none')) return '#student-table';
+			if (!employeeTable.classList.contains('d-none')) return '#employee-table';
+			if (!adminTable.classList.contains('d-none')) return '#admin-table';
+		}
+
+		function updateSelectedCount(selectedCount) {
+			document.getElementById('kt_datatable_selected_records').textContent = selectedCount;
+			if (selectedCount > 0) {
+				document.getElementById('kt_datatable_group_action_form').classList.add('show');
+			} else {
+				document.getElementById('kt_datatable_group_action_form').classList.remove('show');
+			}
+		}
+
+		// Initial setup on page load
+		updateFields(typeSelect.value);
+		updateTables(typeSelect.value);
+		manageCheckboxes();
+
+		// Listen for changes in the select dropdown
+		typeSelect.addEventListener('change', function() {
+			updateFields(this.value);
+			updateTables(this.value);
+			manageCheckboxes(); // Re-initialize checkbox logic for the new visible table
+		});
+
+
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const switches = document.querySelectorAll('.switch input[type="checkbox"]');
 		switches.forEach(switchElement => {
 			switchElement.addEventListener('change', function() {
 				const isChecked = this.checked;
 				const studentId = this.value;
-
 				Swal.fire({
 					title: "Are you sure?",
-					text: isChecked ? "Mark this student as present?" : "Mark this student as absent?",
+					text: isChecked ? "Mark this user as Registered?" : "Mark this user as Not Registered?",
 					icon: "warning",
 					showCancelButton: true,
 					confirmButtonText: "Yes"
 				}).then(function(result) {
 					if (result.value) {
 						console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-						Swal.fire(
-							"Updated!",
-							"Attendance has been updated.",
-							"success"
-						);
+						Swal.fire("Updated!", "Registration has been updated.", "success");
 					} else {
 						switchElement.checked = !isChecked;
 					}

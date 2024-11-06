@@ -11,17 +11,14 @@ var KTDatatablesAdvancedColumnRendering = function() {
 			columnDefs: [
 				{
 					targets: 0,
-					title: 'Agent',
+					title: 'Student',
 					render: function(data, type, full, meta) {
-						var number = KTUtil.getRandomInt(1, 14);
-						var user_img = '100_' + number + '.jpg';
-
-						var output;
-						if (number > 8) {
+						
+						if (number ) {
 							output = `
                                 <div class="d-flex align-items-center">
                                     <div class="symbol symbol-50 flex-shrink-0">
-                                        <img src="assets/media/users/` + user_img + `" alt="photo">
+                                        <img src="assets/media/users/alt="photo">
                                     </div>
                                     <div class="ml-3">
                                         <span class="text-dark-75 font-weight-bold line-height-sm d-block pb-2">` + full[2] + `</span>
@@ -93,16 +90,26 @@ var KTDatatablesAdvancedColumnRendering = function() {
 					},
 				},
 				{
+					targets: 3,
+					render: function(data, type, full, meta) {
+						var status = {
+							1: {'title': '1st year'},
+							2: {'title': '2nd year'},
+							3: {'title': '3rd year'},
+							4: {'title': '4th year'},
+						};
+						if (typeof status[data] === 'undefined') {
+							return data;
+						}
+						return '<span class="label label-lg font-weight-bold' + status[data].class + ' label-inline">' + status[data].title + '</span>';
+					},
+				},
+				{
 					targets: 4,
 					render: function(data, type, full, meta) {
 						var status = {
 							1: {'title': 'Pending', 'class': 'label-light-primary'},
-							2: {'title': 'Delivered', 'class': ' label-light-danger'},
-							3: {'title': 'Canceled', 'class': ' label-light-primary'},
-							4: {'title': 'Success', 'class': ' label-light-success'},
-							5: {'title': 'Info', 'class': ' label-light-info'},
-							6: {'title': 'Danger', 'class': ' label-light-danger'},
-							7: {'title': 'Warning', 'class': ' label-light-warning'},
+							2: {'title': 'Activated', 'class': ' label-light-success'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;
@@ -114,9 +121,8 @@ var KTDatatablesAdvancedColumnRendering = function() {
 					targets: 5,
 					render: function(data, type, full, meta) {
 						var status = {
-							1: {'title': 'Online', 'state': 'danger'},
-							2: {'title': 'Retail', 'state': 'primary'},
-							3: {'title': 'Direct', 'state': 'success'},
+							1: {'title': 'Male', 'state': 'danger'},
+							2: {'title': 'Female', 'state': 'primary'},
 						};
 						if (typeof status[data] === 'undefined') {
 							return data;

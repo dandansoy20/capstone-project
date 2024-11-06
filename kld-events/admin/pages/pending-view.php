@@ -67,7 +67,7 @@ if (isset($_GET['event_id'])) {
 						'name' => htmlspecialchars($row['admin_fname'] . ' ' . $row['admin_lname']),
 						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
 						'type' => 'admin',
-						'profile' => $row['admin_profile'] // Directly use the base64 encoded string
+						'profile' => !empty($row['admin_profile']) ? $row['admin_profile'] : "assets/default.jpg",
 					];
 				}
 
@@ -77,7 +77,7 @@ if (isset($_GET['event_id'])) {
 						'role' => htmlspecialchars($row['organization_name']),
 						'name' => htmlspecialchars($row['org_fname'] . ' ' . $row['org_lname']),
 						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
-						'profile' => $row['org_profile'], // Directly use the base64 encoded string
+						'profile' => !empty($row['org_profile']) ? $row['org_profile'] : "assets/default.jpg",
 						'type' => 'organizer'
 					];
 				}
@@ -184,7 +184,7 @@ if (isset($_GET['event_id'])) {
 										<?php echo htmlspecialchars($event_desc); ?>
 									</p>
 									<a href="?page=memo&event_id=<?php echo $eventId ?>" class="btn btn-light-primary font-weight-bold py-2 px-6">View Proposal</a>
-									<a href="?page=memo" class="btn btn-primary font-weight-bold py-2">Edit</a>
+									<a href="?page=edit-event&event_id=<?php echo $eventId ?>" class="btn btn-primary font-weight-bold py-2 disabled">Launch Event</a>
 								</div>
 							</div>
 						</div>

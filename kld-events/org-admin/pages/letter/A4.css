@@ -1,0 +1,70 @@
+:root {
+  --bleeding: 0.5cm;
+  --margin: 1.5cm;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+  background: rgb(204, 204, 204);
+  display: flex;
+  flex-direction: column;
+  font-family: "Open Sans", sans-serif;
+}
+
+.page {
+  display: inline-block;
+  position: relative;
+  height: 297mm;
+  width: 210mm;
+  font-size: 12pt;
+  margin: 2em auto;
+  padding: calc(var(--bleeding) + var(--margin));
+  box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
+  background: white;
+}
+
+@media screen {
+  .page::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--bleeding) * 2);
+    height: calc(100% - var(--bleeding) * 2);
+    margin: var(--bleeding);
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+@media print {
+  .page {
+    margin: 0;
+    overflow: hidden;
+  }
+}
+h4 .sub-title {
+  font-weight: normal; /* Adjust to make it lighter than h4 */
+  font-style: italic;
+  display: block; /* Ensures it appears on a new line */
+  line-height: 1.2; /* Adjust for closer spacing without extra margin */
+}
+p {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400; /* Normal weight */
+  margin: 0.5em 0;
+}
+
+/* Apply bold weight specifically for strong text */
+p strong {
+  font-weight: 700; /* Bold weight */
+}

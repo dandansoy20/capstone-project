@@ -47,6 +47,278 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->addCC("shizukura06@gmail.com");
             $mail->Subject = "Welcome to KLD Event " . $add_std_firstname;
             $msg = '
+
+            <!--
+                    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+                    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+                    <head>
+                    <title></title>
+                    <meta charset="UTF-8" />
+                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                    <!--[if !mso]>-->
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                    <!--<![endif]-->
+                    <meta name="x-apple-disable-message-reformatting" content="" />
+                    <meta content="target-densitydpi=device-dpi" name="viewport" />
+                    <meta content="true" name="HandheldFriendly" />
+                    <meta content="width=device-width" name="viewport" />
+                    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no" />
+                    <style type="text/css">
+                    table {
+                    border-collapse: separate;
+                    table-layout: fixed;
+                    mso-table-lspace: 0pt;
+                    mso-table-rspace: 0pt
+                    }
+                    table td {
+                    border-collapse: collapse
+                    }
+                    .ExternalClass {
+                    width: 100%
+                    }
+                    .ExternalClass,
+                    .ExternalClass p,
+                    .ExternalClass span,
+                    .ExternalClass font,
+                    .ExternalClass td,
+                    .ExternalClass div {
+                    line-height: 100%
+                    }
+                    body, a, li, p, h1, h2, h3 {
+                    -ms-text-size-adjust: 100%;
+                    -webkit-text-size-adjust: 100%;
+                    }
+                    html {
+                    -webkit-text-size-adjust: none !important
+                    }
+                    body, #innerTable {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale
+                    }
+                    #innerTable img+div {
+                    display: none;
+                    display: none !important
+                    }
+                    img {
+                    Margin: 0;
+                    padding: 0;
+                    -ms-interpolation-mode: bicubic
+                    }
+                    h1, h2, h3, p, a {
+                    line-height: inherit;
+                    overflow-wrap: normal;
+                    white-space: normal;
+                    word-break: break-word
+                    }
+                    a {
+                    text-decoration: none
+                    }
+                    h1, h2, h3, p {
+                    min-width: 100%!important;
+                    width: 100%!important;
+                    max-width: 100%!important;
+                    display: inline-block!important;
+                    border: 0;
+                    padding: 0;
+                    margin: 0
+                    }
+                    a[x-apple-data-detectors] {
+                    color: inherit !important;
+                    text-decoration: none !important;
+                    font-size: inherit !important;
+                    font-family: inherit !important;
+                    font-weight: inherit !important;
+                    line-height: inherit !important
+                    }
+                    u + #body a {
+                    color: inherit;
+                    text-decoration: none;
+                    font-size: inherit;
+                    font-family: inherit;
+                    font-weight: inherit;
+                    line-height: inherit;
+                    }
+                    a[href^="mailto"],
+                    a[href^="tel"],
+                    a[href^="sms"] {
+                    color: inherit;
+                    text-decoration: none
+                    }
+                    </style>
+                    <style type="text/css">
+                    @media (min-width: 481px) {
+                    .hd { display: none!important }
+                    }
+                    </style>
+                    <style type="text/css">
+                    @media (max-width: 480px) {
+                    .hm { display: none!important }
+                    }
+                    </style>
+                    <style type="text/css">
+                    @media (max-width: 480px) {
+                    .t43{padding:0 0 22px!important;width:480px!important}.t30,.t39,.t51,.t6{text-align:center!important}.t29,.t38,.t5,.t50{vertical-align:top!important;width:600px!important}.t10,.t34,.t55{width:480px!important}.t3{border-top-left-radius:0!important;border-top-right-radius:0!important;padding:20px 30px!important}.t27{border-bottom-right-radius:0!important;border-bottom-left-radius:0!important;padding:30px!important}.t57{mso-line-height-alt:20px!important;line-height:20px!important}.t46{width:380px!important}.t1{width:44px!important}.t17,.t25{width:420px!important}
+                    }
+                    </style>
+                    <!--[if !mso]>-->
+                    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@500;800&amp;display=swap" rel="stylesheet" type="text/css" />
+                    <!--<![endif]-->
+                    <!--[if mso]>
+                    <xml>
+                    <o:OfficeDocumentSettings>
+                    <o:AllowPNG/>
+                    <o:PixelsPerInch>96</o:PixelsPerInch>
+                    </o:OfficeDocumentSettings>
+                    </xml>
+                    <![endif]-->
+                    </head>
+                    <body id="body" class="t60" style="min-width:100%;Margin:0px;padding:0px;background-color:#E0E0E0;"><div class="t59" style="background-color:#E0E0E0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td class="t58" style="font-size:0;line-height:0;mso-line-height-rule:exactly;background-color:#E0E0E0;" valign="top" align="center">
+                    <!--[if mso]>
+                    <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false">
+                    <v:fill color="#E0E0E0"/>
+                    </v:background>
+                    <![endif]-->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" align="center" id="innerTable"><tr><td align="center">
+                    <table class="t44" role="presentation" cellpadding="0" cellspacing="0" style="Margin-left:auto;Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="566" class="t43" style="padding:50px 10px 31px 10px;">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t43" style="width:546px;padding:50px 10px 31px 10px;">
+                    <!--<![endif]-->
+                    <div class="t42" style="width:100%;text-align:center;"><div class="t41" style="display:inline-block;"><table class="t40" role="presentation" cellpadding="0" cellspacing="0" align="center" valign="top">
+                    <tr class="t39"><td></td><td class="t38" width="546" valign="top">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="t37" style="width:100%;"><tr>
+                    <td class="t36" style="background-color:transparent;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100% !important;"><tr><td align="center">
+                    <table class="t11" role="presentation" cellpadding="0" cellspacing="0" style="Margin-left:auto;Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="546" class="t10">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t10" style="width:546px;">
+                    <!--<![endif]-->
+                    <div class="t9" style="width:100%;text-align:center;"><div class="t8" style="display:inline-block;"><table class="t7" role="presentation" cellpadding="0" cellspacing="0" align="center" valign="top">
+                    <tr class="t6"><td></td><td class="t5" width="546" valign="top">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="t4" style="width:100%;"><tr>
+                    <td class="t3" style="overflow:hidden;background-color:#0F6C29;padding:49px 50px 42px 50px;border-radius:18px 18px 0 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100% !important;"><tr><td align="left">
+                    <table class="t2" role="presentation" cellpadding="0" cellspacing="0" style="Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="85" class="t1">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t1" style="width:85px;">
+                    <!--<![endif]-->
+                    <div style="font-size:0px;"><img class="t0" style="display:block;border:0;height:auto;width:100%;Margin:0;max-width:100%;" width="85" height="113.421875" alt="" src="https://f12118ac-43b3-4365-9119-d5eb13ce5a05.b-cdn.net/e/80e343f2-994b-4baa-be67-4abac901fa8b/8a78323c-2156-4770-88b5-9fd01f439b87.png"/></div></td>
+                    </tr></table>
+                    </td></tr></table></td>
+                    </tr></table>
+                    </td>
+                    <td></td></tr>
+                    </table></div></div></td>
+                    </tr></table>
+                    </td></tr><tr><td align="center">
+                    <table class="t35" role="presentation" cellpadding="0" cellspacing="0" style="Margin-left:auto;Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="546" class="t34">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t34" style="width:546px;">
+                    <!--<![endif]-->
+                    <div class="t33" style="width:100%;text-align:center;"><div class="t32" style="display:inline-block;"><table class="t31" role="presentation" cellpadding="0" cellspacing="0" align="center" valign="top">
+                    <tr class="t30"><td></td><td class="t29" width="546" valign="top">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="t28" style="width:100%;"><tr>
+                    <td class="t27" style="overflow:hidden;background-color:#F8F8F8;padding:40px 50px 40px 50px;border-radius:0 0 18px 18px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100% !important;"><tr><td align="left">
+                    <table class="t14" role="presentation" cellpadding="0" cellspacing="0" style="Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="381" class="t13">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t13" style="width:381px;">
+                    <!--<![endif]-->
+                    <h1 class="t12" style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:41px;font-weight:800;font-style:normal;font-size:30px;text-decoration:none;text-transform:none;letter-spacing:-1.56px;direction:ltr;color:#191919;text-align:left;mso-line-height-rule:exactly;mso-text-raise:3px;">Hi, ' . $add_std_firstname . '<br/>Welcome to KLD Events!</h1></td>
+                    </tr></table>
+                    </td></tr><tr><td><div class="t15" style="mso-line-height-rule:exactly;mso-line-height-alt:25px;line-height:25px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr><tr><td align="left">
+                    <table class="t18" role="presentation" cellpadding="0" cellspacing="0" style="Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="446" class="t17">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t17" style="width:446px;">
+                    <!--<![endif]-->
+                    <p class="t16" style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:22px;font-weight:500;font-style:normal;font-size:14px;text-decoration:none;text-transform:none;letter-spacing:-0.56px;direction:ltr;color:#333333;text-align:left;mso-line-height-rule:exactly;mso-text-raise:2px;">You are reading this to notify you that we successfully added you to KLD Event. Below is the link to activate your account and create password.</p></td>
+                    </tr></table>
+                    </td></tr><tr><td><div class="t19" style="mso-line-height-rule:exactly;mso-line-height-alt:15px;line-height:15px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr><tr><td align="left">
+                    <table class="t22" role="presentation" cellpadding="0" cellspacing="0" style="Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="234" class="t21" style="background-color:#0F6C29;overflow:hidden;text-align:center;line-height:44px;mso-line-height-rule:exactly;mso-text-raise:10px;padding:0 30px 0 30px;border-radius:40px 40px 40px 40px;">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t21" style="background-color:#0F6C29;overflow:hidden;width:174px;text-align:center;line-height:44px;mso-line-height-rule:exactly;mso-text-raise:10px;padding:0 30px 0 30px;border-radius:40px 40px 40px 40px;">
+                    <!--<![endif]-->
+                    <a class="t20" href=' . $url . ' style="display:block;margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:44px;font-weight:800;font-style:normal;font-size:12px;text-decoration:none;text-transform:uppercase;letter-spacing:2.4px;direction:ltr;color:#FFFFFF;text-align:center;mso-line-height-rule:exactly;mso-text-raise:10px;" target="_blank">Activate</a></td>
+                    </tr></table>
+                    </td></tr><tr><td><div class="t23" style="mso-line-height-rule:exactly;mso-line-height-alt:15px;line-height:15px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr><tr><td align="left">
+                    <table class="t26" role="presentation" cellpadding="0" cellspacing="0" style="Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="446" class="t25">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t25" style="width:446px;">
+                    <!--<![endif]-->
+                    <p class="t24" style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:22px;font-weight:500;font-style:normal;font-size:14px;text-decoration:none;text-transform:none;letter-spacing:-0.56px;direction:ltr;color:#333333;text-align:left;mso-line-height-rule:exactly;mso-text-raise:2px;">If you have any questions or need further assistance, please do not hesitate to contact our support team by replying to this email or visiting our support page.</p></td>
+                    </tr></table>
+                    </td></tr></table></td>
+                    </tr></table>
+                    </td>
+                    <td></td></tr>
+                    </table></div></div></td>
+                    </tr></table>
+                    </td></tr></table></td>
+                    </tr></table>
+                    </td>
+                    <td></td></tr>
+                    </table></div></div></td>
+                    </tr></table>
+                    </td></tr><tr><td align="center">
+                    <table class="t56" role="presentation" cellpadding="0" cellspacing="0" style="Margin-left:auto;Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="600" class="t55">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t55" style="width:600px;">
+                    <!--<![endif]-->
+                    <div class="t54" style="width:100%;text-align:center;"><div class="t53" style="display:inline-block;"><table class="t52" role="presentation" cellpadding="0" cellspacing="0" align="center" valign="top">
+                    <tr class="t51"><td></td><td class="t50" width="600" valign="top">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="t49" style="width:100%;"><tr>
+                    <td class="t48" style="padding:0 50px 0 50px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="width:100% !important;"><tr><td align="center">
+                    <table class="t47" role="presentation" cellpadding="0" cellspacing="0" style="Margin-left:auto;Margin-right:auto;">
+                    <tr>
+                    <!--[if mso]>
+                    <td width="420" class="t46">
+                    <![endif]-->
+                    <!--[if !mso]>-->
+                    <td class="t46" style="width:420px;">
+                    <!--<![endif]-->
+                    <p class="t45" style="margin:0;Margin:0;font-family:Albert Sans,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif;line-height:22px;font-weight:500;font-style:normal;font-size:12px;text-decoration:none;text-transform:none;direction:ltr;color:#888888;text-align:center;mso-line-height-rule:exactly;mso-text-raise:3px;">© 2024 KLD Events. All Rights Reserved<br/></p></td>
+                    </tr></table>
+                    </td></tr></table></td>
+                    </tr></table>
+                    </td>
+                    <td></td></tr>
+                    </table></div></div></td>
+                    </tr></table>
+                    </td></tr><tr><td><div class="t57" style="mso-line-height-rule:exactly;mso-line-height-alt:50px;line-height:50px;font-size:1px;display:block;">&nbsp;&nbsp;</div></td></tr></table></td></tr></table></div><div class="gmail-fix" style="display: none; white-space: nowrap; font: 15px courier; line-height: 0;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div></body>
+                    </html>
+
                 <html>
                     <body>
                     <br><br>Good day ' . $add_std_firstname . ",<br><br>" .
@@ -219,6 +491,28 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo "error";
             }
             break;
+        case "add_org_info":
+            $kld_signup_fname = $_POST['kld_signup_fname'];
+            $kld_signup_lname = $_POST['kld_signup_lname'];
+            $kld_username = $_POST['kld_username'];
+            $kld_password = $_POST['kld_password'];
+            $query_param = " set org_fname = '" . $kld_signup_fname . "', ";
+            $query_param .= " org_lname = '" . $kld_signup_lname . "', ";
+            $query_param .= " org_uname = '" . $kld_username . "', ";
+            $query_param .= " org_pass = '" . $kld_password . "', ";
+            $query_param .= " org_activation_key = '' ";
+            $query_param .= " where org_activation_key = '" . $_SESSION['activation_key'] . "' ";
+
+
+
+            $try = mysqli_query($conn, "Update org_acc" . $query_param);
+            if ($try) {
+                echo "success";
+                session_destroy();
+            } else {
+                echo "error";
+            }
+            break;
         case "create_account":
             $username = $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
@@ -248,23 +542,28 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo "error";
             }
             break;
+
+
         case "logging_in":
             $username = $_POST['username'];
             $password = base64_encode(base64_encode($_POST['password']));
             $login_type = $_POST['login_type'];
-
             switch ($login_type) {
                 case "admin":
 
-                    $try = mysqli_query($conn, "Select * from admin_acc where admin_uname = '" . $username . "' and admin_pass = '" . $password . "'");
+                    $query = "Select * from admin_acc where admin_uname = '" . $username . "' and admin_pass = '" . $password . "'";
+                    $try = mysqli_query($conn, $query);
                     $json = [];
                     while ($row = $try->fetch_array()) {
                         echo "success"; //match yung uname at pass
+                        $_SESSION['kld_id'] = $row['admin_id'];
                         $_SESSION['kld_username'] = $row['admin_uname'];
+                        $_SESSION['kld_admin_role'] = $row['admin_role'];
+                        $_SESSION['kld_profile'] = $row['admin_profile'];
                         $_SESSION['login_type'] = "Administrator";
                         $_SESSION['kld_fname'] = $row['admin_fname'];
                         $_SESSION['kld_lname'] = $row['admin_lname'];
-                        $_SESSION['kld_email'] = "";
+                        $_SESSION['kld_email'] = $row['admin_email'];
                         $_SESSION['kld_login_expiration'] = true;
                         return;
                     }
@@ -272,63 +571,277 @@ if (!array_key_exists('ajax', $_POST)) {
                     break;
                 case "student":
                     // wala pang laman, maya konte
+                    $query = "Select * from std_acc where std_uname = '" . $username . "' and std_pass = '" . $password . "'";
+                    $try = mysqli_query($conn, $query);
+                    $json = [];
+                    while ($row = $try->fetch_array()) {
+                        echo "success"; //match yung uname at pass
+                        $_SESSION['kld_id'] = $row['std_id'];
+                        $_SESSION['kld_username'] = $row['std_uname'];
+                        $_SESSION['kld_std_id'] = $row['std_kld_id'];
+                        $_SESSION['kld_profile'] = $row['std_profilepic'];
+                        $_SESSION['login_type'] = "Student";
+                        $_SESSION['kld_fname'] = $row['std_fname'];
+                        $_SESSION['kld_lname'] = $row['std_lname'];
+                        $_SESSION['kld_email'] = $row['std_kld_email'];
+                        $_SESSION['kld_login_expiration'] = true;
+                        return;
+                    }
+                    echo "failed";
                     break;
                 case "org":
-                    // same
+                    $query = "SELECT org_acc.*, org_tbl.org_name 
+                                  FROM org_acc 
+                                  JOIN org_tbl ON org_acc.org_id = org_tbl.org_id 
+                                  WHERE org_acc.org_uname = '" . $username . "' 
+                                  AND org_acc.org_pass = '" . $password . "'";
+
+                    $try = mysqli_query($conn, $query);
+                    $json = [];
+
+                    while ($row = $try->fetch_array()) {
+                        echo "success"; // Username and password match
+
+                        $_SESSION['kld_id'] = $row['org_acc_id'];
+                        $_SESSION['kld_username'] = $row['org_uname'];
+                        $_SESSION['kld_org_role'] = $row['org_role'];
+                        $_SESSION['login_type'] = "Organizer";
+                        $_SESSION['kld_org'] = $row['org_id'];
+                        $_SESSION['kld_profile'] = $row['org_profile'];
+                        $_SESSION['kld_fname'] = $row['org_fname'];
+                        $_SESSION['kld_lname'] = $row['org_lname'];
+                        $_SESSION['kld_email'] = $row['org_email'];
+                        $_SESSION['kld_org_name'] = $row['org_name']; // Adding the organization name to the session
+                        $_SESSION['kld_login_expiration'] = true;
+                        return;
+                    }
+
+                    echo "failed";
                     break;
+
                 default:
                     die("Someone might be trying to brute-force logging in.");
             }
             break;
+
         case "logging_out":
             unset($_SESSION['ajax']);
             unset($_SESSION['kld_login_expiration']);
             unset($_COOKIE['kld_login_expiration']);
             session_destroy();
             header('location:/login.php');
+            break;
         case "add_event":
+            $eventType = $_POST['eventType'];
             $venue_id = $_POST['venue_id'];
             $event_start_date = date('Y-m-d H:i:s', strtotime($_POST['event_start_date']));
             $event_end_date = date('Y-m-d H:i:s', strtotime($_POST['event_end_date']));
+            $event_cap = $_POST['capacity']; // Capture the event capacity
             $event_title = $_POST['event_title'];
             $event_description = $_POST['event_description'];
             $event_category = $_POST['event_category'];
-            $event_organizer = $_POST['event_organizer'];
+            $event_organization = $_POST['event_organization'];
             $event_poster = $_POST['event_poster'];
 
-
+            // Insert into kld_event
             $try = mysqli_query(
                 $conn,
-                "Insert into kld_event
-                       ( 
-                            venue_id,
-                            event_start_date,
-                            event_end_date,
-                            event_title,
-                            category_id,
-                            event_desc,
-                            event_org_id,
-                            event_poster
-                        )
-                        values
+                "INSERT INTO kld_event
+                        (event_type, 
+                        venue_id, 
+                        event_start_date, 
+                        event_end_date, 
+                        event_cap,  
+                        event_title, 
+                        category_id, 
+                        event_desc, 
+                        event_org_id, 
+                        event_poster,
+                        status)
+                    VALUES
                         (
+                            '" . $eventType . "',
                             '" . $venue_id . "',
                             '" . $event_start_date . "',
                             '" . $event_end_date . "',
+                            '" . $event_cap . "',  
                             '" . $event_title . "',
                             '" . $event_category . "',
                             '" . $event_description . "',
-                            '" . $event_organizer . "',
-                            '" . $event_poster . "'
-                        )
-            "
+                            '" . $event_organization . "',
+                            '" . $event_poster . "',
+                            'pending'
+                        )"
             );
+
+            if ($try) {
+                // Get the last inserted event_id
+                $event_id = mysqli_insert_id($conn);
+                $proposal_letter = $_POST['proposal_letter'];
+
+                // Decode admin and organizer arrays
+                $event_admins = json_decode($_POST['event_admins'], true) ?? []; // Use null coalescing
+                $event_organizers = json_decode($_POST['event_organizers'], true) ?? []; // Use null coalescing
+
+                // Insert stakeholders (admins)
+                foreach ($event_admins as $admin_id) {
+                    $insert_stakeholder = "INSERT INTO stakeholder_tbl (event_id, admin_id, status) VALUES ('$event_id', '$admin_id', 'pending')";
+                    if (!mysqli_query($conn, $insert_stakeholder)) {
+                        error_log("Error inserting admin stakeholder: " . mysqli_error($conn));
+                    }
+                }
+
+                // Insert stakeholders (organizers)
+                foreach ($event_organizers as $org_acc_id) {
+                    $insert_stakeholder = "INSERT INTO stakeholder_tbl (event_id, org_acc_id, status) VALUES ('$event_id', '$org_acc_id', 'pending')";
+                    if (!mysqli_query($conn, $insert_stakeholder)) {
+                        error_log("Error inserting organizer stakeholder: " . mysqli_error($conn));
+                    }
+                }
+
+                // Handle inserting attendees into the event_invitation table
+                $attendees = [
+                    'course_ids' => json_decode($_POST['course_ids'], true),
+                    'yearlvl_ids' => json_decode($_POST['yearlvl_ids'], true),
+                    'section_ids' => json_decode($_POST['section_ids'], true),
+                    'org_ids' => json_decode($_POST['org_ids'], true)
+                ];
+
+                // Use null coalescing operator to handle potential null values
+                foreach ($attendees['course_ids'] ?? [] as $course_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, course_id) VALUES ('$event_id', '$course_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['yearlvl_ids'] ?? [] as $yearlvl_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, yearlvl_id) VALUES ('$event_id', '$yearlvl_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['section_ids'] ?? [] as $section_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, section_id) VALUES ('$event_id', '$section_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                foreach ($attendees['org_ids'] ?? [] as $org_id) {
+                    $insert_invitation = "INSERT INTO event_invitation (event_id, org_id) VALUES ('$event_id', '$org_id')";
+                    mysqli_query($conn, $insert_invitation);
+                }
+
+                // Insert the proposal letter
+                $insert_letter = "INSERT INTO letter_tbl (event_id, letter_content) VALUES ('$event_id', '$proposal_letter')";
+                if (mysqli_query($conn, $insert_letter)) {
+                    // Successfully inserted letter
+                } else {
+                    error_log("Error inserting letter: " . mysqli_error($conn));
+                }
+
+                // Return success response with event_id
+                echo json_encode([
+                    "status" => "success",
+                    "event_id" => $event_id // Send the event ID back to the client
+                ]);
+            } else {
+                echo json_encode([
+                    "status" => "error",
+                    "message" => "Failed to add event. Reason: " . mysqli_error($conn)
+                ]);
+            }
+
+            break;
+
+        case "admin_approve":
+            // Include database connection
+            include('control/db.php');
+
+            // Check if the session variable exists
+            if (!isset($_SESSION['kld_id'])) {
+                echo json_encode(['status' => 'error', 'message' => 'Admin ID not found in session.']);
+                exit;
+            }
+
+            // Get the admin_id from the session
+            $admin_id = $_SESSION['kld_id'];
+
+            // Prepare the SQL query to update the status in stakeholder_tbl
+            $query = "UPDATE stakeholder_tbl SET status = 'approved' WHERE admin_id = ?";
+
+            // Prepare the statement
+            if ($stmt = $conn->prepare($query)) {
+                // Bind the admin_id parameter to the query
+                $stmt->bind_param("i", $admin_id);
+
+                // Execute the statement and check if it was successful
+                if ($stmt->execute()) {
+                    // Check if any rows were affected
+                    if ($stmt->affected_rows > 0) {
+                        echo json_encode(['status' => 'success', 'message' => 'Status updated successfully.']);
+                    } else {
+                        echo json_encode(['status' => 'warning', 'message' => 'No records were updated.']);
+                    }
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Error updating status: ' . $stmt->error]);
+                }
+
+                // Close the statement
+                $stmt->close();
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error preparing statement: ' . $conn->error]);
+            }
+
+            // Close the database connection
+            $conn->close();
+            break;
+
+
+
+
+
+        case "venue_name":
+            ob_start(); // Start output buffering to prevent unwanted output
+
+            if (array_key_exists('ajax', $_POST)) {
+                switch ($_POST['ajax']) {
+                    case "venue_name":
+                        if (isset($_POST['venue_id'])) {
+                            $venue_id = $_POST['venue_id'];
+                            $result = mysqli_query($conn, "SELECT event_start_date FROM kld_event WHERE venue_id = '$venue_id'");
+
+                            $dates = [];
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $dates[] = date('m/d/Y', strtotime($row['event_start_date']));  // Format date as MM/DD/YYYY
+                            }
+
+                            ob_clean(); // Clean buffer before outputting JSON
+                            echo json_encode($dates);  // Send JSON-encoded array
+                        }
+                        break;
+                }
+            }
+
+            ob_end_flush(); // End buffering and send the output
+            break;
+
+
+
+        case "add_event_check_sections":
+            $selectedPrograms = explode(",", base64_decode($_POST['selectedPrograms']));
+            $selectedYearLevels = explode(",", base64_decode($_POST['selectedYearLevels']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $selectedPrograms) . ")";
+            $query .= " and yearlvl in (" . implode(",", $selectedYearLevels) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
             if ($try) {
                 echo 1;
             } else {
                 echo 2;
             }
             break;
+
         case "add_cat":
             $add_cat_category = $_POST['add_cat_category'];
             $add_cat_description = $_POST['add_cat_description'];

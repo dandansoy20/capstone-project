@@ -1,4 +1,3 @@
-
 <!-- begin::User Panel-->
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 
@@ -21,15 +20,15 @@
 		<!--begin::Header-->
 		<div class="d-flex align-items-center mt-5">
 			<div class="symbol symbol-100 mr-5">
-				<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+				<div class="symbol-label" style="background-image:url('<?php echo $_SESSION['kld_profile']; ?>')"></div>
 				<i class="symbol-badge bg-success"></i>
 			</div>
 			<div class="d-flex flex-column">
 				<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-					James Jones
+					<?php echo $_SESSION['kld_fname'] . " " . $_SESSION['kld_lname'] ?>
 				</a>
 				<div class="text-muted mt-1">
-					Application Developer
+					<?php echo $_SESSION['kld_org_role'] ?>
 				</div>
 				<div class="navi mt-2">
 					<a href="#" class="navi-item">
@@ -47,10 +46,10 @@
 
 									<!--end::Svg Icon-->
 								</span> </span>
-							<span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+							<span class="navi-text text-muted text-hover-primary"><?php echo $_SESSION['kld_email']; ?></span>
 						</span>
 					</a>
-					<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+					<a href="logout.php" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
 				</div>
 			</div>
 		</div>

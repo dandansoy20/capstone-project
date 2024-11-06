@@ -47,7 +47,7 @@ var KTCalendarBasic = function() {
                     {
                         title: 'All Day Event',
                         start: YM + '-01',
-                        description: 'Toto lorem ipsum dolor sit incid idunt ut',
+                        description: 'Toto africa lorem ipsum dolor sit incid idunt ut',
                         className: "fc-event-danger fc-event-solid-warning"
                     },
                     {
