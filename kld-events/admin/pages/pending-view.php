@@ -63,6 +63,7 @@ if (isset($_GET['event_id'])) {
 
 				if (!empty($row['admin_fname']) && !empty($row['admin_lname'])) {
 					$stakeholders[] = [
+						'admin_id' => $row['admin_id'],
 						'role' => htmlspecialchars($row['admin_role']),
 						'name' => htmlspecialchars($row['admin_fname'] . ' ' . $row['admin_lname']),
 						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
@@ -74,6 +75,7 @@ if (isset($_GET['event_id'])) {
 				// Fetch organization information
 				if (!empty($row['org_fname']) && !empty($row['org_lname'])) {
 					$stakeholders[] = [
+						'org_acc_id' => $row['org_acc_id'],
 						'role' => htmlspecialchars($row['organization_name']),
 						'name' => htmlspecialchars($row['org_fname'] . ' ' . $row['org_lname']),
 						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
@@ -132,11 +134,19 @@ if (isset($_GET['event_id'])) {
 					<div class="position-absolute top-0 right-0 p-3">
 						<div class="d-flex align-items-center">
 							<!-- Edit and Archive icons -->
-							<a href="?page=edit-event&event_id=<?php echo $eventId ?>" class="btn btn-sm btn-icon btn-primary mx-1" title="Edit">
-								<i class="icon-xl fas fa-pen"></i>
+							<a href="?page=edit-event&event_id=<?php echo $eventId ?>" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" title="Edit">
+								<span class="svg-icon svg-icon-md svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+
+										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<rect x="0" y="0" width="24" height="24"></rect>
+											<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "></path>
+											<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+										</g>
+									</svg><!--end::Svg Icon--></span>
 							</a>
-							<a href="#" class="btn btn-sm btn-icon btn-danger" title="Archive">
-								<i class="icon-xl fas fa-eye-slash"></i>
+							<a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3" title="Archive">
+								<i class="icon-xl fas fa-eye-slash text-danger"></i>
+
 							</a>
 						</div>
 					</div>
@@ -178,31 +188,31 @@ if (isset($_GET['event_id'])) {
 											echo (!empty($venue_name)) ?
 												'<a href="?page=venue-view&venue_id="#">
                                                  <span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
-                                                                         <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
-                                                                         <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                                             <g id="Stockholm-icons-/-Map-/-Marker1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                                 <rect id="bound" x="0" y="0" width="24" height="24"></rect>
-                                                                                 <path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
-                                                                             </g>
-                                                                         </svg>
-                                                                         <!--end::Svg Icon-->
-                                                                     </span>
-                                                                     <span class="text-dark h4 text-hover-primary">' . $venue_name . '</span>
-                                                                 </a>'
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+														<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+															<g id="Stockholm-icons-/-Map-/-Marker1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+																<path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+													<span class="text-dark h4 text-hover-primary">' . $venue_name . '</span>
+												</a>'
 												:
 												'<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
-                                                                     <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Devices/Display3.svg-->
-                                                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                             <rect x="0" y="0" width="24" height="24"/>
-                                                                             <polygon fill="#000000" opacity="0.3" points="5 7 5 15 19 15 19 7"/>
-                                                                             <path d="M11,19 L11,16 C11,15.4477153 11.4477153,15 12,15 C12.5522847,15 13,15.4477153 13,16 L13,19 L14.5,19 C14.7761424,19 15,19.2238576 15,19.5 C15,19.7761424 14.7761424,20 14.5,20 L9.5,20 C9.22385763,20 9,19.7761424 9,19.5 C9,19.2238576 9.22385763,19 9.5,19 L11,19 Z" fill="#000000" opacity="0.3"/>
-                                                                             <path d="M5,7 L5,15 L19,15 L19,7 L5,7 Z M5.25,5 L18.75,5 C19.9926407,5 21,5.8954305 21,7 L21,15 C21,16.1045695 19.9926407,17 18.75,17 L5.25,17 C4.00735931,17 3,16.1045695 3,15 L3,7 C3,5.8954305 4.00735931,5 5.25,5 Z" fill="#000000" fill-rule="nonzero"/>
-                                                                         </g>
-                                                                     </svg>
-                                                                     <!--end::Svg Icon-->
-                                                                 </span>
-                                                                 <span class="text-dark h4">Virtual Event</span>';
+													<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Devices/Display3.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="0" y="0" width="24" height="24"/>
+															<polygon fill="#000000" opacity="0.3" points="5 7 5 15 19 15 19 7"/>
+															<path d="M11,19 L11,16 C11,15.4477153 11.4477153,15 12,15 C12.5522847,15 13,15.4477153 13,16 L13,19 L14.5,19 C14.7761424,19 15,19.2238576 15,19.5 C15,19.7761424 14.7761424,20 14.5,20 L9.5,20 C9.22385763,20 9,19.7761424 9,19.5 C9,19.2238576 9.22385763,19 9.5,19 L11,19 Z" fill="#000000" opacity="0.3"/>
+															<path d="M5,7 L5,15 L19,15 L19,7 L5,7 Z M5.25,5 L18.75,5 C19.9926407,5 21,5.8954305 21,7 L21,15 C21,16.1045695 19.9926407,17 18.75,17 L5.25,17 C4.00735931,17 3,16.1045695 3,15 L3,7 C3,5.8954305 4.00735931,5 5.25,5 Z" fill="#000000" fill-rule="nonzero"/>
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+												<span class="text-dark h4">Virtual Event</span>';
 											?>
 										</a>
 									</div>
@@ -213,7 +223,15 @@ if (isset($_GET['event_id'])) {
 											// Format the date and time
 											$formattedDate = date("F d, Y", strtotime($event_start_date));
 											$formattedTime = date("h:i A", strtotime($event_start_date));
-											echo $formattedDate . " | " . $formattedTime;
+											$clockIcon = '<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+												<g id="Stockholm-icons-/-Home-/-Clock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+													<path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" id="Mask" fill="#000000" opacity="0.3"></path>
+													<path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"></path>
+												</g>
+											</svg><!--end::Svg Icon--></span>';
+											echo $formattedDate . "  " . $clockIcon . "  " . $formattedTime;
+
 											?>
 										</span>
 										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
@@ -225,7 +243,7 @@ if (isset($_GET['event_id'])) {
 										<?php echo htmlspecialchars($event_desc); ?>
 									</p>
 									<a href="?page=memo&event_id=<?php echo $eventId ?>" class="btn btn-light-primary font-weight-bold py-2 px-6">View Proposal</a>
-									<a href="?page=edit-event&event_id=<?php echo $eventId ?>" class="btn btn-primary font-weight-bold py-2 disabled">Launch Event</a>
+									<button id="launch-event" type="button" class="btn btn-primary font-weight-bold py-2 <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>" <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>>Launch Event</button>
 								</div>
 							</div>
 						</div>
@@ -290,6 +308,7 @@ if (isset($_GET['event_id'])) {
 							<h5>Administrator</h5>
 							<div class="row">
 								<?php foreach ($stakeholders as $stakeholder):
+									$statusClass = '';
 									if ($stakeholder['status'] === 'approved') {
 										$statusClass = 'text-success';  // Green for approved
 									} elseif ($stakeholder['status'] === 'rejected') {
@@ -297,21 +316,100 @@ if (isset($_GET['event_id'])) {
 									} else {
 										$statusClass = 'text-warning';  // Yellow for other statuses
 									}
-								?>
 
+									if ($stakeholder['status'] !== 'approved') {
+										$allApproved = false; // If any status is not approved, set flag to false
+									}
+								?>
 									<?php if ($stakeholder['type'] === 'admin'): ?>
 										<div class="col-xl-4">
 											<div class="card card-custom card-stretch gutter-b">
 												<div class="card-body d-flex align-items-center py-0 mt-5">
 													<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-														<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-target="#exampleModalCenter" data-toggle="tooltip" data-theme="dark" title="View Comment">
-															<?php echo htmlspecialchars($stakeholder['name']); ?>
+														<a href="" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="modal" data-target="#admodal_<?php echo $stakeholder['admin_id']; ?>" title="View Comment">
+															<?php
+															$comments_query = "SELECT COUNT(*) AS total_comments FROM comment_tbl WHERE admin_id = " . $stakeholder['admin_id'] . " AND event_id = $eventId";
+															$comments_result = mysqli_query($conn, $comments_query);
+															$comments_row = mysqli_fetch_assoc($comments_result);
+															$total_comments = $comments_row['total_comments'] ?? 0;
+															if ($total_comments > 0) {
+																echo htmlspecialchars($stakeholder['name']) . " <span class='label label-info ml-2'>$total_comments</span>";
+															} else {
+																echo htmlspecialchars($stakeholder['name']);
+															}
+															?>
+
 														</a>
 														<span class="font-weight-bold text-muted font-size-lg"><?php echo htmlspecialchars($stakeholder['role']); ?></span>
 														<div class="<?php echo $statusClass; ?> font-weight-bold mb-3 text-uppercase"><?php echo htmlspecialchars($stakeholder['status']); ?></div>
 													</div>
 													<div class="symbol symbol-lg-100">
 														<img src="<?php echo $stakeholder['profile']; ?>" alt="" />
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- Modal for Comments -->
+										<div class="modal fade" id="admodal_<?php echo $stakeholder['admin_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_<?php echo $stakeholder['admin_id']; ?>" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-l" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel_<?php echo $stakeholder['admin_id']; ?>">Comment</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<i aria-hidden="true" class="ki ki-close"></i>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="timeline timeline-3">
+															<div class="timeline-items">
+																<?php
+																// Fetch comments for the current organizer
+																$comments_query = "SELECT * FROM comment_tbl WHERE admin_id = " . $stakeholder['admin_id'] . " AND event_id = $eventId";
+																$comments_result = mysqli_query($conn, $comments_query);
+
+																if (mysqli_num_rows($comments_result) > 0) {
+																	while ($comment = mysqli_fetch_assoc($comments_result)) {
+																		$comment_text = htmlspecialchars($comment['comment']);
+																		$comment_date = date("F d, Y g:i A", strtotime($comment['comment_date']));
+																?>
+																		<div class="timeline-item">
+																			<div class="timeline-media">
+																				<?php
+																				$org_query = "SELECT admin_profile FROM admin_acc WHERE admin_id = " . $stakeholder['admin_id'];
+																				$org_result = mysqli_query($conn, $org_query);
+																				$org_row = mysqli_fetch_assoc($org_result);
+																				$org_profilepic = ($org_row['admin_profile']);
+																				?>
+																				<img alt="Pic" src="<?php echo $org_profilepic; ?>">
+																			</div>
+																			<div class="timeline-content">
+																				<div class="d-flex align-items-center justify-content-between mb-3">
+																					<div class="mr-2">
+																						<a href="#" class="text-dark-75 text-hover-primary font-weight-bold">
+																							<?php echo $stakeholder['name']; ?>
+																						</a>
+																						<span class="text-muted ml-2">
+																							<?php echo $comment_date; ?>
+																						</span>
+																					</div>
+																				</div>
+																				<p class="p-0">
+																					<?php echo $comment_text; ?>
+																				</p>
+																			</div>
+																		</div>
+																<?php }
+																} else {
+																	// No comment yet
+																	echo '<p class="p-0 text-muted">No comment yet.</p>';
+																}
+																?>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
 													</div>
 												</div>
 											</div>
@@ -324,7 +422,8 @@ if (isset($_GET['event_id'])) {
 
 							<h5>Organizer</h5>
 							<div class="row">
-								<?php foreach ($stakeholders as $stakeholder): $statusClass = '';
+								<?php foreach ($stakeholders as $stakeholder):
+									$statusClass = '';
 									if ($stakeholder['status'] === 'approved') {
 										$statusClass = 'text-success';  // Green for approved
 									} elseif ($stakeholder['status'] === 'rejected') {
@@ -335,14 +434,26 @@ if (isset($_GET['event_id'])) {
 
 									if ($stakeholder['status'] !== 'approved') {
 										$allApproved = false; // If any status is not approved, set flag to false
-									} ?>
+									}
+								?>
 									<?php if ($stakeholder['type'] === 'organizer'): ?>
 										<div class="col-xl-4">
 											<div class="card card-custom card-stretch gutter-b">
 												<div class="card-body d-flex align-items-center py-0 mt-5">
 													<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-														<a href="#" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="modal" data-target="#exampleModalCenter" data-theme="dark" title="View Comment">
-															<?php echo htmlspecialchars($stakeholder['name']); ?> <span class="label label-info ml-2 ">0</span>
+														<a href="" class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-1 text-hover-primary" data-toggle="modal" data-target="#modal_<?php echo $stakeholder['org_acc_id']; ?>" title="View Comment">
+															<?php
+															$comments_query = "SELECT COUNT(*) AS total_comments FROM comment_tbl WHERE org_acc_id = " . $stakeholder['org_acc_id'] . " AND event_id = $eventId";
+															$comments_result = mysqli_query($conn, $comments_query);
+															$comments_row = mysqli_fetch_assoc($comments_result);
+															$total_comments = $comments_row['total_comments'] ?? 0;
+															if ($total_comments > 0) {
+																echo htmlspecialchars($stakeholder['name']) . " <span class='label label-info ml-2'>$total_comments</span>";
+															} else {
+																echo htmlspecialchars($stakeholder['name']);
+															}
+															?>
+
 														</a>
 														<span class="font-weight-bold text-muted font-size-lg"><?php echo htmlspecialchars($stakeholder['role']); ?></span>
 														<div class="<?php echo $statusClass; ?> font-weight-bold mb-3 text-uppercase"><?php echo htmlspecialchars($stakeholder['status']); ?></div>
@@ -353,9 +464,74 @@ if (isset($_GET['event_id'])) {
 												</div>
 											</div>
 										</div>
+
+										<!-- Modal for Comments -->
+										<div class="modal fade" id="modal_<?php echo $stakeholder['org_acc_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_<?php echo $stakeholder['org_acc_id']; ?>" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-l" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel_<?php echo $stakeholder['org_acc_id']; ?>">Comment</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<i aria-hidden="true" class="ki ki-close"></i>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="timeline timeline-3">
+															<div class="timeline-items">
+																<?php
+																// Fetch comments for the current organizer
+																$comments_query = "SELECT * FROM comment_tbl WHERE org_acc_id = " . $stakeholder['org_acc_id'] . " AND event_id = $eventId";
+																$comments_result = mysqli_query($conn, $comments_query);
+
+																if (mysqli_num_rows($comments_result) > 0) {
+																	while ($comment = mysqli_fetch_assoc($comments_result)) {
+																		$comment_text = htmlspecialchars($comment['comment']);
+																		$comment_date = date("F d, Y g:i A", strtotime($comment['comment_date']));
+																?>
+																		<div class="timeline-item">
+																			<div class="timeline-media">
+																				<?php
+																				$org_query = "SELECT org_profile FROM org_acc WHERE org_acc_id = " . $stakeholder['org_acc_id'];
+																				$org_result = mysqli_query($conn, $org_query);
+																				$org_row = mysqli_fetch_assoc($org_result);
+																				$org_profilepic = ($org_row['org_profile']);
+																				?>
+																				<img alt="Pic" src="<?php echo $org_profilepic; ?>">
+																			</div>
+																			<div class="timeline-content">
+																				<div class="d-flex align-items-center justify-content-between mb-3">
+																					<div class="mr-2">
+																						<a href="#" class="text-dark-75 text-hover-primary font-weight-bold">
+																							<?php echo $stakeholder['name']; ?>
+																						</a>
+																						<span class="text-muted ml-2">
+																							<?php echo $comment_date; ?>
+																						</span>
+																					</div>
+																				</div>
+																				<p class="p-0">
+																					<?php echo $comment_text; ?>
+																				</p>
+																			</div>
+																		</div>
+																	<?php
+																	}
+																} else { ?>
+																	<p class="p-0 text-muted">No comment yet.</p>
+																<?php } ?>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+													</div>
+												</div>
+											</div>
+										</div>
 									<?php endif; ?>
 								<?php endforeach; ?>
 							</div>
+
 
 
 						</div>
@@ -915,24 +1091,7 @@ if (isset($_GET['event_id'])) {
 
 		<div class="separator separator-solid separator-border-4"></div>
 
-		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Comment</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<i aria-hidden="true" class="ki ki-close"></i>
-						</button>
-					</div>
 
-					<div class="modal-body">...</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">

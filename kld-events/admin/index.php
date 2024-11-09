@@ -152,6 +152,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="control/js/add-events.js"></script>
 		<!-- <script src="control/js/edit-events.js"></script> -->
 		<script src="control/js/add-cat.js"></script>
+		<script src="control/js/add-course.js"></script>
+		<script src="control/js/add-section.js"></script>
 		<script src="control/js/add-venue.js"></script>
 		<script src="control/js/add-std.js"></script>
 		<script src="control/js/calendar.js"></script>

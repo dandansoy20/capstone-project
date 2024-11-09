@@ -3,9 +3,15 @@ $("#kt_datetimepicker_7_11").datetimepicker({
   defaultDate: eventStartDate,
 });
 // Demo 6
-$("#kt_datetimepicker_7_21").datetimepicker({
-  defaultDate: eventEndDate,
-});
+if (eventEndDate === "1970-01-01 08:00:00") {
+  $("#kt_datetimepicker_7_21").datetimepicker({
+    defaultDate: moment(),
+  });
+} else {
+  $("#kt_datetimepicker_7_21").datetimepicker({
+    defaultDate: eventEndDate,
+  });
+}
 
 $(document).ready(function () {
   // Initialize the disabled dates when the page loads based on the selected venue

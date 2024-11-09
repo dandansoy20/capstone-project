@@ -263,8 +263,8 @@ if (isset($_GET['event_id'])) {
                             <form method="post">
                                 <input type="hidden" id="session_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
                                 <input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
-                                <button type="button" id="admin_reject_btn" name="admin_reject" class="btn btn-light-danger font-weight-bold mr-5" <?php echo ($status === 'rejected') ? 'disabled' : ''; ?>>Reject</button>
-                                <button type="button" id="admin_approve_btn" name="admin_approve" class="btn btn-primary font-weight-bold" <?php echo ($status === 'approved') ? 'disabled' : ''; ?>>Approve</button>
+                                <button type="button" id="admin_reject_btn" name="admin_reject" class="btn btn-light-danger font-weight-bold mr-5 " <?php echo ($status === 'rejected') ? 'disabled data-theme="dark" data-toggle="tooltip" title="Rejected Already"' : ''; ?>>Reject</button>
+                                <button type="button" id="admin_approve_btn" name="admin_approve" class="btn btn-primary font-weight-bold" <?php echo ($status === 'approved') ? 'disabled data-theme="dark" data-toggle="tooltip" title="Approved Already"' : ''; ?>>Approve</button>
                             </form>
                         </div>
                     </div>

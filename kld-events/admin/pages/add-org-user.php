@@ -8,25 +8,7 @@
                 <!--begin::Wizard-->
                 <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
                     <!--begin::Wizard Nav-->
-                    <div class="wizard-nav">
-                        <div class="wizard-steps">
-                            <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
-                                <div class="wizard-wrapper">
-                                    <div class="wizard-number">
-                                        @
-                                    </div>
-                                    <div class="wizard-label">
-                                        <div class="wizard-title">
-                                            Profile
-                                        </div>
-                                        <div class="wizard-desc">
-                                            User's Personal Information
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!--end::Wizard Nav-->
 
                     <!--begin::Card-->

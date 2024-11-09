@@ -145,7 +145,7 @@ $("#add_org_submit").click(async function () {
 
 function validateForm() {
   if ($("#add_org_fname").val() == "") {
-    Swal.fire("Please specify the first name!", "Please try again!", "error");
+    Swal.fire("Please specify the First Name!", "Please try again!", "error");
     return false;
   } else if ($("#add_org_lname").val() == "") {
     Swal.fire("Please specify the last name!", "Please try again!", "error");

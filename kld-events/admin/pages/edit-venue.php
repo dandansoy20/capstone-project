@@ -1,14 +1,29 @@
+<?php
+include('./control/db.php');
+
+// Check if the 'id' parameter exists in the URL
+if (isset($_GET['id'])) {
+    $venueId = $_GET['id'];
+}
+$try = mysqli_query($conn, "Select * from venue_tbl where venue_id = '$venueId'");
+while ($row = $try->fetch_array()) {
+
+
+    $venue_id = $row["venue_id"];
+    $venue_img = !empty($row["venue_img"]) ? base64_decode($row["venue_img"]) : 'assets/venue.png';
+    $venue_name = $row["venue_name"];
+    $venue_desc = $row["venue_desc"];
+    $venue_created = $row["venue_created"];
+}
+
+?>
+
 <div class="d-flex flex-column-fluid">
     <div class="container">
-
-
         <div class="card card-custom card-transparent">
             <div class="card-body p-0">
                 <!--begin::Wizard-->
                 <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
-                    <!--begin::Wizard Nav-->
-
-                    <!--end::Wizard Nav-->
 
                     <!--begin::Card-->
                     <div class="card card-custom card-shadowless rounded-top-0">
@@ -22,17 +37,18 @@
                                             <div class="col-xl-9">
                                                 <!--begin::Wizard Step 1-->
                                                 <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
-                                                    <h5 class="text-dark font-weight-bold mb-10">Add Event Category</h5>
+                                                    <h5 class="text-dark font-weight-bold mb-10">Edit Venue</h5>
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Icon</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Venue Image</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="image-input image-input-outline" id="kt_user_add_avatar">
-                                                                <div class="image-input-wrapper" style="background-image: url(assets/media/users/default.jpg)"></div>
+                                                                <div class="image-input-wrapper" style="background-image: url(<?php echo $venue_img; ?>)"></div>
+
 
                                                                 <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                    <input type="file" id="add_cat_icon" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                                                    <input type="file" id="edit_venue_img" name="profile_avatar" accept=".png, .jpg, .jpeg" />
                                                                     <input type="hidden" name="profile_avatar_remove" />
                                                                 </label>
 
@@ -45,16 +61,18 @@
                                                     <!--end::Group-->
                                                     <!--begin::Group FNAME-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Category Name</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Venue Name</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <input class="form-control form-control-solid form-control-lg" id="add_cat_category" name="add_cat_category" placeholder="Academic" type="text" value="" />
+                                                            <input class="form-control form-control-solid form-control-lg" id="edit_venue" name="edit_venue" placeholder="Academic" type="text" value="<?php echo $venue_name; ?>" />
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">Category Description</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Venue Description</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <textarea class="form-control form-control-solid form-control-lg" id="add_cat_description" name="add_cat_description" placeholder="Description Here..." type="text" rows="3"></textarea>
+                                                            <textarea class="form-control form-control-solid form-control-lg" id="edit_venue_description" name="edit_venue_description" placeholder="Description Here..." type="text" rows="3"><?php echo $venue_desc; ?></textarea>
+                                                            <input type="hidden" value="<?php echo $venue_id; ?>" name="venue_id" id="venue_id">
+                                                            <input type="hidden" value="<?php echo $venue_img; ?>" name="existing_img" id="existing_img">
                                                         </div>
                                                     </div>
 
@@ -64,7 +82,7 @@
                                                 <div class="d-flex justify-content-end border-top pt-10 mt-15">
                                                     <div>
                                                         <button onclick="history.back()" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4">Back</button>
-                                                        <button id="add_cat_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Submit</button>
+                                                        <button id="edit_venue_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Submit</button>
                                                     </div>
                                                 </div>
                                                 <!--end::Wizard Actions-->

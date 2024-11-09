@@ -2,46 +2,78 @@
 include('./control/db.php');  // Include the database connection
 
 // Array of bootstrap color classes
-$colors = ['primary', 'success', 'info', 'warning', 'danger'];
+$colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark'];
 
 ?>
 
 <div class="d-flex flex-column-fluid">
     <div class="container">
-
         <div class="row">
+
             <?php
             $try = mysqli_query($conn, "SELECT * FROM course_tbl");
             $count = 0;  // Initialize a counter to track the number of cards in the row
+            $courses = []; // Array to store course data
 
+            // Fetch all courses and store them in an array
             while ($row = $try->fetch_array()) {
-                // Check if the current column count is divisible by 3, if so close the current row and start a new one
-                if ($count % 3 == 0 && $count != 0) {
-                    echo '</div><div class="row">';  // Close the previous row and open a new one
-                }
+                $courses[] = $row;
+                $count++;
+            }
 
-                // Calculate the color class based on the count (loop through the colors array)
-                $colorClass = $colors[$count % count($colors)];  // Cycle through colors array
+            // Loop through the courses and display each one
+            foreach ($courses as $index => $row) {
+                // Calculate the color class based on the index
+                $colorClass = $colors[$index % count($colors)];  // Cycle through colors array
             ?>
                 <div class="col-xl-4">
                     <!--begin::Stats Widget 13-->
-                    <a href="?page=yearlevel" class="card card-custom bg-<?= $colorClass ?> bg-hover-state-<?= $colorClass ?> card-stretch gutter-b">
+                    <a href="?page=yearlevel&course_id=<?= $row['course_id'] ?>" class="card card-custom bg-<?= $colorClass ?> bg-hover-state-<?= $colorClass ?> card-stretch gutter-b" data-theme="dark" data-toggle="tooltip" title="<?= $row['course_desc'] ?>">
                         <!--begin::Body-->
                         <div class="card-body">
                             <span class="symbol symbol-light-<?= $colorClass ?> symbol-45">
                                 <span class="symbol-label font-weight-bolder font-size-h6"><?= $row['course_acronym'] ?></span>
                             </span>
                             <div class="text-inverse-<?= $colorClass ?> font-weight-bolder font-size-h5 mb-2 mt-5"><?= $row['course_name'] ?></div>
-                            <div class="font-weight-bold text-inverse-<?= $colorClass ?> font-size-sm"><?= $row['course_created'] ?></div>
                         </div>
                         <!--end::Body-->
                     </a>
                     <!--end::Stats Widget 13-->
                 </div>
             <?php
-                $count++;  // Increment the counter
-            } // End of while loop
+            }
+
+            // Add an empty column and the "Add Course" card if needed (for second row)
+            if ($count % 3 != 0) {
+                $emptyColumns = 3 - ($count % 3);  // Number of empty columns needed to fill the row
+
+                // If we need to add empty columns
+                for ($i = 0; $i < $emptyColumns - 1; $i++) {
+                    echo '<div class="col-xl-4"></div>'; // Empty columns to fill the space
+                }
+            }
+
+            // Add the "Add Course" card in the last column of the second row
             ?>
-        </div> <!-- Close the last row -->
+            <div class="col-xl-4">
+                <!--begin::Stats Widget 13-->
+                <a href="?page=add-course" class="card card-custom bg-light bg-hover-state-primary card-stretch gutter-b">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <!-- Add "+" icon and "Add Course" text -->
+                        <span class="symbol symbol-light-primary symbol-45">
+                            <span class="symbol-label font-weight-bolder font-size-h5">
+                                <i class="fas fa-plus"></i> <!-- FontAwesome "+" icon -->
+                            </span>
+                        </span>
+                        <div class="text-dark-50 font-weight-bolder font-size-h5 mb-2 mt-5">
+                            Add Course
+                        </div>
+                    </div>
+                    <!--end::Body-->
+                </a>
+                <!--end::Stats Widget 13-->
+            </div>
+        </div> <!-- End row -->
     </div>
 </div>

@@ -100,7 +100,7 @@ include('control/db.php');
 								<a href="?page=upcoming-events" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
 									<span class="menu-text">Upcoming Events
-										<span class="label label-danger ml-2">
+										<span class="label label-info ml-2">
 											<?php
 											$try = mysqli_query($conn, "SELECT COUNT(status) FROM `kld_event` where status = 'upcoming'");
 											while ($row = $try->fetch_array()) {
@@ -115,7 +115,7 @@ include('control/db.php');
 								<a href="?page=proposal-events&id=<?php echo $_SESSION['kld_id']; ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
 									<span class="menu-text">Pending Events
-										<span class="label label-info ml-2">
+										<span class="label label-warning ml-2">
 											<?php
 											$try = mysqli_query($conn, "SELECT COUNT(status) FROM `kld_event` where status = 'pending'");
 											while ($row = $try->fetch_array()) {

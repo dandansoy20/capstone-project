@@ -832,9 +832,9 @@ if (!array_key_exists('ajax', $_POST)) {
             );
 
             if ($try) {
-                echo 1;
+                echo "success";
             } else {
-                echo 2;
+                echo "error";
             }
             break;
         case "edit_cat":
@@ -861,27 +861,153 @@ if (!array_key_exists('ajax', $_POST)) {
             }
             break;
 
+        case "add_course":
+            $add_course_name = mysqli_real_escape_string($conn, $_POST['add_course_name']);
+            $add_course_description = mysqli_real_escape_string($conn, $_POST['add_course_description']);
+            $add_course_acronym = mysqli_real_escape_string($conn, $_POST['add_course_acronym']); // Adding the category icon
 
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO course_tbl
+                            (
+                                course_name,
+                                course_desc,
+                                course_acronym
+                            )
+                            VALUES
+                            (
+                                '$add_course_name',
+                                '$add_course_description',
+                                '$add_course_acronym'
+                            )"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
+        case "edit_course":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_course_name = mysqli_real_escape_string($conn, $_POST['edit_course_name']);
+            $edit_course_description = mysqli_real_escape_string($conn, $_POST['edit_course_description']);
+            $edit_course_acronym = mysqli_real_escape_string($conn, $_POST['edit_course_acronym']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE course_tbl
+                         SET
+                             course_name = '$edit_course_name',
+                             course_desc = '$edit_course_description',
+                             course_acronym = '$edit_course_acronym'
+                         WHERE course_id = '$course_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+        case "add_section":
+            $add_section_name = mysqli_real_escape_string($conn, $_POST['add_section_name']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+            $yearlvl = mysqli_real_escape_string($conn, $_POST['yearlvl']); // Adding the category icon
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO section_tbl
+                                (
+                                    section_name,
+                                    course_id,
+                                    yearlvl
+                                )
+                                VALUES
+                                (
+                                    '$add_section_name',
+                                    '$course_id',
+                                    '$yearlvl'
+                                )"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
+        case "edit_section":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_section_name = mysqli_real_escape_string($conn, $_POST['edit_section_name']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+            $yearlvl = mysqli_real_escape_string($conn, $_POST['yearlvl']); // Adding the category icon
+            $section_id = mysqli_real_escape_string($conn, $_POST['section_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE section_tbl
+                             SET
+                                 section_name = '$edit_section_name',
+                                 section_desc = '$course_id',
+                                 section_acronym = '$yearlvl'
+                             WHERE section_id = '$section_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
 
         case "add_venue":
             $add_venue = $_POST['add_venue'];
             $add_venue_description = $_POST['add_venue_description'];
-
+            $add_venue_img = $_POST['add_venue_img']; // Adding the category icon
 
             $try = mysqli_query(
                 $conn,
-                "Insert into venue_tbl
-                       ( 
+                "INSERT INTO venue_tbl
+                        (
                             venue_name,
-                            venue_desc
+                            venue_desc,
+                            venue_img
                         )
-                        values
+                        VALUES
                         (
                             '" . $add_venue . "',
-                            '" . $add_venue_description . "'
-                        )
-            "
+                            '" . $add_venue_description . "',
+                            '" . $add_venue_img . "'
+                        )"
             );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+            break;
+        case "edit_venue":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_venue = mysqli_real_escape_string($conn, $_POST['edit_venue']);
+            $edit_venue_description = mysqli_real_escape_string($conn, $_POST['edit_venue_description']);
+            $venue_img = mysqli_real_escape_string($conn, $_POST['venue_img']);
+            $venue_id = mysqli_real_escape_string($conn, $_POST['venue_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE venue_tbl
+                         SET
+                             venue_name = '$edit_venue',
+                             venue_desc = '$edit_venue_description',
+                             venue_img = '$venue_img'
+                         WHERE venue_id = '$venue_id'"
+            );
+
             if ($try) {
                 echo 1;
             } else {

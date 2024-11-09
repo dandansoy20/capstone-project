@@ -81,7 +81,7 @@ while ($row = $try->fetch_array()) {
                                                 <!--begin::Wizard Actions-->
                                                 <div class="d-flex justify-content-end border-top pt-10 mt-15">
                                                     <div>
-                                                        <a href="" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4">Cancel</a>
+                                                        <button onclick="history.back()" id="prev-step" class="btn btn-light-primary font-weight-bolder px-9 py-4">Back</button>
                                                         <button id="edit_cat_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Submit</button>
                                                     </div>
                                                 </div>
