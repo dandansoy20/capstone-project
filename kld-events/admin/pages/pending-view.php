@@ -926,14 +926,14 @@ if (isset($_GET['event_id'])) {
 										<!--begin::Body-->
 										<div class="card-body">
 
-											<p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder">Image Title</p>
+											<p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"></p>
 											<!--begin::Bottom-->
 											<div class="pt-4">
 
 												<!--begin::Image-->
 												<div class="bgi-no-repeat bgi-size-cover rounded" style="background-image: url(assets/media/acquaintance/1.jpg); width: 100%; padding-bottom: 100%;"></div>
 												<!--end::Image-->
-												<p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2">Insert Text here</p>
+												<p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2"></p>
 
 											</div>
 											<!--end::Bottom-->
@@ -1068,14 +1068,63 @@ if (isset($_GET['event_id'])) {
 									</div>
 								</div>
 
-								<div class="col-xl-6">
+								<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+									<!--begin::Card-->
+									<div class="card card-custom gutter-b ">
+										<div class="card-header border-0">
+											<h3 class="card-title">Ticket Form
+											</h3>
+										</div>
+										<div class="card-body">
+											<div class="d-flex flex-column align-items-center">
+												<!--begin: Icon-->
+												<img alt="" class="max-h-65px" src="assets/media/svg/files/folders.svg">
+												<!--end: Icon-->
 
-
-
-
-
-
+												<!--begin: Tite-->
+												<div class="d-flex flex-column font-size-sm font-weight-bold pt-5">
+													<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
+														<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Agreement Samle.pdf
+													</a>
+													<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
+														<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Requirements.docx
+													</a>
+												</div>
+												<!--end: Tite-->
+											</div>
+										</div>
+									</div>
+									<!--end:: Card-->
 								</div>
+								<div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+									<!--begin::Card-->
+									<div class="card card-custom gutter-b ">
+										<div class="card-header border-0">
+											<h3 class="card-title">Meeting Link
+											</h3>
+										</div>
+										<div class="card-body">
+											<div class="d-flex flex-column align-items-center">
+												<!--begin: Icon-->
+												<img alt="" class="max-h-65px" src="assets/media/svg/files/link.svg">
+												<!--end: Icon-->
+
+												<!--begin: Tite-->
+												<div class="d-flex flex-column font-size-sm font-weight-bold pt-5">
+													<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
+														<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Agreement Samle.pdf
+													</a>
+													<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
+														<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Requirements.docx
+													</a>
+												</div>
+												<!--end: Tite-->
+											</div>
+										</div>
+									</div>
+									<!--end:: Card-->
+								</div>
+
 							</div>
 
 						</div>
