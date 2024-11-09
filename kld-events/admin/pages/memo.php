@@ -173,9 +173,7 @@ if (isset($_GET['event_id'])) {
                             $formattedDate = date("F d, Y", strtotime($event_date_created));
                             echo htmlspecialchars($formattedDate);
                             ?></h4><br>
-                        <h6>To whom it may concern,</h6><br>
-                        <p class="lead" style="text-align: justify;">
-                            <?php echo htmlspecialchars($proposal); ?></p>
+                        <?php echo $proposal; ?>
                     </div>
                 </div>
                 <!-- end: Invoice body-->

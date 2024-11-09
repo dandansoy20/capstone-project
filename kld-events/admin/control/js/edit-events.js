@@ -1,62 +1,183 @@
-// constant vars
-let selectedPrograms = [];
-let selectedYearLevels = [];
-//On triggers
-$("#event_next_button").click(function () {
-  $("#review_venue").text($("#venue_name").find(":selected").text());
-  $("#review_date").text(
-    $("#event_start_date").val() + " - " + $("#event_end_date").val()
-  );
-  $("#review_title").text($("#event_title").val());
-  $("#review_description").text($("#event_description").val());
-  $("#review_category").text($("#event_category").find(":selected").text());
-  $("#review_organizer").text($("#event_organizer").find(":selected").text());
+// Demo 6
+$("#kt_datetimepicker_7_11").datetimepicker({
+  defaultDate: eventStartDate,
+});
+// Demo 6
+$("#kt_datetimepicker_7_21").datetimepicker({
+  defaultDate: eventEndDate,
 });
 
-function imagefileinsert(e) {
-  var string = $(e).prop("files")[0];
-  var file = new FileReader();
-  file.readAsDataURL(string);
-  //$(file).ready(function (){
-  //});
-  file.addEventListener(
-    "load",
-    function () {
-      $(e)[0].outerHTML =
-        '<img src="' + file.result + '" contenteditable="true" />';
-      e_editmode($("#e_editor_editbtn"), "1");
+$(document).ready(function () {
+  // Initialize the disabled dates when the page loads based on the selected venue
+  initializeDisabledDatesForVenue();
+
+  // Bind the change event to update the disabled dates when the venue is changed
+  $("#edit_venue_name").change(function () {
+    const venueId = $(this).val();
+    // Fetch and update the disabled dates based on the selected venue
+    $.ajax({
+      url: "ajax.php",
+      method: "POST",
+      data: { venue_id: venueId, ajax: "venue_name" },
+      success: function (response) {
+        console.log("AJAX Response:", response); // Log response for debugging
+        const disabledDates = JSON.parse(response).map((date) =>
+          moment(date, "MM/DD/YYYY")
+        );
+        initializeDateTimePicker("#kt_datetimepicker_7_11", disabledDates);
+        initializeDateTimePicker("#kt_datetimepicker_7_2", disabledDates);
+      },
+      error: function () {
+        console.error("Failed to fetch disabled dates.");
+      },
+    });
+  });
+
+  // Function to initialize disabled dates for the selected venue on page load
+  function initializeDisabledDatesForVenue() {
+    const venueId = $("#edit_venue_name").val(); // Get the selected venue ID
+    if (venueId) {
+      $.ajax({
+        url: "ajax.php",
+        method: "POST",
+        data: { venue_id: venueId, ajax: "venue_name" },
+        success: function (response) {
+          console.log("AJAX Response on page load:", response); // Log response for debugging
+          const disabledDates = JSON.parse(response).map((date) =>
+            moment(date, "MM/DD/YYYY")
+          );
+          initializeDateTimePicker("#kt_datetimepicker_7_11", disabledDates);
+          initializeDateTimePicker("#kt_datetimepicker_7_21", disabledDates);
+        },
+        error: function () {
+          console.error("Failed to fetch disabled dates on page load.");
+        },
+      });
+    }
+  }
+
+  // Function to initialize datetime picker with disabled dates
+  function initializeDateTimePicker(pickerId, disabledDates) {
+    $(pickerId).datetimepicker("destroy"); // Destroy any existing instance to refresh
+    $(pickerId).datetimepicker({
+      format: "MM/DD/YYYY HH:mm",
+      disabledDates: disabledDates, // Pass the formatted moment dates here
+      useCurrent: false,
+    });
+  }
+});
+function checkSections() {
+  // If either programs or year levels are empty, disable and clear the sections
+  if (selectedPrograms.length === 0 || selectedYearLevels.length === 0) {
+    $("#kt_select2_3").html("").prop("disabled", true);
+    return;
+  }
+
+  var dataString =
+    "ajax=add_event_check_sections" +
+    "&selectedPrograms=" +
+    btoa(selectedPrograms).replace(/\=/g, "") +
+    "&selectedYearLevels=" +
+    btoa(selectedYearLevels).replace(/\=/g, "");
+
+  console.log(dataString);
+
+  $.ajax({
+    type: "POST",
+    url: "ajax.php",
+    data: dataString,
+    cache: false,
+    success: function (html) {
+      console.log("html", html);
+
+      // Update the sections dropdown with the response data
+      $("#kt_select2_3").html(html).prop("disabled", false);
+
+      // Optionally, you can trigger the selection of previously selected sections here
+      // Assuming that selectedSections is an array of previously selected section IDs
+      if (Array.isArray(selectedSections) && selectedSections.length > 0) {
+        selectedSections.forEach(function (sectionId) {
+          $("#kt_select2_3")
+            .find(`option[value="${sectionId}"]`)
+            .prop("selected", true);
+        });
+      }
     },
-    false
+  });
+}
+
+// Function to initialize form visibility based on the checkbox state
+function initializeFormVisibility() {
+  var toggleCheckbox = document.getElementById("AlltoggleForms");
+  var formContainer = document.getElementById("formContainer");
+
+  // Set the form container display based on the checkbox state
+  formContainer.style.display = toggleCheckbox.checked ? "none" : "block";
+
+  // Initialize visibility for other form sections based on their checkbox states
+  var toggleAllOrganization = document.getElementById("toggleAllOrganization");
+  var selectOrganizationContainer = document.getElementById(
+    "select_organization_container"
   );
+  selectOrganizationContainer.style.display = toggleAllOrganization.checked
+    ? "none"
+    : "flex";
+
+  var toggleAllSections = document.getElementById("toggleAllSections");
+  var selectSectionsContainer = document.getElementById(
+    "select_sections_container"
+  );
+  selectSectionsContainer.style.display = toggleAllSections.checked
+    ? "none"
+    : "flex";
+
+  var toggleCap = document.getElementById("toggleCap");
+  var formCapacity = document.getElementById("formCapacity");
+  var formCapacityText = document.getElementById("formCapacityText");
+  if (toggleCap.checked) {
+    formCapacity.style.display = "flex";
+    formCapacityText.style.display = "block";
+  } else {
+    formCapacity.style.display = "none";
+    formCapacityText.style.display = "none";
+  }
 }
 
-// Function to validate the form
-function validateForm() {
-  const eventType = $("input[name='eventType']:checked").val();
+// Call the function to initialize visibility when the page loads
+initializeFormVisibility();
 
-  // If 'inPerson' is selected, ensure a venue is selected
-  if (eventType === "inPerson" && $("#venue_name").val() == "") {
-    Swal.fire("Please select a venue!", "Please try again!", "error");
-    return false;
-  }
-
-  // Add date validity check
-  const startDate = new Date($("#event_start_date").val());
-  const endDate = new Date($("#event_end_date").val());
-  if (startDate >= endDate) {
-    Swal.fire(
-      "End date must be after the start date!",
-      "Please try again!",
-      "error"
+// Event listeners to toggle visibility when checkbox state changes
+document
+  .getElementById("toggleAllOrganization")
+  .addEventListener("change", function () {
+    var formContainer = document.getElementById(
+      "select_organization_container"
     );
-    return false;
+    formContainer.style.display = this.checked ? "none" : "flex";
+  });
+
+document
+  .getElementById("toggleAllSections")
+  .addEventListener("change", function () {
+    var formContainer = document.getElementById("select_sections_container");
+    formContainer.style.display = this.checked ? "none" : "flex";
+  });
+
+document.getElementById("toggleCap").addEventListener("change", function () {
+  var formCapacity = document.getElementById("formCapacity");
+  var formCapacityText = document.getElementById("formCapacityText");
+  if (this.checked) {
+    formCapacity.style.display = "flex";
+    formCapacityText.style.display = "block";
+  } else {
+    formCapacity.style.display = "none";
+    formCapacityText.style.display = "none";
   }
+});
 
-  return true; // Return true if all checks pass
-}
+//////////////////////////
 
-// Handler for event submission
-$("#event_edit_submit").click(function () {
+$("#edit_event_submit").click(function () {
   // Run validation before proceeding
   if (!validateForm()) {
     return; // Stop if validation fails
@@ -77,7 +198,7 @@ $("#event_edit_submit").click(function () {
     "&eventType=" +
     encodeURIComponent(eventType) + // Use the captured eventType
     "&venue_id=" +
-    encodeURIComponent($("#venue_name").val()) +
+    encodeURIComponent($("#edit_venue_name").val()) +
     "&event_start_date=" +
     encodeURIComponent($("#event_start_date").val()) +
     "&event_end_date=" +
@@ -213,364 +334,3 @@ $("#event_edit_submit").click(function () {
     },
   });
 });
-
-// Handler for event next button
-$("#event_next_button").click(function () {
-  // Run validation before proceeding
-  if (!validateForm()) {
-    Swal.fire(
-      "AJAX request failed",
-      "Please check your connection and try again.",
-      "error"
-    );
-    return; // Stop if validation fails
-  }
-
-  // Proceed to the next step of the wizard
-  _wizard.goNext(); // Make sure _wizard is defined globally or adjust accordingly
-});
-
-$("#kt_dropzone_1").dropzone({
-  url: "/",
-  paramName: "file",
-  maxFiles: 1,
-  maxFilesize: 10,
-});
-
-$("#kt_select2_11").change(function () {
-  const programs = this.selectedOptions;
-  if (!programs && typeof programs !== "object") return;
-  selectedPrograms = Object.keys(programs).map((key) => {
-    return programs[key].value;
-  });
-  // kada bago ng program, check kung anung mga sections
-  checkSections();
-});
-
-$("#yrlevel").change(function () {
-  const yearlevels = this.selectedOptions;
-  if (!yearlevels && typeof yearlevels !== "object") return;
-  selectedYearLevels = Object.keys(yearlevels).map((key) => {
-    return yearlevels[key].value;
-  });
-  // kada bago ng yearlevel, check kung anung mga sections
-  checkSections();
-});
-
-////venue disabler
-$(document).ready(function () {
-  $("#venue_name").change(function () {
-    const venueId = $(this).val();
-
-    // Fetch disabled dates for the selected venue
-    $.ajax({
-      url: "ajax.php",
-      method: "POST",
-      data: { venue_id: venueId, ajax: "venue_name" },
-      success: function (response) {
-        console.log("AJAX Response:", response); // Log response for debugging
-
-        // Parse and format each date in response to 'moment' format
-        const disabledDates = JSON.parse(response).map((date) =>
-          moment(date, "MM/DD/YYYY")
-        );
-        initializeDateTimePicker("#kt_datetimepicker_7_1", disabledDates);
-        initializeDateTimePicker("#kt_datetimepicker_7_2", disabledDates);
-      },
-      error: function () {
-        console.error("Failed to fetch disabled dates.");
-      },
-    });
-  });
-});
-
-function initializeDateTimePicker(pickerId, disabledDates, startDate, endDate) {
-  $(pickerId).datetimepicker("destroy"); // Destroy any existing instance to refresh
-  $(pickerId).datetimepicker({
-    format: "MM/DD/YYYY HH:mm",
-    disabledDates: disabledDates, // Pass formatted moment dates here
-    useCurrent: false,
-  });
-}
-
-function checkSections() {
-  // If either programs or year levels are empty, disable and clear the sections
-  if (selectedPrograms.length === 0 || selectedYearLevels.length === 0) {
-    $("#kt_select2_3").html("").prop("disabled", true);
-    return;
-  }
-
-  var dataString =
-    "ajax=add_event_check_sections" +
-    "&selectedPrograms=" +
-    btoa(selectedPrograms).replace(/\=/g, "") +
-    "&selectedYearLevels=" +
-    btoa(selectedYearLevels).replace(/\=/g, "");
-
-  console.log(dataString);
-
-  $.ajax({
-    type: "POST",
-    url: "ajax.php",
-    data: dataString,
-    cache: false,
-    success: function (html) {
-      console.log("html", html);
-      $("#kt_select2_3").html(html).prop("disabled", false);
-    },
-  });
-}
-
-$("#event_preview").click(function () {
-  debugger;
-  var dataString =
-    "ajax=preview_event" +
-    "&venue_name=" +
-    $("#venue_name").val() +
-    "&event_start_date=" +
-    $("#event_start_date").val() +
-    "&event_end_date=" +
-    $("#event_end_date").val() +
-    "&event_title=" +
-    $("#event_title").text() +
-    "&event_organization=" +
-    $("#event_organization").val() +
-    "&inPerson_radio=" +
-    $("#inPerson_radio").val() +
-    "&virtual_radio=" +
-    $("#virtual_radio").val() +
-    "&toggleForms=" +
-    $("#toggleForms").val() +
-    "&kt_select2_11=" +
-    $("#kt_select2_11").val() +
-    "&toggleAllSections=" +
-    $("#toggleAllSections").val() +
-    "&kt_select2_3=" +
-    $("#kt_select2_3").val() +
-    "&yrlevel=" +
-    $("#yrlevel").val() +
-    "&toggleAllOrganization=" +
-    $("#toggleAllOrganization").val() +
-    "&kt_select_2_4=" +
-    $("#kt_select_2_4").val() +
-    "&toggleCap=" +
-    $("#toggleCap").val() +
-    "&kt_nouislider_1_input=" +
-    $("#kt_nouislider_1_input").val() +
-    "&kt_dropzone_1=" +
-    $("#kt_dropzone_1").val() +
-    "&kt_maxlength_5=" +
-    $("#kt_maxlength_5").val() +
-    "&event_description=" +
-    $("#event_description").text() +
-    "&event_category=" +
-    $("#event_category").val() +
-    "&event_organizer=" +
-    $("#event_organizer").val() +
-    "&event_poster=" +
-    btoa($("#kt_dropzone_1").prop("dropzone").files[0].dataURL);
-  console.log(dataString);
-  $.ajax({
-    type: "POST",
-    url: "ajax.php",
-    data: dataString,
-    cache: false,
-    success: function (html) {
-      switch (html) {
-        case "1":
-          break;
-        case "2":
-          alert("Not saved!");
-          break;
-        default:
-          alert("Something went wrong, please try again.");
-          console.log(html);
-      }
-    },
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  var demo8 = function () {
-    $("#admin_repeater").repeater({
-      initEmpty: false,
-      defaultValues: {
-        "text-input": "foo",
-      },
-      show: function () {
-        $(this).slideDown();
-        updateOptions(adminRepeater, ".admin-select", adminAddButton);
-      },
-      hide: function (deleteElement) {
-        $(this).slideUp(deleteElement);
-        setTimeout(
-          () => updateOptions(adminRepeater, ".admin-select", adminAddButton),
-          100
-        );
-      },
-    });
-  };
-
-  var demo9 = function () {
-    $("#org_repeater").repeater({
-      initEmpty: false,
-      defaultValues: {
-        "text-input": "foo",
-      },
-      show: function () {
-        $(this).slideDown();
-        updateOptions(orgRepeater, ".another-org-select", orgAddButton);
-      },
-      hide: function (deleteElement) {
-        $(this).slideUp(deleteElement);
-        setTimeout(
-          () => updateOptions(orgRepeater, ".another-org-select", orgAddButton),
-          100
-        );
-      },
-    });
-  };
-
-  const adminRepeater = document.querySelector(
-    "#admin_repeater [data-repeater-list]"
-  );
-  const adminAddButton = document.querySelector(
-    "#admin_repeater [data-repeater-create]"
-  );
-  const orgRepeater = document.querySelector(
-    "#org_repeater [data-repeater-list]"
-  );
-  const orgAddButton = document.querySelector(
-    "#org_repeater [data-repeater-create]"
-  );
-
-  function updateOptions(repeater, selectClass, addButton) {
-    const selectedValues = Array.from(repeater.querySelectorAll(selectClass))
-      .map((select) => select.value)
-      .filter((value) => value !== "");
-
-    repeater.querySelectorAll(selectClass).forEach((select) => {
-      const currentValue = select.value;
-      select.querySelectorAll("option").forEach((option) => {
-        option.style.display =
-          !selectedValues.includes(option.value) ||
-          option.value === currentValue
-            ? "block"
-            : "none";
-      });
-    });
-
-    const availableOptions = Array.from(
-      repeater
-        .querySelector(`${selectClass}:last-of-type`)
-        .querySelectorAll("option")
-    ).filter(
-      (option) => option.style.display !== "none" && option.value !== ""
-    );
-
-    addButton.style.display = availableOptions.length <= 1 ? "none" : "block";
-  }
-
-  function updateInput(selectElement, inputClass) {
-    const selectedOption = selectElement.options[selectElement.selectedIndex];
-    const input = selectElement
-      .closest("[data-repeater-item]")
-      .querySelector(inputClass);
-    input.value =
-      selectedOption.getAttribute("data-role") ||
-      selectedOption.getAttribute("data-org");
-  }
-
-  function setupRepeater(repeater, selectClass, addButton, inputClass) {
-    repeater.addEventListener("change", function (event) {
-      if (event.target.classList.contains(selectClass.slice(1))) {
-        updateOptions(repeater, selectClass, addButton);
-        updateInput(event.target, inputClass);
-      }
-    });
-
-    repeater.addEventListener("click", function (event) {
-      if (event.target.closest("[data-repeater-delete]")) {
-        setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
-      }
-    });
-
-    addButton.addEventListener("click", function () {
-      setTimeout(() => updateOptions(repeater, selectClass, addButton), 100);
-    });
-
-    updateOptions(repeater, selectClass, addButton);
-  }
-
-  setupRepeater(adminRepeater, ".admin-select", adminAddButton, ".admin-role");
-  setupRepeater(
-    orgRepeater,
-    ".another-org-select",
-    orgAddButton,
-    ".another-org-name"
-  );
-
-  demo8();
-  demo9();
-});
-
-document.getElementById("toggleForms").addEventListener("change", function () {
-  var formContainer = document.getElementById("formContainer");
-  formContainer.style.display = this.checked ? "none" : "block";
-});
-
-document
-  .getElementById("toggleAllOrganization")
-  .addEventListener("change", function () {
-    var formContainer = document.getElementById(
-      "select_organization_container"
-    );
-    formContainer.style.display = this.checked ? "none" : "flex";
-  });
-
-document
-  .getElementById("toggleAllSections")
-  .addEventListener("change", function () {
-    var formContainer = document.getElementById("select_sections_container");
-    formContainer.style.display = this.checked ? "none" : "flex";
-  });
-
-document.getElementById("toggleCap").addEventListener("change", function () {
-  var formCapacity = document.getElementById("formCapacity");
-  var formCapacityText = document.getElementById("formCapacityText");
-  if (this.checked) {
-    formCapacity.style.display = "flex";
-    formCapacityText.style.display = "block";
-  } else {
-    formCapacity.style.display = "none";
-    formCapacityText.style.display = "none";
-  }
-});
-
-var demo1 = function () {
-  // init slider
-  var slider = document.getElementById("kt_nouislider_1");
-
-  noUiSlider.create(slider, {
-    start: [2],
-    step: 2,
-    range: {
-      min: [2],
-      max: [5000],
-    },
-    format: wNumb({
-      decimals: 0,
-    }),
-  });
-
-  // init slider input
-  var sliderInput = document.getElementById("kt_nouislider_1_input");
-
-  slider.noUiSlider.on("update", function (values, handle) {
-    sliderInput.value = values[handle];
-  });
-
-  sliderInput.addEventListener("change", function () {
-    slider.noUiSlider.set(this.value);
-  });
-};

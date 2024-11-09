@@ -8,25 +8,7 @@
                 <!--begin::Wizard-->
                 <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
                     <!--begin::Wizard Nav-->
-                    <div class="wizard-nav">
-                        <div class="wizard-steps">
-                            <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
-                                <div class="wizard-wrapper">
-                                    <div class="wizard-number">
-                                        @
-                                    </div>
-                                    <div class="wizard-label">
-                                        <div class="wizard-title">
-                                            Profile
-                                        </div>
-                                        <div class="wizard-desc">
-                                            User's Personal Information
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!--end::Wizard Nav-->
 
                     <!--begin::Card-->
@@ -79,14 +61,15 @@
                                                     </div>
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
+                                                    <!-- Course Selection -->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Course</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control form-control-solid form-control-lg" name="course" type="text" id="add_std_course">
+                                                            <select class="form-control form-control-solid form-control-lg" name="course" id="add_std_course">
                                                                 <option selected disabled>Select Course</option>
                                                                 <?php
                                                                 include('./control/db.php');
-                                                                $try = mysqli_query($conn, "Select * from course_tbl");
+                                                                $try = mysqli_query($conn, "SELECT * FROM course_tbl");
                                                                 while ($row = $try->fetch_array()) {
                                                                     echo '<option value="' . $row['course_id'] . '">' . $row['course_name'] . '</option>';
                                                                 }
@@ -94,34 +77,32 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <!--end::Group-->
-                                                    <!--begin::Group-->
+
+                                                    <!-- Year Level Selection -->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Year Level</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control form-control-solid form-control-lg" name="yrlvl" type="text" id="add_std_yearlvl">
+                                                            <select class="form-control form-control-solid form-control-lg" name="yrlvl" id="add_std_yearlvl">
                                                                 <option selected disabled value="null">Select Year Level</option>
                                                                 <option value="1">1st Year</option>
                                                                 <option value="2">2nd Year</option>
                                                                 <option value="3">3rd Year</option>
                                                                 <option value="4">4th Year</option>
-
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <!--end::Group-->
-                                                    <!--begin::Group-->
+
+                                                    <!-- Section Selection -->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Section</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="input-group input-group-solid input-group-lg">
-                                                                <select class="form-control form-control-solid form-control-lg" id="add_std_section" name="section" type="text" disabled>
+                                                                <select class="form-control form-control-solid form-control-lg" id="add_std_section" name="section" disabled>
                                                                     <option selected disabled>Select Section</option>
                                                                 </select>
                                                                 <select hidden id="std_add_section_options" readonly="readonly" disabled="disabled">
                                                                     <?php
-                                                                    include('./control/db.php');
-                                                                    $try = mysqli_query($conn, "Select * from section_tbl");
+                                                                    $try = mysqli_query($conn, "SELECT * FROM section_tbl");
                                                                     while ($row = $try->fetch_array()) {
                                                                         echo '<option value="' . $row['section_id'] . '" data-yrlvl="' . $row['yearlvl'] . '" data-course="' . $row['course_id'] . '">' . $row['section_name'] . '</option>';
                                                                     }
@@ -130,6 +111,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
                                                     <div class="form-group row">

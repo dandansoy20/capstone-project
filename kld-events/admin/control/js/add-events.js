@@ -91,7 +91,7 @@ $("#event_submit").click(function () {
     "&event_organization=" +
     encodeURIComponent($("#event_organization").val()) +
     "&proposal_letter=" +
-    encodeURIComponent($("#kt_maxlength_5").val());
+    encodeURIComponent($("#kt_summernote_1").summernote("code"));
 
   // Include capacity if the toggle is checked
   if ($("#toggleCap").is(":checked")) {
@@ -293,6 +293,22 @@ function initializeDateTimePicker(pickerId, disabledDates) {
   });
 }
 
+// Existing toggleForm function remains unchanged
+function toggleForm() {
+  const inPersonRadio = document.querySelector(
+    'input[name="eventType"][value="inPerson"]'
+  );
+  const inPersonForm = document.getElementById("inPersonForm");
+
+  if (inPersonRadio.checked) {
+    inPersonForm.style.display = "block";
+  } else {
+    inPersonForm.style.display = "none";
+  }
+}
+// Initial call to set the correct form visibility on page load
+toggleForm();
+
 function checkSections() {
   // If either programs or year levels are empty, disable and clear the sections
   if (selectedPrograms.length === 0 || selectedYearLevels.length === 0) {
@@ -320,75 +336,6 @@ function checkSections() {
     },
   });
 }
-
-$("#event_preview").click(function () {
-  debugger;
-  var dataString =
-    "ajax=preview_event" +
-    "&venue_name=" +
-    $("#venue_name").val() +
-    "&event_start_date=" +
-    $("#event_start_date").val() +
-    "&event_end_date=" +
-    $("#event_end_date").val() +
-    "&event_title=" +
-    $("#event_title").text() +
-    "&event_organization=" +
-    $("#event_organization").val() +
-    "&inPerson_radio=" +
-    $("#inPerson_radio").val() +
-    "&virtual_radio=" +
-    $("#virtual_radio").val() +
-    "&toggleForms=" +
-    $("#toggleForms").val() +
-    "&kt_select2_11=" +
-    $("#kt_select2_11").val() +
-    "&toggleAllSections=" +
-    $("#toggleAllSections").val() +
-    "&kt_select2_3=" +
-    $("#kt_select2_3").val() +
-    "&yrlevel=" +
-    $("#yrlevel").val() +
-    "&toggleAllOrganization=" +
-    $("#toggleAllOrganization").val() +
-    "&kt_select_2_4=" +
-    $("#kt_select_2_4").val() +
-    "&toggleCap=" +
-    $("#toggleCap").val() +
-    "&kt_nouislider_1_input=" +
-    $("#kt_nouislider_1_input").val() +
-    "&kt_dropzone_1=" +
-    $("#kt_dropzone_1").val() +
-    "&kt_maxlength_5=" +
-    $("#kt_maxlength_5").val() +
-    "&event_description=" +
-    $("#event_description").text() +
-    "&event_category=" +
-    $("#event_category").val() +
-    "&event_organizer=" +
-    $("#event_organizer").val() +
-    "&event_poster=" +
-    btoa($("#kt_dropzone_1").prop("dropzone").files[0].dataURL);
-  console.log(dataString);
-  $.ajax({
-    type: "POST",
-    url: "ajax.php",
-    data: dataString,
-    cache: false,
-    success: function (html) {
-      switch (html) {
-        case "1":
-          break;
-        case "2":
-          alert("Not saved!");
-          break;
-        default:
-          alert("Something went wrong, please try again.");
-          console.log(html);
-      }
-    },
-  });
-});
 
 document.addEventListener("DOMContentLoaded", function () {
   var demo8 = function () {

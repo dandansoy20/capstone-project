@@ -129,6 +129,77 @@ if (isset($_GET['event_id'])) {
     width: 21cm;
     height: 29.7cm;
   }
+
+  /* Styling for bold and underlined text */
+  b {
+    font-weight: bold;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Merge borders */
+    margin: 20px 0;
+    font-size: 16px;
+    background-color: #fff;
+    /* White background for the table */
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    /* Light gray border */
+    padding: 10px;
+    /* Spacing inside the cells */
+    text-align: left;
+    /* Align text to the left */
+  }
+
+  th {
+    background-color: #f2f2f2;
+    /* Light gray background for table headers */
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+    /* Subtle zebra stripe effect */
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+    /* Light gray background when hovering over a row */
+  }
+
+  /* Unordered list styling */
+  ul {
+    list-style-type: disc;
+    /* Use default bullet points */
+    padding-left: 20px;
+    /* Space to the left of the list */
+    margin: 10px 0;
+  }
+
+  li {
+    font-size: 16px;
+    margin: 5px 0;
+    /* Space between list items */
+  }
+
+  li u {
+    text-decoration: underline;
+  }
+
+  /* Additional styling for break lines */
+  br {
+    line-height: 1.5;
+    /* Space between line breaks */
+  }
 </style>
 
 <body style="--bleeding: 0.5cm; --margin: 1.6cm">
@@ -167,10 +238,16 @@ if (isset($_GET['event_id'])) {
     <?php endforeach; ?>
 
 
-    <p>To whom it may concern,</p>
-    <p style="text-align: justify;">
-      <?php echo htmlspecialchars($proposal); ?></p>
-    </p>
+    <?php echo $proposal; ?>
+
+
+    <!-- End of your content -->
+  </div>
+
+  <div class="page" style="background-image: url('bg.jpg')">
+    <!-- Your content here -->
+    <br /><br /><br /><br /><br />
+
     <p>
       <br />
       <strong>Event Title:</strong> <?php echo htmlspecialchars($event_title); ?>
@@ -196,6 +273,9 @@ if (isset($_GET['event_id'])) {
 
     <!-- End of your content -->
   </div>
+
+
+
 
 
 </body>

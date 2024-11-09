@@ -813,28 +813,56 @@ if (!array_key_exists('ajax', $_POST)) {
         case "add_cat":
             $add_cat_category = $_POST['add_cat_category'];
             $add_cat_description = $_POST['add_cat_description'];
-
+            $add_cat_icon = $_POST['add_cat_icon']; // Adding the category icon
 
             $try = mysqli_query(
                 $conn,
-                "Insert into category_tbl
-                       ( 
+                "INSERT INTO category_tbl
+                        (
                             category_name,
-                            category_desc
+                            category_desc,
+                            category_icon
                         )
-                        values
+                        VALUES
                         (
                             '" . $add_cat_category . "',
-                            '" . $add_cat_description . "'
-                        )
-            "
+                            '" . $add_cat_description . "',
+                            '" . $add_cat_icon . "'
+                        )"
             );
+
             if ($try) {
                 echo 1;
             } else {
                 echo 2;
             }
             break;
+        case "edit_cat":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_cat_category = mysqli_real_escape_string($conn, $_POST['edit_cat_category']);
+            $edit_cat_description = mysqli_real_escape_string($conn, $_POST['edit_cat_description']);
+            $edit_cat_icon = mysqli_real_escape_string($conn, $_POST['edit_cat_icon']);
+            $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE category_tbl
+                     SET
+                         category_name = '$edit_cat_category',
+                         category_desc = '$edit_cat_description',
+                         category_icon = '$edit_cat_icon'
+                     WHERE category_id = '$category_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
+
+
         case "add_venue":
             $add_venue = $_POST['add_venue'];
             $add_venue_description = $_POST['add_venue_description'];

@@ -147,9 +147,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/global/plugins.bundle.js"></script>
 		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="control/js/edit-events.js"></script>
 
 		<script src="control/js/add-events.js"></script>
-		<script src="control/js/edit-events.js"></script>
+		<!-- <script src="control/js/edit-events.js"></script> -->
 		<script src="control/js/add-cat.js"></script>
 		<script src="control/js/add-venue.js"></script>
 		<script src="control/js/add-std.js"></script>
@@ -173,6 +174,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
 
+		<script src="assets/js/pages/crud/forms/editors/summernote.js"></script>
 		<script src="assets/js/pages/features/miscellaneous/blockui.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/input-mask.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-timepicker.js"></script>

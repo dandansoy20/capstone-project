@@ -414,7 +414,7 @@ if (isset($_GET['event_id'])) {
 																<!--begin::Select-->
 																<div class="form-group">
 																	<label>Venue</label>
-																	<select name="venue_name" id="venue_name" value="" class="form-control form-control-solid form-control-lg">
+																	<select name="venue_name" id="edit_venue_name" value="" class="form-control form-control-solid form-control-lg">
 																		<option value="<?php echo $venue_id ?>" disabled selected><?php echo $venue_name ?></option>
 																		<?php
 																		include('./control/db.php');
@@ -434,9 +434,9 @@ if (isset($_GET['event_id'])) {
 																<div class="col-lg-12 col-md-9 col-sm-12">
 																	<div class="row">
 																		<div class="col">
-																			<div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+																			<div class="input-group date" id="kt_datetimepicker_7_11" data-target-input="nearest">
 																				<input type="text" class="form-control datetimepicker-input" placeholder="Start date" name="event_start_date" id="event_start_date" data-target="#kt_datetimepicker_7_1" />
-																				<div class="input-group-append" data-target="#kt_datetimepicker_7_1" data-toggle="datetimepicker">
+																				<div class="input-group-append" data-target="#kt_datetimepicker_7_11" data-toggle="datetimepicker">
 																					<span class="input-group-text">
 																						<i class="ki ki-calendar"></i>
 																					</span>
@@ -444,9 +444,9 @@ if (isset($_GET['event_id'])) {
 																			</div>
 																		</div>
 																		<div class="col">
-																			<div class="input-group date" id="kt_datetimepicker_7_2" data-target-input="nearest">
+																			<div class="input-group date" id="kt_datetimepicker_7_21" data-target-input="nearest">
 																				<input type="text" class="form-control datetimepicker-input" placeholder="End date" name="event_end_date" id="event_end_date" data-target="#kt_datetimepicker_7_2" />
-																				<div class="input-group-append" data-target="#kt_datetimepicker_7_2" data-toggle="datetimepicker">
+																				<div class="input-group-append" data-target="#kt_datetimepicker_7_21" data-toggle="datetimepicker">
 																					<span class="input-group-text">
 																						<i class="ki ki-calendar"></i>
 																					</span>
@@ -462,20 +462,15 @@ if (isset($_GET['event_id'])) {
 														<!--end::Form-->
 
 														<script>
-															// Existing toggleForm function remains unchanged
-															function toggleForm() {
-																const inPersonRadio = document.querySelector('input[name="eventType"][value="inPerson"]');
-																const inPersonForm = document.getElementById('inPersonForm');
-
-																if (inPersonRadio.checked) {
-																	inPersonForm.style.display = 'block';
-																} else {
-																	inPersonForm.style.display = 'none';
-																}
-															}
-
-															// Initial call to set the correct form visibility on page load
-															toggleForm();
+															var eventStartDate = "<?php echo isset($event_start_date) ? date('m/d/Y H:i', strtotime($event_start_date)) : ''; ?>";
+															var eventEndDate = "<?php
+																				// Check if event_end_date is the Unix epoch date
+																				if (isset($event_end_date) && $event_end_date == '1970-01-01 08:00:00') {
+																					echo ''; // Set it as null or empty string
+																				} else {
+																					echo isset($event_end_date) ? date('m/d/Y H:i', strtotime($event_end_date)) : '';
+																				}
+																				?>";
 														</script>
 
 													</div>
@@ -491,7 +486,7 @@ if (isset($_GET['event_id'])) {
 															<label>Event Title</label>
 															<input type="text" class="form-control form-control-solid form-control-lg"
 																name="event_title" id="event_title" placeholder="Input Title"
-																value="<?php echo $event_title ?>" disabled />
+																value="<?php echo $event_title ?>" />
 														</div>
 														<!--end::Input-->
 
@@ -499,31 +494,32 @@ if (isset($_GET['event_id'])) {
 														<div class="form-group">
 															<label>Event Description</label>
 															<textarea class="form-control" id="event_description" name="event_description"
-																rows="3" disabled><?php echo $event_desc ?></textarea>
+																rows="3"><?php echo $event_desc ?></textarea>
 														</div>
 
 
 														<div class="form-group">
 															<label>Event Host</label>
-															<select name="event_organization" id="event_organization"
-																class="form-control form-control-solid form-control-lg">
-																<option value="" disabled>Select Host</option>
-																<option value="0">KLD Events</option>
+															<select name="event_organization" id="event_organization" class="form-control form-control-solid form-control-lg">
+																<option value="">Select Host</option>
+																<option value="0" <?php if (!isset($_POST['event_organization']) || $_POST['event_organization'] == '0') echo 'selected'; ?>>KLD Events</option>
 																<?php
 																include('./control/db.php');
-																$try = mysqli_query($conn, "Select * from org_tbl");
+																$try = mysqli_query($conn, "SELECT * FROM org_tbl");
 																while ($row = $try->fetch_array()) {
-																	var_dump($row);
-																	echo '<option value="' . $row['org_id'] . '">' . $row['org_name'] . '</option>';
+																	// Check if the current row's org_id matches the selected value
+																	$selected = (isset($_POST['event_organization']) && $_POST['event_organization'] == $row['org_id']) ? 'selected' : '';
+																	echo '<option value="' . $row['org_id'] . '" ' . $selected . '>' . $row['org_name'] . '</option>';
 																}
 																?>
 															</select>
+
 														</div>
 
 														<div class="form-group">
 															<label>Event Category</label>
 															<select name="event_category" id="event_category" class="form-control form-control-solid form-control-lg">
-																<option value="<?php echo $category_id; ?>" disabled selected><?php echo $category_name; ?></option>
+																<option value="<?php echo $category_id; ?>" selected><?php echo $category_name; ?></option>
 																<?php
 																include('./control/db.php');
 
@@ -555,17 +551,61 @@ if (isset($_GET['event_id'])) {
 													<div class="pb-5" data-wizard-type="step-content">
 														<h4 class="mb-10 font-weight-bold text-dark">Select Event Attendees</h4>
 
+														<?php
+														include('./control/db.php');
+
+														$query = mysqli_query($conn, "SELECT course_id, yearlvl_id, section_id, org_id FROM event_invitation WHERE event_id = '$eventId'");
+
+														// Initialize the checked attribute
+														$Allchecked = '';
+
+														// Check if the query was successful and if any rows are returned
+														if ($query) {
+															$row = $query->fetch_array();
+															if ($row && is_null($row['course_id']) && is_null($row['yearlvl_id']) && is_null($row['section_id']) && is_null($row['org_id'])) {
+																$Allchecked = 'checked="checked"';
+															}
+														} else {
+															// Optional: Log the error for debugging purposes (not displayed to the user)
+															error_log("Error loading event invitation details: " . mysqli_error($conn));
+														}
+
+														?>
+
+
 														<div class="form-group row">
 															<label class="col-4 text-right col-form-label">Select All KLD Members</label>
 															<div class="col-8">
 																<span class="switch switch-icon">
 																	<label>
-																		<input type="checkbox" id="toggleForms" name="select" checked="checked" />
+																		<input type="checkbox" id="AlltoggleForms" name="select" <?php echo $Allchecked; ?> />
 																		<span></span>
 																	</label>
 																</span>
 															</div>
 														</div>
+
+
+														<?php
+														include('./control/db.php');
+
+														// Query to get the course_id values from the event_invitation table and join with course_tbl to get course names
+														$query = mysqli_query($conn, "SELECT ei.course_id, c.course_name FROM event_invitation ei
+														JOIN course_tbl c ON ei.course_id = c.course_id
+														WHERE ei.event_id = '$eventId'");
+
+														// Initialize an array to store the selected course IDs
+														$selectedCourses = [];
+
+														if ($query) {
+															while ($row = $query->fetch_array()) {
+																$selectedCourses[] = $row['course_id']; // Store the selected course_id values
+															}
+														} else {
+															// Optional: Log the error for debugging purposes (not displayed to the user)
+															error_log("Error loading event invitation details: " . mysqli_error($conn));
+														}
+														?>
 
 														<div id="formContainer" style="display: none;">
 															<div class="form-group row">
@@ -574,10 +614,12 @@ if (isset($_GET['event_id'])) {
 																	<select class="form-control select2" id="kt_select2_11" multiple="multiple" name="param" style="width: 100%;" data-placeholder="Select programs...">
 																		<optgroup label="KLD Courses">
 																			<?php
-																			include('./control/db.php');
+																			// Query to get all available courses
 																			$try = mysqli_query($conn, "SELECT * FROM course_tbl");
 																			while ($row = $try->fetch_array()) {
-																				echo '<option value="' . $row['course_id'] . '" data-acronym="' . $row['course_acronym'] . '">' . $row['course_name'] . '</option>';
+																				// Check if the course_id is in the selectedCourses array
+																				$selected = in_array($row['course_id'], $selectedCourses) ? 'selected' : '';
+																				echo '<option value="' . $row['course_id'] . '" data-acronym="' . $row['course_acronym'] . '" ' . $selected . '>' . $row['course_name'] . '</option>';
 																			}
 																			?>
 																		</optgroup>
@@ -585,37 +627,118 @@ if (isset($_GET['event_id'])) {
 																</div>
 															</div>
 
+
+
+															<?php
+															include('./control/db.php');
+
+															// Query to get the yearlvl_id values from the event_invitation table
+															$query = mysqli_query($conn, "SELECT yearlvl_id FROM event_invitation WHERE event_id = '$eventId'");
+
+															// Initialize an array to store the selected year levels
+															$selectedYearLevels = [];
+
+															if ($query) {
+																while ($row = $query->fetch_array()) {
+																	$selectedYearLevels[] = $row['yearlvl_id']; // Store the selected yearlvl_id values
+																}
+															} else {
+																// Optional: Log the error for debugging purposes (not displayed to the user)
+																error_log("Error loading event invitation details: " . mysqli_error($conn));
+															}
+															?>
+
 															<div class="form-group row">
 																<label class="col-form-label text-right col-lg-4 col-sm-12">Select Year Level</label>
 																<div class="col-lg-8 col-md-9 col-sm-12">
 																	<select class="form-control selectpicker" multiple="multiple" id="yrlevel">
-																		<option value="1">1st year</option>
-																		<option value="2">2nd year</option>
-																		<option value="3">3rd year</option>
-																		<option value="4">4th year</option>
+																		<option value="1" <?php echo in_array(1, $selectedYearLevels) ? 'selected' : ''; ?>>1st year</option>
+																		<option value="2" <?php echo in_array(2, $selectedYearLevels) ? 'selected' : ''; ?>>2nd year</option>
+																		<option value="3" <?php echo in_array(3, $selectedYearLevels) ? 'selected' : ''; ?>>3rd year</option>
+																		<option value="4" <?php echo in_array(4, $selectedYearLevels) ? 'selected' : ''; ?>>4th year</option>
 																	</select>
 																</div>
 															</div>
 
+
+															<?php
+															include('./control/db.php');
+
+															$query = mysqli_query($conn, "SELECT section_id FROM event_invitation WHERE event_id = '$eventId'");
+
+															// Initialize the checked attribute
+															$SectionChecked = '';
+
+															// Check if the query was successful and if all values of section_id are NULL
+															if ($query) {
+																$allNull = true; // Assume all section_id values are NULL until proven otherwise
+
+																// Loop through all rows to check if section_id is NULL for every row
+																while ($row = $query->fetch_array()) {
+																	if (!is_null($row['section_id'])) {
+																		$allNull = false; // If any section_id is not NULL, set $allNull to false
+																		break; // No need to check further, we already know not all section_id values are NULL
+																	}
+																}
+
+																// If all section_id values were NULL, check the checkbox
+																if ($allNull) {
+																	$SectionChecked = 'checked="checked"';
+																}
+															} else {
+																// Optional: Log the error for debugging purposes (not displayed to the user)
+																error_log("Error loading event invitation details: " . mysqli_error($conn));
+															}
+															?>
 
 															<div class="form-group row">
 																<label class="col-4 text-right col-form-label">Select All Sections</label>
 																<div class="col-8">
 																	<span class="switch switch-icon">
 																		<label>
-																			<input type="checkbox" id="toggleAllSections" name="select" checked="checked" />
+																			<input type="checkbox" id="toggleAllSections" name="select" <?php echo $SectionChecked; ?> />
 																			<span></span>
 																		</label>
 																	</span>
 																</div>
 															</div>
+
+															<?php
+															include('./control/db.php');
+
+															// Query to get the section_id values from the event_invitation table
+															$query = mysqli_query($conn, "SELECT section_id FROM event_invitation WHERE event_id = '$eventId'");
+
+															// Initialize an array to store the selected section IDs
+															$selectedSections = [];
+
+															if ($query) {
+																while ($row = $query->fetch_array()) {
+																	$selectedSections[] = $row['section_id']; // Store the selected section_id values
+																}
+															} else {
+																// Optional: Log the error for debugging purposes (not displayed to the user)
+																error_log("Error loading event invitation details: " . mysqli_error($conn));
+															}
+
+															// Query to fetch all available sections for the select dropdown
+															$sectionsQuery = mysqli_query($conn, "SELECT * FROM section_tbl"); // Assuming sections are in section_tbl
+															?>
+
 															<div class="form-group row" id="select_sections_container" style="display: none">
 																<label class="col-form-label text-right col-lg-4 col-sm-12">Select Section</label>
 																<div class="col-lg-8 col-md-9 col-sm-12">
 																	<select class="form-control select2" id="kt_select2_3" multiple="multiple" name="section" style="width: 100%;" data-placeholder="Select section...">
+																		<?php while ($section = $sectionsQuery->fetch_array()) { ?>
+																			<option value="<?php echo $section['section_id']; ?>" <?php echo in_array($section['section_id'], $selectedSections) ? 'selected' : ''; ?>>
+																				<?php echo $section['section_name']; ?>
+																			</option>
+																		<?php } ?>
 																	</select>
 																</div>
 															</div>
+
+
 
 
 															<div class="separator separator-dashed my-8"></div>
@@ -715,21 +838,21 @@ if (isset($_GET['event_id'])) {
 														<?php
 														if ($_SESSION['login_type'] === "Administrator") {
 															echo '
-                                            <div class="form-group">
-                                                <div data-repeater-item="" class="form-group row align-items-center">
-                                                    <div class="col-md-4">
-                                                        <label>Name:</label>
-                                                        <input id="admin" type="text" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
-                                                        <input type="hidden" name="admin_id" id="admin_id" value="' . $_SESSION['kld_id'] . '" /> <!-- Hidden input for admin ID -->
-                                                        <div class="d-md-none mb-2"></div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Role:</label>
-                                                        <input type="text" class="form-control" value="' . $_SESSION['kld_admin_role'] . '" disabled />
-                                                        <div class="d-md-none mb-2"></div>
-                                                    </div>
-                                                </div>
-                                            </div>';
+															<div class="form-group">
+																<div data-repeater-item="" class="form-group row align-items-center">
+																	<div class="col-md-4">
+																		<label>Name:</label>
+																		<input id="admin" type="text" class="form-control" value="' . $_SESSION['kld_fname'] . ' ' . $_SESSION['kld_lname'] . '" disabled />
+																		<input type="hidden" name="admin_id" id="admin_id" value="' . $_SESSION['kld_id'] . '" /> <!-- Hidden input for admin ID -->
+																		<div class="d-md-none mb-2"></div>
+																	</div>
+																	<div class="col-md-4">
+																		<label>Role:</label>
+																		<input type="text" class="form-control" value="' . $_SESSION['kld_admin_role'] . '" disabled />
+																		<div class="d-md-none mb-2"></div>
+																	</div>
+																</div>
+															</div>';
 														}
 														?>
 
@@ -784,9 +907,9 @@ if (isset($_GET['event_id'])) {
 																				<?php
 																				// Fetching organizer details including org_name
 																				$try = mysqli_query($conn, "SELECT org_acc.org_acc_id, org_acc.org_role, org_acc.org_fname, org_acc.org_lname, org_tbl.org_name 
-                                                                        FROM org_acc 
-                                                                        JOIN org_tbl ON org_tbl.org_id = org_acc.org_id 
-                                                                        WHERE org_role = 'Event Manager'");
+																											FROM org_acc 
+																											JOIN org_tbl ON org_tbl.org_id = org_acc.org_id 
+																											WHERE org_role = 'Event Manager'");
 																				while ($row = $try->fetch_array()) {
 																					echo '<option value="' . $row['org_acc_id'] . '" data-org="' . $row['org_name'] . '">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</option>';
 																				}
@@ -838,17 +961,10 @@ if (isset($_GET['event_id'])) {
 															</button>
 														</div>
 														<div>
-															<a href="?page=letter">
-																<button type="button"
-																	class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
-																	data-wizard-type="action-submit">
-																	Preview
-																</button>
-															</a>
-															<button type="button" id="event_submit" name="event_submit"
+															<button type="button" id="edit_event_submit" name="edit_event_submit"
 																class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
 																data-wizard-type="action-submit">
-																Submit
+																Save Changes
 															</button>
 
 															<button type="button" id="event_next_button" name="event_next_button"

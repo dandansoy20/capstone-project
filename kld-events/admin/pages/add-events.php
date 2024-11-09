@@ -462,12 +462,18 @@
                                 <div class="pb-5" data-wizard-type="step-content">
 
                                     <h4 class="mb-10 font-weight-bold text-dark">Letter Proposal</h4>
+
+
                                     <div class="form-group row">
                                         <div class="col-12 pt-4">
+                                            <div class="summernote" id="kt_summernote_1" name="proposal_letter"></div>
+                                        </div>
+
+                                        <!--  <div class="col-12 pt-4">
                                             <textarea class="form-control" id="kt_maxlength_5" maxlength="1500" name="proposal_letter"
                                                 placeholder="Write your purpose" rows="6"></textarea>
                                             <span class="form-text text-muted">Maximum of 1,500 characters only</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <h4 class="mb-10 font-weight-bold text-dark">Admin</h4>
                                     <?php
@@ -578,13 +584,6 @@
                                     </div>
                                 </div>
                                 <!--end::Wizard Step 5-->
-
-                                <!--end::Wizard Step 3-->
-
-
-                                <!--begin::Wizard Step 5-->
-                                <!--end::Wizard Step 5-->
-
 
                                 <!--begin::Wizard Actions-->
                                 <div class="d-flex justify-content-between border-top mt-5 pt-10">
