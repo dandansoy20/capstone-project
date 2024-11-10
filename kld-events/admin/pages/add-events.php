@@ -595,13 +595,6 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <a href="?page=letter">
-                                            <button type="button"
-                                                class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
-                                                data-wizard-type="action-submit">
-                                                Preview
-                                            </button>
-                                        </a>
                                         <button type="button" id="event_submit" name="event_submit"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit">

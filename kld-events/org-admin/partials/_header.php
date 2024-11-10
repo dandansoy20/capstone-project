@@ -62,7 +62,7 @@
 											</span><span class="menu-text">Completed Events</span></a>
 									</li>
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=upcoming-events"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=upcoming-events&id=<?php echo $_SESSION['kld_id']; ?>"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="icon text-dark-50 la la-calendar-check"></i>
@@ -70,7 +70,7 @@
 
 											</span><span class="menu-text">Upcoming Events</span></a></li>
 
-									<li class="menu-item " aria-haspopup="true"><a href="?page=proposal-events"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=proposal-events&id=<?php echo $_SESSION['kld_id']; ?>"
 											class="menu-link "><span class="svg-icon menu-icon">
 
 												<i class="icon text-dark-50 ki ki-reload"></i>
@@ -78,7 +78,7 @@
 												<!--end::Svg Icon-->
 											</span><span class="menu-text">Pending Events</span></a>
 									</li>
-									<li class="menu-item " aria-haspopup="true"><a href="?page=add-events"
+									<li class="menu-item " aria-haspopup="true"><a href="?page=add-events&id=<?php echo $_SESSION['kld_id']; ?>"
 											class="menu-link ">
 											<span class="svg-icon menu-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 

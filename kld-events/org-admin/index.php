@@ -56,12 +56,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 		<!--end::Global Theme Styles-->
-
-		<!--begin::Layout Themes(used by all pages)-->
-		<link href="assets/css/themes/layout/header/base/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-		<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+		>
 		<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
 		<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
@@ -74,7 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<body id="kt_body" style="background-image: url(assets/media/bg/bg-10.jpg)"
 		class="page-loading-enabled page-loading quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled page-loading">
-
+		<?php include("control/api.php"); ?>
 		<?php include("partials/_page-loader.php"); ?>
 
 		<?php include("layout.php"); ?>
@@ -155,11 +150,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 		<script src="assets/js/scripts.bundle.js"></script>
 		<script src="control/js/add-events.js"></script>
-		<script src="control/js/add-cat.js"></script>
-		<script src="control/js/add-venue.js"></script>
-		<script src="control/js/add-std.js"></script>
 		<script src="control/js/calendar.js"></script>
-		<script src="control/js/organizer.js"></script>
+
+		<script src="control/js/letter.js"></script>
 		<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
 
 
@@ -167,6 +160,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors(used by this page)-->
 
+		<script src="assets/js/pages/crud/forms/editors/summernote.js"></script>
 		<script src="assets/js/pages/crud/forms/widgets/bootstrap-maxlength.js"></script>
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 		<script src="assets/js/pages/features/calendar/external-events.js"></script>

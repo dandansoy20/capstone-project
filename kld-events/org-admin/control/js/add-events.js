@@ -91,7 +91,7 @@ $("#event_submit").click(function () {
     "&event_organization=" +
     encodeURIComponent($("#event_organization").val()) +
     "&proposal_letter=" +
-    encodeURIComponent($("#kt_maxlength_5").val());
+    encodeURIComponent($("#kt_summernote_1").summernote("code"));
 
   // Include capacity if the toggle is checked
   if ($("#toggleCap").is(":checked")) {

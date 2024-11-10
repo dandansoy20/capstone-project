@@ -24,6 +24,7 @@ if (isset($_GET['venue_id'])) {
             kld_event.venue_id = ?"; // Use a placeholder for prepared statement
 
     // Initialize a statement and prepare the SQL query
+
     $stmt = $conn->prepare($query);
     if ($stmt === false) {
         die("Database query failed: " . $conn->error);
@@ -49,14 +50,12 @@ if (isset($_GET['venue_id'])) {
         // Move back to the first row for further processing
         $result->data_seek(0);
     } else {
-        echo "No events found for this venue.";
         $venuename = ''; // Reset variable in case of no events
     }
 
     // Close the statement
     $stmt->close();
 } else {
-    echo "No venue ID provided.";
     $venuename = ''; // Reset variable in case of no venue ID
 }
 ?>

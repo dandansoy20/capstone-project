@@ -104,17 +104,6 @@ var KTBlockUIDemo = (function () {
           KTApp.unblock("#kt_blockui_content");
         }, 1000);
       });
-      $("#edit_venue_name").on("change", function () {
-        KTApp.block("#kt_blockui_content", {
-          overlayColor: "#000000",
-          state: "primary",
-          message: "Processing...",
-        });
-
-        setTimeout(function () {
-          KTApp.unblock("#kt_blockui_content");
-        }, 1000);
-      });
     });
   };
 

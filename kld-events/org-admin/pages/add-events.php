@@ -472,10 +472,14 @@
                                     <h4 class="mb-10 font-weight-bold text-dark">Letter Proposal</h4>
                                     <div class="form-group row">
                                         <div class="col-12 pt-4">
+                                            <div class="summernote" id="kt_summernote_1" name="proposal_letter"></div>
+                                        </div>
+
+                                        <!--  <div class="col-12 pt-4">
                                             <textarea class="form-control" id="kt_maxlength_5" maxlength="1500" name="proposal_letter"
                                                 placeholder="Write your purpose" rows="6"></textarea>
                                             <span class="form-text text-muted">Maximum of 1,500 characters only</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <h4 class="mb-10 font-weight-bold text-dark">Admin</h4>
 
@@ -605,13 +609,6 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <a href="?page=letter">
-                                            <button type="button"
-                                                class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
-                                                data-wizard-type="action-submit">
-                                                Preview
-                                            </button>
-                                        </a>
                                         <button type="button" id="event_submit" name="event_submit"
                                             class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
                                             data-wizard-type="action-submit">

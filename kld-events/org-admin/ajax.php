@@ -751,49 +751,55 @@ if (!array_key_exists('ajax', $_POST)) {
             break;
 
         case "admin_approve":
-            // Include database connection
-            include('control/db.php');
+            $id = $_POST['session_id']; // Session ID of the admin
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
-            // Check if the session variable exists
-            if (!isset($_SESSION['kld_id'])) {
-                echo json_encode(['status' => 'error', 'message' => 'Admin ID not found in session.']);
-                exit;
-            }
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND org_acc_id=?");
+            $status = 'approved'; // Set status to 'approved'
+            $stmt->bind_param("ssi", $status, $eventId, $id); // "ssi" indicates the types: string, string, integer
 
-            // Get the admin_id from the session
-            $admin_id = $_SESSION['kld_id'];
-
-            // Prepare the SQL query to update the status in stakeholder_tbl
-            $query = "UPDATE stakeholder_tbl SET status = 'approved' WHERE admin_id = ?";
-
-            // Prepare the statement
-            if ($stmt = $conn->prepare($query)) {
-                // Bind the admin_id parameter to the query
-                $stmt->bind_param("i", $admin_id);
-
-                // Execute the statement and check if it was successful
-                if ($stmt->execute()) {
-                    // Check if any rows were affected
-                    if ($stmt->affected_rows > 0) {
-                        echo json_encode(['status' => 'success', 'message' => 'Status updated successfully.']);
-                    } else {
-                        echo json_encode(['status' => 'warning', 'message' => 'No records were updated.']);
-                    }
-                } else {
-                    echo json_encode(['status' => 'error', 'message' => 'Error updating status: ' . $stmt->error]);
-                }
-
-                // Close the statement
-                $stmt->close();
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Error preparing statement: ' . $conn->error]);
+                echo "error"; // Indicate there was an error with the update
             }
 
-            // Close the database connection
-            $conn->close();
+            $stmt->close();
             break;
 
+        case "admin_reject":
+            $id = $_POST['session_id']; // Session ID of the admin
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND org_acc_id=?");
+            $status = 'rejected'; // Set status to 'rejected'
+            $stmt->bind_param("ssi", $status, $eventId, $id); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "add_comment":
+            $comment = mysqli_real_escape_string($conn, $_POST['comment']);
+            $event_id = intval($_POST['event_id']);
+            $session_id = intval($_POST['session_id']);
+
+            // Insert the comment into the comment_tbl
+            $query = "INSERT INTO comment_tbl (event_id, org_acc_id, comment, comment_date) VALUES ('$event_id', '$session_id', '$comment', NOW())";
+
+            if (mysqli_query($conn, $query)) {
+                echo "success"; // Echo success message
+            } else {
+                // Instead of returning a JSON error message, echo a simple error message
+                echo "error"; // Echo error message
+            }
+            break;
 
 
 
