@@ -323,22 +323,22 @@ if (!array_key_exists('ajax', $_POST)) {
                     <body>
                     <br><br>Good day ' . $add_std_firstname . ",<br><br>" .
                 "You are reading this to notify you that we successfully added you to KLD Event.
-                    <br><br>Below is the link to activate your account and create password.<br><br><br><br>
-                    <center>
-                        <a style=
-                            'text-decoration: none;
-                            background:#00bf00;
-                            border:1px solid transparent;
-                            color:white;
-                            border-radius:15px;
-                            padding:15px 47px;
-                            min-width: 300px;
-                            min-height: 50px;
-                            font-size:13px;
-                            margin-right:7px' 
-                            href='$url'>Activate</a>
-                    </center>
-                    <br>
+                        <br><br>Below is the link to activate your account and create password.<br><br><br><br>
+                        <center>
+                            <a style=
+                                'text-decoration: none;
+                                background:#00bf00;
+                                border:1px solid transparent;
+                                color:white;
+                                border-radius:15px;
+                                padding:15px 47px;
+                                min-width: 300px;
+                                min-height: 50px;
+                                font-size:13px;
+                                margin-right:7px' 
+                                href='$url'>Activate</a>
+                        </center>
+                        <br>
                     </body>
                 </html>";
             //$mail->Body    = '';
@@ -547,7 +547,12 @@ if (!array_key_exists('ajax', $_POST)) {
                     break;
                 case "student":
                     // wala pang laman, maya konte
-                    $query = "Select * from std_acc where std_uname = '" . $username . "' and std_pass = '" . $password . "'";
+                    $query = "Select std_acc.*, yearlvl_tbl.yearlvl_name, course_tbl.course_name, section_tbl.section_name
+                    from std_acc
+                    left join yearlvl_tbl on std_acc.yearlvl = yearlvl_tbl.yearlvl_id
+                    left join course_tbl on std_acc.course_id = course_tbl.course_id
+                    left join section_tbl on std_acc.section_id = section_tbl.section_id
+                    where std_uname = '" . $username . "' and std_pass = '" . $password . "'";
                     $try = mysqli_query($conn, $query);
                     $json = [];
                     while ($row = $try->fetch_array()) {
@@ -561,6 +566,9 @@ if (!array_key_exists('ajax', $_POST)) {
                         $_SESSION['kld_lname'] = $row['std_lname'];
                         $_SESSION['kld_email'] = $row['std_kld_email'];
                         $_SESSION['kld_login_expiration'] = true;
+                        $_SESSION['kld_yearlvl'] = $row['yearlvl_name'];
+                        $_SESSION['kld_course'] = $row['course_name'];
+                        $_SESSION['kld_section'] = $row['section_name'];
                         return;
                     }
                     echo "failed";
@@ -810,6 +818,56 @@ if (!array_key_exists('ajax', $_POST)) {
             }
             break;
 
+        case "add_org":
+            $org_name = $_POST['org_name'];
+            $add_org_description = $_POST['add_org_description'];
+            $org_pic = $_POST['org_pic']; // Adding the category icon
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO org_tbl
+                            (
+                                org_name,
+                                org_desc,
+                                org_pic
+                            )
+                            VALUES
+                            (
+                                '" . $org_name . "',
+                                '" . $add_org_description . "',
+                                '" . $org_pic . "'
+                            )"
+            );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+            break;
+        case "edit_org":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_org_name = mysqli_real_escape_string($conn, $_POST['edit_org_name']);
+            $edit_org_description = mysqli_real_escape_string($conn, $_POST['edit_org_description']);
+            $org_pic = mysqli_real_escape_string($conn, $_POST['org_pic']);
+            $org_id = mysqli_real_escape_string($conn, $_POST['org_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE org_tbl
+                         SET
+                             org_name = '$edit_org_name',
+                             org_desc = '$edit_org_description',
+                             org_pic = '$org_pic'
+                         WHERE org_id = '$org_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
         case "add_cat":
             $add_cat_category = $_POST['add_cat_category'];
             $add_cat_description = $_POST['add_cat_description'];
@@ -1014,7 +1072,7 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo 2;
             }
             break;
-        case "calendar_init":
+            /* case "calendar_init":
             $try = mysqli_query(
                 $conn,
                 "Select * from kld_event
@@ -1033,7 +1091,52 @@ if (!array_key_exists('ajax', $_POST)) {
             }
 
             echo json_encode($json);
+            break; */
+        case "venue_calendar":
+            if (isset($_POST['venue_id'])) {
+                $venue_id = mysqli_real_escape_string($conn, $_POST['venue_id']);
+
+                $try = mysqli_query($conn, "SELECT * FROM kld_event WHERE venue_id = '$venue_id'");
+
+                if (!$try) {
+                    echo json_encode(["error" => "Failed to fetch events"]);
+                    exit;
+                }
+
+                $json = [];
+
+                // Array of possible event color classes
+                $color_classes = [
+                    "fc-event-solid-primary",
+                    "fc-event-solid-info",
+                    "fc-event-solid-success",
+                    "fc-event-solid-warning",
+                    "fc-event-solid-danger",
+                    "fc-event-light",
+                    "fc-event-solid-dark"
+                ];
+
+                while ($row = $try->fetch_array()) {
+                    $temp_obj = new stdClass();
+                    $temp_obj->title = $row['event_title'];
+                    $temp_obj->start = $row['event_start_date'];
+                    $temp_obj->end = $row['event_end_date'];
+                    $temp_obj->description = $row['event_desc'];
+
+                    // Randomly select a class from the array
+                    $random_class = $color_classes[array_rand($color_classes)];
+
+                    $temp_obj->className = $random_class;  // Assign the random class
+
+                    array_push($json, $temp_obj);
+                }
+
+                echo json_encode($json);
+            } else {
+                echo json_encode(["error" => "Venue ID not provided"]);
+            }
             break;
+
 
         case "add_cat2":
             $try = mysqli_query(

@@ -36,7 +36,7 @@ $(document).ready(function () {
           switch (html) {
             case "1":
               Swal.fire(
-                "Category saved successfully!",
+                "Course saved successfully!",
                 "Redirecting...",
                 "success"
               );
@@ -45,11 +45,7 @@ $(document).ready(function () {
               }, 3000); // Redirect after 3 seconds
               break;
             case "2":
-              Swal.fire(
-                "Failed to save category!",
-                "Please try again.",
-                "error"
-              );
+              Swal.fire("Failed to save course!", "Please try again.", "error");
               break;
             default:
               Swal.fire("Something went wrong!", "Please try again.", "error");
@@ -90,7 +86,7 @@ $(document).ready(function () {
           switch (html) {
             case "1":
               Swal.fire(
-                "Course saved successfully!",
+                "Course updated successfully!",
                 "Redirecting...",
                 "success"
               );
@@ -104,7 +100,11 @@ $(document).ready(function () {
               }, 3000); // Redirect after 3 seconds
               break;
             case "2":
-              Swal.fire("Failed to save course!", "Please try again.", "error");
+              Swal.fire(
+                "Failed to update course!",
+                "Please try again.",
+                "error"
+              );
               break;
             default:
               Swal.fire("Something went wrong!", "Please try again.", "error");

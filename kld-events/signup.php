@@ -118,13 +118,13 @@ License: You must have a valid license purchased only from themeforest(the above
 
                                                 <input
                                                     class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8"
-                                                    type="" placeholder="First Name" id="kld_signup_fname" value="<?php echo $_SESSION['kld_fname'] ?>" />
+                                                    type="" placeholder="First Name" disabled id="kld_signup_fname" value="<?php echo $_SESSION['kld_fname'] ?>" />
                                             </div>
                                             <div class="col-6">
 
                                                 <input
                                                     class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8"
-                                                    type="" placeholder="Last Name" id="kld_signup_lname" value="<?php echo $_SESSION['kld_lname'] ?>" />
+                                                    type="" placeholder="Last Name" disabled id="kld_signup_lname" value="<?php echo $_SESSION['kld_lname'] ?>" />
                                             </div>
                                         </div>
                                     </div>

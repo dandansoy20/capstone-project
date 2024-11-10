@@ -2,7 +2,7 @@
 include('./control/db.php');  // Include the database connection
 
 // Array of bootstrap color classes
-$colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark'];
+$colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark', 'info'];
 
 ?>
 
@@ -41,16 +41,6 @@ $colors = ['primary', 'success', 'info', 'warning', 'danger', 'dark'];
                     <!--end::Stats Widget 13-->
                 </div>
             <?php
-            }
-
-            // Add an empty column and the "Add Course" card if needed (for second row)
-            if ($count % 3 != 0) {
-                $emptyColumns = 3 - ($count % 3);  // Number of empty columns needed to fill the row
-
-                // If we need to add empty columns
-                for ($i = 0; $i < $emptyColumns - 1; $i++) {
-                    echo '<div class="col-xl-4"></div>'; // Empty columns to fill the space
-                }
             }
 
             // Add the "Add Course" card in the last column of the second row

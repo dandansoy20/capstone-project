@@ -1,8 +1,6 @@
 // Click handler for Add Category Submit
 $("#add_cat_submit").click(async function () {
   if (catValidateForm()) {
-    $(this).text("Submitting");
-    $(this).prop("disabled", "disabled");
     var cat_icon = await imagefileinsert(
       document.getElementById("add_cat_icon")
     );

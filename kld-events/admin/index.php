@@ -151,12 +151,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<script src="control/js/add-events.js"></script>
 		<!-- <script src="control/js/edit-events.js"></script> -->
+		<script src="control/js/add-org.js"></script>
 		<script src="control/js/add-cat.js"></script>
 		<script src="control/js/add-course.js"></script>
 		<script src="control/js/add-section.js"></script>
 		<script src="control/js/add-venue.js"></script>
 		<script src="control/js/add-std.js"></script>
 		<script src="control/js/calendar.js"></script>
+		<script src="control/js/venue-calendar.js"></script>
 		<script src="control/js/organizer.js"></script>
 		<script src="control/js/letter.js"></script>
 
@@ -175,6 +177,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
 		<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 		<script src="assets/js/pages/features/charts/apexcharts.js"></script>
+
+		<!-- <script src="assets/js/pages/features/calendar/basic.js"></script> -->
 
 		<script src="assets/js/pages/crud/forms/editors/summernote.js"></script>
 		<script src="assets/js/pages/features/miscellaneous/blockui.js"></script>
