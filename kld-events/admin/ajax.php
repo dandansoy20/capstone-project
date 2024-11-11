@@ -755,7 +755,38 @@ if (!array_key_exists('ajax', $_POST)) {
 
             $stmt->close();
             break;
+        case "launch":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'upcoming'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "cancel":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'cancelled'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
         case "add_comment":
             $comment = mysqli_real_escape_string($conn, $_POST['comment']);
             $event_id = intval($_POST['event_id']);

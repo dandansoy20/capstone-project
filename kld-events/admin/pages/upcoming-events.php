@@ -11,6 +11,7 @@
             "SELECT 
                             venue_tbl.venue_name,
                             venue_tbl.venue_desc,
+                            kld_event.event_id,
                             kld_event.event_title,
                             kld_event.event_desc,
                             org_tbl.org_name,
@@ -52,7 +53,7 @@
 
                                  <div class="row">
                                     <div class="col-9">
-                                <a href="#">
+                                <a href="?page=upcoming-event&event_id=' . $row["event_id"] . '">
                                     <h1 class="text-primary font-weight-bolder m-0 text-hover-secondary">' . $row["event_title"] . '</h1>
                                 </a>
 
@@ -119,7 +120,7 @@
                                     ' . $row["event_desc"] . '
                                 </p>
 
-                                <a href="?page=upcoming-view" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                <a href="?page=upcoming-view&event_id=' . $row["event_id"] . '" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                                  </div>
                                 <div class="col-3">
                                     <img src="' . base64_decode($row["event_poster"]) . '" style="width: 100%"/>                                   

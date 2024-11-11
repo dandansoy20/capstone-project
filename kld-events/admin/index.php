@@ -161,6 +161,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="control/js/venue-calendar.js"></script>
 		<script src="control/js/organizer.js"></script>
 		<script src="control/js/letter.js"></script>
+		<script src="control/js/launch.js"></script>
 
 
 		<!--end::Global Theme Bundle-->

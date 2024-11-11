@@ -97,7 +97,7 @@ include('control/db.php');
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'upcoming-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=upcoming-events" class="menu-link">
+								<a href="?page=upcoming-events&id=<?php echo $_SESSION['kld_id']; ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
 									<span class="menu-text">Upcoming Events
 										<span class="label label-info ml-2">
@@ -139,7 +139,7 @@ include('control/db.php');
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'archived-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=archived-events" class="menu-link">
+								<a href="?page=archived-events&id=<?php echo $_SESSION['kld_id']; ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
 									<span class="menu-text">Archives</span>
 								</a>
