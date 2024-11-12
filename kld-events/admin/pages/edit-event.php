@@ -104,7 +104,7 @@ if (isset($_GET['event_id'])) {
 
 			// Check if no event found
 			if (empty($stakeholders)) {
-				echo '<h1> walang stakeholder </h1>';
+				echo '';
 			}
 		} else {
 			// Handle execution failure
@@ -205,7 +205,7 @@ if (isset($_GET['event_id'])) {
 				<div class="example-preview">
 					<ul class="nav nav-pills nav-fill">
 						<li class="nav-item">
-							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4">
+							<a class="nav-link " id="stats-tab-4" data-toggle="tab" href="#stats-4">
 								<span class="nav-icon">
 									<i class="flaticon2-user-1"></i>
 								</span>
@@ -213,7 +213,7 @@ if (isset($_GET['event_id'])) {
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="proposal-tab-4" data-toggle="tab" href="#proposal" aria-controls="proposal">
+							<a class="nav-link active" id="proposal-tab-4" data-toggle="tab" href="#proposal" aria-controls="proposal">
 								<span class="nav-icon">
 									<i class="flaticon2-chat-1"></i>
 								</span>
@@ -232,7 +232,7 @@ if (isset($_GET['event_id'])) {
 
 					<div class="tab-content mt-5" id="myTabContent4">
 
-						<div class="tab-pane fade show active" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
+						<div class="tab-pane fade" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
 
 
 							<div class="card card-custom" id="kt_blockui_content">
@@ -989,7 +989,7 @@ if (isset($_GET['event_id'])) {
 
 						</div>
 
-						<div class="tab-pane fade" id="proposal" role="tabpanel" aria-labelledby="proposal-tab-4">
+						<div class="tab-pane fade  show active" id="proposal" role="tabpanel" aria-labelledby="proposal-tab-4">
 
 							<h5>Pre-Event Information</h5>
 
@@ -1097,71 +1097,43 @@ if (isset($_GET['event_id'])) {
 													<form class="form" id="kt_form">
 														<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
 															<h4 class="mb-10 font-weight-bold text-dark">Event Contents</h4>
-															<div id="add_info_content" class="kt-repeater">
-																<div data-repeater-list="image_list" class="col-lg-12">
-																	<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+															<div id="add_info_content">
+																<div class="form-group row">
+																	<div data-repeater-list="image_list" class="col-lg-12">
+																		<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
 
-																		<!-- Dropzone -->
-																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																			<div class="dropzone dropzone-multi dynamic-dropzone" id="kt_dropzone_6">
+																			<!-- Dropzone -->
+																			<div class="col-lg-12 col-md-12 col-sm-12 mb-3 ">
+																				<div class="image-input image-input-outline" id="kt_user_add_avatar">
+																					<div class="image-input-wrapper" style="background-image: url(assets/add-image.png)"></div>
 
-																				<div class="dropzone-panel mb-lg-0 mb-2">
-																					<a class="dropzone-select btn btn-outline-primary btn-lg">
-																						<i class="flaticon2-image-file"></i> Upload Image Here
-																					</a>
-																					<a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm">Upload All</a>
-																					<a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm">Remove All</a>
-																				</div>
-																				<div class="dropzone-items">
-																					<div class="dropzone-item" style="display:none">
-																						<div class="dropzone-file">
-																							<div class="dropzone-filename" title="some_image_file_name.jpg">
-																								<span data-dz-name="">some_image_file_name.jpg</span>
-																								<strong>(<span data-dz-size="">340kb</span>)</strong>
-																							</div>
-																							<div class="dropzone-error" data-dz-errormessage=""></div>
-																						</div>
-																						<div class="dropzone-progress">
-																							<div class="progress">
-																								<div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress=""></div>
-																							</div>
-																						</div>
-																						<div class="dropzone-toolbar">
-																							<span class="dropzone-start">
-																								<i class="flaticon2-arrow"></i>
-																							</span>
-																							<span class="dropzone-cancel" data-dz-remove="" style="display: none;">
-																								<i class="flaticon2-cross"></i>
-																							</span>
-																							<span class="dropzone-delete" data-dz-remove="">
-																								<i class="flaticon2-cross"></i>
-																							</span>
-																						</div>
-																					</div>
+																					<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+																						<i class="fa fa-pen icon-sm text-muted"></i>
+																						<input type="file" id="info_image" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+																						<input type="hidden" name="profile_avatar_remove" />
+																					</label>
+
+																					<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																						<i class="ki ki-bold-close icon-xs text-muted"></i>
+																					</span>
 																				</div>
 																			</div>
-																		</div>
 
-																		<!-- Input Field -->
-																		<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-																			<input type="text" class="form-control" placeholder="Insert Title Here" />
-																		</div>
-
-
-																		<!-- Description -->
-																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																			<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
-																		</div>
-
-																		<!-- Delete Button -->
-																		<div class="col-lg-4 col-md-6 col-sm-12">
-																			<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-																				<i class="la la-trash-o"></i> Delete
-																			</a>
+																			<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+																				<input type="text" class="form-control" placeholder="Insert Title Here" />
+																			</div>
+																			<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																				<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
+																			</div>
+																			<!-- Delete Button -->
+																			<div class="col-lg-4 col-md-6 col-sm-12">
+																				<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+																					<i class="la la-trash-o"></i> Delete
+																				</a>
+																			</div>
 																		</div>
 																	</div>
 																</div>
-
 																<!-- Add Button -->
 																<div class="form-group row">
 																	<div class="col-lg-4 col-md-6 col-sm-12">
@@ -1377,7 +1349,7 @@ if (isset($_GET['event_id'])) {
 																<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
 															</div>
 															<div>
-																<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">Save Changes</button>
+																<button type="button" id="add_info" name="add_info" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">Save Changes</button>
 																<button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
 															</div>
 														</div>
@@ -1475,35 +1447,6 @@ if (isset($_GET['event_id'])) {
 
 		<div class="separator separator-solid separator-border-4"></div>
 
-		<div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="row">
-					<div class="modal-content">
-						<div class="alert alert-info mb-5 p-5" role="alert">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<i aria-hidden="true" class="ki ki-close"></i>
-							</button>
-							<h4 class="alert-heading">Well done!</h4>
-
-							<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-						</div>
-					</div>
-
-					<div class="modal-content">
-						<div class="alert alert-info mb-5 p-5" role="alert">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<i aria-hidden="true" class="ki ki-close"></i>
-							</button>
-							<h4 class="alert-heading">Well done!</h4>
-
-							<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
 
 		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">

@@ -3132,7 +3132,11 @@ var KTWidgets = (function () {
     }
 
     var options = {
-      series: [24],
+      series: [
+        isNaN((registeredCount / invitedCount) * 100)
+          ? 0
+          : (registeredCount / invitedCount) * 100,
+      ],
       chart: {
         height: height,
         type: "radialBar",

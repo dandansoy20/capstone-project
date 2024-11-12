@@ -127,7 +127,7 @@ include('control/db.php');
 								</a>
 							</li>
 							<li class="menu-item menu-item-submenu <?php echo ($current_page == 'completed-events') ? 'menu-item-active' : ''; ?>" aria-haspopup="true" data-menu-toggle="hover">
-								<a href="?page=completed-events" class="menu-link">
+								<a href="?page=completed-events&id=<?php echo $_SESSION['kld_id']; ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot"><span></span></i>
 									<span class="menu-text">Completed Events</span>
 								</a>

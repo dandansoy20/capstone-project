@@ -23,12 +23,12 @@ var KTInputmask = (function () {
       mask: "(999) 999-9999",
     });
 
-    // empty placeholder
+    /* // empty placeholder
     $("#kt_inputmask_4").inputmask("mask", {
       mask: "KLD-99-999999",
       placeholder: "", // remove underscores from the input mask
     });
-
+ */
     // empty placeholder
     $("#add_org_kldid").inputmask("mask", {
       mask: "KLD-99-999999",

@@ -1,4 +1,3 @@
-
 <!-- begin::User Panel-->
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 
@@ -26,7 +25,7 @@
 			</div>
 			<div class="d-flex flex-column">
 				<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-					James Jones
+					<?php echo $_SESSION['kld_name']; ?>
 				</a>
 				<div class="text-muted mt-1">
 					Application Developer

@@ -2,7 +2,126 @@
 if (session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
-include "./control/db.php";
+
+// Include the database connection
+include('./control/db.php');
+
+// Check if the 'event_id' parameter exists in the URL
+if (isset($_GET['event_id'])) {
+	$eventId = $_GET['event_id'];
+
+	// Prepare the SQL statement to fetch events for the specific event ID
+	$query = "SELECT 
+                kld_event.*, 
+                org_tbl.org_name AS organization_name, 
+                category_tbl.category_name,
+                venue_tbl.venue_name,
+                letter_tbl.letter_content,
+                stakeholder_tbl.*,
+
+                admin_acc.admin_profile,
+                admin_acc.admin_id,
+                admin_acc.admin_fname,
+                admin_acc.admin_lname,
+                admin_acc.admin_role,
+
+                org_acc.org_profile,
+                org_acc.org_id,
+                org_acc.org_fname,
+                org_acc.org_lname,
+                org_acc.org_role
+              FROM 
+                kld_event 
+			LEFT JOIN 
+				venue_tbl ON kld_event.venue_id = venue_tbl.venue_id 
+			LEFT JOIN 
+				category_tbl ON kld_event.category_id = category_tbl.category_id 
+			LEFT JOIN 
+				letter_tbl ON kld_event.event_id = letter_tbl.event_id 
+			LEFT JOIN 
+				stakeholder_tbl ON kld_event.event_id = stakeholder_tbl.event_id 
+			LEFT JOIN 
+				admin_acc ON stakeholder_tbl.admin_id = admin_acc.admin_id
+			LEFT JOIN 
+				org_acc ON stakeholder_tbl.org_acc_id = org_acc.org_acc_id  -- Join to get org_id
+			LEFT JOIN 
+				org_tbl ON org_acc.org_id = org_tbl.org_id  -- Join to get org_name
+			WHERE 
+				kld_event.event_id = ?";
+
+	// Prepare the SQL statement
+	if ($stmt = $conn->prepare($query)) {
+		// Bind the parameter
+		$stmt->bind_param("i", $eventId);
+
+		// Execute the statement
+		if ($stmt->execute()) {
+			// Get the result
+			$result = $stmt->get_result();
+
+			// Initialize an array to hold stakeholder information
+			$stakeholders = [];
+
+			// Loop through the results and populate the stakeholders array
+			while ($row = $result->fetch_assoc()) {
+
+				if (!empty($row['admin_fname']) && !empty($row['admin_lname'])) {
+					$stakeholders[] = [
+						'admin_id' => $row['admin_id'],
+						'role' => htmlspecialchars($row['admin_role']),
+						'name' => htmlspecialchars($row['admin_fname'] . ' ' . $row['admin_lname']),
+						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
+						'type' => 'admin',
+						'profile' => !empty($row['admin_profile']) ? $row['admin_profile'] : "assets/default.jpg",
+					];
+				}
+
+				// Fetch organization information
+				if (!empty($row['org_fname']) && !empty($row['org_lname'])) {
+					$stakeholders[] = [
+						'org_acc_id' => $row['org_acc_id'],
+						'role' => htmlspecialchars($row['organization_name']),
+						'name' => htmlspecialchars($row['org_fname'] . ' ' . $row['org_lname']),
+						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
+						'profile' => !empty($row['org_profile']) ? $row['org_profile'] : "assets/default.jpg",
+						'type' => 'organizer'
+					];
+				}
+
+
+
+				// Fetch other values for event details
+				$event_title = $row['event_title'];
+				$event_start_date = $row['event_start_date'];
+				$event_date_created = $row['event_created'];
+				$event_desc = $row['event_desc'];
+				$org_name = $row['organization_name'] ?? "KLD Events";
+				$category_name = $row['category_name'];
+				$venue_name = $row['venue_name']; // Assign "Virtual Event" if venue_name is null
+				$proposal = $row["letter_content"] ?? "No Event Proposal Letter";
+				$event_poster = base64_decode($row["event_poster"]) ?? " ";
+			}
+
+
+
+			// Check if no event found
+			if (empty($stakeholders)) {
+				echo '';
+			}
+		} else {
+			// Handle execution failure
+			die("Execution failed: " . $stmt->error);
+		}
+
+		// Close the statement
+		$stmt->close();
+	} else {
+		// Handle preparation failure
+		die("Database query preparation failed: " . $conn->error);
+	}
+} else {
+	die("Event ID not provided.");
+}
 ?>
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
@@ -229,44 +348,72 @@ include "./control/db.php";
 								</th>
 								<th class="pr-0" style="width: 50px">Student</th>
 								<th style="min-width: 200px"></th>
-								<th style="min-width: 150px">Email</th>
 								<th style="min-width: 150px">Program</th>
 								<th style="min-width: 150px">Section</th>
+								<th style="min-width: 150px">Date</th>
 								<th style="min-width: 150px">Status</th>
 								<th class="min-width: 150px" style="min-width: 150px">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$try = mysqli_query($conn, "SELECT std_acc.*, course_tbl.course_acronym, section_tbl.section_name, yearlvl_tbl.yearlvl_name FROM std_acc JOIN course_tbl ON std_acc.course_id = course_tbl.course_id JOIN section_tbl ON std_acc.section_id = section_tbl.section_id JOIN yearlvl_tbl ON std_acc.yearlvl = yearlvl_tbl.yearlvl_id");
+							$try = mysqli_query(
+								$conn,
+								"SELECT sa.*, 
+									course_tbl.course_acronym, 
+									section_tbl.section_name, 
+									yearlvl_tbl.yearlvl_name,
+									at.status, 
+									at.attendance_date 
+								FROM std_acc sa
+								JOIN event_invitation ei 
+									ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+									AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+									AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+								JOIN course_tbl ON sa.course_id = course_tbl.course_id
+								JOIN section_tbl ON sa.section_id = section_tbl.section_id
+								JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+								LEFT JOIN attendance_tbl at ON sa.std_id = at.std_id AND at.event_id = $eventId
+								WHERE ei.event_id = $eventId;
+								"
+							);
+
 							while ($row = $try->fetch_array()) {
+								// Check if the student is registered for the specific event by checking the status in registration_tbl
+								$status_result = mysqli_query($conn, "SELECT status, attendance_date FROM attendance_tbl WHERE std_id = '" . $row['std_id'] . "' AND event_id = $eventId");
+
+								// Initialize status and reg_date for each student
+								$status = 'INACTIVE';
+								$reg_date = '--.--.----'; // Default date when not registered
+
+								if (mysqli_num_rows($status_result) > 0) {
+									$status_row = mysqli_fetch_assoc($status_result);
+									$status = strtolower($status_row['status']) == 'attended' ? 'attended' : 'INACTIVE';
+									$reg_date = ($status == 'attended' && !empty($status_row['reg_date'])) ? date("F d, Y", strtotime($status_row['reg_date'])) : '--.--.----';
+								}
+
 								echo '<tr>';
-								// Checkbox
 								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['std_kld_id'] . '" /><span></span></label></td>';
-
-								// Profile Image
-								echo '<td class="pr-0"><div class="symbol symbol-50 symbol-light mt-1"><span class="symbol-label"><img src="' . ($row['std_profilepic'] ? $row['std_profilepic'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/></span></div></td>';
-
-								// Name and ID
+								echo '<td class="pr-0">
+										<div class="symbol symbol-40 symbol-sm flex-shrink-0">';
+								if (!empty($row['std_profilepic'])) {
+									echo '<img src="' . $row['std_profilepic'] . '" class="h-75 align-self-end" alt=""/>';
+								} else {
+									echo '<img src="assets/media/users/default.jpg" class="h-75 align-self-end" alt=""/>';
+								}
+								echo '</div></td>';
 								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['std_fname'] . ' ' . $row['std_lname'] . '</a><span class="text-muted font-weight-bold text-muted d-block">' . $row['std_kld_id'] . '</span></td>';
-
-								// Email
-								echo '<td><span class="text-muted font-weight-bold">' . $row['std_kld_email'] . '</span></td>';
-
-								// Program and Year Level
 								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['course_acronym'] . '</span><span class="text-muted font-weight-bold">' . $row['yearlvl_name'] . '</span></td>';
-
-								// Section
 								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['section_name'] . '</span></td>';
+								echo '<td><span class="text-muted font-weight-bold">' . $reg_date . '</span></td>';
 
 								// Status
-								$status = strtoupper($row['status']);
-								$status_text = ($status == 'ACTIVE') ? 'Present' : 'Absent';
-								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
+								$status_text = ($status == 'attended') ? 'Present' : 'Absent';
+								$label_class = ($status == 'attended') ? 'label-light-primary' : 'label-light-danger';
 								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
 
 								// Switch
-								$_status = ($status == 'ACTIVE') ? 'checked="checked"' : '';
+								$_status = ($status == 'attended') ? 'checked="checked"' : '';
 								echo '<td class="pr-0 text-right"><span class="switch switch-outline switch-icon switch-success"><label><input type="checkbox" ' . $_status . ' name="select"/><span></span></label></span></td>';
 
 								echo '</tr>';
@@ -406,117 +553,3 @@ include "./control/db.php";
 	</div>
 	<!--end::Entry-->
 </div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
-		const typeSelect = document.getElementById('kt_datatable_search_status');
-		const studentFields = document.getElementById('student-fields');
-		const employeeFields = document.getElementById('employee-fields');
-		const studentTable = document.getElementById('student-table');
-		const employeeTable = document.getElementById('employee-table');
-		const adminTable = document.getElementById('admin-table');
-
-		// Function to show/hide fields based on selected type
-		function updateFields(selectedType) {
-			studentFields.classList.add('d-none');
-			employeeFields.classList.add('d-none');
-
-			if (selectedType === 'std') {
-				studentFields.classList.remove('d-none');
-			} else if (selectedType === 'emp') {
-				employeeFields.classList.remove('d-none');
-			}
-		}
-
-		// Function to show/hide tables based on selected type
-		function updateTables(selectedType) {
-			studentTable.classList.add('d-none');
-			employeeTable.classList.add('d-none');
-			adminTable.classList.add('d-none');
-
-			if (selectedType === 'std') {
-				studentTable.classList.remove('d-none');
-			} else if (selectedType === 'emp') {
-				employeeTable.classList.remove('d-none');
-			} else if (selectedType === 'adm') {
-				adminTable.classList.remove('d-none');
-			}
-		}
-
-		// Function to manage selected checkboxes and display the action form
-		function manageCheckboxes() {
-			const checkboxes = document.querySelectorAll(`${getVisibleTable()} tbody input[type="checkbox"]:not(.switch input[type="checkbox"])`);
-			const mainCheckbox = document.querySelector(`${getVisibleTable()} thead input[type="checkbox"]`);
-			let selectedCount = 0;
-
-			checkboxes.forEach(checkbox => {
-				checkbox.addEventListener('change', function() {
-					this.checked ? selectedCount++ : selectedCount--;
-					updateSelectedCount(selectedCount);
-				});
-			});
-
-			mainCheckbox.addEventListener('change', function() {
-				const isChecked = this.checked;
-				checkboxes.forEach(checkbox => {
-					checkbox.checked = isChecked;
-					selectedCount = isChecked ? checkboxes.length : 0;
-				});
-				updateSelectedCount(selectedCount);
-			});
-		}
-
-		function getVisibleTable() {
-			if (!studentTable.classList.contains('d-none')) return '#student-table';
-			if (!employeeTable.classList.contains('d-none')) return '#employee-table';
-			if (!adminTable.classList.contains('d-none')) return '#admin-table';
-		}
-
-		function updateSelectedCount(selectedCount) {
-			document.getElementById('kt_datatable_selected_records').textContent = selectedCount;
-			if (selectedCount > 0) {
-				document.getElementById('kt_datatable_group_action_form').classList.add('show');
-			} else {
-				document.getElementById('kt_datatable_group_action_form').classList.remove('show');
-			}
-		}
-
-		// Initial setup on page load
-		updateFields(typeSelect.value);
-		updateTables(typeSelect.value);
-		manageCheckboxes();
-
-		// Listen for changes in the select dropdown
-		typeSelect.addEventListener('change', function() {
-			updateFields(this.value);
-			updateTables(this.value);
-			manageCheckboxes(); // Re-initialize checkbox logic for the new visible table
-		});
-
-
-	});
-
-	document.addEventListener('DOMContentLoaded', function() {
-		const switches = document.querySelectorAll('.switch input[type="checkbox"]');
-		switches.forEach(switchElement => {
-			switchElement.addEventListener('change', function() {
-				const isChecked = this.checked;
-				const studentId = this.value;
-				Swal.fire({
-					title: "Are you sure?",
-					text: isChecked ? "Mark this student as present?" : "Mark this student as absent?",
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonText: "Yes"
-				}).then(function(result) {
-					if (result.value) {
-						console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-						Swal.fire("Updated!", "Attendance has been updated.", "success");
-					} else {
-						switchElement.checked = !isChecked;
-					}
-				});
-			});
-		});
-	});
-</script>

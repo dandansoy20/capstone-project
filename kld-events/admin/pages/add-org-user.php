@@ -23,7 +23,7 @@
                                             <div class="col-xl-9">
                                                 <!--begin::Wizard Step 1-->
                                                 <div class="my-5 step" data-wizard-type="step-content" data-wizard-state="current">
-                                                    <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:</h5>
+                                                    <h5 class="text-dark font-weight-bold mb-10">Add Organizer User:</h5>
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label text-left">Profile Picture</label>

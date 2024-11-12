@@ -131,31 +131,18 @@ if (isset($_GET['event_id'])) {
 				<!--begin::Engage Widget 1-->
 				<div class="card card-custom card-stretch gutter-b position-relative">
 					<!-- Toolbar for icons -->
-					<div class="position-absolute top-0 right-0 p-3">
-						<div class="d-flex align-items-center">
-							<!-- Edit and Archive icons -->
-							<a href="?page=edit-event&event_id=<?php echo $eventId ?>" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3" title="Edit">
-								<span class="svg-icon svg-icon-md svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+					<!--begin::Toolbar-->
 
-										<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-											<rect x="0" y="0" width="24" height="24"></rect>
-											<path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953) "></path>
-											<path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-										</g>
-									</svg><!--end::Svg Icon--></span>
-							</a>
-							<a href="#" class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3" title="Archive">
-								<i class="icon-xl fas fa-eye-slash text-danger"></i>
-
-							</a>
-						</div>
-					</div>
+					<!--end::Toolbar-->
 
 					<!-- Existing Card Body -->
 					<div class="card-body d-flex p-0">
+
 						<div class="flex-grow-1 p-8 card-rounded bgi-no-repeat d-flex"
+
 							style="background-color: #FFF; background-position: center bottom; background-size: auto 100%; background-image: url(assets/media/svg/humans/custom-88.png)">
 							<!-- Existing content -->
+
 							<div class="row">
 								<div class="col-12 col-md-3" style="text-align: center;">
 									<img src="<?php echo $event_poster; ?>"
@@ -163,6 +150,31 @@ if (isset($_GET['event_id'])) {
 								</div>
 								<div class="col-12 col-md-9">
 									<!-- Title and details -->
+									<div class="d-flex justify-content-end">
+										<div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions"
+											data-placement="left">
+											<a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
+												data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="ki ki-bold-more-hor"></i>
+											</a>
+											<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+												<ul class="navi navi-hover py-5">
+													<li class="navi-item">
+														<a href="?page=edit-cat&id=<?php echo $category_id; ?>" class="navi-link">
+															<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
+															<span class="navi-text">Edit</span>
+														</a>
+													</li>
+													<li class="navi-item">
+														<a href="#" onclick="editOrganizer(<?php echo $category_id; ?>)" class="navi-link">
+															<span class="navi-icon"><i class="flaticon2-gear"></i></span>
+															<span class="navi-text">Archive</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
 									<a href="#" class="d-flex align-items-center">
 										<div class="mr-3 d-flex align-items-center bg-hover-light p-2 rounded">
 											<div class="flex-shrink-0 text-center">
@@ -175,6 +187,7 @@ if (isset($_GET['event_id'])) {
 										</h1>
 										<span class="label label-danger label-inline ml-2">Live Now</span>
 									</a>
+
 									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($org_name); ?></h6>
 									<div class="d-flex my-5">
 										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -246,7 +259,7 @@ if (isset($_GET['event_id'])) {
 									</p>
 									<form method="post">
 										<a href="?page=memo&event_id=<?php echo $eventId ?>" class="btn btn-light-primary font-weight-bold py-2 px-6">View Proposal</a>
-										<button id="cancel-event" name="cancel-event" type="button" class="btn btn-light-danger font-weight-bold py-2">Cancel Event</button>
+										<button id="end-event" name="end-event" type="button" class="btn btn-primary font-weight-bold py-2">End Event</button>
 										<input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
 									</form>
 								</div>
@@ -268,7 +281,7 @@ if (isset($_GET['event_id'])) {
 					<ul class="nav nav-pills nav-fill">
 
 						<li class="nav-item">
-							<a class="nav-link active" id="proposal-tab-4" data-toggle="tab" href="#proposal-4">
+							<a class="nav-link " id="proposal-tab-4" data-toggle="tab" href="#proposal-4">
 								<span class="nav-icon">
 									<i class="flaticon2-user-1"></i>
 								</span>
@@ -276,11 +289,11 @@ if (isset($_GET['event_id'])) {
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="stats-tab-4" data-toggle="tab" href="#stats-4" aria-controls="stats-4">
+							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4" aria-controls="stats-4">
 								<span class="nav-icon">
 									<i class="flaticon2-pie-chart-4"></i>
 								</span>
-								<span class="nav-text">Statistics</span>
+								<span class="nav-text">Reports</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -309,10 +322,13 @@ if (isset($_GET['event_id'])) {
 						</li>
 					</ul>
 					<div class="tab-content mt-5" id="myTabContent4">
-						<div class="tab-pane fade  show active" id="proposal-4" role="tabpanel" aria-labelledby="proposal-tab-4">
+						<div class="tab-pane fade  " id="proposal-4" role="tabpanel" aria-labelledby="proposal-tab-4">
 							<h5>Administrator</h5>
 							<div class="row">
-								<?php foreach ($stakeholders as $stakeholder):
+								<?php
+								$hasAdmin = false; // Variable to track if there's at least one admin
+
+								foreach ($stakeholders as $stakeholder):
 									$statusClass = '';
 									if ($stakeholder['status'] === 'approved') {
 										$statusClass = 'text-success';  // Green for approved
@@ -325,8 +341,11 @@ if (isset($_GET['event_id'])) {
 									if ($stakeholder['status'] !== 'approved') {
 										$allApproved = false; // If any status is not approved, set flag to false
 									}
+
+									// Check if the stakeholder type is 'admin'
+									if ($stakeholder['type'] === 'admin'):
+										$hasAdmin = true; // Set to true if at least one admin is found
 								?>
-									<?php if ($stakeholder['type'] === 'admin'): ?>
 										<div class="col-xl-4">
 											<div class="card card-custom card-stretch gutter-b">
 												<div class="card-body d-flex align-items-center py-0 mt-5">
@@ -343,7 +362,6 @@ if (isset($_GET['event_id'])) {
 																echo htmlspecialchars($stakeholder['name']);
 															}
 															?>
-
 														</a>
 														<span class="font-weight-bold text-muted font-size-lg"><?php echo htmlspecialchars($stakeholder['role']); ?></span>
 														<div class="<?php echo $statusClass; ?> font-weight-bold mb-3 text-uppercase"><?php echo htmlspecialchars($stakeholder['status']); ?></div>
@@ -369,7 +387,7 @@ if (isset($_GET['event_id'])) {
 														<div class="timeline timeline-3">
 															<div class="timeline-items">
 																<?php
-																// Fetch comments for the current organizer
+																// Fetch comments for the current admin
 																$comments_query = "SELECT * FROM comment_tbl WHERE admin_id = " . $stakeholder['admin_id'] . " AND event_id = $eventId";
 																$comments_result = mysqli_query($conn, $comments_query);
 
@@ -407,7 +425,7 @@ if (isset($_GET['event_id'])) {
 																<?php }
 																} else {
 																	// No comment yet
-																	echo '<p class="p-0 text-muted">No comment yet.</p>';
+																	echo '<span> class="pl-5 text-muted">No comment yet.</span>';
 																}
 																?>
 															</div>
@@ -421,7 +439,14 @@ if (isset($_GET['event_id'])) {
 										</div>
 									<?php endif; ?>
 								<?php endforeach; ?>
+
+								<?php
+								// If no admin stakeholders were found, display a message
+								if (!$hasAdmin): ?>
+									<span class="text-muted pl-5">No admin to show.</span>
+								<?php endif; ?>
 							</div>
+
 
 							<div class="separator separator-solid mt-2 mb-4"></div>
 
@@ -535,42 +560,79 @@ if (isset($_GET['event_id'])) {
 										</div>
 									<?php endif; ?>
 								<?php endforeach; ?>
+								<?php
+								// If no admin stakeholders were found, display a message
+								if (!$hasAdmin): ?>
+									<span class="text-muted pl-5">No Organizer to show.</span>
+								<?php endif; ?>
 							</div>
 
 
 
 						</div>
-						<div class="tab-pane fade" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
+						<div class="tab-pane fade show active" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
 							<div class="row">
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 14-->
+									<?php
+									$invitedCountQuery = "
+									SELECT COUNT(*) AS invited_count 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl 
+										ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl 
+										ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl 
+										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									WHERE ei.event_id = $eventId
+									";
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = $invitedResult->fetch_assoc()['invited_count'];
+
+									$registeredCountQuery = "
+									SELECT COUNT(*) AS registered_count 
+									FROM registration_tbl 
+									WHERE event_id = $eventId AND status = 'registered'
+									";
+									$registeredResult = $conn->query($registeredCountQuery);
+									$registeredCount = $registeredResult->fetch_assoc()['registered_count'];
+									?>
+
+									<script>
+										// Pass PHP values to JavaScript
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var registeredCount = <?php echo $registeredCount; ?>;
+									</script>
+
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Registration
-													<div class="font-size-sm text-muted mt-2">542 Registered to the event</div>
+													<div class="font-size-sm text-muted mt-2">
+														<?php echo $invitedCount; ?> students invited to the event
+													</div>
 												</div>
 											</div>
-
 										</div>
 
-										<!--end::Header-->
-										<!--begin::Body-->
 										<div class="card-body d-flex flex-column">
 											<div class="flex-grow-1">
-												<div id="kt_mixed_widget_14_chart" style="height: 200px">
-												</div>
+												<div id="kt_mixed_widget_14_chart" style="height: 200px"></div>
 											</div>
 											<div class="pt-5">
-
-												<a href="?page=registered-view" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
+												<a href="?page=registered-view&event_id=<?php echo $eventId; ?>" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
 											</div>
 										</div>
 										<!--end::Body-->
 									</div>
 									<!--end::Mixed Widget 14-->
 								</div>
+
 
 
 								<div class="col-xl-4">

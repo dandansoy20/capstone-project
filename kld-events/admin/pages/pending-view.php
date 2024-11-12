@@ -542,27 +542,58 @@ if (isset($_GET['event_id'])) {
 							<div class="row">
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 14-->
+									<?php
+									$invitedCountQuery = "
+									SELECT COUNT(*) AS invited_count 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl 
+										ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl 
+										ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl 
+										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									WHERE ei.event_id = $eventId
+									";
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = ($invitedResult->num_rows > 0) ? $invitedResult->fetch_assoc()['invited_count'] : 0;
+
+									$registeredCountQuery = "
+									SELECT COUNT(*) AS registered_count 
+									FROM registration_tbl 
+									WHERE event_id = $eventId AND status = 'registered'
+									";
+									$registeredResult = $conn->query($registeredCountQuery);
+									$registeredCount = ($registeredResult->num_rows > 0) ? $registeredResult->fetch_assoc()['registered_count'] : 0;
+									?>
+
+									<script>
+										// Pass PHP values to JavaScript
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var registeredCount = <?php echo $registeredCount; ?>;
+									</script>
+
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Registration
-													<div class="font-size-sm text-muted mt-2">542 Registered to the event</div>
+													<div class="font-size-sm text-muted mt-2">
+														<?php echo $invitedCount; ?> students invited to the event
+													</div>
 												</div>
 											</div>
-
 										</div>
 
-										<!--end::Header-->
-										<!--begin::Body-->
 										<div class="card-body d-flex flex-column">
 											<div class="flex-grow-1">
-												<div id="kt_mixed_widget_14_chart" style="height: 200px">
-												</div>
+												<div id="kt_mixed_widget_14_chart" style="height: 200px"></div>
 											</div>
 											<div class="pt-5">
-
-												<a href="?page=registered-view" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
+												<a href="?page=registered-view&event_id=<?php echo $eventId; ?>" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
 											</div>
 										</div>
 										<!--end::Body-->

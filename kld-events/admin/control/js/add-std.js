@@ -42,7 +42,7 @@ $(document).ready(function () {
 });
 
 $("#add_std_submit").click(async function () {
-  if (validateForm()) {
+  if (stdValidateForm()) {
     var dataString =
       "ajax=add_std" +
       "&add_std_profilepic=" +
@@ -79,7 +79,7 @@ $("#add_std_submit").click(async function () {
               function () {
                 window.open("index.php", "_self");
               },
-              5000 // 5 seconds
+              2000 // 2 seconds
             );
 
             break;
@@ -115,7 +115,7 @@ async function imagefileinsert(e) {
   return result;
 }
 
-function validateForm() {
+function stdValidateForm() {
   if ($("#add_std_course").val() == "") {
     Swal.fire("Please specify the course!", "Please try again!", "error");
     return false;
@@ -134,3 +134,9 @@ function validateForm() {
   }
   return true;
 }
+
+// empty placeholder
+$("#add_std_kldnum").inputmask("mask", {
+  mask: "KLD-99-999999",
+  placeholder: "", // remove underscores from the input mask
+});
