@@ -165,7 +165,7 @@
               <h1 class="mb-5">Student</h1>
               <input class="mb-5 rounded-pill" type="text" id="std_username" name="username" required placeholder="Username" />
               <input class="mb-5 rounded-pill" type="password" id="std_password" name="password" required placeholder="Password" /><br>
-              <input type="hidden" id="login_type" value="student" />
+              <input type="hidden" id="login_type_std" value="student" />
               <button type="button" id="login_std" class="btn btn-pill btn-primary opacity-90 px-15 py-3 m-2">Sign In</button>
 
               <a href="">Forgot Password?</a>
@@ -176,7 +176,7 @@
               <h1>Employee</h1>
               <input class="mb-5 rounded-pill" type="text" id="emp_username" name="username" required placeholder="Username" />
               <input class="mb-5 rounded-pill" type="password" id="emp_password" name="password" required placeholder="Password" /><br>
-              <input type="hidden" id="login_type" value="employee" />
+              <input type="hidden" id="login_type_emp" value="employee" />
               <button type="button" id="login_emp" class="btn btn-pill btn-primary opacity-90 px-15 py-3 m-2">Sign In</button>
 
               <a href="">Forgot Password?</a>

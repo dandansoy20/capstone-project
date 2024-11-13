@@ -51,7 +51,19 @@ function validateForm() {
     );
     return false;
   }
-
+  if ($("#event_title").val() == "") {
+    Swal.fire("Please specify the Event title!", "Please try again!", "error");
+    return false;
+  } else if ($("#event_description").val() == "") {
+    Swal.fire("Please input description!", "Please try again!", "error");
+    return false;
+  } else if ($("#event_organization").val() == "") {
+    Swal.fire("Please specify the organization!", "Please try again!", "error");
+    return false;
+  } else if ($("#event_category").val() == "") {
+    Swal.fire("Please input category!", "Please try again!", "error");
+    return false;
+  }
   return true; // Return true if all checks pass
 }
 

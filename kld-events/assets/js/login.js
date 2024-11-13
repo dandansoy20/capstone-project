@@ -36,6 +36,44 @@ $("#login_std").click(function () {
   });
 });
 
+$("#login_emp").click(function () {
+  var dataString =
+    "ajax=logging_in" +
+    "&login_type=" +
+    $("#login_type").val() +
+    "&username=" +
+    $("#emp_username").val() +
+    "&password=" +
+    $("#emp_password").val();
+  console.log(dataString);
+  $.ajax({
+    type: "POST",
+    url: "admin/ajax.php",
+    data: dataString,
+    cache: false,
+    success: function (html) {
+      console.log(html);
+      switch (html) {
+        case "success":
+          //Swal.fire("Incorrect Username/Password", "Please try again!", "success");
+          window.open("emp-user", "_self");
+          break;
+        case "failed":
+          Swal.fire(
+            "Incorrect Username/Password",
+            "Please try again!",
+            "error"
+          );
+          console.log(html);
+          break;
+        default:
+          alert("Something went wrong, please try again.");
+          console.log(html);
+      }
+    },
+  });
+});
+
 $("#kld_password").keypress(function (e) {
   if (e.which == 13) {
     $("#kld_admin_login_button").click();

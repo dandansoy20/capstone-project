@@ -26,7 +26,7 @@
                                                     <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:</h5>
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                        <label class="col-xl-3 col-lg-3 col-form-label text-left">Profile</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="image-input image-input-outline" id="kt_user_add_avatar">
                                                                 <div class="image-input-wrapper" style="background-image: url(assets/media/users/default.jpg)"></div>
@@ -62,6 +62,14 @@
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Employee Position</label>
+                                                        <div class="col-lg-9 col-xl-9">
+                                                            <input class="form-control form-control-solid form-control-lg" id="add_emp_role" name="emprole" placeholder="Instructor" type="text" value="" />
+                                                        </div>
+                                                    </div>
+                                                    <!--end::Group-->
+                                                    <!--begin::Group-->
+                                                    <div class="form-group row">
                                                         <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <select class="form-control form-control-solid form-control-lg" name="org" type="text" id="add_emp_org">
@@ -85,7 +93,7 @@
                                                             <div class="input-group input-group-solid input-group-lg">
                                                                 <input type="text"
                                                                     class="form-control form-control-solid form-control-lg"
-                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
+                                                                    placeholder="Enter ID Number" name="add_emp_kldnum" id="add_emp_kldnum"
                                                                     value="" />
                                                             </div>
                                                         </div>

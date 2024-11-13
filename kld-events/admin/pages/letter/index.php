@@ -79,6 +79,7 @@ if (isset($_GET['event_id'])) {
         $event_start_date = $row['event_start_date'];
         $event_date_created = $row['event_created'];
         $org_name = $row['org_name'];
+        $event_org_id = $row['event_org_id'];
         $category_name = $row['category_name'];
         $venue_name = $row['venue_name'] ?? "Virtual Event"; // Assign "Virtual Event" if venue_name is null
         $proposal = $row["letter_content"] ?? "No Event Proposal Letter";
@@ -262,13 +263,60 @@ if (isset($_GET['event_id'])) {
     <p><strong>Time:</strong> <?php echo htmlspecialchars($formattedTime); ?></p>
     <p><strong>Venue:</strong> <?php echo htmlspecialchars($venue_name); ?></p>
 
+    <?php
+    $query = "SELECT * FROM event_invitation WHERE event_id = $eventId";
+    $result = $conn->query($query);
+    $row = $result->fetch_assoc();
+
+    $participant = "";
+
+    if ($row) {
+      $course_id = $row['course_id'];
+      $yearlvl_id = $row['yearlvl_id'];
+      $section_id = $row['section_id'];
+      $org_id = $row['org_id'];
+
+      // Check conditions and set the participant string
+      if (is_null($course_id) && is_null($yearlvl_id) && is_null($section_id) && is_null($org_id)) {
+        $participant = "All Students & Employees";
+      } elseif (is_null($course_id) && !is_null($yearlvl_id) && is_null($section_id)) {
+        $participant = "All courses from Year Level " . $yearlvl_id . " - All Sections";
+      } elseif (!is_null($course_id) && !is_null($yearlvl_id) && is_null($section_id)) {
+        $participant = "$course_id from" . $yearlvl_id . " - All Sections";
+      } elseif (!$row) {
+        $participant = "No Participant";
+      }
+      // Add more conditions as needed to cover different scenarios
+    }
+    ?>
+
+    <p><strong>Participants:</strong> <?php echo $participant; ?></p>
+
     <br />
     <p>Respectfully,</p>
-    <h4>
 
-      Julius Dela Cruz<br />
-      <em style="font-weight: normal"><?php echo htmlspecialchars($org_name); ?></em>
+    <h4>
+      <?php
+      // Prepare the SQL query
+      $query = "SELECT * FROM org_acc WHERE org_id = $event_org_id AND org_role = 'Event Manager'";
+      $result = $conn->query($query);
+
+      // Check if the query returns any results
+      if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+      ?>
+        <!-- Display the Event Manager's full name -->
+        <?php echo htmlspecialchars($row['org_fname'] . " " . $row['org_lname']); ?><br />
+        <!-- Display the organization name -->
+        <em style="font-style: italic; font-weight: 200"><?php echo htmlspecialchars($row['org_role']); ?></em><br />
+      <?php
+      } else {
+        // If no results, display a fallback message
+        echo "KLD Events";
+      }
+      ?>
     </h4>
+
 
 
     <!-- End of your content -->

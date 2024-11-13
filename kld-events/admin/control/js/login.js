@@ -40,7 +40,7 @@ $("#login_std").click(function () {
   var dataString =
     "ajax=logging_in" +
     "&login_type=" +
-    $("#login_type").val() +
+    $("#login_type_std").val() +
     "&username=" +
     $("#std_username").val() +
     "&password=" +
@@ -57,6 +57,44 @@ $("#login_std").click(function () {
         case "success":
           //Swal.fire("Incorrect Username/Password", "Please try again!", "success");
           window.open("std-user/index.php", "_self");
+          break;
+        case "failed":
+          Swal.fire(
+            "Incorrect Username/Password",
+            "Please try again!",
+            "error"
+          );
+          console.log(html);
+          break;
+        default:
+          alert("Something went wrong, please try again.");
+          console.log(html);
+      }
+    },
+  });
+});
+
+$("#login_emp").click(function () {
+  var dataString =
+    "ajax=logging_in" +
+    "&login_type=" +
+    $("#login_type_emp").val() +
+    "&username=" +
+    $("#emp_username").val() +
+    "&password=" +
+    $("#emp_password").val();
+  console.log(dataString);
+  $.ajax({
+    type: "POST",
+    url: "admin/ajax.php",
+    data: dataString,
+    cache: false,
+    success: function (html) {
+      console.log(html);
+      switch (html) {
+        case "success":
+          //Swal.fire("Incorrect Username/Password", "Please try again!", "success");
+          window.open("emp-user/index.php", "_self");
           break;
         case "failed":
           Swal.fire(

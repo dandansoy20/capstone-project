@@ -1,3 +1,72 @@
+$(document).ready(function () {
+  // Initialize the KTDatatable
+  var datatable = $("#kt_datatable").KTDatatable({
+    // Enable sorting, pagination, and searching
+    sortable: true,
+    pagination: true,
+    search: true,
+
+    // Set the AJAX configuration to fetch data from PHP
+    ajax: {
+      url: "ajax.php", // The PHP file that returns the data
+      method: "GET", // Method of request (GET, POST, etc.)
+      data: function (data) {
+        // Add additional parameters to the request if needed (like filters)
+        var status = $("#kt_datatable_search_status").val();
+        var type = $("#kt_datatable_search_type").val();
+
+        // Append custom filters to the data being sent to the server
+        data.status = status;
+        data.type = type;
+      },
+      dataSrc: "data", // Where to find the actual data in the JSON response
+    },
+
+    // Define the columns for KTDatatable
+    columns: [
+      {
+        field: "select",
+        title: "Select",
+        selector: { class: "m-checkbox--solid m-checkbox--brand" },
+        width: 30,
+      },
+      {
+        field: "std_profile",
+        title: "Student",
+      },
+      {
+        field: "std_name",
+        title: "",
+      },
+      {
+        field: "course_name",
+        title: "Program",
+      },
+      {
+        field: "section_name",
+        title: "Section",
+      },
+    ],
+
+    // Enable multi-row selection
+    select: {
+      style: "multi",
+      selector: "td:first-child",
+    },
+  });
+
+  // Handle record selection demo
+  $("#kt_datatable").on("change", "tbody .m-checkbox", function () {
+    var selectedRecords = datatable.getSelectedRecords();
+    console.log("Selected Records: ", selectedRecords);
+  });
+
+  // Handle search form submit
+  $(".btn-light-primary").on("click", function () {
+    datatable.reload(); // Reload data based on the current filters
+  });
+});
+
 ////////////
 $(document).ready(function () {
   const typeSelect = $("#kt_datatable_search_status");
@@ -79,31 +148,5 @@ $(document).ready(function () {
     updateFields(this.value);
     updateTables(this.value);
     manageCheckboxes();
-  });
-});
-
-$(document).ready(function () {
-  const switches = $('.switch input[type="checkbox"]');
-  switches.each(function () {
-    $(this).on("change", function () {
-      const isChecked = this.checked;
-      const studentId = this.value;
-      Swal.fire({
-        title: "Are you sure?",
-        text: isChecked
-          ? "Mark this user as Registered?"
-          : "Mark this user as Not Registered?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (result.value) {
-          console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-          Swal.fire("Updated!", "Registration has been updated.", "success");
-        } else {
-          this.checked = !isChecked;
-        }
-      });
-    });
   });
 });

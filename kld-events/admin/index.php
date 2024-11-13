@@ -165,12 +165,14 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="control/js/add-section.js"></script>
 	<script src="control/js/add-venue.js"></script>
 	<script src="control/js/add-std.js"></script>
+	<script src="control/js/add-emp.js"></script>
 	<script src="control/js/calendar.js"></script>
 	<script src="control/js/venue-calendar.js"></script>
 	<script src="control/js/organizer.js"></script>
 	<script src="control/js/letter.js"></script>
 	<script src="control/js/launch.js"></script>
 	<script src="control/js/register.js"></script>
+	<script src="control/js/attendance.js"></script>
 
 
 	<!--end::Global Theme Bundle-->
@@ -208,6 +210,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!--begin::Page Vendors(used by this page)-->
 	<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+
 	<!--end::Page Vendors-->
 
 	<!--begin::Page Scripts(used by this page)-->

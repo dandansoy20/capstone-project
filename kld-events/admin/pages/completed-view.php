@@ -599,13 +599,49 @@ if (isset($_GET['event_id'])) {
 
 
 								<div class="col-xl-4">
+									<?php
+									$invitedCountQuery = "
+									SELECT COUNT(*) AS invited_count 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl 
+										ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl 
+										ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl 
+										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									WHERE ei.event_id = $eventId
+									";
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = ($invitedResult->num_rows > 0) ? $invitedResult->fetch_assoc()['invited_count'] : 0;
+
+
+									$attendanceCountQuery = "
+									SELECT COUNT(*) AS attendance_count 
+									FROM attendance_tbl 
+									WHERE event_id = $eventId AND status = 'attended'
+									";
+									$attendanceResult = $conn->query($attendanceCountQuery);
+									$attendanceCount = ($attendanceResult->num_rows > 0) ? $attendanceResult->fetch_assoc()['attendance_count'] : 0;
+									?>
+									<script>
+										// Pass PHP values to JavaScript
+
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var attendanceCount = <?php echo $attendanceCount; ?>;
+									</script>
 									<!--begin::Mixed Widget 18-->
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Attendance
-													<div class="font-size-sm text-muted mt-2">No Attendance Yet</div>
+													<div class="font-size-sm text-muted mt-2">
+														<?php echo $attendanceCount; ?> attended to the event
+													</div>
 												</div>
 											</div>
 											<div class="card-toolbar">
@@ -658,7 +694,7 @@ if (isset($_GET['event_id'])) {
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=feedback-view" class="btn btn-info btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Feedbacks</a>
+												<a href="?page=feedback-view" class="btn btn-info btn-shadow-hover font-weight-bolder w-100 py-3">View Feedbacks</a>
 											</div>
 											<!--end::Items-->
 										</div>

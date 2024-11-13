@@ -18,5 +18,5 @@ if (isset($_COOKIE['kld_login_expiration'])) {
 }
 
 // Redirect to the login page
-header('Location: login.php');
+header('Location: ../index.php#login');
 exit();

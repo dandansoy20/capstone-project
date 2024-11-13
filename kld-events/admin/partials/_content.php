@@ -159,7 +159,7 @@ if (session_status() == PHP_SESSION_NONE) {
 			</div>
 			<div class="col-xl-4">
 				<!--begin::Stats Widget 15-->
-				<a href="?page=completed-events" class="card card-custom bg-success bg-hover-state-success card-stretch gutter-b">
+				<a href="?page=completed-events&id=<?php echo $_SESSION['kld_id']; ?>" class="card card-custom bg-success bg-hover-state-success card-stretch gutter-b">
 					<!--begin::Body-->
 					<div class="card-body">
 						<span class="svg-icon svg-icon-white svg-icon-3x ml-n1">
@@ -208,7 +208,7 @@ if (session_status() == PHP_SESSION_NONE) {
 						<div class="card-toolbar">
 							<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 								<li class="nav-item">
-									<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_1">Tomorrow</a>
+									<a class="nav-link py-2 px-4 font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_1">This Month</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link py-2 px-4 active font-weight-bolder" data-toggle="tab" href="#kt_tab_pane_10_2">Today</a>
