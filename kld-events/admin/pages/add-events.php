@@ -355,7 +355,6 @@
                                             </div>
                                         </div>
 
-
                                         <div class="form-group row">
                                             <label class="col-4 text-right col-form-label">Select All Sections</label>
                                             <div class="col-8">
@@ -375,9 +374,7 @@
                                             </div>
                                         </div>
 
-
                                         <div class="separator separator-dashed my-8"></div>
-
 
                                         <div class="form-group row">
                                             <label class="col-4 text-right col-form-label">Select All Organization</label>
@@ -405,10 +402,7 @@
                                             </div>
                                         </div>
 
-
                                         <div class="separator separator-dashed my-8"></div>
-
-
 
                                     </div>
                                     <div class="form-group row">

@@ -8,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Check if the user is logged in and has the correct role
-if (!isset($_SESSION['kld_login_expiration']) || $_SESSION['login_type'] !== "Administrator") {
+if (!isset($_SESSION['kld_login_expiration']) || $_SESSION['login_type'] !== "Organizer") {
 	// If not logged in as admin, redirect to the login page
 	header("Location: login.php");
 	exit();

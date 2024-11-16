@@ -30,7 +30,7 @@
              LEFT JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id
              LEFT JOIN category_tbl ON kld_event.category_id = category_tbl.category_id
              WHERE kld_event.status = 'pending' AND stakeholder_tbl.status = 'pending' AND stakeholder_tbl.admin_id = $adminId
-             ORDER BY `kld_event`.`event_start_date` DESC"
+             ORDER BY `kld_event`.`event_created` DESC"
         );
 
 
@@ -181,6 +181,7 @@
              kld_event.event_start_date,
              kld_event.event_end_date,
              kld_event.event_poster,
+             kld_event.event_created,
              category_tbl.category_name,
              category_tbl.category_desc
          FROM `kld_event`
@@ -189,7 +190,7 @@
          LEFT JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id
          LEFT JOIN category_tbl ON kld_event.category_id = category_tbl.category_id
          WHERE kld_event.status = 'pending' AND stakeholder_tbl.status = 'approved' AND stakeholder_tbl.admin_id = $adminId
-         ORDER BY `kld_event`.`event_start_date` DESC"
+         ORDER BY `kld_event`.`event_created` DESC"
             );
 
 
@@ -344,7 +345,7 @@
          LEFT JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id
          LEFT JOIN category_tbl ON kld_event.category_id = category_tbl.category_id
          WHERE kld_event.status = 'pending' AND stakeholder_tbl.status = 'rejected' AND stakeholder_tbl.admin_id = $adminId
-         ORDER BY `kld_event`.`event_start_date` DESC"
+         ORDER BY `kld_event`.`event_created` DESC"
                 );
 
 

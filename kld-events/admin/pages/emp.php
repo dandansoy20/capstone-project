@@ -31,8 +31,13 @@ include "./control/db.php";
 								</svg>
 								<!--end::Svg Icon-->
 							</span>
-							<span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">1</span>
-							<span class="font-weight-bold text-white font-size-sm">Employed Users</span>
+							<?php
+							$query = "SELECT COUNT(*) FROM std_acc where status = 'activated'";
+							$result = $conn->query($query);
+							$row = $result->fetch_row();
+							?>
+							<span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block"><?php echo $row[0]; ?></span>
+							<span class="font-weight-bold text-white font-size-sm">KLD Employee Users</span>
 						</div>
 						<!--end::Body-->
 					</div>
@@ -56,7 +61,7 @@ include "./control/db.php";
 								</svg>
 								<!--end::Svg Icon-->
 							</span>
-							<span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">43</span>
+							<span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">0</span>
 							<span class="font-weight-bold text-white font-size-sm">Employee Events</span>
 						</div>
 						<!--end::Body-->
@@ -68,12 +73,13 @@ include "./control/db.php";
 					<div class="card card-custom bgi-no-repeat card-stretch gutter-b" style="background-position: right top; background-size: 30% auto; background-image: url(assets/media/svg/shapes/abstract-3.svg)">
 						<!--begin::Body-->
 						<div class="card-body my-4">
+
 							<a href="#" class="card-title font-weight-bolder text-primary font-size-h6 mb-4 text-hover-state-dark d-block">Activated Accounts</a>
 							<div class="font-weight-bold text-muted font-size-sm">
-								<span class="text-dark-75 font-weight-bolder font-size-h2 mr-2">100%</span>Avarage
+								<span class="text-dark-75 font-weight-bolder font-size-h2 mr-2">0%</span>Avarage
 							</div>
 							<div class="progress progress-xs mt-7 bg-primary-o-60">
-								<div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 						</div>
 						<!--end::Body-->

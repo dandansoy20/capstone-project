@@ -239,7 +239,6 @@ $("#event_next_button").click(function () {
   }
 
   // Proceed to the next step of the wizard
-  _wizard.goNext(); // Make sure _wizard is defined globally or adjust accordingly
 });
 
 $("#kt_dropzone_1").dropzone({
@@ -284,7 +283,7 @@ $(document).ready(function () {
 
         // Parse and format each date in response to 'moment' format
         const disabledDates = JSON.parse(response).map((date) =>
-          moment(date, "MM/DD/YYYY")
+          moment(date + " 00:00:00", "MM/DD/YYYY HH:mm:ss")
         );
         initializeDateTimePicker("#kt_datetimepicker_7_1", disabledDates);
         initializeDateTimePicker("#kt_datetimepicker_7_2", disabledDates);
@@ -533,3 +532,47 @@ var demo1 = function () {
     slider.noUiSlider.set(this.value);
   });
 };
+
+function updateSliderCapacity() {
+  // Collect selected values
+  const courseIds = $("#kt_select2_11").val() || [];
+  const yearlvlIds = $("#yrlevel").val() || [];
+  const sectionIds = $("#kt_select2_3").val() || [];
+  const orgIds = $("#kt_select_2_4").val() || [];
+  const selectAllMembers = $("#toggleForms").is(":checked"); // Check if the "Select All KLD Members" switch is active
+
+  var dataString =
+    "ajax=update_capacity" +
+    "course_ids=" +
+    encodeURIComponent(JSON.stringify(courseIds));
+  dataString +=
+    "&yearlvl_ids=" + encodeURIComponent(JSON.stringify(yearlvlIds));
+  dataString +=
+    "&section_ids=" + encodeURIComponent(JSON.stringify(sectionIds));
+  dataString += "&org_ids=" + encodeURIComponent(JSON.stringify(orgIds));
+  // Send AJAX request to fetch the count
+  $.ajax({
+    type: "POST",
+    url: "ajax.php", // Replace with the path to your PHP script
+    data: dataString,
+    success: function (response) {
+      const data = JSON.parse(response);
+      const maxCapacity = data.totalCount || 5000; // Default to 5000 if no data
+
+      // Update the noUiSlider max range
+      const slider = document.getElementById("kt_nouislider_1");
+      slider.noUiSlider.updateOptions({
+        range: {
+          min: 2,
+          max: maxCapacity,
+        },
+      });
+    },
+  });
+}
+
+// Call updateSliderCapacity when filters or the "Select All KLD Members" toggle change
+$("#kt_select2_11, #yrlevel, #kt_select2_3, #kt_select_2_4, #toggleForms").on(
+  "change",
+  updateSliderCapacity
+);

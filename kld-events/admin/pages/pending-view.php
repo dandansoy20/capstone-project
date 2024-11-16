@@ -593,7 +593,7 @@ if (isset($_GET['event_id'])) {
 												<div id="kt_mixed_widget_14_chart" style="height: 200px"></div>
 											</div>
 											<div class="pt-5">
-												<a href="?page=registered-view&event_id=<?php echo $eventId; ?>" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
+												<a href="?page=registered-view&event_id=<?php echo $eventId; ?>" disabled class="btn btn-success btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Registered</a>
 											</div>
 										</div>
 										<!--end::Body-->
@@ -604,6 +604,40 @@ if (isset($_GET['event_id'])) {
 
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 18-->
+									<?php
+									$invitedCountQuery = "
+									SELECT COUNT(*) AS invited_count 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl 
+										ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl 
+										ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl 
+										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									WHERE ei.event_id = $eventId
+									";
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = ($invitedResult->num_rows > 0) ? $invitedResult->fetch_assoc()['invited_count'] : 0;
+
+
+									$attendanceCountQuery = "
+									SELECT COUNT(*) AS attendance_count 
+									FROM attendance_tbl 
+									WHERE event_id = $eventId AND status = 'attended'
+									";
+									$attendanceResult = $conn->query($attendanceCountQuery);
+									$attendanceCount = ($attendanceResult->num_rows > 0) ? $attendanceResult->fetch_assoc()['attendance_count'] : 0;
+									?>
+									<script>
+										// Pass PHP values to JavaScript
+
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var attendanceCount = <?php echo $attendanceCount; ?>;
+									</script>
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">

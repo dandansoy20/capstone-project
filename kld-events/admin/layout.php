@@ -28,7 +28,6 @@ $breadcrumb = ["Home", "Dashboard"]; // Default breadcrumb array
 
 			<?php include("partials/_header.php"); ?>
 
-			<?php include("partials/_subheader/subheader-v1.php"); ?>
 			<!--begin::Content-->
 			<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
 

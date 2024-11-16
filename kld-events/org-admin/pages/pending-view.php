@@ -240,7 +240,7 @@ if (isset($_GET['event_id'])) {
 									</div>
 
 									<p class="text-dark-50 my-5 font-size-xl font-weight-bold">
-										<?php echo htmlspecialchars($event_desc); ?>
+										<?php echo ($event_desc); ?>
 									</p>
 									<a href="?page=memo&event_id=<?php echo $eventId ?>" class="btn btn-light-primary font-weight-bold py-2 px-6">View Proposal</a>
 									<button id="launch-event" type="button" class="btn btn-primary font-weight-bold py-2 <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>" <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>>Launch Event</button>

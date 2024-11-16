@@ -23,7 +23,7 @@
 								<!--end::Username-->
 
 								<!--begin::Info-->
-								<div class="font-weight-bold text-dark-50 font-size-sm pb-6"><?php echo $_SESSION['kld_course'] ?>, <?php echo $_SESSION['kld_yearlvl'] ?></div>
+								<div class="font-weight-bold text-dark-50 font-size-sm pb-6"><?php echo $_SESSION['kld_role'] ?></div>
 								<!--end::Info-->
 							</div>
 							<!--end::Header-->

@@ -43,6 +43,8 @@ $(document).ready(function () {
 
 $("#add_std_submit").click(async function () {
   if (stdValidateForm()) {
+    $(this).text("Submitting");
+    $(this).prop("disabled", "disabled");
     var dataString =
       "ajax=add_std" +
       "&add_std_profilepic=" +
