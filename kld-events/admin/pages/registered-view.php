@@ -287,7 +287,6 @@ if (isset($_GET['event_id'])) {
 										<select class="form-control" id="kt_datatable_search_status">
 											<option value="std">Student</option>
 											<option value="emp">Employee</option>
-											<option value="adm">Admin</option>
 										</select>
 									</div>
 								</div>
@@ -297,10 +296,14 @@ if (isset($_GET['event_id'])) {
 											<div class="d-flex align-items-center">
 												<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
 												<select class="form-control" id="kt_datatable_search_program">
-													<option value="">BSIS</option>
-													<option value="1">BSCE</option>
-													<option value="2">BSIT</option>
-													<option value="3">BSN</option>
+													<option value="0">All</option>
+													<?php
+													include('./control/db.php');
+													$try = mysqli_query($conn, "Select * from course_tbl");
+													while ($row = $try->fetch_array()) {
+														echo '<option value="' . $row['course_id'] . '">' . $row['course_acronym'] . '</option>';
+													}
+													?>
 												</select>
 											</div>
 										</div>
@@ -308,10 +311,11 @@ if (isset($_GET['event_id'])) {
 											<div class="d-flex align-items-center">
 												<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
 												<select class="form-control" id="kt_datatable_search_year">
-													<option value="">1st</option>
-													<option value="1">2nd</option>
-													<option value="2">3rd</option>
-													<option value="3">4th</option>
+													<option value="0">All</option>
+													<option value="1">1st</option>
+													<option value="2">2nd</option>
+													<option value="3">3rd</option>
+													<option value="4">4th</option>
 												</select>
 											</div>
 										</div>
@@ -319,10 +323,14 @@ if (isset($_GET['event_id'])) {
 											<div class="d-flex align-items-center">
 												<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
 												<select class="form-control" id="kt_datatable_search_section">
-													<option value="">BSIS 101</option>
-													<option value="1">BSIS 103</option>
-													<option value="2">BSIS 102</option>
-													<option value="3">BSIS 106</option>
+													<option value="0">All</option>
+													<?php
+													include('./control/db.php');
+													$try = mysqli_query($conn, "Select * from section_tbl"); ////where the selected yearlvl and course
+													while ($row = $try->fetch_array()) {
+														echo '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+													}
+													?>
 												</select>
 											</div>
 										</div>
@@ -332,7 +340,7 @@ if (isset($_GET['event_id'])) {
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block">Organization:</label>
 										<select class="form-control" id="kt_datatable_search_org">
-											<!-- Add your organization options here -->
+											<!-- PENDING PART  -->
 											<option value="org1">Organization 1</option>
 											<option value="org2">Organization 2</option>
 											<option value="org3">Organization 3</option>
@@ -344,7 +352,7 @@ if (isset($_GET['event_id'])) {
 					</div>
 				</div>
 
-				<div class="mb-5 collapse" id="kt_datatable_group_action_form">
+				<!-- <div class="mb-5 collapse" id="kt_datatable_group_action_form">
 					<div class="d-flex align-items-center">
 						<div class="font-weight-bold text-danger mr-3">Selected <span id="kt_datatable_selected_records">0</span> records:</div>
 						<div class="dropdown mr-2">
@@ -357,7 +365,7 @@ if (isset($_GET['event_id'])) {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 
@@ -386,44 +394,43 @@ if (isset($_GET['event_id'])) {
 						</thead>
 						<tbody>
 							<?php
-							$try = mysqli_query(
-								$conn,
-								"SELECT sa.*, 
+							// Main query to get student data and their registration status in one go
+							$query = "
+									SELECT DISTINCT sa.*, 
 										course_tbl.course_acronym, 
 										section_tbl.section_name, 
 										yearlvl_tbl.yearlvl_name,
-										rt.status, 
-										rt.reg_date 
-								 FROM std_acc sa
-								 JOIN event_invitation ei 
-									 ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
-									 AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
-									 AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
-								 JOIN course_tbl ON sa.course_id = course_tbl.course_id
-								 JOIN section_tbl ON sa.section_id = section_tbl.section_id
-								 JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
-								 LEFT JOIN registration_tbl rt ON sa.std_id = rt.std_id AND rt.event_id = $eventId
-								 WHERE ei.event_id = $eventId;"
-							);
+										rt.status AS reg_status, 
+										rt.reg_date AS reg_date 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									LEFT JOIN registration_tbl rt ON sa.std_id = rt.std_id AND rt.event_id = $eventId
+									WHERE ei.event_id = $eventId;
+								";
 
-							while ($row = $try->fetch_array()) {
-								// Check if the student is registered for the specific event by checking the status in registration_tbl
-								$status_result = mysqli_query($conn, "SELECT status, reg_date FROM registration_tbl WHERE std_id = '" . $row['std_id'] . "' AND event_id = $eventId");
+							$result = mysqli_query($conn, $query);
 
-								// Initialize status and reg_date for each student
-								$status = 'INACTIVE';
-								$reg_date = '--.--.----'; // Default date when not registered
+							while ($row = mysqli_fetch_array($result)) {
+								// Default values for registration status
+								$status = 'Not Yet Registered';
+								$reg_date = '--------------';
 
-								if (mysqli_num_rows($status_result) > 0) {
-									$status_row = mysqli_fetch_assoc($status_result);
-									$status = strtolower($status_row['status']) == 'registered' ? 'registered' : 'INACTIVE';
-									$reg_date = ($status == 'registered' && !empty($status_row['reg_date'])) ? date("F d, Y", strtotime($status_row['reg_date'])) : '--.--.----';
+								if ($row['reg_status'] == 'registered') {
+									$status = 'Registered';
+									$reg_date = !empty($row['reg_date']) ? date("F d, Y", strtotime($row['reg_date'])) : '--------------';
 								}
 
+								// Display each row
 								echo '<tr>';
 								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['std_kld_id'] . '" /><span></span></label></td>';
 								echo '<td class="pr-0">
-										<div class="symbol symbol-40 symbol-sm flex-shrink-0">';
+                            <div class="symbol symbol-40 symbol-sm flex-shrink-0">';
 								if (!empty($row['std_profilepic'])) {
 									echo '<img src="' . $row['std_profilepic'] . '" class="h-75 align-self-end" alt=""/>';
 								} else {
@@ -437,20 +444,19 @@ if (isset($_GET['event_id'])) {
 								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['section_name'] . '</span></td>';
 								echo '<td><span class="text-muted font-weight-bolder d-block font-size-lg">' . $reg_date . '</span></td>';
 
-								// Updated status logic based on registration_tbl status field
-								$status_text = ($status == 'registered') ? 'Registered' : 'Not Registered';
-								$label_class = ($status == 'registered') ? 'label-light-primary' : 'label-light-danger';
-								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
+								// Status logic (Registered or Not Registered)
+								$label_class = ($status == 'Registered') ? 'label-light-primary' : 'label-light-danger';
+								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status . '</span></td>';
 
 								echo '</tr>';
 							}
-
 							?>
 						</tbody>
 					</table>
 				</div>
 				<!--end::Table-->
 			</div>
+
 
 			<div class="card-body py-0 d-none" id="employee-table">
 				<!--begin::Table-->
@@ -579,30 +585,3 @@ if (isset($_GET['event_id'])) {
 	</div>
 	<!--end::Entry-->
 </div>
-
-<script>
-	$(document).ready(function() {
-		const switches = $('.switch input[type="checkbox"]');
-		switches.each(function() {
-			$(this).on("change", function() {
-				const isChecked = this.checked;
-				const studentId = this.value;
-				Swal.fire({
-					title: "Are you sure?",
-					text: isChecked ?
-						"Mark this user as Registered?" : "Mark this user as Not Registered?",
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonText: "Yes",
-				}).then((result) => {
-					if (result.value) {
-						console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-						Swal.fire("Updated!", "Registration has been updated.", "success");
-					} else {
-						this.checked = !isChecked;
-					}
-				});
-			});
-		});
-	});
-</script>

@@ -3135,7 +3135,7 @@ var KTWidgets = (function () {
       series: [
         isNaN((registeredCount / invitedCount) * 100)
           ? 0
-          : (registeredCount / invitedCount) * 100,
+          : ((registeredCount / invitedCount) * 100).toFixed(2),
       ],
       chart: {
         height: height,
@@ -3172,7 +3172,7 @@ var KTWidgets = (function () {
       stroke: {
         lineCap: "round",
       },
-      labels: ["Progress"],
+      labels: ["Registered"],
     };
 
     var chart = new ApexCharts(element, options);
@@ -3541,7 +3541,7 @@ var KTWidgets = (function () {
       series: [
         isNaN((attendanceCount / invitedCount) * 100)
           ? 0
-          : (attendanceCount / invitedCount) * 100,
+          : ((attendanceCount / invitedCount) * 100).toFixed(2),
       ],
       chart: {
         height: height,
@@ -3585,7 +3585,7 @@ var KTWidgets = (function () {
       stroke: {
         lineCap: "round",
       },
-      labels: ["Progress"],
+      labels: ["Attended"],
     };
 
     var chart = new ApexCharts(element, options);

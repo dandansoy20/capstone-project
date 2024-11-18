@@ -405,17 +405,6 @@
                                         <div class="separator separator-dashed my-8"></div>
 
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-4 text-right col-form-label">Set Event Capacity</label>
-                                        <div class="col-8">
-                                            <span class="switch switch-icon">
-                                                <label>
-                                                    <input type="checkbox" id="toggleCap" name="select" />
-                                                    <span></span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>
 
                                     <div class="form-group row" id="formCapacity" style="display: none;">
                                         <label class="col-4 text-right col-form-label">Number of Attendees</label>

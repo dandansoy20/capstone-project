@@ -30,6 +30,13 @@ var KTBootstrapTimepicker = (function () {
       showMeridian: true,
     });
 
+    $("#agenda_time").timepicker({
+      defaultTime: "10:30:20 AM",
+      minuteStep: 1,
+      showSeconds: true,
+      showMeridian: true,
+    });
+
     // validation state demos
     $(
       "#kt_timepicker_1_validate, #kt_timepicker_2_validate, #kt_timepicker_3_validate"

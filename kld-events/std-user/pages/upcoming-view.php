@@ -228,13 +228,32 @@ if (isset($_GET['event_id'])) {
 						<!--end::Separator-->
 
 						<div class="d-flex justify-content-end">
-							<form method="post"><!-- 
-								<button id="cancel-event" name="cancel-event" type="button" disabled class="btn btn-light-warning font-weight-bold py-2 disabled">Evaluate</button> -->
-								<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>
-								<input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
-								<input type="hidden" id="std_id" value="<?php echo $_SESSION['kld_id']; ?>" />
+							<?php
+							// Include the database connection
+							include('./control/db.php');
+
+							// Sanitize inputs to prevent SQL injection
+							$userId = mysqli_real_escape_string($conn, $_SESSION['kld_id']);
+
+							// Prepare and execute the query
+							$query = "SELECT status FROM registration_tbl WHERE event_id='$eventId' AND std_id='$userId'";
+							$try = mysqli_query($conn, $query);
+
+							// Check if the query returned a result
+							$row = $try ? $try->fetch_array() : null;
+							if ($row && $row['status'] === "registered") {
+								$reg_button = '<button type="button" class="btn btn-primary font-weight-bold py-2 px-6" disabled>Registered</button>';
+							} else {
+								$reg_button = '<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>';
+							}
+							?>
+							<form>
+								<?php echo $reg_button; ?>
+								<input type="hidden" id="event_id" name="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
+								<input type="hidden" id="std_id" name="std_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
 							</form>
 						</div>
+
 					</div>
 					<!--end::Body-->
 				</div>

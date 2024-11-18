@@ -444,7 +444,7 @@ if (isset($_GET['event_id'])) {
 							<?php
 							$try = mysqli_query(
 								$conn,
-								"SELECT sa.*, 
+								"SELECT DISTINCT sa.*, 
 									course_tbl.course_acronym, 
 									section_tbl.section_name, 
 									yearlvl_tbl.yearlvl_name,

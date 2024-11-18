@@ -173,6 +173,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="control/js/launch.js"></script>
 	<script src="control/js/register.js"></script>
 	<script src="control/js/attendance.js"></script>
+	<script src="control/js/std.js"></script>
+	<script src="control/js/emp.js"></script>
 
 
 	<!--end::Global Theme Bundle-->
@@ -199,7 +201,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="assets/js/pages/custom/wizard/wizard-2.js"></script>
 	<script src="assets/js/pages/crud/forms/widgets/nouislider.js"></script>
 	<script src="assets/js/pages/crud/forms/widgets/form-repeater.js"></script>
-	<script src="assets/js/pages/custom/user/add-user.js"></script>
+	<script src="assets/js/pages/custom/user/add-user.js"></script><!-- 
+	<script src="assets/js/pages/crud/ktdatatable/advanced/record-selection.js"></script> -->
 
 	<!--end::Page Vendors-->
 

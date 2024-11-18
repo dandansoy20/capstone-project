@@ -594,7 +594,7 @@ if (session_status() == PHP_SESSION_NONE) {
 					<div class="menu-submenu menu-submenu-classic menu-submenu-left">
 						<ul class="menu-subnav">
 							<li class="menu-item" aria-haspopup="true">
-								<a target="_blank" href="https://preview.keenthemes.com/metronic/demo8/builder.php" class="menu-link">
+								<a href="?page=upcoming-events" class="menu-link">
 									<span class="svg-icon menu-icon">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -606,11 +606,11 @@ if (session_status() == PHP_SESSION_NONE) {
 										</svg>
 										<!--end::Svg Icon-->
 									</span>
-									<span class="menu-text">Upcoming Events</span>
+									<span class="menu-text">For you events</span>
 								</a>
 							</li>
 							<li class="menu-item" aria-haspopup="true">
-								<a href="javascript:;" class="menu-link menu-toggle">
+								<a href="?page=registered-events" class="menu-link menu-toggle">
 									<span class="svg-icon menu-icon">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -626,7 +626,7 @@ if (session_status() == PHP_SESSION_NONE) {
 								</a>
 							</li>
 							<li class="menu-item" aria-haspopup="true">
-								<a href="javascript:;" class="menu-link menu-toggle">
+								<a href="?page=attended-events" class="menu-link menu-toggle">
 									<span class="svg-icon menu-icon">
 										<!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Add-user.svg-->
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

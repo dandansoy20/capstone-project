@@ -1,342 +1,331 @@
-// Demo 6
-$("#kt_datetimepicker_7_11").datetimepicker({
-  defaultDate: eventStartDate,
-});
-// Demo 6
-if (eventEndDate === "1970-01-01 08:00:00") {
-  $("#kt_datetimepicker_7_21").datetimepicker({
-    defaultDate: moment(),
-  });
-} else {
-  $("#kt_datetimepicker_7_21").datetimepicker({
-    defaultDate: eventEndDate,
-  });
-}
+//////////////////////////
+$("#add_image").click(async function (event) {
+  if (guideValidation()) {
+    var guide_image = await imagefileinsert(
+      document.getElementById("guide_image")
+    );
+    var dataString =
+      "ajax=add_guide" +
+      "&guide_image=" +
+      guide_image +
+      "&event_id=" +
+      $("#event_id").val() +
+      "&guide_title=" +
+      $("#guide_title").val() +
+      "&guide_desc=" +
+      $("#guide_desc").val();
+    console.log("DATASTRING", dataString);
 
-$(document).ready(function () {
-  // Initialize the disabled dates when the page loads based on the selected venue
-  initializeDisabledDatesForVenue();
-
-  // Bind the change event to update the disabled dates when the venue is changed
-  $("#edit_venue_name").change(function () {
-    const venueId = $(this).val();
-    // Fetch and update the disabled dates based on the selected venue
     $.ajax({
+      type: "POST",
       url: "ajax.php",
-      method: "POST",
-      data: { venue_id: venueId, ajax: "venue_name" },
-      success: function (response) {
-        console.log("AJAX Response:", response); // Log response for debugging
-        const disabledDates = JSON.parse(response).map((date) =>
-          moment(date, "MM/DD/YYYY")
-        );
-        initializeDateTimePicker("#kt_datetimepicker_7_11", disabledDates);
-        initializeDateTimePicker("#kt_datetimepicker_7_2", disabledDates);
+      data: dataString,
+      cache: false,
+      success: function (html) {
+        switch (html) {
+          case "success":
+            Swal.fire("Image saved successfully!", "Redirecting...", "success");
+            var event_id = $("#event_id").val();
+            setTimeout(function () {
+              window.open(
+                "?page=edit-event&event_id=" + event_id,
+                "_self",
+                "_self"
+              ); // Reload the page after successful submission
+            }, 3000); // Redirect after 3 seconds
+            break;
+          case "error":
+            Swal.fire("Failed to save category!", "Please try again.", "error");
+            break;
+          default:
+            Swal.fire("Something went wrong!", "Please try again.", "error");
+            console.log(html);
+        }
       },
       error: function () {
-        console.error("Failed to fetch disabled dates.");
+        Swal.fire("Request failed!", "Please check your connection.", "error");
       },
     });
-  });
+  }
+});
 
-  // Function to initialize disabled dates for the selected venue on page load
-  function initializeDisabledDatesForVenue() {
-    const venueId = $("#edit_venue_name").val(); // Get the selected venue ID
-    if (venueId) {
+$("#delete_guide").click(function (event) {
+  event.preventDefault(); // Prevent the default action
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Check if the user confirmed the deletion
+      var guide_id = $("#guide_id").val(); // Ensure guide_id is correctly captured
+
+      var dataString =
+        "ajax=delete_guide&event_id=" +
+        $("#event_id").val() +
+        "&guide_id=" +
+        guide_id;
+      console.log("DATASTRING", dataString);
+
+      // Perform the AJAX request
       $.ajax({
+        type: "POST",
         url: "ajax.php",
-        method: "POST",
-        data: { venue_id: venueId, ajax: "venue_name" },
-        success: function (response) {
-          console.log("AJAX Response on page load:", response); // Log response for debugging
-          const disabledDates = JSON.parse(response).map((date) =>
-            moment(date, "MM/DD/YYYY")
-          );
-          initializeDateTimePicker("#kt_datetimepicker_7_11", disabledDates);
-          initializeDateTimePicker("#kt_datetimepicker_7_21", disabledDates);
+        data: dataString,
+        cache: false,
+        success: function (html) {
+          switch (html) {
+            case "success":
+              Swal.fire(
+                "Content deleted successfully!",
+                "Redirecting...",
+                "success"
+              );
+              var event_id = $("#event_id").val();
+              setTimeout(function () {
+                window.open("?page=edit-event&event_id=" + event_id, "_self"); // Redirect after successful deletion
+              }, 2000); // Redirect after 2 seconds
+              break;
+            case "error":
+              Swal.fire(
+                "Failed to delete guide!",
+                "Please try again.",
+                "error"
+              );
+              break;
+            default:
+              Swal.fire("Something went wrong!", "Please try again.", "error");
+              console.log(html); // Log any unexpected response
+          }
         },
         error: function () {
-          console.error("Failed to fetch disabled dates on page load.");
+          Swal.fire(
+            "Request failed!",
+            "Please check your connection.",
+            "error"
+          );
         },
       });
     }
-  }
+  });
+});
 
-  // Function to initialize datetime picker with disabled dates
-  function initializeDateTimePicker(pickerId, disabledDates) {
-    $(pickerId).datetimepicker("destroy"); // Destroy any existing instance to refresh
-    $(pickerId).datetimepicker({
-      format: "MM/DD/YYYY HH:mm",
-      disabledDates: disabledDates, // Pass the formatted moment dates here
-      useCurrent: false,
+function guideValidation() {
+  if ($("#guide_title").val() == "") {
+    Swal.fire("Please specify the title name!", "Please try again!", "error");
+    return false;
+  } else if ($("#guide_desc").val() == "") {
+    Swal.fire("Please specify the description!", "Please try again!", "error");
+    return false;
+  }
+  return true;
+}
+
+// Function to convert image to base64
+async function imagefileinsert(e) {
+  var file = $(e).prop("files")[0];
+  if (!file) return false;
+  const result = await new Promise((resolve, reject) => {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      resolve(btoa(event.target.result));
+    };
+
+    reader.onerror = function (error) {
+      reject(error);
+    };
+
+    reader.readAsDataURL(file);
+  });
+  return result;
+}
+
+$("#add_agenda").click(async function (event) {
+  if (agendaValidation()) {
+    var dataString =
+      "ajax=add_agenda" +
+      "&event_id=" +
+      $("#event_id").val() +
+      "&agenda_time=" +
+      $("#kt_timepicker_4").val() +
+      "&agenda_desc=" +
+      $("#agenda_desc").val();
+    console.log("DATASTRING", dataString);
+
+    $.ajax({
+      type: "POST",
+      url: "ajax.php",
+      data: dataString,
+      cache: false,
+      success: function (html) {
+        switch (html) {
+          case "success":
+            Swal.fire(
+              "Agenda added successfully!",
+              "Redirecting...",
+              "success"
+            );
+            var event_id = $("#event_id").val();
+            setTimeout(function () {
+              window.open(
+                "?page=edit-event&event_id=" + event_id,
+                "_self",
+                "_self"
+              ); // Reload the page after successful submission
+            }, 3000); // Redirect after 3 seconds
+            break;
+          case "error":
+            Swal.fire("Failed to save category!", "Please try again.", "error");
+            break;
+          default:
+            Swal.fire("Something went wrong!", "Please try again.", "error");
+            console.log(html);
+        }
+      },
+      error: function () {
+        Swal.fire("Request failed!", "Please check your connection.", "error");
+      },
     });
   }
 });
-function checkSections() {
-  // If either programs or year levels are empty, disable and clear the sections
-  if (selectedPrograms.length === 0 || selectedYearLevels.length === 0) {
-    $("#kt_select2_3").html("").prop("disabled", true);
-    return;
+
+function agendaValidation() {
+  if ($("#kt_timepicker_4").val() == "") {
+    Swal.fire("Please specify the title name!", "Please try again!", "error");
+    return false;
+  } else if ($("#agenda_desc").val() == "") {
+    Swal.fire("Please specify the description!", "Please try again!", "error");
+    return false;
   }
-
-  var dataString =
-    "ajax=add_event_check_sections" +
-    "&selectedPrograms=" +
-    btoa(selectedPrograms).replace(/\=/g, "") +
-    "&selectedYearLevels=" +
-    btoa(selectedYearLevels).replace(/\=/g, "");
-
-  console.log(dataString);
-
-  $.ajax({
-    type: "POST",
-    url: "ajax.php",
-    data: dataString,
-    cache: false,
-    success: function (html) {
-      console.log("html", html);
-
-      // Update the sections dropdown with the response data
-      $("#kt_select2_3").html(html).prop("disabled", false);
-
-      // Optionally, you can trigger the selection of previously selected sections here
-      // Assuming that selectedSections is an array of previously selected section IDs
-      if (Array.isArray(selectedSections) && selectedSections.length > 0) {
-        selectedSections.forEach(function (sectionId) {
-          $("#kt_select2_3")
-            .find(`option[value="${sectionId}"]`)
-            .prop("selected", true);
-        });
-      }
-    },
-  });
+  return true;
 }
 
-// Function to initialize form visibility based on the checkbox state
-function initializeFormVisibility() {
-  var toggleCheckbox = document.getElementById("AlltoggleForms");
-  var formContainer = document.getElementById("formContainer");
+// Disable Dropzone's auto-discovery
+Dropzone.autoDiscover = false;
 
-  // Set the form container display based on the checkbox state
-  formContainer.style.display = toggleCheckbox.checked ? "none" : "block";
-
-  // Initialize visibility for other form sections based on their checkbox states
-  var toggleAllOrganization = document.getElementById("toggleAllOrganization");
-  var selectOrganizationContainer = document.getElementById(
-    "select_organization_container"
-  );
-  selectOrganizationContainer.style.display = toggleAllOrganization.checked
-    ? "none"
-    : "flex";
-
-  var toggleAllSections = document.getElementById("toggleAllSections");
-  var selectSectionsContainer = document.getElementById(
-    "select_sections_container"
-  );
-  selectSectionsContainer.style.display = toggleAllSections.checked
-    ? "none"
-    : "flex";
-
-  var toggleCap = document.getElementById("toggleCap");
-  var formCapacity = document.getElementById("formCapacity");
-  var formCapacityText = document.getElementById("formCapacityText");
-  if (toggleCap.checked) {
-    formCapacity.style.display = "flex";
-    formCapacityText.style.display = "block";
-  } else {
-    formCapacity.style.display = "none";
-    formCapacityText.style.display = "none";
-  }
-}
-
-// Call the function to initialize visibility when the page loads
-initializeFormVisibility();
-
-// Event listeners to toggle visibility when checkbox state changes
-document
-  .getElementById("toggleAllOrganization")
-  .addEventListener("change", function () {
-    var formContainer = document.getElementById(
-      "select_organization_container"
-    );
-    formContainer.style.display = this.checked ? "none" : "flex";
-  });
-
-document
-  .getElementById("toggleAllSections")
-  .addEventListener("change", function () {
-    var formContainer = document.getElementById("select_sections_container");
-    formContainer.style.display = this.checked ? "none" : "flex";
-  });
-
-document.getElementById("toggleCap").addEventListener("change", function () {
-  var formCapacity = document.getElementById("formCapacity");
-  var formCapacityText = document.getElementById("formCapacityText");
-  if (this.checked) {
-    formCapacity.style.display = "flex";
-    formCapacityText.style.display = "block";
-  } else {
-    formCapacity.style.display = "none";
-    formCapacityText.style.display = "none";
-  }
+// Initialize Dropzone
+var myDropzone = new Dropzone("#event_file", {
+  url: "ajax.php", // Server-side script to handle file upload
+  paramName: "file", // Parameter name for the uploaded file
+  maxFiles: 1, // Limit to 1 file
+  maxFilesize: 10, // File size limit in MB
+  acceptedFiles:
+    "image/*,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document", // Accepted file types
+  addRemoveLinks: true, // Show remove links
+  dictDefaultMessage: "Drop files here or click to upload.",
+  dictRemoveFile: "Remove file",
+  init: function () {
+    this.on("maxfilesexceeded", function (file) {
+      this.removeAllFiles(); // Remove existing files and add the new one
+      this.addFile(file);
+    });
+  },
 });
 
-//////////////////////////
+$("#add_file").click(function () {
+  if (myDropzone.files.length > 0) {
+    var file = myDropzone.files[0];
+    var formData = new FormData();
+    formData.append("file", file);
+    formData.append("event_id", $("#event_id").val());
+    formData.append("ajax", "add_file"); // Add the 'ajax' parameter here
 
-$("#edit_event_submit").click(function () {
-  // Run validation before proceeding
-  if (!validateForm()) {
-    return; // Stop if validation fails
-  }
+    // Log FormData contents
+    console.log("FormData contents: ", formData);
 
-  // Collect the event type from the radio buttons
-  const eventType = $("input[name='eventType']:checked").val(); // Get the selected event type (either 'virtual' or 'inPerson')
-
-  // Ensure the eventType is valid
-  if (eventType !== "virtual" && eventType !== "inPerson") {
-    console.error("Invalid event type selected!");
-    return; // Exit if the event type is invalid
-  }
-
-  // Construct dataString with URL encoding
-  let dataString =
-    "ajax=add_event" +
-    "&eventType=" +
-    encodeURIComponent(eventType) + // Use the captured eventType
-    "&venue_id=" +
-    encodeURIComponent($("#edit_venue_name").val()) +
-    "&event_start_date=" +
-    encodeURIComponent($("#event_start_date").val()) +
-    "&event_end_date=" +
-    encodeURIComponent($("#event_end_date").val()) +
-    "&event_title=" +
-    encodeURIComponent($("#event_title").val()) +
-    "&event_description=" +
-    encodeURIComponent($("#event_description").val()) +
-    "&event_category=" +
-    encodeURIComponent($("#event_category").val()) +
-    "&event_organization=" +
-    encodeURIComponent($("#event_organization").val()) +
-    "&proposal_letter=" +
-    encodeURIComponent($("#kt_maxlength_5").val());
-
-  // Include capacity if the toggle is checked
-  if ($("#toggleCap").is(":checked")) {
-    const attendeeCount = $("#kt_nouislider_1_input").val(); // Get the value from the input field
-    dataString += "&capacity=" + encodeURIComponent(attendeeCount); // Append capacity to dataString
-  }
-
-  // Collect selected organizers
-  const organizers = [];
-  $("#org_repeater .another-org-select").each(function () {
-    if ($(this).val()) {
-      organizers.push($(this).val()); // Get the selected organizer ID
-    }
-  });
-
-  // Log the collected organizers
-  console.log("Organizers selected:", organizers);
-
-  // Collect selected admins
-  const admins = [];
-
-  // First, add the admin ID from the hidden input
-  const adminId = $("#admin_id").val(); // Get the admin ID
-  if (adminId) {
-    admins.push(adminId); // Push the admin ID first
-  }
-
-  // Then, collect the selected admins from the dropdown
-  $("#admin_repeater .admin-select").each(function () {
-    if ($(this).val()) {
-      admins.push($(this).val()); // Get the selected admin ID
-    }
-  });
-
-  // Log the collected admins
-  console.log("Admins selected:", admins);
-
-  // Add organizers and admins to dataString
-  dataString +=
-    "&event_organizers=" + encodeURIComponent(JSON.stringify(organizers));
-  dataString += "&event_admins=" + encodeURIComponent(JSON.stringify(admins));
-  // Collect selected attendees
-
-  const attendees = {
-    select_all_kld_members: $("#toggleForms").is(":checked"),
-    course_ids: $("#kt_select2_11").val() || [], // get selected course IDs
-    yearlvl_ids: $("#yrlevel").val() || [], // get selected year levels
-    section_ids: $("#kt_select2_3").val() || [], // get selected section IDs
-    org_ids: $("#kt_select_2_4").val() || [], // get selected organization IDs
-  };
-
-  // Determine values to send based on selections
-  if (attendees.select_all_kld_members) {
-    attendees.course_ids = null; // Use null instead of empty string
-    attendees.yearlvl_ids = null; // Use null instead of empty string
-    attendees.section_ids = null; // Use null instead of empty string
-    attendees.org_ids = null; // Use null instead of empty string
-  } else {
-    if ($("#toggleAllSections").is(":checked")) {
-      attendees.section_ids = null; // Use null for "All Sections"
-    }
-    if ($("#toggleAllOrganization").is(":checked")) {
-      attendees.org_ids = null; // Use null for "All Organizations"
-    }
-  }
-
-  // Add the attendees information to the dataString
-  dataString +=
-    "&course_ids=" + encodeURIComponent(JSON.stringify(attendees.course_ids));
-  dataString +=
-    "&yearlvl_ids=" + encodeURIComponent(JSON.stringify(attendees.yearlvl_ids));
-  dataString +=
-    "&section_ids=" + encodeURIComponent(JSON.stringify(attendees.section_ids));
-  dataString +=
-    "&org_ids=" + encodeURIComponent(JSON.stringify(attendees.org_ids));
-
-  // Collect selected organizers and admins...
-
-  // (Your existing code for collecting organizers and admins)
-
-  // Check if a file was uploaded in Dropzone
-  const dropzoneInstance = $("#kt_dropzone_1").get(0).dropzone;
-  if (dropzoneInstance && dropzoneInstance.files.length > 0) {
-    dataString +=
-      "&event_poster=" +
-      encodeURIComponent(btoa(dropzoneInstance.files[0].dataURL));
-  } else {
-    Swal.fire("Please upload an event poster!", "", "warning");
-    return;
-  }
-
-  console.log("Data sent to server: ", dataString);
-
-  // AJAX call to submit the data
-  $.ajax({
-    type: "POST",
-    url: "ajax.php",
-    data: dataString,
-    cache: false,
-    success: function (response) {
-      const data = JSON.parse(response); // Parse the JSON response
-      console.log("Server response:", data); // Log the entire response for debugging
-
-      if (data.status === "success") {
+    $.ajax({
+      url: "ajax.php",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        if (response === "success") {
+          Swal.fire("File added successfully!", "Redirecting...", "success");
+          setTimeout(function () {
+            window.location.href =
+              "?page=edit-event&event_id=" + $("#event_id").val();
+          }, 3000);
+        } else {
+          Swal.fire("Upload error!", response, "error");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.log("AJAX error:", status, error);
         Swal.fire(
-          "Event created successfully!",
-          "Redirecting to your event...",
-          "success"
+          "Upload error!",
+          "An unexpected error occurred. Please try again.",
+          "error"
         );
-        setTimeout(function () {
-          window.open(
-            "index.php?page=pending-view&event_id=" + data.event_id,
-            "_self"
-          );
-        }, 5000); // 5 seconds
-      } else {
-        Swal.fire("Something went wrong: " + data.message, "", "error");
-      }
-    },
-  });
+      },
+    });
+  } else {
+    Swal.fire(
+      "No file selected!",
+      "Please upload a file before submitting.",
+      "warning"
+    );
+  }
 });
+
+$("#add_link").click(async function (event) {
+  if (linkValidation()) {
+    var dataString =
+      "ajax=add_link" +
+      "&event_id=" +
+      $("#event_id").val() +
+      "&link_name=" +
+      $("#link_name").val() +
+      "&link_url=" +
+      $("#link_url").val();
+    console.log("DATASTRING", dataString);
+
+    $.ajax({
+      type: "POST",
+      url: "ajax.php",
+      data: dataString,
+      cache: false,
+      success: function (html) {
+        switch (html) {
+          case "success":
+            Swal.fire("Link added successfully!", "Redirecting...", "success");
+            var event_id = $("#event_id").val();
+            setTimeout(function () {
+              window.open(
+                "?page=edit-event&event_id=" + event_id,
+                "_self",
+                "_self"
+              ); // Reload the page after successful submission
+            }, 3000); // Redirect after 3 seconds
+            break;
+          case "error":
+            Swal.fire("Failed to save category!", "Please try again.", "error");
+            break;
+          default:
+            Swal.fire("Something went wrong!", "Please try again.", "error");
+            console.log(html);
+        }
+      },
+      error: function () {
+        Swal.fire("Request failed!", "Please check your connection.", "error");
+      },
+    });
+  }
+});
+
+function linkValidation() {
+  if ($("#link_name").val() == "") {
+    Swal.fire("Please specify the link name!", "Please try again!", "error");
+    return false;
+  } else if ($("#link_url").val() == "") {
+    Swal.fire("Please specify the url!", "Please try again!", "error");
+    return false;
+  }
+  return true;
+}
