@@ -162,15 +162,9 @@
 									<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
 										<ul class="navi navi-hover py-5">
 											<li class="navi-item">
-												<a href="?page=edit-venue&id=<?php echo $venue_id; ?>" class="navi-link">
+												<a href="?page=upcoming-view&event_id=<?php echo $event_id; ?>" class="navi-link">
 													<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
-													<span class="navi-text">Edit</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="#" onclick="editOrganizer(<?php echo $venue_id; ?>)" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-gear"></i></span>
-													<span class="navi-text">Archive</span>
+													<span class="navi-text">View Event</span>
 												</a>
 											</li>
 										</ul>
@@ -186,7 +180,7 @@
 						</p>
 						<!--begin::Bottom-->
 						<div class="pt-4">
-							<div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url(<?php echo $event_poster; ?>)" data-toggle="modal" data-target="#imageModal"></div>
+							<div class="bgi-no-repeat bgi-size-cover rounded min-h-295px" style="background-image: url(<?php echo $event_poster; ?>)" data-toggle="modal" data-target="#imageModal_<?php echo $event_id; ?>"></div>
 							<!--begin::Image--><!-- 
 							<div class="bgi-no-repeat bgi-size-cover rounded min-h-265px" style="background-image: url()"></div> -->
 							<!--end::Image-->
@@ -292,7 +286,7 @@
 					</div>
 					<!--end::Body-->
 				</div>
-				<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+				<div class="modal fade" id="imageModal_<?php echo $event_id; ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">

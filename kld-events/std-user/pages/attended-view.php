@@ -108,7 +108,8 @@ if (isset($_GET['event_id'])) {
 
 							<!--begin::Info-->
 							<div class="d-flex flex-column flex-grow-1">
-								<a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?></a>
+								<a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?> <span class="label label-success label-inline ml-2">Attended</span></a>
+
 								<span class="text-muted font-weight-bold"><?php echo $event_date_created; ?></span>
 							</div>
 							<!--end::Info-->
@@ -252,21 +253,40 @@ if (isset($_GET['event_id'])) {
 
 							// Sanitize inputs to prevent SQL injection
 							$userId = mysqli_real_escape_string($conn, $_SESSION['kld_id']);
+							$eventId = mysqli_real_escape_string($conn, $eventId); // Sanitize $eventId as well
 
-							// Prepare and execute the query
-							$query = "SELECT status FROM registration_tbl WHERE event_id='$eventId' AND std_id='$userId'";
-							$try = mysqli_query($conn, $query);
+							// Prepare and execute the query for attendance
+							$attendanceQuery = "SELECT status FROM attendance_tbl WHERE event_id='$eventId' AND std_id='$userId'";
+							$attendanceResult = mysqli_query($conn, $attendanceQuery);
 
-							// Check if the query returned a result
-							$row = $try ? $try->fetch_array() : null;
-							if ($row && $row['status'] === "registered") {
-								$reg_button = '<button type="button" class="btn btn-primary font-weight-bold py-2 px-6" disabled>Registered</button>
-								<button type="button" data-toggle="modal" data-target="#ticketModal" class="btn btn-warning font-weight-bold py-2 px-6">View Ticket</button>';
+							// Check if the attendance query returned a result
+							$attendanceRow = $attendanceResult ? $attendanceResult->fetch_array() : null;
+
+							// Prepare and execute the query for feedback
+							$feedbackQuery = "SELECT status FROM feedback_tbl WHERE event_id='$eventId' AND std_id='$userId'";
+							$feedbackResult = mysqli_query($conn, $feedbackQuery);
+
+							// Check if the feedback query returned a result
+							$feedbackRow = $feedbackResult ? $feedbackResult->fetch_array() : null;
+
+							if ($attendanceRow && $attendanceRow['status'] === "attended") {
+								if ($feedbackRow && $feedbackRow['status'] === "evaluated") {
+									// If feedback is already evaluated, display a disabled "Evaluated" button
+									$reg_button = '
+        <button type="button" data-toggle="modal" data-target="#ticketModal" class="btn btn-light-warning font-weight-bold py-2 px-6">View Ticket</button>
+        <button class="btn btn-secondary font-weight-bold py-2 px-6" disabled>Evaluated</button>';
+								} else {
+									// If not evaluated, display the "Evaluate" button
+									$reg_button = '
+        <button type="button" data-toggle="modal" data-target="#ticketModal" class="btn btn-light-warning font-weight-bold py-2 px-6">View Ticket</button>
+        <a href="?page=feedback_event&event_id=' . $eventId . '&std_id=' . $_SESSION['kld_id'] . '" class="btn btn-primary font-weight-bold py-2 px-6">Evaluate</a>';
+								}
 							} else {
-								$reg_button = '<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>
-								';
+								// If not attended, display the "Register Now!" button
+								$reg_button = '<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>';
 							}
 							?>
+
 							<form>
 								<?php echo $reg_button; ?>
 								<input type="hidden" id="event_id" name="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
@@ -294,7 +314,6 @@ if (isset($_GET['event_id'])) {
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
 							</div>
 						</div>
 					</div>
@@ -329,7 +348,7 @@ if (isset($_GET['event_id'])) {
 						<div class="example-preview">
 							<ul class="nav nav-pills nav-fill">
 								<li class="nav-item">
-									<a class="nav-link active" id="attendance-tab-4" data-toggle="tab" href="#attendance-4" aria-controls="attendance-4">
+									<a class="nav-link " id="attendance-tab-4" data-toggle="tab" href="#attendance-4" aria-controls="attendance-4">
 										<span class="nav-icon">
 											<i class="flaticon-presentation"></i>
 										</span>
@@ -345,7 +364,7 @@ if (isset($_GET['event_id'])) {
 									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="gallery-tab-4" data-toggle="tab" href="#gallery-4" aria-controls="gallery-4">
+									<a class="nav-link active" id="gallery-tab-4" data-toggle="tab" href="#gallery-4" aria-controls="gallery-4">
 										<span class="nav-icon">
 											<i class="flaticon2-image-file"></i>
 										</span>
@@ -355,7 +374,7 @@ if (isset($_GET['event_id'])) {
 							</ul>
 							<div class="tab-content mt-5" id="myTabContent4">
 
-								<div class="tab-pane fade show active" id="attendance-4" role="tabpanel" aria-labelledby="attendance-tab-4">
+								<div class="tab-pane fade " id="attendance-4" role="tabpanel" aria-labelledby="attendance-tab-4">
 
 									<div class="row">
 										<?php
@@ -551,7 +570,7 @@ if (isset($_GET['event_id'])) {
 									</div>
 
 								</div>
-								<div class="tab-pane fade" id="gallery-4" role="tabpanel" aria-labelledby="gallery-tab-4">
+								<div class="tab-pane fade show active" id="gallery-4" role="tabpanel" aria-labelledby="gallery-tab-4">
 									<div class="row">
 										<?php
 										include('./control/db.php');

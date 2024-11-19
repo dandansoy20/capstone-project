@@ -167,6 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 	<script src="control/js/register.js"></script>
+	<script src="control/js/feedback.js"></script>
 
 	<!--begin::Page Scripts(used by this page)-->
 	<script src="assets/js/pages/widgets.js"></script>

@@ -1207,7 +1207,7 @@ if (!array_key_exists('ajax', $_POST)) {
                     break;
                 case "student":
                     // wala pang laman, maya konte
-                    $query = "Select std_acc.*, yearlvl_tbl.yearlvl_name, course_tbl.course_acronym, section_tbl.section_name
+                    $query = "Select std_acc.*, yearlvl_tbl.yearlvl_name, course_tbl.*, section_tbl.section_name
                     from std_acc
                     left join yearlvl_tbl on std_acc.yearlvl = yearlvl_tbl.yearlvl_id
                     left join course_tbl on std_acc.course_id = course_tbl.course_id
@@ -1228,6 +1228,7 @@ if (!array_key_exists('ajax', $_POST)) {
                         $_SESSION['kld_login_expiration'] = true;
                         $_SESSION['kld_yearlvl'] = $row['yearlvl_name'];
                         $_SESSION['kld_course'] = $row['course_acronym'];
+                        $_SESSION['kld_program'] = $row['course_name'];
                         $_SESSION['kld_section'] = $row['section_name'];
                         return;
                     }
@@ -2303,6 +2304,43 @@ if (!array_key_exists('ajax', $_POST)) {
             } else {
                 echo "No file uploaded.";
             }
+            break;
+
+        case "submit_feedback_std":
+            $event_id = $_POST['event_id'];
+            $std_id = $_POST['std_id'];
+            $responses = json_decode($_POST['responses'], true); // Decode JSON string
+
+            // Prepare the statement to insert into response_tbl
+            $query = "INSERT INTO response_tbl (question_id, event_id, std_id, response) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                foreach ($responses as $response) {
+                    $question_id = $response['question_id'];
+                    $answer = $response['response'];
+                    $stmt->bind_param("iiis", $question_id, $event_id, $std_id, $answer);
+                    $stmt->execute();
+                }
+                $stmt->close();
+
+                // Insert into feedback_tbl with status 'evaluated'
+                $feedbackQuery = "INSERT INTO feedback_tbl (event_id, std_id, status) VALUES (?, ?, 'evaluated')";
+                $feedbackStmt = $conn->prepare($feedbackQuery);
+
+                if ($feedbackStmt) {
+                    $feedbackStmt->bind_param("ii", $event_id, $std_id);
+                    $feedbackStmt->execute();
+                    $feedbackStmt->close();
+
+                    echo "success";
+                } else {
+                    echo "error in feedback_tbl insertion";
+                }
+            } else {
+                echo "error in response_tbl insertion";
+            }
+
             break;
 
 

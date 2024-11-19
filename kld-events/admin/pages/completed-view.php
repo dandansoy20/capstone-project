@@ -670,6 +670,24 @@ if (isset($_GET['event_id'])) {
 									<!--end::Mixed Widget 18-->
 								</div>
 
+								<?php
+								// Select count of students or employees with 'evaluated' status from feedback_tbl
+								$evaluatedCountQuery = "
+								SELECT COUNT(*) AS evaluated_count
+								FROM feedback_tbl
+								WHERE event_id = $eventId AND status = 'evaluated'
+								";
+								$evaluatedResult = $conn->query($evaluatedCountQuery);
+								$evaluatedCount = ($evaluatedResult->num_rows > 0) ? $evaluatedResult->fetch_assoc()['evaluated_count'] : 0;
+
+								// You can also count how many std_id or emp_id are evaluated by using the same query as a reference
+								?>
+								<script>
+									// Pass PHP values to JavaScript
+									var evaluatedCount = <?php echo $evaluatedCount; ?>;
+								</script>
+
+
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 16-->
 									<div class="card card-custom gutter-b card-stretch">

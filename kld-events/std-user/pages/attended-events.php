@@ -24,7 +24,7 @@
                             OR (ei.course_id = sa.course_id AND ei.yearlvl_id = sa.yearlvl AND ei.section_id = sa.section_id)
                         )
                         AND sa.std_id = '$_SESSION[kld_id]'
-                        AND e.status = 'upcoming'
+                        AND e.status = 'completed'
                     ORDER BY e.event_created DESC;
                     ";
             $events_result = mysqli_query($conn, $events_query);
@@ -182,7 +182,7 @@
                                 <textarea id="kt_forms_widget_4_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="" style="overflow: hidden; overflow-wrap: break-word; height: 20px;"></textarea>
                                 <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
 
-                                    <a href="?page=upcoming-view&event_id=<?php echo $event_id; ?>" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                    <a href="?page=attended-view&event_id=<?php echo $event_id; ?>" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                                 </div>
                             </form>
                         </div>

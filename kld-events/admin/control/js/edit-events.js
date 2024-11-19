@@ -116,11 +116,8 @@ $("#delete_guide").click(function (event) {
 });
 
 function guideValidation() {
-  if ($("#guide_title").val() == "") {
-    Swal.fire("Please specify the title name!", "Please try again!", "error");
-    return false;
-  } else if ($("#guide_desc").val() == "") {
-    Swal.fire("Please specify the description!", "Please try again!", "error");
+  if ($("#guide_image").val() == "") {
+    Swal.fire("Please insert the image!", "Please try again!", "error");
     return false;
   }
   return true;

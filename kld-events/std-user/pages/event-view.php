@@ -7,8 +7,8 @@
 
 
         <!--end::Row-->
-        <div class="row">
-            <div class="col-xl-12">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xxl-8 pt-5">
 
                 <!--begin::Engage Widget 1-->
                 <div class="card card-custom card-stretch gutter-b">
@@ -16,8 +16,8 @@
                         <div class="flex-grow-1 p-8 card-rounded bgi-no-repeat d-flex"
                             style="background-color: #FFF; background-position: center bottom; background-size: auto 100%; background-image: url(assets/media/svg/humans/custom-88.png)">
 
-                            <div class="col-4 col-xl-4" style="text-align: center;" >
-                                <img src="assets/media/svg/humans/custom-8.png" style="width: 100%; object-fit: cover;"/>
+                            <div class="col-4 col-xl-4" style="text-align: center;">
+                                <img src="assets/media/svg/humans/custom-8.png" style="width: 100%; object-fit: cover;" />
                             </div>
                             <div class="col-8 col-xl-8">
                                 <a href="#">
@@ -89,10 +89,10 @@
                                     wala ako malagay na kahit ano dito kase pang testing lang ganun para malaman ko lang
                                     kung ano itsura nya kapag naka ano, yung ganito na ano may mahabang text
                                 </p>
-                                
-                            <a href="?page=add-details" class="btn btn-light font-weight-bold py-2 px-6">Add Details</a>
-                            
-                            <a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
+
+                                <a href="?page=add-details" class="btn btn-light font-weight-bold py-2 px-6">Add Details</a>
+
+                                <a href="?page=memo" class="btn btn-primary font-weight-bold py-2 px-6">View Memo</a>
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@
         </div>
 
 
-        
+
 
 
         <!--end::Container-->

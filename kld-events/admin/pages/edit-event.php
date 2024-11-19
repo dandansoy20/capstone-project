@@ -239,7 +239,7 @@ if (isset($_GET['event_id'])) {
 								<div class="card-body p-0">
 									<!--begin::Wizard-->
 									<div class="wizard wizard-1" id="kt_wizard_v1" data-wizard-state="step-first"
-										data-wizard-clickable="false">
+										data-wizard-clickable="true">
 										<!--begin::Wizard Nav-->
 										<div class="wizard-nav border-bottom">
 											<div class="wizard-steps p-8 p-lg-10">

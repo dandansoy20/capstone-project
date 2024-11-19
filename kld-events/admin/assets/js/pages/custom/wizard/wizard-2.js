@@ -13,7 +13,7 @@ var KTWizard2 = (function () {
     // Initialize form wizard
     _wizardObj = new KTWizard(_wizardEl, {
       startStep: 1, // initial active step number
-      clickableSteps: false, // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
+      clickableSteps: true, // to make steps clickable this set value true and add data-wizard-clickable="true" in HTML for class="wizard" element
     });
 
     // Validation before going to next page
@@ -29,8 +29,6 @@ var KTWizard2 = (function () {
         validator.validate().then(function (status) {
           if (status == "Valid") {
             wizard.goTo(wizard.getNewStep());
-
-            KTUtil.scrollTop();
           } else {
             Swal.fire({
               text: "Sorry, looks like there are some errors detected, please try again.",
@@ -40,9 +38,7 @@ var KTWizard2 = (function () {
               customClass: {
                 confirmButton: "btn font-weight-bold btn-light",
               },
-            }).then(function () {
-              KTUtil.scrollTop();
-            });
+            }).then(function () {});
           }
         });
       }
@@ -51,9 +47,7 @@ var KTWizard2 = (function () {
     });
 
     // Change event
-    _wizardObj.on("changed", function (wizard) {
-      KTUtil.scrollTop();
-    });
+    _wizardObj.on("changed", function (wizard) {});
 
     // Submit event
     _wizardObj.on("submit", function (wizard) {

@@ -160,13 +160,13 @@ if (isset($_GET['event_id'])) {
 											<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
 												<ul class="navi navi-hover py-5">
 													<li class="navi-item">
-														<a href="?page=edit-cat&id=<?php echo $category_id; ?>" class="navi-link">
+														<a href="?page=edit-event&event_id=<?php echo $eventId; ?>" class="navi-link">
 															<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
 															<span class="navi-text">Edit</span>
 														</a>
 													</li>
 													<li class="navi-item">
-														<a href="#" onclick="editOrganizer(<?php echo $category_id; ?>)" class="navi-link">
+														<a href="#" class="navi-link">
 															<span class="navi-icon"><i class="flaticon2-gear"></i></span>
 															<span class="navi-text">Archive</span>
 														</a>
@@ -1230,7 +1230,54 @@ if (isset($_GET['event_id'])) {
 
 						</div>
 						<div class="tab-pane fade" id="gallery-4" role="tabpanel" aria-labelledby="gallery-tab-4">
-							gallery
+							<div class="row">
+								<div class="col-xl-4 col-sm-12">
+									<!--begin::Forms Widget 4-->
+									<div class="card card-custom gutter-b">
+										<!--begin::Body-->
+										<div class="card-body">
+											<!--begin::Bottom-->
+											<div class="pt-4">
+
+												<!--begin::Image-->
+												<div class="bgi-no-repeat bgi-size-cover rounded" style="background-image: url(assets/media/acquaintance/1.jpg); width: 100%; padding-bottom: 100%;"></div>
+												<!--end::Image-->
+
+											</div>
+											<!--end::Separator-->
+
+										</div>
+										<!--end::Body-->
+									</div>
+								</div>
+								<div class="col-xl-4 col-sm-12">
+									<!--begin::Forms Widget 4-->
+									<div class="uppy" id="kt_uppy_3">
+										<div class="uppy-drag"><button type="button" class="uppy-Root uppy-u-reset uppy-DragDrop-container uppy-DragDrop--isDragDropSupported" style="width: 100%; height: 100%;">
+												<input class="uppy-DragDrop-input" type="file" hidden="" name="files[]" multiple="" accept="image/*,video/*">
+												<div class="uppy-DragDrop-inner"><svg aria-hidden="true" focusable="false" class="uppy-c-icon uppy-DragDrop-arrow" width="16" height="16" viewBox="0 0 16 16">
+														<path d="M11 10V0H5v10H2l6 6 6-6h-3zm0 0" fillRule="evenodd"></path>
+													</svg>
+													<div class="uppy-DragDrop-label">Drop files here or <span class="uppy-DragDrop-browse">browse</span></div><span class="uppy-DragDrop-note"></span>
+												</div>
+											</button></div>
+										<div class="uppy-informer">
+											<div class="uppy uppy-Informer" aria-hidden="true">
+												<p role="alert"> </p>
+											</div>
+										</div>
+										<div class="uppy-progress">
+											<div class="uppy uppy-ProgressBar" style="position: initial;">
+												<div class="uppy-ProgressBar-inner" style="width: 0%;"></div>
+												<div class="uppy-ProgressBar-percentage">0</div>
+											</div>
+										</div>
+										<div class="uppy-thumbnails"></div>
+									</div>
+
+								</div>
+
+							</div>
 						</div>
 					</div>
 				</div>
