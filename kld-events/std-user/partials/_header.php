@@ -515,7 +515,7 @@ if (session_status() == PHP_SESSION_NONE) {
 					<!--begin::Nav-->
 					<div class="navi navi-spacer-x-0 pt-5">
 						<!--begin::Item-->
-						<a href="#" class="navi-item px-8">
+						<a href="?page=profile" class="navi-item px-8">
 							<div class="navi-link">
 								<div class="navi-icon mr-2">
 									<i class="flaticon2-calendar-3 text-success"></i>

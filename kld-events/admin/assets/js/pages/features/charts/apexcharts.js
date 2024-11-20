@@ -1112,111 +1112,6 @@ var KTApexChartsDemo = (function () {
     chart.render();
   };
 
-  var _demo12 = function () {
-    const apexChart = "#chart_12";
-    var options = {
-      series: [44, 55, 13, 43, 22],
-      chart: {
-        width: 380,
-        type: "pie",
-      },
-      labels: [
-        "Strongly Agree",
-        "Agree",
-        "Neutral",
-        "Disagree",
-        "Strongly Disagree",
-      ],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
-      colors: [primary, success, info, warning, danger],
-    };
-
-    var chart = new ApexCharts(document.querySelector(apexChart), options);
-    chart.render();
-  };
-
-  var _demo112 = function () {
-    const apexChart = "#chart_112";
-    var options = {
-      series: [61, 22, 32, 5, 3],
-      chart: {
-        width: 380,
-        type: "pie",
-      },
-      labels: [
-        "Strongly Agree",
-        "Agree",
-        "Neutral",
-        "Disagree",
-        "Strongly Disagree",
-      ],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
-      colors: [primary, success, info, warning, danger],
-    };
-
-    var chart = new ApexCharts(document.querySelector(apexChart), options);
-    chart.render();
-  };
-
-  var _demo212 = function () {
-    const apexChart = "#chart_212";
-    var options = {
-      series: [61, 22, 32, 5, 3],
-      chart: {
-        width: 380,
-        type: "pie",
-      },
-      labels: [
-        "Strongly Agree",
-        "Agree",
-        "Neutral",
-        "Disagree",
-        "Strongly Disagree",
-      ],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: "bottom",
-            },
-          },
-        },
-      ],
-      colors: [primary, success, info, warning, danger],
-    };
-
-    var chart = new ApexCharts(document.querySelector(apexChart), options);
-    chart.render();
-  };
-
   var _demo13 = function () {
     const apexChart = "#chart_13";
     var options = {
@@ -1299,6 +1194,130 @@ var KTApexChartsDemo = (function () {
     chart.render();
   };
 
+  var _demo112 = function () {
+    const apexChart = "#chart_112";
+    var options = {
+      series: [61, 22, 32, 5, 3],
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      colors: [primary, success, info, warning, danger],
+    };
+
+    var chart = new ApexCharts(document.querySelector(apexChart), options);
+    chart.render();
+  };
+
+  var _demo212 = function () {
+    const apexChart = "#chart_212";
+    var options = {
+      series: [61, 22, 32, 5, 3],
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      colors: [primary, success, info, warning, danger],
+    };
+
+    var chart = new ApexCharts(document.querySelector(apexChart), options);
+    chart.render();
+  };
+
+  var _demo12 = function (chartId) {
+    // Get the data from the data-* attributes for the specific chart
+    var chart = document.querySelector("#" + chartId);
+
+    var stronglyAgree = parseInt(chart.getAttribute("data-strongly-agree"), 10);
+    var agree = parseInt(chart.getAttribute("data-agree"), 10);
+    var neutral = parseInt(chart.getAttribute("data-neutral"), 10);
+    var disagree = parseInt(chart.getAttribute("data-disagree"), 10);
+    var stronglyDisagree = parseInt(
+      chart.getAttribute("data-strongly-disagree"),
+      10
+    );
+
+    // Set up the chart options dynamically
+    var options = {
+      series: [stronglyAgree, agree, neutral, disagree, stronglyDisagree],
+      chart: {
+        width: 380,
+        type: "pie",
+      },
+      labels: [
+        "Strongly Agree",
+        "Agree",
+        "Neutral",
+        "Disagree",
+        "Strongly Disagree",
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      colors: [
+        KTApp.getSettings()["colors"]["theme"]["base"]["danger"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["info"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["warning"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["primary"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["success"],
+      ],
+    };
+
+    // Create and render the chart
+    var chartInstance = new ApexCharts(chart, options);
+    chartInstance.render();
+  };
+
   return {
     // public functions
     init: function () {
@@ -1313,11 +1332,17 @@ var KTApexChartsDemo = (function () {
       _demo9();
       _demo10();
       _demo11();
-      _demo12();
-      _demo112();
-      _demo212();
       _demo13();
       _demo14();
+      _demo112();
+      _demo212();
+
+      var charts = document.querySelectorAll('[id^="f_chart_"]');
+
+      // Loop through each chart element and initialize each one
+      charts.forEach(function (chart) {
+        _demo12(chart.id); // Initialize each chart with its specific ID
+      });
     },
   };
 })();

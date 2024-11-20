@@ -173,6 +173,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="control/js/launch.js"></script>
 	<script src="control/js/register.js"></script>
 	<script src="control/js/attendance.js"></script>
+	<script src="control/js/feedback.js"></script>
 	<script src="control/js/std.js"></script>
 	<script src="control/js/emp.js"></script>
 

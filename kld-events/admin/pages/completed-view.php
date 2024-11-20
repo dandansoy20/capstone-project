@@ -676,16 +676,46 @@ if (isset($_GET['event_id'])) {
 								SELECT COUNT(*) AS evaluated_count
 								FROM feedback_tbl
 								WHERE event_id = $eventId AND status = 'evaluated'
-								";
+							";
 								$evaluatedResult = $conn->query($evaluatedCountQuery);
 								$evaluatedCount = ($evaluatedResult->num_rows > 0) ? $evaluatedResult->fetch_assoc()['evaluated_count'] : 0;
 
-								// You can also count how many std_id or emp_id are evaluated by using the same query as a reference
+								// Select counts of responses for each feedback level (Strongly Disagree to Strongly Agree)
+								$responseCountQuery = "
+									SELECT 
+										SUM(CASE WHEN response = 'Strongly Disagree' THEN 1 ELSE 0 END) AS strongly_disagree,
+										SUM(CASE WHEN response = 'Disagree' THEN 1 ELSE 0 END) AS disagree,
+										SUM(CASE WHEN response = 'Neutral' THEN 1 ELSE 0 END) AS neutral,
+										SUM(CASE WHEN response = 'Agree' THEN 1 ELSE 0 END) AS agree,
+										SUM(CASE WHEN response = 'Strongly Agree' THEN 1 ELSE 0 END) AS strongly_agree
+									FROM response_tbl
+									WHERE event_id = $eventId
+								";
+								$responseResult = $conn->query($responseCountQuery);
+								$responseCounts = ($responseResult->num_rows > 0) ? $responseResult->fetch_assoc() : array(
+									'strongly_disagree' => 0,
+									'disagree' => 0,
+									'neutral' => 0,
+									'agree' => 0,
+									'strongly_agree' => 0
+								);
+
+								// Pass PHP values to JavaScript
 								?>
+
 								<script>
-									// Pass PHP values to JavaScript
 									var evaluatedCount = <?php echo $evaluatedCount; ?>;
+
+									// Response counts for feedback levels
+									var responseCounts = {
+										stronglyDisagree: <?php echo $responseCounts['strongly_disagree']; ?>,
+										disagree: <?php echo $responseCounts['disagree']; ?>,
+										neutral: <?php echo $responseCounts['neutral']; ?>,
+										agree: <?php echo $responseCounts['agree']; ?>,
+										stronglyAgree: <?php echo $responseCounts['strongly_agree']; ?>
+									};
 								</script>
+
 
 
 								<div class="col-xl-4">
@@ -696,7 +726,7 @@ if (isset($_GET['event_id'])) {
 											<div class="card-title">
 												<div class="card-label">
 													<div class="font-weight-bolder">Feedback</div>
-													<div class="font-size-sm text-muted mt-2">No Feedback Yet</div>
+													<div class="font-size-sm text-muted mt-2"><?php echo $evaluatedCount; ?> Submit Feedback</div>
 												</div>
 											</div>
 										</div>
@@ -705,14 +735,15 @@ if (isset($_GET['event_id'])) {
 										<div class="card-body d-flex flex-column">
 											<!--begin::Chart-->
 											<div class="flex-grow-1">
-												<div id="kt_mixed_widget_16_chart" style="height: 200px"></div>
+
+												<div id="chart_110" class="d-flex justify-content-center"></div>
 											</div>
 
 											<!--end::Chart-->
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=feedback-view" class="btn btn-info btn-shadow-hover font-weight-bolder w-100 py-3">View Feedbacks</a>
+												<a href="?page=feedback-view&event_id=<?php echo $eventId; ?>" class="btn btn-info btn-shadow-hover font-weight-bolder w-100 py-3">View Feedbacks</a>
 											</div>
 											<!--end::Items-->
 										</div>

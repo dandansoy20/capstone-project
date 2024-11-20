@@ -9,24 +9,26 @@
             <?php
             include('./control/db.php');
             $events_query = "
-                    SELECT DISTINCT e.*
-                    FROM kld_event e
-                    JOIN event_invitation ei ON e.event_id = ei.event_id
-                    JOIN std_acc sa ON 
-                        (ei.course_id IS NULL OR ei.course_id = sa.course_id)
-                        AND (ei.yearlvl_id IS NULL OR ei.yearlvl_id = sa.yearlvl)
-                        AND (ei.section_id IS NULL OR ei.section_id = sa.section_id)
-                    WHERE 
-                        (
-                            (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) 
-                            OR (ei.course_id = sa.course_id AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)
-                            OR (ei.course_id IS NULL AND ei.yearlvl_id = sa.yearlvl AND ei.section_id IS NULL)
-                            OR (ei.course_id = sa.course_id AND ei.yearlvl_id = sa.yearlvl AND ei.section_id = sa.section_id)
-                        )
-                        AND sa.std_id = '$_SESSION[kld_id]'
-                        AND e.status = 'completed'
-                    ORDER BY e.event_created DESC;
-                    ";
+            SELECT DISTINCT e.*
+            FROM kld_event e
+            JOIN event_invitation ei ON e.event_id = ei.event_id
+            JOIN std_acc sa ON 
+                (ei.course_id IS NULL OR ei.course_id = sa.course_id)
+                AND (ei.yearlvl_id IS NULL OR ei.yearlvl_id = sa.yearlvl)
+                AND (ei.section_id IS NULL OR ei.section_id = sa.section_id)
+            JOIN attendance_tbl at ON e.event_id = at.event_id AND at.std_id = sa.std_id
+            WHERE 
+                (
+                    (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) 
+                    OR (ei.course_id = sa.course_id AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)
+                    OR (ei.course_id IS NULL AND ei.yearlvl_id = sa.yearlvl AND ei.section_id IS NULL)
+                    OR (ei.course_id = sa.course_id AND ei.yearlvl_id = sa.yearlvl AND ei.section_id = sa.section_id)
+                )
+                AND sa.std_id = '$_SESSION[kld_id]'
+                AND e.status = 'completed'
+            ORDER BY e.event_created DESC;
+        ";
+
             $events_result = mysqli_query($conn, $events_query);
 
             while ($event = mysqli_fetch_assoc($events_result)) {
@@ -85,7 +87,21 @@
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?></a>
+                                    <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?>
+
+                                        <?php
+                                        include('./control/db.php');
+
+                                        // Check if the student is registered for the event
+                                        $try = mysqli_query($conn, "SELECT * FROM feedback_tbl WHERE event_id = '$event_id' AND std_id = '$_SESSION[kld_id]'");
+
+                                        // If there's at least one row returned, it means the student is registered
+                                        if (mysqli_num_rows($try) > 0) {
+                                            echo '<span class="label label-warning label-inline ml-2">Evaluated</span>';
+                                        }
+                                        ?>
+
+                                    </a>
                                     <span class="text-muted font-weight-bold"><?php echo $event_created; ?></span>
                                 </div>
                             </div>

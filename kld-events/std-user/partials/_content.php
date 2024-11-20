@@ -11,9 +11,9 @@
 							<!--begin::Header-->
 							<div class="d-flex flex-column flex-center">
 								<!--begin::Symbol-->
-								<div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
+								<div class="symbol symbol-120 symbol-circle symbol-white overflow-hidden">
 									<span class="symbol-label">
-										<img src="assets/media/svg/avatars/007-boy-2.svg" class="h-75 align-self-end" alt="">
+										<img src="<?php echo $_SESSION['kld_profile'] ?>" class="h-75" alt="">
 									</span>
 								</div>
 								<!--end::Symbol-->
@@ -146,7 +146,20 @@
 
 							<!--begin::Info-->
 							<div class="d-flex flex-column flex-grow-1">
-								<a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?></a>
+								<a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?>
+									<?php
+									include('./control/db.php');
+
+									// Check if the student is registered for the event
+									$try = mysqli_query($conn, "SELECT * FROM registration_tbl WHERE event_id = '$event_id' AND std_id = '$_SESSION[kld_id]'");
+
+									// If there's at least one row returned, it means the student is registered
+									if (mysqli_num_rows($try) > 0) {
+										echo '<span class="label label-primary label-inline ml-2">Registered</span>';
+									}
+									?>
+								</a>
+
 								<span class="text-muted font-weight-bold"><?php echo $event_created; ?></span>
 							</div>
 							<!--end::Info-->
