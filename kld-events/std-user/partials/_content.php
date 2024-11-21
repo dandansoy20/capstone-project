@@ -62,28 +62,25 @@
 
 
 			<?php
-			// Fetch events for the current category
-			/*************  ✨ Codeium Command 🌟  *************/
 			include('./control/db.php');
 			$events_query = "
-			SELECT DISTINCT e.*
+			SELECT e.*
 			FROM kld_event e
 			JOIN event_invitation ei ON e.event_id = ei.event_id
-			JOIN std_acc sa ON 
-				(ei.course_id IS NULL OR ei.course_id = sa.course_id)
-				AND (ei.yearlvl_id IS NULL OR ei.yearlvl_id = sa.yearlvl)
-				AND (ei.section_id IS NULL OR ei.section_id = sa.section_id)
-			WHERE 
-				(
-					(ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) 
-					OR (ei.course_id = sa.course_id AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)
-					OR (ei.course_id IS NULL AND ei.yearlvl_id = sa.yearlvl AND ei.section_id IS NULL)
-					OR (ei.course_id = sa.course_id AND ei.yearlvl_id = sa.yearlvl AND ei.section_id = sa.section_id)
-				)
-				AND sa.std_id = '$_SESSION[kld_id]'
-				AND e.status = 'upcoming'
-			ORDER BY e.event_created DESC;
-			";
+			LEFT JOIN std_acc s ON (ei.course_id = s.course_id 
+									AND ei.yearlvl_id = s.yearlvl 
+									AND (ei.section_id IS NULL OR ei.section_id = s.section_id)
+									AND s.std_id = 20)
+			WHERE e.status = 'upcoming'  -- Filter only upcoming events
+			AND (
+				(ei.course_id IS NOT NULL AND ei.course_id = s.course_id)  -- Invite based on course
+				OR (ei.yearlvl_id IS NOT NULL AND ei.yearlvl_id = s.yearlvl)  -- Invite based on year level
+				OR (ei.section_id IS NULL)  -- No section filter, invite all sections
+				OR (ei.org_id IS NULL)  -- Open to employees, no specific org_id filter
+				OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)  -- Open for all
+			)
+			GROUP BY e.event_id;
+						";
 
 			// Execute the events query
 			$events_result = mysqli_query($conn, $events_query);

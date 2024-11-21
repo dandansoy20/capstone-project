@@ -578,7 +578,7 @@ if (isset($_GET['event_id'])) {
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Registration
 													<div class="font-size-sm text-muted mt-2">
-														<?php echo $registeredCount; ?> students invited to the event
+														<?php echo $registeredCount; ?> member(s) registered to the event
 													</div>
 												</div>
 											</div>
@@ -601,7 +601,7 @@ if (isset($_GET['event_id'])) {
 								<div class="col-xl-4">
 									<?php
 									$invitedCountQuery = "
-									SELECT COUNT(*) AS invited_count 
+									SELECT COUNT(DISTINCT sa.std_id) AS invited_count 
 									FROM std_acc sa
 									JOIN event_invitation ei 
 										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
@@ -620,7 +620,7 @@ if (isset($_GET['event_id'])) {
 
 
 									$attendanceCountQuery = "
-									SELECT COUNT(*) AS attendance_count 
+									SELECT COUNT(DISTINCT std_id) AS attendance_count 
 									FROM attendance_tbl 
 									WHERE event_id = $eventId AND status = 'attended'
 									";
@@ -676,7 +676,7 @@ if (isset($_GET['event_id'])) {
 								SELECT COUNT(*) AS evaluated_count
 								FROM feedback_tbl
 								WHERE event_id = $eventId AND status = 'evaluated'
-							";
+								";
 								$evaluatedResult = $conn->query($evaluatedCountQuery);
 								$evaluatedCount = ($evaluatedResult->num_rows > 0) ? $evaluatedResult->fetch_assoc()['evaluated_count'] : 0;
 
@@ -690,7 +690,7 @@ if (isset($_GET['event_id'])) {
 										SUM(CASE WHEN response = 'Strongly Agree' THEN 1 ELSE 0 END) AS strongly_agree
 									FROM response_tbl
 									WHERE event_id = $eventId
-								";
+									";
 								$responseResult = $conn->query($responseCountQuery);
 								$responseCounts = ($responseResult->num_rows > 0) ? $responseResult->fetch_assoc() : array(
 									'strongly_disagree' => 0,
