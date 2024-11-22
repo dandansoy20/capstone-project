@@ -215,7 +215,7 @@ $("#event_submit").click(function () {
         );
         setTimeout(function () {
           window.open(
-            "index.php?page=pending-view&event_id=" + data.event_id,
+            "index.php?page=edit-event&event_id=" + data.event_id,
             "_self"
           );
         }, 5000); // 5 seconds

@@ -2099,6 +2099,46 @@ if (!array_key_exists('ajax', $_POST)) {
 
             break;
 
+
+
+
+        case "registered-std":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT sa.*, 
+										course_tbl.course_acronym, 
+										section_tbl.section_name, 
+										yearlvl_tbl.yearlvl_name,
+										rt.status AS reg_status, 
+										rt.reg_date AS reg_date 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									LEFT JOIN registration_tbl rt ON sa.std_id = rt.std_id AND rt.event_id = $eventId
+									WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+
+
+
+
         case "std-fetch":
 
             $sql = "SELECT 

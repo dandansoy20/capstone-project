@@ -173,7 +173,12 @@ if (isset($_GET['event_id'])) {
 											<?php echo htmlspecialchars($event_title); ?>
 										</h1>
 									</a>
-									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($org_name); ?></h6>
+									<?php
+									$try = mysqli_query($conn, "SELECT org_tbl.org_name as event_host FROM kld_event JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id WHERE event_id = '$eventId'");
+									$row = $try->fetch_array();
+									$event_host = $row['event_host'] ?? "KLD Events";
+									?>
+									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($event_host); ?></h6>
 									<div class="d-flex my-5">
 										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 												<g id="Stockholm-icons-/-Design-/-Layers" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

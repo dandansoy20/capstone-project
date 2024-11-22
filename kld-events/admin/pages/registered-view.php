@@ -12,42 +12,20 @@ if (isset($_GET['event_id'])) {
 
 	// Prepare the SQL statement to fetch events for the specific event ID
 	$query = "SELECT 
-                kld_event.*, 
-                org_tbl.org_name AS organization_name, 
-                category_tbl.category_name,
-                venue_tbl.venue_name,
-                letter_tbl.letter_content,
-                stakeholder_tbl.*,
-
-                admin_acc.admin_profile,
-                admin_acc.admin_id,
-                admin_acc.admin_fname,
-                admin_acc.admin_lname,
-                admin_acc.admin_role,
-
-                org_acc.org_profile,
-                org_acc.org_id,
-                org_acc.org_fname,
-                org_acc.org_lname,
-                org_acc.org_role
-              FROM 
-                kld_event 
-			LEFT JOIN 
-				venue_tbl ON kld_event.venue_id = venue_tbl.venue_id 
-			LEFT JOIN 
-				category_tbl ON kld_event.category_id = category_tbl.category_id 
-			LEFT JOIN 
-				letter_tbl ON kld_event.event_id = letter_tbl.event_id 
-			LEFT JOIN 
-				stakeholder_tbl ON kld_event.event_id = stakeholder_tbl.event_id 
-			LEFT JOIN 
-				admin_acc ON stakeholder_tbl.admin_id = admin_acc.admin_id
-			LEFT JOIN 
-				org_acc ON stakeholder_tbl.org_acc_id = org_acc.org_acc_id  -- Join to get org_id
-			LEFT JOIN 
-				org_tbl ON org_acc.org_id = org_tbl.org_id  -- Join to get org_name
-			WHERE 
-				kld_event.event_id = ?";
+	kld_event.*, 
+	org_tbl.org_name, 
+	category_tbl.category_name,
+	venue_tbl.venue_name
+  FROM 
+	kld_event 
+  LEFT JOIN 
+	venue_tbl ON kld_event.venue_id = venue_tbl.venue_id 
+  LEFT JOIN 
+	category_tbl ON kld_event.category_id = category_tbl.category_id 
+  LEFT JOIN 
+	org_tbl ON kld_event.event_org_id = org_tbl.org_id
+  WHERE 
+	kld_event.event_id = ?";
 
 	// Prepare the SQL statement
 	if ($stmt = $conn->prepare($query)) {
@@ -59,34 +37,11 @@ if (isset($_GET['event_id'])) {
 			// Get the result
 			$result = $stmt->get_result();
 
-			// Initialize an array to hold stakeholder information
-			$stakeholders = [];
 
 			// Loop through the results and populate the stakeholders array
 			while ($row = $result->fetch_assoc()) {
 
-				if (!empty($row['admin_fname']) && !empty($row['admin_lname'])) {
-					$stakeholders[] = [
-						'admin_id' => $row['admin_id'],
-						'role' => htmlspecialchars($row['admin_role']),
-						'name' => htmlspecialchars($row['admin_fname'] . ' ' . $row['admin_lname']),
-						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
-						'type' => 'admin',
-						'profile' => !empty($row['admin_profile']) ? $row['admin_profile'] : "assets/default.jpg",
-					];
-				}
 
-				// Fetch organization information
-				if (!empty($row['org_fname']) && !empty($row['org_lname'])) {
-					$stakeholders[] = [
-						'org_acc_id' => $row['org_acc_id'],
-						'role' => htmlspecialchars($row['organization_name']),
-						'name' => htmlspecialchars($row['org_fname'] . ' ' . $row['org_lname']),
-						'status' => htmlspecialchars($row['status']), // Assuming 'status' is the column name in stakeholder_tbl
-						'profile' => !empty($row['org_profile']) ? $row['org_profile'] : "assets/default.jpg",
-						'type' => 'organizer'
-					];
-				}
 
 
 
@@ -95,18 +50,10 @@ if (isset($_GET['event_id'])) {
 				$event_start_date = $row['event_start_date'];
 				$event_date_created = $row['event_created'];
 				$event_desc = $row['event_desc'];
-				$org_name = $row['organization_name'] ?? "KLD Events";
+				$org_name = $row['org_name'] ?? "KLD Events";
 				$category_name = $row['category_name'];
-				$venue_name = $row['venue_name']; // Assign "Virtual Event" if venue_name is null
-				$proposal = $row["letter_content"] ?? "No Event Proposal Letter";
+				$venue_name = $row['venue_name']; // Assign "Virtual Event" if venue_
 				$event_poster = base64_decode($row["event_poster"]) ?? " ";
-			}
-
-
-
-			// Check if no event found
-			if (empty($stakeholders)) {
-				echo '';
 			}
 		} else {
 			// Handle execution failure
@@ -581,6 +528,120 @@ if (isset($_GET['event_id'])) {
 
 		</div>
 		<!--end::Container-->
+
+
+		<div class="card card-custom gutter-b">
+			<div class="card-header flex-wrap border-0 pt-6 pb-0">
+				<div class="card-title">
+					<h3 class="card-label">KLD Students
+						<span class="d-block text-muted pt-2 font-size-sm">Kolehiyong Lungsod ng Dasmarinas</span>
+					</h3>
+				</div>
+				<div class="card-toolbar">
+					<!--begin::Button-->
+					<a href="?page=add_std" class="btn btn-primary font-weight-bolder">
+						<span class="svg-icon svg-icon-md">
+							<!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+							<i class="icon la la-user-plus"></i>
+							<!--end::Svg Icon-->
+						</span>Add Student</a>
+					<!--end::Button-->
+				</div>
+			</div>
+			<div class="card-body">
+				<!--begin: Search Form-->
+				<!--begin::Search Form-->
+				<div class="mb-7">
+					<div class="row align-items-center">
+						<div class="col-12">
+							<div class="row align-items-center">
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="input-icon">
+										<input type="text" class="form-control" placeholder="Search..." id="datatable_search" />
+										<span>
+											<i class="flaticon2-search-1 text-muted"></i>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
+										<select class="form-control" id="kt_datatable_program">
+											<option value="">All</option>
+											<?php
+											include('./control/db.php');
+											$try = mysqli_query($conn, "Select * from course_tbl");
+											while ($row = $try->fetch_array()) {
+												echo '<option value="' . $row['course_id'] . '">' . $row['course_acronym'] . '</option>';
+											}
+											?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
+										<select class="form-control" id="kt_datatable_yearlvl">
+											<option value="">All</option>
+											<option value="1">1st Year</option>
+											<option value="2">2nd Year</option>
+											<option value="3">3rd Year</option>
+											<option value="4">4th Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
+										<select class="form-control" id="kt_datatable_section">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end::Search Form-->
+				<!--end: Search Form-->
+				<!--begin: Selected Rows Group Action Form-->
+				<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
+					<div class="d-flex align-items-center">
+						<div class="font-weight-bold text-danger mr-3">Selected
+							<span id="kt_datatable_selected_records">0</span>records:
+						</div>
+						<div class="dropdown mr-2">
+							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Update status</button>
+							<div class="dropdown-menu dropdown-menu-sm">
+								<ul class="nav nav-hover flex-column">
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Pending</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Delivered</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Canceled</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<button class="btn btn-sm btn-danger mr-2" type="button" id="kt_datatable_delete_all">Delete All</button>
+					</div>
+				</div>
+				<!--end: Selected Rows Group Action Form-->
+				<!--begin: Datatable-->
+				<div class="datatable datatable-bordered datatable-head-custom" id="registered_std"></div>
+				<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId ?>">
+				<!--end: Datatable-->
+			</div>
+		</div>
+
 
 	</div>
 	<!--end::Entry-->
