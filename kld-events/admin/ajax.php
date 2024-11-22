@@ -1708,6 +1708,40 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo 2;
             }
             break;
+        case "std_reg_check_sections":
+            $kt_datatable_program = explode(",", base64_decode($_POST['kt_datatable_program']));
+            $kt_datatable_yearlvl = explode(",", base64_decode($_POST['kt_datatable_yearlvl']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+        case "std_att_check_sections":
+            $kt_datatable_program = explode(",", base64_decode($_POST['kt_datatable_program']));
+            $kt_datatable_yearlvl = explode(",", base64_decode($_POST['kt_datatable_yearlvl']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+            break;
         case "view_registered":
 
             // Query to fetch the data
@@ -2135,6 +2169,41 @@ if (!array_key_exists('ajax', $_POST)) {
             $conn->close();
 
             break;
+
+        case "attendance-std":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT sa.std_id, sa.std_fname, sa.std_lname, sa.std_kld_id, sa.yearlvl, sa.section_id, sa.course_id, sa.std_profilepic,
+									course_tbl.course_acronym, 
+									section_tbl.section_name, 
+									yearlvl_tbl.yearlvl_name,
+									at.status, 
+									at.attendance_date 
+								FROM std_acc sa
+								JOIN event_invitation ei 
+									ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+									AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+									AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+								JOIN course_tbl ON sa.course_id = course_tbl.course_id
+								JOIN section_tbl ON sa.section_id = section_tbl.section_id
+								JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+								LEFT JOIN attendance_tbl at ON sa.std_id = at.std_id AND at.event_id = $eventId
+								WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+
 
 
 

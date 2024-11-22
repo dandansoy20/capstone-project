@@ -179,7 +179,12 @@ if (isset($_GET['event_id'])) {
 
 										</h1>
 									</a>
-									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($org_name); ?></h6>
+									<?php
+									$try = mysqli_query($conn, "SELECT org_tbl.org_name as event_host FROM kld_event JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id WHERE event_id = '$eventId'");
+									$row = $try->fetch_array();
+									$event_host = $row['event_host'] ?? "KLD Events";
+									?>
+									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($event_host); ?></h6>
 									<div class="d-flex my-5">
 										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 												<g id="Stockholm-icons-/-Design-/-Layers" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -589,6 +594,109 @@ if (isset($_GET['event_id'])) {
 
 		</div>
 		<!--end::Container-->
+
+
+		<div class="card card-custom gutter-b">
+			<div class="card-header flex-wrap border-0 pt-6 pb-0">
+				<div class="card-title">
+					<h3 class="card-label">KLD Students
+						<span class="d-block text-muted pt-2 font-size-sm">Kolehiyong Lungsod ng Dasmarinas</span>
+					</h3>
+				</div>
+			</div>
+			<div class="card-body">
+				<!--begin: Search Form-->
+				<!--begin::Search Form-->
+				<div class="mb-7">
+					<div class="row align-items-center">
+						<div class="col-12">
+							<div class="row align-items-center">
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="input-icon">
+										<input type="text" class="form-control" placeholder="Search..." id="datatable_search" />
+										<span>
+											<i class="flaticon2-search-1 text-muted"></i>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
+										<select class="form-control" id="kt_datatable_program">
+											<option value="">All</option>
+											<?php
+											include('./control/db.php');
+											$try = mysqli_query($conn, "Select * from course_tbl");
+											while ($row = $try->fetch_array()) {
+												echo '<option value="' . $row['course_id'] . '">' . $row['course_acronym'] . '</option>';
+											}
+											?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
+										<select class="form-control" id="kt_datatable_yearlvl">
+											<option value="">All</option>
+											<option value="1">1st Year</option>
+											<option value="2">2nd Year</option>
+											<option value="3">3rd Year</option>
+											<option value="4">4th Year</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3 my-2 my-md-0">
+									<div class="d-flex align-items-center">
+										<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
+										<select class="form-control" id="kt_datatable_section">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--end::Search Form-->
+				<!--end: Search Form-->
+				<!--begin: Selected Rows Group Action Form-->
+				<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
+					<div class="d-flex align-items-center">
+						<div class="font-weight-bold text-danger mr-3">Selected
+							<span id="kt_datatable_selected_records">0</span>records:
+						</div>
+						<div class="dropdown mr-2">
+							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Update status</button>
+							<div class="dropdown-menu dropdown-menu-sm">
+								<ul class="nav nav-hover flex-column">
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Pending</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Delivered</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="#" class="nav-link">
+											<span class="nav-text">Canceled</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<button class="btn btn-sm btn-danger mr-2" type="button" id="kt_datatable_delete_all">Delete All</button>
+					</div>
+				</div>
+				<!--end: Selected Rows Group Action Form-->
+				<!--begin: Datatable-->
+				<div class="datatable datatable-bordered datatable-head-custom" id="attendance_std"></div>
+				<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId ?>">
+				<!--end: Datatable-->
+			</div>
+		</div>
 
 	</div>
 	<!--end::Entry-->
