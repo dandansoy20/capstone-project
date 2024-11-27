@@ -1,5 +1,5 @@
 <!--begin::Entry-->
-<div class="d-flex flex-column-fluid">
+<div class="d-flex flex-column-fluid pt-8">
     <!--begin::Container-->
     <div class=" container ">
         <!--begin::Profile Personal Information-->
@@ -14,16 +14,17 @@
                         <!--begin::User-->
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')">
+                                <div class="symbol-label" style="background-image:url('<?php echo $_SESSION['kld_profile'] ?>')">
                                 </div>
                                 <i class="symbol-badge bg-success"></i>
                             </div>
                             <div>
                                 <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
-                                    Juan Dela Cruz
+                                    <?php echo $_SESSION['kld_fname'] . " " . $_SESSION['kld_lname']; ?>
+
                                 </a>
                                 <div class="text-muted">
-                                    President
+                                    <?php echo $_SESSION['kld_course'] . ", " . $_SESSION['kld_yearlvl']; ?>
                                 </div>
                             </div>
                         </div>
@@ -33,22 +34,22 @@
                         <div class="py-9">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">KLD Email:</span>
-                                <a href="#" class="text-muted text-hover-primary">jdelacruz@kld.edu.ph</a>
+                                <a href="#" class="text-muted text-hover-primary"><?php echo $_SESSION['kld_email']; ?></a>
                             </div>
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">KLD-ID:</span>
-                                <span class="text-muted">KLD-21-000123</span>
+                                <span class="text-muted"><?php echo $_SESSION['kld_std_id']; ?></span>
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <span class="font-weight-bold mr-2">Organization:</span>
-                                <span class="text-muted">IICS</span>
+                                <span class="font-weight-bold mr-2">Course:</span>
+                                <span class="text-muted"><?php echo $_SESSION['kld_course']; ?></span>
                             </div>
                         </div>
                         <!--end::Contact-->
 
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
-                            
+
                             <div class="navi-item mb-2">
                                 <a href="custom/apps/profile/profile-1/personal-information.html"
                                     class="navi-link py-4 active">
@@ -73,9 +74,9 @@
                                     </span>
                                 </a>
                             </div>
-                          
+
                             <div class="navi-item mb-2">
-                                <a href="?page=cpass" class="navi-link py-4 ">
+                                <a href="#" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span
                                             class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg--><svg
@@ -99,8 +100,35 @@
                                         Change Password
                                     </span>
                                 </a>
+                                <a href="#" class="navi-item px-8" onclick="return alertStatus()">
+                                    <div class="navi-link">
+                                        <div class="navi-icon mr-2">
+                                            <i class="flaticon2-information text-primary"></i>
+                                        </div>
+                                        <div class="navi-text">
+                                            <div class="font-weight-bold">
+                                                Under Development
+                                            </div>
+                                            <div class="text-muted">
+                                                This page is currently under development
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <script>
+                                    function alertStatus() {
+                                        swal.fire({
+                                            title: 'Under Development',
+                                            text: 'This page is currently under development',
+                                            icon: 'info',
+                                            confirmButtonText: 'Close'
+                                        });
+                                        return false;
+                                    }
+                                </script>
                             </div>
-                           
+
                         </div>
                         <!--end::Nav-->
                     </div>
@@ -141,9 +169,9 @@
                                 <label class="col-xl-3 col-lg-3 col-form-label">Display Profile Picture</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="image-input image-input-outline" id="kt_profile_avatar"
-                                        style="background-image: url(assets/media/users/blank.png)">
+                                        style="background-image: url('<?php echo $_SESSION['kld_profile'] ?>')">
                                         <div class="image-input-wrapper"
-                                            style="background-image: url(assets/media/users/300_21.jpg)"></div>
+                                            style="background-image: url('<?php echo $_SESSION['kld_profile'] ?>')"></div>
 
                                         <label
                                             class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -172,22 +200,22 @@
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="Juan" />
+                                    <input class="form-control form-control-lg form-control-solid" type="text" disabled
+                                        value="<?php echo $_SESSION['kld_fname'] ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="Dela Cruz" />
+                                    <input class="form-control form-control-lg form-control-solid" type="text" disabled
+                                        value="<?php echo $_SESSION['kld_lname'] ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-lg-3 col-form-label">Username Account</label>
                                 <div class="col-lg-9 col-xl-6">
-                                    <input class="form-control form-control-lg form-control-solid" type="text"
-                                        value="cocomartin27" />
+                                    <input class="form-control form-control-lg form-control-solid" type="text" disabled
+                                        value="<?php echo $_SESSION['kld_username'] ?>" />
                                 </div>
                             </div>
                             <div class="row">
@@ -203,7 +231,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i
                                                     class="flaticon-email"></i></span></div>
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            value="jdelacruz" disabled placeholder="Email" />
+                                            value="<?php echo explode('@', $_SESSION['kld_email'])[0]  ?>" disabled placeholder="Email" />
                                         <div class="input-group-append"><span class="input-group-text">@kld.edu.ph</span></div>
                                     </div>
                                     <span class="form-text text-muted">We'll never share your email with anyone
@@ -217,16 +245,16 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i
                                                     class="la la-address-card"></i></span></div>
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            value="KLD-21-000001" disabled placeholder="ID Number" />
+                                            value="<?php echo $_SESSION['kld_std_id'] ?>" disabled placeholder="ID Number" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">Organization</label>
+                                <label class="col-xl-3 col-lg-3 col-form-label">Program</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="input-group input-group-lg input-group-solid">
                                         <input type="text" class="form-control form-control-lg form-control-solid"
-                                            placeholder="Organization" disabled value="Institute of Information and Computing Science" />
+                                            placeholder="Program" disabled value="<?php echo $_SESSION['kld_program'] ?>" />
                                     </div>
                                 </div>
                             </div>

@@ -79,7 +79,8 @@
 				OR (ei.org_id IS NULL)  -- Open to employees, no specific org_id filter
 				OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)  -- Open for all
 			)
-			GROUP BY e.event_id;
+			GROUP BY e.event_id
+			ORDER BY e.event_created DESC;
 						";
 
 			// Execute the events query
