@@ -7,26 +7,7 @@
             <div class="card-body p-0">
                 <!--begin::Wizard-->
                 <div class="wizard wizard-4" id="kt_wizard" data-wizard-state="step-first" data-wizard-clickable="true">
-                    <!--begin::Wizard Nav-->
-                    <div class="wizard-nav">
-                        <div class="wizard-steps">
-                            <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
-                                <div class="wizard-wrapper">
-                                    <div class="wizard-number">
-                                        @
-                                    </div>
-                                    <div class="wizard-label">
-                                        <div class="wizard-title">
-                                            Profile
-                                        </div>
-                                        <div class="wizard-desc">
-                                            User's Personal Information
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!--end::Wizard Nav-->
 
                     <!--begin::Card-->
@@ -42,12 +23,12 @@
                                                 <!--begin::Wizard Step 1-->
                                                 <div class="my-5 step" data-wizard-type="step-content"
                                                     data-wizard-state="current">
-                                                    <h5 class="text-dark font-weight-bold mb-10">User's Profile Details:
+                                                    <h5 class="text-dark font-weight-bold mb-10">Admin User's Profile Details:
                                                     </h5>
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
                                                         <label
-                                                            class="col-xl-3 col-lg-3 col-form-label text-left">Avatar</label>
+                                                            class="col-xl-3 col-lg-3 col-form-label text-left">Profile Picture</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="image-input image-input-outline"
                                                                 id="kt_user_add_avatar">

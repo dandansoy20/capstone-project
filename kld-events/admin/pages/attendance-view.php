@@ -264,342 +264,13 @@ if (isset($_GET['event_id'])) {
 			</div>
 		</div>
 
-		<div class="card card-custom gutter-b">
-			<!--begin::Header-->
-			<div class="card-header border-0 py-5">
-				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Attendees</span>
-					<span class="text-muted mt-3 font-weight-bold font-size-sm">Kolehiyo ng Lungsod ng Dasmariñas</span>
-				</h3>
-			</div>
 
-
-
-
-			<div class="card-body">
-				<div class="mb-7">
-					<div class="row align-items-center">
-						<div class="col-12">
-							<div class="row align-items-center">
-								<div class="col-md-3 my-2">
-									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-										<select class="form-control" id="kt_datatable_search_status">
-											<?php
-											$query = "SELECT *
-											FROM event_invitation 
-											LEFT JOIN kld_event ON event_invitation.event_id = kld_event.event_id                        
-											WHERE kld_event.event_id = '" . $eventId . "'";
-
-											$result = mysqli_query($conn, $query);
-
-											// Initialize the variables as null
-											$course_id = $yearlvl_id = $section_id = $org_id = null;
-
-											if (mysqli_num_rows($result) > 0) {
-												$row = mysqli_fetch_assoc($result);
-												$course_id = $row['course_id'];
-												$yearlvl_id = $row['yearlvl_id'];
-												$section_id = $row['section_id'];
-												$org_id = $row['org_id'];
-											}
-
-											// Conditional statements to display options
-											if (is_null($course_id) && is_null($yearlvl_id) && is_null($section_id) && is_null($org_id)) {
-												// If all values are null, display both options
-												echo '<option value="std">Student</option>';
-												echo '<option value="emp">Employee</option>';
-											} elseif (!is_null($course_id) && is_null($yearlvl_id) && is_null($section_id) && is_null($org_id)) {
-												echo '<option value="std">Student</option>';
-											} elseif (is_null($course_id) && !is_null($yearlvl_id) && is_null($section_id) && is_null($org_id)) {
-												echo '<option value="std">Student</option>';
-											} elseif (is_null($course_id) && is_null($yearlvl_id) && is_null($section_id) && !is_null($org_id)) {
-												echo '<option value="emp">Employee</option>';
-											} elseif (!is_null($course_id) && !is_null($yearlvl_id) && !is_null($section_id) && is_null($org_id)) {
-												echo '<option value="std">Student</option>';
-											}
-											?>
-										</select>
-									</div>
-								</div>
-								<div id="student-fields" class="col-md-9 my-2 d-none">
-									<div class="row align-items-center">
-										<div class="col-md-4 my-2">
-											<div class="d-flex align-items-center">
-												<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
-												<select class="form-control" id="kt_datatable_search_program">
-													<?php
-													// Query to fetch course acronyms from course_tbl
-													$courseQuery = "SELECT * FROM course_tbl";
-													$courseResult = mysqli_query($conn, $courseQuery);
-
-													if (mysqli_num_rows($courseResult) > 0) {
-														// Loop through each row and display the course acronym as an option
-														while ($courseRow = mysqli_fetch_assoc($courseResult)) {
-															echo '<option value="' . $courseRow['course_id'] . '">' . $courseRow['course_acronym'] . '</option>';
-														}
-													} else {
-														// If no courses are found, display a default option
-														echo '<option value="">No programs available</option>';
-													}
-													?>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4 my-2">
-											<div class="d-flex align-items-center">
-												<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
-												<select class="form-control" id="kt_datatable_search_year">
-													<option value="1">1st</option>
-													<option value="2">2nd</option>
-													<option value="3">3rd</option>
-													<option value="4">4th</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4 my-2">
-											<div class="d-flex align-items-center">
-												<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
-												<select class="form-control" id="kt_datatable_search_section">
-													<?php
-													// Query to fetch course acronyms from course_tbl
-													$courseQuery = "SELECT * FROM section_tbl";
-													$courseResult = mysqli_query($conn, $courseQuery);
-
-													if (mysqli_num_rows($courseResult) > 0) {
-														// Loop through each row and display the course acronym as an option
-														while ($courseRow = mysqli_fetch_assoc($courseResult)) {
-															echo '<option value="' . $courseRow['section_id'] . '">' . $courseRow['section_name'] . '</option>';
-														}
-													} else {
-														// If no courses are found, display a default option
-														echo '<option value="">No programs available</option>';
-													}
-													?>
-												</select>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="employee-fields" class="col-md-4 my-2 d-none">
-									<div class="d-flex align-items-center">
-										<label class="mr-3 mb-0 d-none d-md-block">Organization:</label>
-										<select class="form-control" id="kt_datatable_search_org">
-											<?php
-											// Query to fetch organization names
-											$orgQuery = "SELECT * FROM org_tbl";
-											$orgResult = mysqli_query($conn, $orgQuery);
-
-											if (mysqli_num_rows($orgResult) > 0) {
-												// Loop through each row and display the organization name as an option
-												while ($orgRow = mysqli_fetch_assoc($orgResult)) {
-													echo '<option value="' . $orgRow['org_id'] . '">' . $orgRow['org_name'] . '</option>';
-												}
-											} else {
-												// If no organizations are found, display a default option
-												echo '<option value="">No organizations available</option>';
-											}
-											?>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="mb-5 collapse" id="kt_datatable_group_action_form">
-					<div class="d-flex align-items-center">
-						<div class="font-weight-bold text-danger mr-3">Selected <span id="kt_datatable_selected_records">0</span> records:</div>
-						<div class="dropdown mr-2">
-							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Update status</button>
-							<div class="dropdown-menu dropdown-menu-sm">
-								<ul class="nav nav-hover flex-column">
-									<li class="nav-item"><a href="#" class="nav-link"><span class="nav-text">Present</span></a></li>
-									<li class="nav-item"><a href="#" class="nav-link"><span class="nav-text">Absent</span></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="card-body py-0 d-none" id="student-table">
-				<!--begin::Table-->
-				<div class="table-responsive">
-					<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
-						<thead>
-							<tr class="text-left">
-								<th class="pl-0" style="width: 20px">
-									<label class="checkbox checkbox-lg checkbox-inline">
-										<input type="checkbox" value="1" />
-										<span></span>
-									</label>
-								</th>
-								<th class="pr-0" style="width: 50px">Student</th>
-								<th style="min-width: 200px"></th>
-								<th style="min-width: 150px">Program</th>
-								<th style="min-width: 150px">Section</th>
-								<th style="min-width: 150px">Date</th>
-								<th style="min-width: 150px">Status</th>
-								<th class="min-width: 150px" style="min-width: 150px">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$try = mysqli_query(
-								$conn,
-								"SELECT DISTINCT sa.*, 
-									course_tbl.course_acronym, 
-									section_tbl.section_name, 
-									yearlvl_tbl.yearlvl_name,
-									at.status, 
-									at.attendance_date 
-								FROM std_acc sa
-								JOIN event_invitation ei 
-									ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
-									AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
-									AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
-								JOIN course_tbl ON sa.course_id = course_tbl.course_id
-								JOIN section_tbl ON sa.section_id = section_tbl.section_id
-								JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
-								LEFT JOIN attendance_tbl at ON sa.std_id = at.std_id AND at.event_id = $eventId
-								WHERE ei.event_id = $eventId;
-								"
-							);
-
-							while ($row = $try->fetch_array()) {
-								// Check if the student is registered for the specific event by checking the status in registration_tbl
-								$status_result = mysqli_query($conn, "SELECT status, attendance_date FROM attendance_tbl WHERE std_id = '" . $row['std_id'] . "' AND event_id = $eventId");
-
-								// Initialize status and reg_date for each student
-								$status = 'INACTIVE';
-								$attendance_date = '--.--.----'; // Default date when not registered
-
-								if (mysqli_num_rows($status_result) > 0) {
-									$status_row = mysqli_fetch_assoc($status_result);
-									$status = strtolower($status_row['status']) == 'attended' ? 'attended' : 'INACTIVE';
-									$attendance_date = ($status == 'attended' && !empty($status_row['attendance_date'])) ? date("F d, Y", strtotime($status_row['attendance_date'])) : '--.--.----';
-								}
-
-								echo '<tr>';
-								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" id="student-id" name="student-id" value="' . $row['std_id'] . '" /><span></span></label></td>';
-								echo '<td class="pr-0">
-										<div class="symbol symbol-40 symbol-sm flex-shrink-0">';
-								if (!empty($row['std_profilepic'])) {
-									echo '<img src="' . $row['std_profilepic'] . '" class="h-75 align-self-end" alt=""/>';
-								} else {
-									echo '<img src="assets/media/users/default.jpg" class="h-75 align-self-end" alt=""/>';
-								}
-								echo '</div></td>';
-								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['std_fname'] . ' ' . $row['std_lname'] . '</a><span class="text-muted font-weight-bold text-muted d-block">' . $row['std_kld_id'] . '</span></td>';
-								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['course_acronym'] . '</span><span class="text-muted font-weight-bold">' . $row['yearlvl_name'] . '</span></td>';
-								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['section_name'] . '</span></td>';
-								echo '<td><span class="text-muted font-weight-bold">' . $attendance_date . '</span></td>';
-
-								// Status
-								$status_text = ($status == 'attended') ? 'Present' : 'Absent';
-								$label_class = ($status == 'attended') ? 'label-light-primary' : 'label-light-danger';
-								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
-
-								// Switch
-								$_status = ($status == 'attended') ? 'checked="checked"' : '';
-								$_attended = ($status == 'attended') ? 'absent"' : 'attended';
-								echo '<td class="pr-0 text-right">
-										<form method="post">
-											<input type="hidden" id="std_id" name="std_id" value="' . $row['std_id'] . '"/>
-											<input type="hidden" id="event_id" name="event_id" value="' . $eventId . '"/>
-											<span class="switch switch-outline switch-icon switch-success">
-												<label>
-													<input type="checkbox" class="attended-checkbox" ' . $_status . ' data-std-id="' . $row['std_id'] . '" data-event-id="' . $eventId . '" />
-													<span></span>
-												</label>
-											</span>
-										</form>
-									</td>';
-
-
-
-								echo '</tr>';
-							}
-							?>
-						</tbody>
-
-					</table>
-				</div>
-				<!--end::Table-->
-			</div>
-
-			<div class="card-body py-0 d-none" id="employee-table">
-				<!--begin::Table-->
-				<div class="table-responsive">
-					<table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
-						<thead>
-							<tr class="text-left">
-								<th class="pl-0" style="width: 20px">
-									<label class="checkbox checkbox-lg checkbox-inline">
-										<input type="checkbox" value="1" />
-										<span></span>
-									</label>
-								</th>
-								<th class="pr-0" style="width: 50px">Employee</th>
-								<th style="min-width: 200px"></th>
-								<th style="min-width: 150px">Email</th>
-								<th style="min-width: 150px">Role</th>
-								<th style="min-width: 150px">Status</th>
-								<th class="min-width: 150px" style="min-width: 150px">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$try = mysqli_query($conn, "SELECT org_acc.*, org_tbl.org_name FROM org_acc JOIN org_tbl ON org_acc.org_id = org_tbl.org_id");
-							while ($row = $try->fetch_array()) {
-								echo '<tr>';
-								// Checkbox
-								echo '<td class="pl-0"><label class="checkbox checkbox-lg checkbox-inline"><input type="checkbox" value="' . $row['org_acc_id'] . '" /><span></span></label></td>';
-
-								// Profile Image
-								echo '<td class="pr-0"><div class="symbol symbol-50 symbol-light mt-1"><span class="symbol-label"><img src="' . ($row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt=""/></span></div></td>';
-
-								// Name and ID
-								echo '<td class="pl-0"><a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</a><span class="text-muted font-weight-bold text-muted d-block">' . $row['org_kld_id'] . '</span></td>';
-
-								// Email
-								echo '<td><span class="text-muted font-weight-bold">' . $row['org_email'] . '</span></td>';
-
-								// Section
-								echo '<td><span class="text-dark-75 font-weight-bolder d-block font-size-lg">' . $row['org_role'] . '</span></td>';
-
-								// Status
-								$status = strtoupper($row['status']);
-								$status_text = ($status == 'ACTIVE') ? 'Present' : 'Absent';
-								$label_class = ($status == 'ACTIVE') ? 'label-light-primary' : 'label-light-danger';
-								echo '<td><span class="label label-lg ' . $label_class . ' label-inline">' . $status_text . '</span></td>';
-
-								// Switch
-								$_status = ($status == 'ACTIVE') ? 'checked="checked"' : '';
-								echo '<td class="pr-0 text-right"><span class="switch switch-outline switch-icon switch-success"><label><input type="checkbox" ' . $_status . ' name="select"/><span></span></label></span></td>';
-
-								echo '</tr>';
-							}
-							?>
-						</tbody>
-
-					</table>
-				</div>
-				<!--end::Table-->
-			</div>
-
-
-
-		</div>
-		<!--end::Container-->
 
 
 		<div class="card card-custom gutter-b">
 			<div class="card-header flex-wrap border-0 pt-6 pb-0">
 				<div class="card-title">
-					<h3 class="card-label">KLD Students
+					<h3 class="card-label">Attendance KLD Members
 						<span class="d-block text-muted pt-2 font-size-sm">Kolehiyong Lungsod ng Dasmarinas</span>
 					</h3>
 				</div>
@@ -622,7 +293,7 @@ if (isset($_GET['event_id'])) {
 								<div class="col-md-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block">Program:</label>
-										<select class="form-control" id="kt_datatable_program">
+										<select class="form-control" id="kt_datatable_program_att">
 											<option value="">All</option>
 											<?php
 											include('./control/db.php');
@@ -637,7 +308,7 @@ if (isset($_GET['event_id'])) {
 								<div class="col-md-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block">Year Level:</label>
-										<select class="form-control" id="kt_datatable_yearlvl">
+										<select class="form-control" id="kt_datatable_yearlvl_att">
 											<option value="">All</option>
 											<option value="1">1st Year</option>
 											<option value="2">2nd Year</option>
@@ -649,7 +320,7 @@ if (isset($_GET['event_id'])) {
 								<div class="col-md-3 my-2 my-md-0">
 									<div class="d-flex align-items-center">
 										<label class="mr-3 mb-0 d-none d-md-block">Section:</label>
-										<select class="form-control" id="kt_datatable_section">
+										<select class="form-control" id="kt_datatable_section_att">
 										</select>
 									</div>
 								</div>
@@ -662,37 +333,33 @@ if (isset($_GET['event_id'])) {
 				<!--begin: Selected Rows Group Action Form-->
 				<div class="mt-10 mb-5 collapse" id="kt_datatable_group_action_form">
 					<div class="d-flex align-items-center">
-						<div class="font-weight-bold text-danger mr-3">Selected
-							<span id="kt_datatable_selected_records">0</span>records:
+						<div class="font-weight-bold text-danger mr-3">
+							Selected
+							<span id="kt_datatable_selected_records">0</span> records:
 						</div>
 						<div class="dropdown mr-2">
 							<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Update status</button>
 							<div class="dropdown-menu dropdown-menu-sm">
 								<ul class="nav nav-hover flex-column">
 									<li class="nav-item">
-										<a href="#" class="nav-link">
-											<span class="nav-text">Pending</span>
+										<a href="#" class="nav-link" id="mark-present">
+											<span class="nav-text">Present</span>
 										</a>
 									</li>
 									<li class="nav-item">
-										<a href="#" class="nav-link">
-											<span class="nav-text">Delivered</span>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="#" class="nav-link">
-											<span class="nav-text">Canceled</span>
+										<a href="#" class="nav-link" id="mark-absent">
+											<span class="nav-text">Absent</span>
 										</a>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<button class="btn btn-sm btn-danger mr-2" type="button" id="kt_datatable_delete_all">Delete All</button>
 					</div>
 				</div>
-				<!--end: Selected Rows Group Action Form-->
+
 				<!--begin: Datatable-->
 				<div class="datatable datatable-bordered datatable-head-custom" id="attendance_std"></div>
+
 				<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId ?>">
 				<!--end: Datatable-->
 			</div>

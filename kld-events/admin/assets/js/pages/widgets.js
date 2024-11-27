@@ -3334,7 +3334,7 @@ var KTWidgets = (function () {
     }
 
     var options = {
-      series: [60, 50, 75, 80],
+      series: [0, 0, 0, 0],
       chart: {
         height: height,
         type: "radialBar",
@@ -3364,7 +3364,7 @@ var KTWidgets = (function () {
               fontWeight: "bold",
               formatter: function (w) {
                 // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                return "60%";
+                return "0%";
               },
             },
           },

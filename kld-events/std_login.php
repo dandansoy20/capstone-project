@@ -26,18 +26,18 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
 	<!--begin::Page Custom Styles(used by this page)-->
-	<link href="assets/css/pages/login/classic/login-3.css" rel="stylesheet" type="text/css" />
+	<link href="std-user/assets/css/pages/login/classic/login-3.css" rel="stylesheet" type="text/css" />
 	<!--end::Page Custom Styles-->
 
 	<!--begin::Global Theme Styles(used by all pages)-->
-	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="std-user/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="std-user/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
+	<link href="std-user/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 	<!--end::Global Theme Styles-->
 
 	<!--begin::Layout Themes(used by all pages)-->
 
-	<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
+	<link rel="shortcut icon" href="std-user/assets/media/logos/kldlogo.png" />
 
 </head>
 <!--end::Head-->
@@ -50,12 +50,12 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Login-->
 		<div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
-			<div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url(assets/media/bg/bg-1.jpg);">
+			<div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url(std-user/assets/media/bg/bg-1.jpg);">
 				<div class="login-form text-center text-white p-7 position-relative overflow-hidden">
 					<!--begin::Login Header-->
 					<div class="d-flex flex-center mb-15">
 						<a href="#">
-							<img src="assets/media/logos/logo-letter-9.png" class="max-h-100px" alt="" />
+							<img src="std-user/assets/media/logos/logo-letter-9.png" class="max-h-100px" alt="" />
 						</a>
 					</div>
 					<!--end::Login Header-->
@@ -214,16 +214,16 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--end::Global Config-->
 
 	<!--begin::Global Theme Bundle(used by all pages)-->
-	<script src="assets/plugins/global/plugins.bundle.js"></script>
-	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-	<script src="assets/js/scripts.bundle.js"></script>
+	<script src="std-user/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="std-user/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+	<script src="std-user/assets/js/scripts.bundle.js"></script>
 	<!--end::Global Theme Bundle-->
 
 
 	<!--begin::Page Scripts(used by this page)-->
-	<script src="assets/js/pages/custom/login/login-general.js"></script>
+	<script src="std-user/assets/js/pages/custom/login/login-general.js"></script>
 
-	<script src="../admin/control/js/login.js"></script>
+	<script src="admin/control/js/login.js"></script>
 	<!--end::Page Scripts-->
 </body>
 <!--end::Body-->

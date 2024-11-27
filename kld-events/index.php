@@ -70,8 +70,8 @@
           <li><a href="#features">Features</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#team">Team</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li class="dropdown">
+          <li><a href="#pricing">More Features</a></li>
+          <!-- <li class="dropdown">
             <a href="#"><span>Dropdown</span>
               <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
@@ -91,7 +91,7 @@
               <li><a href="#">Dropdown 3</a></li>
               <li><a href="#">Dropdown 4</a></li>
             </ul>
-          </li>
+          </li> -->
           <li><a href="#login">Sign In</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -126,7 +126,7 @@
             <div class="d-flex">
               <a href="#about" class="btn-get-started">Get Started</a>
               <a
-                href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+                href="https://www.youtube.com/watch?v=zcj992U7yvc"
                 class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
             </div>
           </div>
@@ -875,14 +875,9 @@
                   alt="" />
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Jefferson Montemayor</h4>
+                <span>KLD Event Software Engineer</span>
+
               </div>
             </div>
           </div>
@@ -900,14 +895,9 @@
                   alt="" />
               </div>
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Aubrey Sta. Romana</h4>
+                <span>KLD Event Project Manager</span>
+
               </div>
             </div>
           </div>
@@ -925,14 +915,9 @@
                   alt="" />
               </div>
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter-x"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Riza Mae Alburo</h4>
+                <span>KLD Event Head of Documentation</span>
+
               </div>
             </div>
           </div>
@@ -946,10 +931,10 @@
     <section id="pricing" class="pricing section">
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
+        <h2>Comparison</h2>
         <div>
-          <span>Check Our</span>
-          <span class="description-title">Pricing</span>
+          <span>What's with</span>
+          <span class="description-title">KLD Events?</span>
         </div>
       </div>
       <!-- End Section Title -->
@@ -969,32 +954,33 @@
               <ul>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Quam adipiscing vitae proin</span>
+                  <span>Event Calendar</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nec feugiat nisl pretium</span>
+                  <span>User Management</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nulla at volutpat diam uteera</span>
+                  <span>Event Management </span>
                 </li>
                 <li class="na">
                   <i class="bi bi-x"></i>
-                  <span>Pharetra massa massa ultricies</span>
+                  <span>Event Planning </span>
                 </li>
                 <li class="na">
                   <i class="bi bi-x"></i>
-                  <span>Massa ultricies mi quis hendrerit</span>
+                  <span>Attendance Monitoring</span>
                 </li>
-                <li class="na">
-                  <i class="bi bi-x"></i>
-                  <span>Voluptate id voluptas qui sed aperiam rerum</span>
+                <li>
+                  <i class="bi bi-check"></i>
+                  <span>Feedback and Evaluation</span>
                 </li>
-                <li class="na">
-                  <i class="bi bi-x"></i>
-                  <span>Iure nihil dolores recusandae odit voluptatibus</span>
+                <li>
+                  <i class="bi bi-check"></i>
+                  <span>Venue Management</span>
                 </li>
+
               </ul>
             </div>
           </div>
@@ -1002,44 +988,45 @@
 
           <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="pricing-item featured">
-              <p class="popular">Popular</p>
+              <p class="popular">KLD Events</p>
               <h3>Business Plan</h3>
               <p class="description">
                 Ullam mollitia quasi nobis soluta in voluptatum et sint palora
                 dex strater
               </p>
-              <h4><sup>$</sup>29<span> / month</span></h4>
+              <h4>KLD Events</h4>
               <a href="#" class="cta-btn">Start a free trial</a>
               <p class="text-center small">No credit card required</p>
               <ul>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Quam adipiscing vitae proin</span>
+                  <span>Event Calendar</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nec feugiat nisl pretium</span>
+                  <span>User Management</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nulla at volutpat diam uteera</span>
+                  <span>Event Management </span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Pharetra massa massa ultricies</span>
+                  <span>Event Planning </span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Massa ultricies mi quis hendrerit</span>
+                  <span>Attendance Monitoring</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Voluptate id voluptas qui sed aperiam rerum</span>
+                  <span>Feedback and Evaluation</span>
                 </li>
-                <li class="na">
-                  <i class="bi bi-x"></i>
-                  <span>Iure nihil dolores recusandae odit voluptatibus</span>
+                <li>
+                  <i class="bi bi-check"></i>
+                  <span>Venue Management</span>
                 </li>
+
               </ul>
             </div>
           </div>
@@ -1058,32 +1045,33 @@
               <ul>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Quam adipiscing vitae proin</span>
+                  <span>Event Calendar</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nec feugiat nisl pretium</span>
+                  <span>User Management</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Nulla at volutpat diam uteera</span>
+                  <span>Event Management </span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Pharetra massa massa ultricies</span>
+                  <span>Event Planning </span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Massa ultricies mi quis hendrerit</span>
+                  <span>Attendance Monitoring</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Voluptate id voluptas qui sed aperiam rerum</span>
+                  <span>Feedback and Evaluation</span>
                 </li>
                 <li>
                   <i class="bi bi-check"></i>
-                  <span>Iure nihil dolores recusandae odit voluptatibus</span>
+                  <span>Venue Management</span>
                 </li>
+
               </ul>
             </div>
           </div>

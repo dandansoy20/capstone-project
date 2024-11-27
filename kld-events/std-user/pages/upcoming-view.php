@@ -131,8 +131,8 @@ if (isset($_GET['event_id'])) {
 											</li>
 											<li class="navi-item">
 												<a href="#" onclick="editOrganizer(<?php echo $venue_id; ?>)" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-gear"></i></span>
-													<span class="navi-text">Archive</span>
+													<span class="navi-icon"><i class="flaticon2-cancel"></i></span>
+													<span class="navi-text">Cancel</span>
 												</a>
 											</li>
 										</ul>

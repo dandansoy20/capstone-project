@@ -225,7 +225,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 					$try = mysqli_query(
 						$conn,
-						"SELECT 
+						"SELECT DISTINCT 
 								stakeholder_tbl.*,
 								venue_tbl.venue_name,
 								venue_tbl.venue_id,

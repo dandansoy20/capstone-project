@@ -1305,11 +1305,11 @@ var KTApexChartsDemo = (function () {
         },
       ],
       colors: [
-        KTApp.getSettings()["colors"]["theme"]["base"]["danger"],
-        KTApp.getSettings()["colors"]["theme"]["base"]["info"],
-        KTApp.getSettings()["colors"]["theme"]["base"]["warning"],
-        KTApp.getSettings()["colors"]["theme"]["base"]["primary"],
         KTApp.getSettings()["colors"]["theme"]["base"]["success"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["primary"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["warning"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["info"],
+        KTApp.getSettings()["colors"]["theme"]["base"]["danger"],
       ],
     };
 

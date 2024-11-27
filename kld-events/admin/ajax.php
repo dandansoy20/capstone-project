@@ -36,17 +36,16 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->Host = 'smtp.hostinger.com';
             $mail->Port = 587;
             //$mail->Port = 465;
-            $mail->SMTPSecure = "TLS";/* 
-            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
-
-            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key;
+            $mail->SMTPSecure = "TLS";
+            $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key;
+            /* 
+            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
 
             $mail->Username = 'steven.dale@lucero.cloud';
             $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
-            $mail->setFrom('noreply@lucero.cloud', 'KLD noreply');
+            $mail->setFrom('noreply@lucero.cloud', 'KLD Events Account Activation');
             $mail->addAddress($add_std_email);
-            $mail->addCC("denzdmagician@gmail.com");
-            $mail->addCC("shizukura06@gmail.com");
+            $mail->addCC("mdplucero@kld.edu.ph");
             $mail->Subject = "Welcome to KLD Event " . $add_std_firstname;
             $msg = '
 
@@ -402,16 +401,15 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->Host = 'smtp.hostinger.com';
             $mail->Port = 587;
             //$mail->Port = 465;
-            $mail->SMTPSecure = "TLS";/* 
-            $url = "https://markdenzel.lucero.cloud/kld-events/emp-user/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
-            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/emp-user/signup.php?ajax=account_activation&activation_key=" . $activation_key;
+            $mail->SMTPSecure = "TLS";
+            $url = "https://markdenzel.lucero.cloud/kld-events/emp-user/signup.php?ajax=account_activation&activation_key=" . $activation_key;/* 
+            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/emp-user/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
 
             $mail->Username = 'steven.dale@lucero.cloud';
             $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
-            $mail->setFrom('noreply@lucero.cloud', 'KLD noreply');
+            $mail->setFrom('noreply@lucero.cloud', 'KLD Events');
             $mail->addAddress($add_emp_email);
-            $mail->addCC("denzdmagician@gmail.com");
-            $mail->addCC("shizukura06@gmail.com");
+            $mail->addCC("mdplucero@kld.edu.ph");
             $mail->Subject = "Welcome to KLD Event " . $add_emp_firstname;
             $msg = '
     
@@ -766,15 +764,14 @@ if (!array_key_exists('ajax', $_POST)) {
             $mail->Port = 587;
             //$mail->Port = 465;
             $mail->SMTPSecure = "TLS";
-            /* $url = "https://markdenzel.lucero.cloud/kld-events/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
-            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/org-admin/signup.php?ajax=account_activation&activation_key=" . $activation_key;
+            $url = "https://markdenzel.lucero.cloud/kld-events/org-admin/signup.php?ajax=account_activation&activation_key=" . $activation_key;/* 
+            $url = "http://localhost/capstone-project-kld-events/kld-events/kld-events/org-admin/signup.php?ajax=account_activation&activation_key=" . $activation_key; */
 
             $mail->Username = 'steven.dale@lucero.cloud';
             $mail->Password = base64_decode("U3RAY3lMMWx5THVjI3Iw");
             $mail->setFrom('noreply@lucero.cloud', 'KLD noreply');
             $mail->addAddress($add_org_email);
-            $mail->addCC("denzdmagician@gmail.com");
-            $mail->addCC("shizukura06@gmail.com");
+            $mail->addCC("mdplucero@kld.edu.ph");
             $mail->Subject = "Welcome to KLD Event, " . $add_org_fname;
             $msg = '
     
@@ -1585,6 +1582,34 @@ if (!array_key_exists('ajax', $_POST)) {
             }
             break;
 
+        case "update-attendance-status":
+            $eventId = $_POST['event_id'];
+            $stdIds = $_POST['std_ids'];  // Array of student IDs
+            $status = $_POST['status'];
+
+            foreach ($stdIds as $stdId) {
+                if ($status == 'attended') {
+                    // Insert or update attendance status
+                    $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, std_id, status)
+                                                VALUES (?, ?, ?)
+                                                ON DUPLICATE KEY UPDATE status = ?");
+                    $stmt->bind_param("iiss", $eventId, $stdId, $status, $status);
+                } else {
+                    // Delete attendance record for absent status
+                    $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND std_id = ? AND status = 'attended'");
+                    $stmt->bind_param("ii", $eventId, $stdId);
+                }
+
+                if (!$stmt->execute()) {
+                    echo "error";
+                    exit;
+                }
+            }
+
+            echo "success";
+            break;
+
+
 
 
         case "std_register":
@@ -1724,11 +1749,13 @@ if (!array_key_exists('ajax', $_POST)) {
             } else {
                 echo 2;
             }
+
+            break;
         case "std_att_check_sections":
-            $kt_datatable_program = explode(",", base64_decode($_POST['kt_datatable_program']));
-            $kt_datatable_yearlvl = explode(",", base64_decode($_POST['kt_datatable_yearlvl']));
-            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program) . ")";
-            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl) . ")";
+            $kt_datatable_program_att = explode(",", base64_decode($_POST['kt_datatable_program_att']));
+            $kt_datatable_yearlvl_att = explode(",", base64_decode($_POST['kt_datatable_yearlvl_att']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program_att) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl_att) . ")";
 
             $try = mysqli_query($conn, $query);
             while ($row = $try->fetch_array()) {
@@ -1740,7 +1767,7 @@ if (!array_key_exists('ajax', $_POST)) {
             } else {
                 echo 2;
             }
-            break;
+
             break;
         case "view_registered":
 

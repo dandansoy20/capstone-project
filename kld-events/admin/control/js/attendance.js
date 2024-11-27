@@ -1,5 +1,5 @@
 ////////////
-$(document).ready(function () {
+/* $(document).ready(function () {
   const typeSelect = $("#kt_datatable_search_status");
   const studentFields = $("#student-fields");
   const employeeFields = $("#employee-fields");
@@ -65,9 +65,9 @@ $(document).ready(function () {
   function updateSelectedCount(selectedCount) {
     $("#kt_datatable_selected_records").text(selectedCount);
     if (selectedCount > 0) {
-      $("#kt_datatable_group_action_form").addClass("show");
+      $("#std_attendance_actions").addClass("show");
     } else {
-      $("#kt_datatable_group_action_form").removeClass("show");
+      $("#std_attendance_actions").removeClass("show");
     }
   }
 
@@ -80,9 +80,9 @@ $(document).ready(function () {
     updateTables(this.value);
     manageCheckboxes();
   });
-});
+}); */
 
-$(document).ready(function () {
+/* $(document).ready(function () {
   const switches = $('.attendance_switch input[type="checkbox"]');
   switches.each(function () {
     $(this).on("change", function () {
@@ -106,17 +106,19 @@ $(document).ready(function () {
       });
     });
   });
-});
+}); */
 
-$(".attended-checkbox").change(function () {
+// Event listener for the attendance toggle
+$(document).on("change", ".attended-checkbox", function () {
   var std_id = $(this).data("std-id");
   var event_id = $(this).data("event-id");
   var status = $(this).is(":checked") ? "attended" : "absent";
   var originalStatus = $(this).prop("checked"); // Save the original state of the checkbox
 
+  // Confirm the action with SweetAlert
   Swal.fire({
     title:
-      "Mark this user as " + (status == "attended" ? "attended?" : "absent?"),
+      "Mark this user as " + (status === "attended" ? "attended?" : "absent?"),
     showDenyButton: true,
     showCancelButton: true,
     confirmButtonText: "Yes",
@@ -132,6 +134,7 @@ $(".attended-checkbox").change(function () {
         status: status, // Send status based on checkbox state
       };
 
+      // Send AJAX request to update attendance
       $.ajax({
         type: "POST",
         url: "ajax.php",
@@ -139,18 +142,28 @@ $(".attended-checkbox").change(function () {
         success: function (response) {
           console.log(response);
           if (response === "success") {
+            // Show success notification with SweetAlert
             Swal.fire(
               "Done!",
               "This user is marked as " + status + ".",
               "success"
             ).then(() => {
-              var event_id = $("#event_id").val();
-              window.open(
-                `?page=attendance-view&event_id=${event_id}`,
-                "_self"
-              );
+              // Dynamically update the row without reloading the page
+              var row = datatable
+                .getDataSourceParam("data")
+                .find((row) => row.std_id == std_id);
+              if (row) {
+                row.status = status; // Update the status
+                row.attendance_date =
+                  status === "attended"
+                    ? moment().format("MMMM D, YYYY")
+                    : "---------"; // Update attendance date
+                // Update the table row to reflect the changes
+                datatable.updateRow(row);
+              }
             });
           } else {
+            // Show error notification with SweetAlert
             Swal.fire(
               "Error!",
               "There was an issue updating the status.",
@@ -162,99 +175,25 @@ $(".attended-checkbox").change(function () {
         },
         error: function (xhr, status, error) {
           console.error(error);
+          // Show error notification if AJAX fails
+          Swal.fire(
+            "Error!",
+            "There was an issue with the request. Please try again.",
+            "error"
+          );
         },
       });
     } else if (result.isDenied) {
+      // Revert the checkbox to its original state if canceled
       Swal.fire("Changes are not saved", "", "info");
-      $(this).prop("checked", originalStatus); // Revert the checkbox to its original state if canceled
+      $(this).prop("checked", originalStatus);
     }
   });
 });
 
 $(document).ready(function () {
-  // When the "Select All" checkbox is clicked
-  $('th input[type="checkbox"]').on("change", function () {
-    // Get the "checked" status of the "Select All" checkbox
-    var isChecked = $(this).is(":checked");
-
-    // Check or uncheck all checkboxes in the table based on the "Select All" status
-    $('td input[type="checkbox"]').prop("checked", isChecked);
-
-    // For debugging, you can log the state
-    console.log("Select All status: " + isChecked);
-  });
-
-  // Optional: Add a listener to log the value of each checkbox when clicked
-  $('td input[type="checkbox"]').on("change", function () {
-    var studentId = $(this).val();
-    console.log(
-      "Student ID: " + studentId + ", Checked: " + $(this).is(":checked")
-    );
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Function to handle fetching sections
-  function fetchSections() {
-    // Retrieve selected program and year level values
-    const selectedPrograms = Array.from(
-      document.querySelectorAll("#kt_datatable_search_program option:checked")
-    ).map((option) => option.value);
-    const selectedYearLevels = Array.from(
-      document.querySelectorAll("#kt_datatable_search_year option:checked")
-    ).map((option) => option.value);
-
-    // Prepare the data to be sent
-    const formData = new FormData();
-    formData.append("action", "attendance_check_sections");
-    formData.append("selectedPrograms", btoa(selectedPrograms.join(","))); // Base64 encode
-    formData.append("selectedYearLevels", btoa(selectedYearLevels.join(","))); // Base64 encode
-
-    // Make the AJAX request using fetch
-    fetch("ajax.php", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json()) // Parse the response as JSON
-      .then((data) => {
-        const sectionSelect = document.getElementById(
-          "kt_datatable_search_section"
-        );
-        sectionSelect.innerHTML = ""; // Clear previous options
-
-        if (data.status === 1 && data.sections.length > 0) {
-          // Populate the select element with new options
-          data.sections.forEach((section) => {
-            const option = document.createElement("option");
-            option.value = section.section_id;
-            option.textContent = section.section_name;
-            sectionSelect.appendChild(option);
-          });
-        } else {
-          // If no sections are available, add a default option
-          const option = document.createElement("option");
-          option.value = "";
-          option.textContent = "No sections available";
-          sectionSelect.appendChild(option);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching sections:", error);
-      });
-  }
-
-  // Event listeners for the dropdowns
-  document
-    .getElementById("kt_datatable_search_program")
-    .addEventListener("change", fetchSections);
-  document
-    .getElementById("kt_datatable_search_year")
-    .addEventListener("change", fetchSections);
-});
-
-$(document).ready(function () {
   // Configuration for the main datatable
-  var dataString = { ajax: "attendance-std", event_id: $("#event_id").val() }; // Parameters to send with the AJAX request
+  var eventID = $("#event_id").val();
 
   // Initialize the KTDatatable
   var datatable = $("#attendance_std").KTDatatable({
@@ -264,7 +203,10 @@ $(document).ready(function () {
         read: {
           url: "ajax.php", // URL for fetching data
           method: "POST", // HTTP method
-          params: dataString, // Query parameters
+          params: {
+            ajax: "attendance-std",
+            event_id: eventID, // Pass the event_id dynamically
+          },
         },
       },
       pageSize: 10, // Rows per page
@@ -281,10 +223,13 @@ $(document).ready(function () {
     columns: [
       {
         field: "std_id",
-        title: "#",
+        title: "std_id",
         sortable: false,
         width: 30,
         textAlign: "center",
+        selector: {
+          class: "kt-checkbox",
+        },
       },
       {
         field: "std_profilepic",
@@ -363,56 +308,155 @@ $(document).ready(function () {
           return `
               <form method="post">
                 <input type="hidden" id="std_id" name="std_id" value="${row.std_id}"/>
-                <input type="hidden" id="event_id" name="event_id" value="${row.event_id}"/>
+                <input type="hidden" id="event_id" name="event_id" value="${eventID}"/>
                 <span class="switch switch-outline switch-icon switch-success">
                   <label>
-                    <input type="checkbox" class="attended-checkbox" ${isChecked} data-std-id="${row.std_id}" data-event-id="${row.event_id}" />
+                    <input type="checkbox" name="switch" class="attended-checkbox" ${isChecked} data-std-id="${row.std_id}" data-event-id="${eventID}" name="select"/>
                     <span></span>
                   </label>
                 </span>
               </form>
-            
           `;
         },
       },
     ],
   });
 
+  var selectedRecords = [];
+  var eventID = $("#event_id").val(); // Assuming eventID is available as a global variable
+
+  // Event delegation for individual checkboxes
+  $(document).on("change", "td input[type='checkbox']", function () {
+    var recordId = $(this).closest("tr").data("std-id"); // Get the student ID from the row's data attribute
+
+    // Add or remove record from the selected list
+    if ($(this).is(":checked")) {
+      if (!selectedRecords.includes(recordId)) {
+        selectedRecords.push(recordId);
+      }
+    } else {
+      selectedRecords = selectedRecords.filter(function (id) {
+        return id !== recordId; // Remove from selected records
+      });
+    }
+
+    // Update the display of selected records count
+    console.log("Selected Records:", selectedRecords); // Check the selected records
+    $("#kt_datatable_selected_records").text(selectedRecords.length);
+    toggleGroupActionForm(); // Toggle visibility of group action form
+  });
+
+  // Function to toggle the visibility of the group action form
+  function toggleGroupActionForm() {
+    if (selectedRecords.length > 0) {
+      $("#kt_datatable_group_action_form").collapse("show"); // Show group action form
+    } else {
+      $("#kt_datatable_group_action_form").collapse("hide"); // Hide group action form
+    }
+  }
+
+  // Handle "Present" and "Absent" actions
+  $("#mark-present").on("click", function () {
+    updateAttendanceStatus("attended");
+  });
+
+  $("#mark-absent").on("click", function () {
+    updateAttendanceStatus("absent");
+  });
+
+  // Function to update the attendance status of selected records
+  function updateAttendanceStatus(status) {
+    console.log({
+      ajax: "update-attendance-status",
+      event_id: eventID,
+      std_ids: selectedRecords, // Send selected student IDs
+      status: status,
+    });
+
+    // Check if selectedRecords is empty before sending AJAX
+    if (selectedRecords.length === 0) {
+      Swal.fire(
+        "No records selected!",
+        "Please select students to update.",
+        "warning"
+      );
+      return; // Exit the function if no records are selected
+    }
+
+    // Send AJAX request to update the attendance status of the selected records
+    $.ajax({
+      url: "ajax.php",
+      method: "POST",
+      data: {
+        ajax: "update-attendance-status",
+        event_id: eventID,
+        std_ids: selectedRecords, // Pass the array of selected student IDs
+        status: status,
+      },
+      success: function (response) {
+        console.log("Response:", response);
+        if (response === "success") {
+          Swal.fire(
+            "Success!",
+            "Attendance status updated for selected students.",
+            "success"
+          ).then(() => {
+            // Reload the datatable or refresh the page
+            datatable.reload(); // Make sure `datatable` is the correct object
+            $("#std_attendance_count").text("0"); // Reset the count display
+            selectedRecords = []; // Clear selected records
+            toggleGroupActionForm(); // Hide the group action form
+          });
+        } else {
+          Swal.fire(
+            "Error!",
+            "There was an issue updating attendance. Please try again.",
+            "error"
+          );
+        }
+      },
+      error: function () {
+        console.log("AJAX request failed.");
+        Swal.fire("Error!", "AJAX request failed. Please try again.", "error");
+      },
+    });
+  }
+
   // Set up search filter for input field
 
   // Function to set up filters on the select dropdowns
   function setUpSelectFilters() {
     // Program filter
-    $("#kt_datatable_program").on("change", function () {
+    $("#kt_datatable_program_att").on("change", function () {
       datatable.search($(this).val().toLowerCase(), "course_id");
     });
 
     // Year Level filter
-    $("#kt_datatable_yearlvl").on("change", function () {
+    $("#kt_datatable_yearlvl_att").on("change", function () {
       datatable.search($(this).val().toLowerCase(), "yearlvl");
     });
 
     // Initialize selectpickers (if you're using Bootstrap select or similar)
-    $("#kt_datatable_program, #kt_datatable_yearlvl").selectpicker();
+    $("#kt_datatable_program_att, #kt_datatable_yearlvl_att").selectpicker();
   }
 
   // Initialize select filters
   setUpSelectFilters();
 
-  $("#kt_datatable_program").change(function () {
+  $("#kt_datatable_program_att").change(function () {
     const programs = this.selectedOptions;
     if (!programs && typeof programs !== "object") return;
-    kt_datatable_program = Object.keys(programs).map((key) => {
+    kt_datatable_program_att = Object.keys(programs).map((key) => {
       return programs[key].value;
     });
     // kada bago ng program, check kung anung mga sections
     checkSections();
   });
 
-  $("#kt_datatable_yearlvl").change(function () {
+  $("#kt_datatable_yearlvl_att").change(function () {
     const yearlevels = this.selectedOptions;
     if (!yearlevels && typeof yearlevels !== "object") return;
-    kt_datatable_yearlvl = Object.keys(yearlevels).map((key) => {
+    kt_datatable_yearlvl_att = Object.keys(yearlevels).map((key) => {
       return yearlevels[key].value;
     });
     // kada bago ng yearlevel, check kung anung mga sections
@@ -422,19 +466,19 @@ $(document).ready(function () {
   function checkSections() {
     // If either programs or year levels are empty, disable and clear the sections
     if (
-      kt_datatable_program.length === 0 ||
-      kt_datatable_yearlvl.length === 0
+      kt_datatable_program_att.length === 0 ||
+      kt_datatable_yearlvl_att.length === 0
     ) {
-      $("#kt_datatable_section").html("").prop("disabled", true);
+      $("#kt_datatable_section_att").html("").prop("disabled", true);
       return;
     }
 
     var dataString =
       "ajax=std_att_check_sections" +
-      "&kt_datatable_program=" +
-      btoa(kt_datatable_program).replace(/\=/g, "") +
-      "&kt_datatable_yearlvl=" +
-      btoa(kt_datatable_yearlvl).replace(/\=/g, "");
+      "&kt_datatable_program_att=" +
+      btoa(kt_datatable_program_att).replace(/\=/g, "") +
+      "&kt_datatable_yearlvl_att=" +
+      btoa(kt_datatable_yearlvl_att).replace(/\=/g, "");
 
     console.log(dataString);
 
@@ -445,11 +489,11 @@ $(document).ready(function () {
       cache: false,
       success: function (html) {
         console.log("html", html);
-        $("#kt_datatable_section").html(html).prop("disabled", false);
+        $("#kt_datatable_section_att").html(html).prop("disabled", false);
       },
     });
   }
-  $("#kt_datatable_section").on("change", function () {
+  $("#kt_datatable_section_att").on("change", function () {
     // Get the selected section value and perform a search in the datatable
     datatable.search($(this).val().toLowerCase(), "section_id");
   });

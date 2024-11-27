@@ -1,18 +1,6 @@
 "use strict";
 
 var KTCalendarExternalEvents = (function () {
-  var initExternalEvents = function () {
-    $("#kt_calendar_external_events .fc-draggable-handle").each(function () {
-      // store data so the calendar knows to render an event upon drop
-      $(this).data("event", {
-        title: $.trim($(this).text()), // use the element's text as the event title
-        stick: true, // maintain when user navigates (see docs on the renderEvent method)
-        classNames: [$(this).data("color")],
-        description: "Lorem ipsum dolor eius mod tempor labore",
-      });
-    });
-  };
-
   var initCalendar = function () {
     var todayDate = moment().startOf("day");
     var YM = todayDate.format("YYYY-MM");
@@ -21,9 +9,6 @@ var KTCalendarExternalEvents = (function () {
     var TOMORROW = todayDate.clone().add(1, "day").format("YYYY-MM-DD");
 
     var calendarEl = document.getElementById("kt_calendar");
-    var containerEl = document.getElementById("kt_calendar_external_events");
-
-    var Draggable = FullCalendarInteraction.Draggable;
 
     new Draggable(containerEl, {
       itemSelector: ".fc-draggable-handle",
@@ -70,14 +55,6 @@ var KTCalendarExternalEvents = (function () {
           eventLimit: true, // allow "more" link when too many events
           navLinks: true,
           events: JSON.parse(html),
-
-          drop: function (arg) {
-            // is the "remove after drop" checkbox checked?
-            if ($("#kt_calendar_external_events_remove").is(":checked")) {
-              // if so, remove the element from the "Draggable Events" list
-              $(arg.draggedEl).remove();
-            }
-          },
 
           eventRender: function (info) {
             var element = $(info.el);

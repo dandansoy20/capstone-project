@@ -166,9 +166,9 @@ if (isset($_GET['event_id'])) {
 														</a>
 													</li>
 													<li class="navi-item">
-														<a href="#" class="navi-link">
-															<span class="navi-icon"><i class="flaticon2-gear"></i></span>
-															<span class="navi-text">Archive</span>
+														<a class="navi-link" id="cancel-event" name="cancel-event">
+															<span class="navi-icon"><i class="flaticon2-cancel"></i></span>
+															<span class="navi-text">Cancel</span>
 														</a>
 													</li>
 												</ul>
@@ -614,7 +614,7 @@ if (isset($_GET['event_id'])) {
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Registration
 													<div class="font-size-sm text-muted mt-2">
-														<?php echo $invitedCount; ?> students invited to the event
+														<?php echo $invitedCount; ?> members invited to the event
 													</div>
 												</div>
 											</div>
@@ -696,7 +696,7 @@ if (isset($_GET['event_id'])) {
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=attendance-view" class="btn btn-primary btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Attendance</a>
+												<a href="?page=attendance-view" class="btn btn-primary btn-shadow-hover font-weight-bolder w-100 py-3">View Attendance</a>
 											</div>
 											<!--end::Items-->
 										</div>

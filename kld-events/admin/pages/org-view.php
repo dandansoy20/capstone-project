@@ -135,12 +135,7 @@ if (isset($_GET['org_id'])) {
                                                 <table class="table table-head-custom table-vertical-center" id="kt_advance_table_widget_1">
                                                     <thead>
                                                         <tr class="text-left">
-                                                            <th class="pl-0" style="width: 20px">
-                                                                <label class="checkbox checkbox-lg checkbox-inline">
-                                                                    <input type="checkbox" value="1" />
-                                                                    <span></span>
-                                                                </label>
-                                                            </th>
+
                                                             <th class="pr-0" style="width: 64px">Users</th>
                                                             <th style="min-width: 200px"></th>
                                                             <th style="min-width: 150px">Email</th>
@@ -155,7 +150,7 @@ if (isset($_GET['org_id'])) {
                                                     // Run the query
                                                     $try = mysqli_query(
                                                         $conn,
-                                                        "SELECT * FROM org_acc WHERE org_id = '$orgId'"
+                                                        "SELECT * FROM emp_acc WHERE org_id = '$orgId'"
                                                     );
 
                                                     // Check if there are any results
@@ -165,35 +160,29 @@ if (isset($_GET['org_id'])) {
                                                             echo '
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="pl-0">
-                                                                        <label class="checkbox checkbox-lg checkbox-inline">
-                                                                            <input type="checkbox" value="' . $row['org_acc_id'] . '" />
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </td>
                                                                     <td class="pr-0">
                                                                         <div class="symbol symbol-40 symbol-sm flex-shrink-0">
-                                                                            <img src="' . ($row['org_profile'] ? $row['org_profile'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt="" />
+                                                                            <img src="' . ($row['emp_profilepic'] ? $row['emp_profilepic'] : 'assets/media/users/default.jpg') . '" class="h-75 align-self-end" alt="" />
                                                                         </div>
                                                                     </td>
                                                                     <td class="pl-0">
-                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['org_fname'] . ' ' . $row['org_lname'] . '</a>
-                                                                        <span class="text-muted font-weight-bold text-muted d-block">' . $row['org_kld_id'] . '</span>
+                                                                        <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">' . $row['emp_fname'] . ' ' . $row['emp_lname'] . '</a>
+                                                                        <span class="text-muted font-weight-bold text-muted d-block">' . $row['emp_kld_id'] . '</span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-muted font-weight-bold">' . $row['org_email'] . '</span>
+                                                                        <span class="text-muted font-weight-bold">' . $row['emp_kld_email'] . '</span>
                                                                     </td>
                                                                     <td>
-                                                                        <span class="text-muted font-weight-bold">' . $row['org_role'] . '</span>
+                                                                        <span class="text-muted font-weight-bold">' . $row['emp_role'] . '</span>
                                                                     </td>
                                                                     <td>
                                                                         <span class="label label-lg label-inline label-' . ($row['status'] === "ACTIVE" ? "light-success" : "light-danger") . '">' . ($row['status'] === "ACTIVE" ? "Activated" : "Not yet Activated") . '</span>
                                                                     </td>
                                                                     <td class="pr-0 text-right">
-                                                                        <a href="?page=overview-organizer&id=' . $row['org_acc_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+                                                                        <a href="?page=overview-organizer&id=' . $row['emp_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                                                             <!-- SVG icon code here -->
                                                                         </a>
-                                                                        <a href="?page=edit-organizer&id=' . $row['org_acc_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                                                        <a href="?page=edit-organizer&id=' . $row['emp_id'] . '" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                                                             <!-- SVG icon code here -->
                                                                         </a>
                                                                         <a href="#" class="btn btn-icon btn-light btn-hover-primary btn-sm">
