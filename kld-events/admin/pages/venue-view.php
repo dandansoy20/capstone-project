@@ -26,8 +26,13 @@ if (isset($_GET['venue_id'])) {
 <!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
+
     <div class="d-flex flex-column-fluid">
+
         <div class="container">
+            <button type="button" onclick="history.go(-1)" class="btn btn-light-primary font-weight-bolder mb-5">
+                <i class="ki ki-long-arrow-back icon-sm"></i>Back
+            </button>
             <div class="row">
                 <div class="col-xl-12">
                     <!--begin::Nav Panel Widget 1-->
@@ -136,8 +141,8 @@ if (isset($_GET['venue_id'])) {
                                                         /*************  ✨ Codeium Command 🌟  *************/
                                                         $events_query = "
                                                             SELECT * FROM kld_event
-                                                            WHERE venue_id = $venueId AND (status = 'pending' OR status = 'upcoming')
-                                                            ORDER BY event_start_date ASC
+                                                            WHERE venue_id = $venueId
+                                                            ORDER BY CASE WHEN status = 'upcoming' THEN 0 ELSE 1 END, status ASC
                                                         ";
 
                                                         /******  a91c3e8c-59dd-49fe-9fe0-ee0c60b1457e  *******/

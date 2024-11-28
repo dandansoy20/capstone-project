@@ -1,5 +1,4 @@
 <!--begin::Entry-->
-<!--begin::Entry-->
 <div class="d-flex flex-column-fluid pt-10">
     <!--begin::Container-->
     <div class=" container ">
@@ -10,21 +9,12 @@
             <?php
             include('./control/db.php');
             $events_query = "
-                    SELECT DISTINCT e.*
-				FROM kld_event e
-				LEFT JOIN event_invitation ei ON e.event_id = ei.event_id
-				LEFT JOIN emp_acc ea ON ea.org_id = ei.org_id -- Allow matching for org_id
-				WHERE 
-					(
-						-- Case 1: All fields are NULL (open to all employees)
-						(ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id IS NULL)
-						
-						-- Case 2: org_id matches the employee's org_id, and course/yearlvl/section are NULL
-						OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id = ea.org_id)
-					)
-					AND (ei.org_id IS NULL OR ea.emp_id = '$_SESSION[kld_id]') -- Include when org_id is NULL or matches the employee's org_id
-					AND e.status = 'upcoming' -- Only select upcoming events
-				ORDER BY e.event_created DESC;
+                    SELECT e.*
+                    FROM kld_event e
+                    JOIN registration_tbl r ON e.event_id = r.event_id
+                    WHERE r.emp_id = '$_SESSION[kld_id]'
+                    AND e.status = 'upcoming'
+                    ORDER BY e.event_created DESC;
                     ";
             $events_result = mysqli_query($conn, $events_query);
 

@@ -589,17 +589,29 @@ if (isset($_GET['event_id'])) {
 									JOIN yearlvl_tbl 
 										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
 									WHERE ei.event_id = $eventId
-									";
-									$invitedResult = $conn->query($invitedCountQuery);
-									$invitedCount = $invitedResult->fetch_assoc()['invited_count'];
+								
+									UNION ALL
+								
+									SELECT COUNT(*) AS invited_count 
+									FROM emp_acc ea
+									JOIN event_invitation ei 
+										ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+										AND (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) -- Ensure it includes cases where these fields are NULL
+									WHERE ei.event_id = $eventId
+								";
 
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = 0;
+									while ($row = $invitedResult->fetch_assoc()) {
+										$invitedCount += $row['invited_count'] ?? 0;
+									}
 									$registeredCountQuery = "
 									SELECT COUNT(*) AS registered_count 
 									FROM registration_tbl 
 									WHERE event_id = $eventId AND status = 'registered'
 									";
 									$registeredResult = $conn->query($registeredCountQuery);
-									$registeredCount = $registeredResult->fetch_assoc()['registered_count'];
+									$registeredCount = $registeredResult->fetch_assoc()['registered_count'] ?? 0;
 									?>
 
 									<script>
@@ -639,32 +651,46 @@ if (isset($_GET['event_id'])) {
 									<!--begin::Mixed Widget 18-->
 									<?php
 									$invitedCountQuery = "
-									SELECT COUNT(*) AS invited_count 
-									FROM std_acc sa
-									JOIN event_invitation ei 
-										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
-										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
-										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
-									JOIN course_tbl 
-										ON sa.course_id = course_tbl.course_id
-									JOIN section_tbl 
-										ON sa.section_id = section_tbl.section_id
-									JOIN yearlvl_tbl 
-										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
-									WHERE ei.event_id = $eventId
-									";
-									$invitedResult = $conn->query($invitedCountQuery);
-									$invitedCount = ($invitedResult->num_rows > 0) ? $invitedResult->fetch_assoc()['invited_count'] : 0;
+    SELECT COUNT(*) AS invited_count 
+    FROM std_acc sa
+    JOIN event_invitation ei 
+        ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+        AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+        AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+    JOIN course_tbl 
+        ON sa.course_id = course_tbl.course_id
+    JOIN section_tbl 
+        ON sa.section_id = section_tbl.section_id
+    JOIN yearlvl_tbl 
+        ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+    WHERE ei.event_id = $eventId
 
+    UNION ALL
+
+    SELECT COUNT(*) AS invited_count 
+    FROM emp_acc ea
+    JOIN event_invitation ei 
+        ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+        AND (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) -- Include all-NULL case
+    WHERE ei.event_id = $eventId
+";
+
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = 0;
+									while ($row = $invitedResult->fetch_assoc()) {
+										$invitedCount += $row['invited_count'] ?? 0;
+									}
 
 									$attendanceCountQuery = "
-									SELECT COUNT(*) AS attendance_count 
-									FROM attendance_tbl 
-									WHERE event_id = $eventId AND status = 'attended'
-									";
+    SELECT COUNT(*) AS attendance_count 
+    FROM attendance_tbl 
+    WHERE event_id = $eventId AND status = 'attended'
+";
+
 									$attendanceResult = $conn->query($attendanceCountQuery);
 									$attendanceCount = ($attendanceResult->num_rows > 0) ? $attendanceResult->fetch_assoc()['attendance_count'] : 0;
 									?>
+
 									<script>
 										// Pass PHP values to JavaScript
 
@@ -696,7 +722,7 @@ if (isset($_GET['event_id'])) {
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=attendance-view" class="btn btn-primary btn-shadow-hover font-weight-bolder w-100 py-3">View Attendance</a>
+												<a href="?page=attendance-view&event_id=<?php echo $eventId; ?>" class="btn btn-primary btn-shadow-hover font-weight-bolder w-100 py-3">View Attendance</a>
 											</div>
 											<!--end::Items-->
 										</div>

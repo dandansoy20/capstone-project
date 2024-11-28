@@ -10,9 +10,9 @@ $("#register_event").click(function () {
       $(this).text("Submitting");
       $(this).prop("disabled", "disabled");
       var dataString = {
-        ajax: "std_register",
+        ajax: "emp_register",
         event_id: $("#event_id").val(),
-        std_id: $("#std_id").val(),
+        emp_id: $("#emp_id").val(),
       };
 
       $.ajax({

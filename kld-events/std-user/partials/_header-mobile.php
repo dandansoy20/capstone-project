@@ -1,7 +1,7 @@
 <div id="kt_header_mobile" class="header-mobile">
 	<!--begin::Logo-->
 	<a href="index.php">
-		<img alt="Logo" src="assets/media/logos/kldlogo.png" class="max-h-30px" />
+		<img alt="Logo" src="assets/media/logos/logo-default.png" class="max-h-30px" />
 	</a>
 	<!--end::Logo-->
 	<!--begin::Toolbar-->

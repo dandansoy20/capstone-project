@@ -113,33 +113,6 @@ if (isset($_GET['event_id'])) {
 							</div>
 							<!--end::Info-->
 
-							<!--begin::Dropdown-->
-							<div class="d-flex justify-content-end">
-								<div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions"
-									data-placement="left">
-									<a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="ki ki-bold-more-hor"></i>
-									</a>
-									<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-										<ul class="navi navi-hover py-5">
-											<li class="navi-item">
-												<a href="?page=edit-venue&id=<?php echo $venue_id; ?>" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
-													<span class="navi-text">Edit</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="#" onclick="editOrganizer(<?php echo $venue_id; ?>)" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-cancel"></i></span>
-													<span class="navi-text">Cancel</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!--end::Dropdown-->
 						</div>
 						<!--end::Top-->
 						<!--begin::Text-->

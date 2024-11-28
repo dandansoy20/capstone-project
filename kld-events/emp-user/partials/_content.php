@@ -11,9 +11,9 @@
 							<!--begin::Header-->
 							<div class="d-flex flex-column flex-center">
 								<!--begin::Symbol-->
-								<div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
+								<div class="symbol symbol-120 symbol-circle symbol-white overflow-hidden">
 									<span class="symbol-label">
-										<img src="assets/media/svg/avatars/007-boy-2.svg" class="h-75 align-self-end" alt="">
+										<img src="<?php echo $_SESSION['kld_profile'] ?>" class="h-75" alt="">
 									</span>
 								</div>
 								<!--end::Symbol-->
@@ -64,22 +64,21 @@
 			$events_query = "
 				SELECT DISTINCT e.*
 				FROM kld_event e
-				JOIN event_invitation ei ON e.event_id = ei.event_id
-				LEFT JOIN emp_acc ea ON ei.org_id = ea.org_id  -- Use LEFT JOIN to allow for NULL org_id in event_invitation
+				LEFT JOIN event_invitation ei ON e.event_id = ei.event_id
+				LEFT JOIN emp_acc ea ON ea.org_id = ei.org_id -- Allow matching for org_id
 				WHERE 
 					(
-						-- Case 1: All of course_id, yearlvl_id, section_id are NULL (open to all)
+						-- Case 1: All fields are NULL (open to all employees)
 						(ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id IS NULL)
 						
-						-- Case 2: org_id is NULL (the event is open to all employees regardless of their course, year, or section)
-						OR ((ei.course_id IS NOT NULL OR ei.yearlvl_id IS NOT NULL OR ei.section_id IS NOT NULL ) AND ei.org_id = ea.org_id)
-						
-						-- Case 3: org_id is not NULL, meaning the employee is invited based on their organization
-						OR (ei.org_id IS NOT NULL AND ei.org_id = ea.org_id)
+						-- Case 2: org_id matches the employee's org_id, and course/yearlvl/section are NULL
+						OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id = ea.org_id)
 					)
-					AND ea.emp_id = '$_SESSION[kld_id]'  -- Ensure we are filtering based on the employee ID
-					AND e.status = 'upcoming'  -- Only upcoming events
+					AND (ei.org_id IS NULL OR ea.emp_id = '$_SESSION[kld_id]') -- Include when org_id is NULL or matches the employee's org_id
+					AND e.status = 'upcoming' -- Only select upcoming events
 				ORDER BY e.event_created DESC;
+
+
 			";
 
 			// Execute the events query
@@ -147,34 +146,6 @@
 								<span class="text-muted font-weight-bold"><?php echo $event_created; ?></span>
 							</div>
 							<!--end::Info-->
-
-							<!--begin::Dropdown-->
-							<div class="d-flex justify-content-end">
-								<div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions"
-									data-placement="left">
-									<a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="ki ki-bold-more-hor"></i>
-									</a>
-									<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-										<ul class="navi navi-hover py-5">
-											<li class="navi-item">
-												<a href="?page=edit-venue&id=<?php echo $venue_id; ?>" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
-													<span class="navi-text">Edit</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="#" onclick="editOrganizer(<?php echo $venue_id; ?>)" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-gear"></i></span>
-													<span class="navi-text">Archive</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!--end::Dropdown-->
 						</div>
 						<!--end::Top-->
 						<!--begin::Text-->

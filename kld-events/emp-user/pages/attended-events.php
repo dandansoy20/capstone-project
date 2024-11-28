@@ -1,5 +1,4 @@
 <!--begin::Entry-->
-<!--begin::Entry-->
 <div class="d-flex flex-column-fluid pt-10">
     <!--begin::Container-->
     <div class=" container ">
@@ -10,22 +9,16 @@
             <?php
             include('./control/db.php');
             $events_query = "
-                    SELECT DISTINCT e.*
-				FROM kld_event e
-				LEFT JOIN event_invitation ei ON e.event_id = ei.event_id
-				LEFT JOIN emp_acc ea ON ea.org_id = ei.org_id -- Allow matching for org_id
-				WHERE 
-					(
-						-- Case 1: All fields are NULL (open to all employees)
-						(ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id IS NULL)
-						
-						-- Case 2: org_id matches the employee's org_id, and course/yearlvl/section are NULL
-						OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id = ea.org_id)
-					)
-					AND (ei.org_id IS NULL OR ea.emp_id = '$_SESSION[kld_id]') -- Include when org_id is NULL or matches the employee's org_id
-					AND e.status = 'upcoming' -- Only select upcoming events
-				ORDER BY e.event_created DESC;
-                    ";
+    SELECT DISTINCT e.*
+    FROM kld_event e
+    JOIN attendance_tbl at ON e.event_id = at.event_id
+    WHERE at.emp_id = '$_SESSION[kld_id]'
+    AND e.status = 'completed'
+    ORDER BY e.event_created DESC;
+";
+
+
+
             $events_result = mysqli_query($conn, $events_query);
 
             while ($event = mysqli_fetch_assoc($events_result)) {
@@ -84,7 +77,21 @@
                                     </span>
                                 </div>
                                 <div class="d-flex flex-column flex-grow-1">
-                                    <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?></a>
+                                    <a href="#" class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"><?php echo $org_name; ?>
+
+                                        <?php
+                                        include('./control/db.php');
+
+                                        // Check if the student is registered for the event
+                                        $try = mysqli_query($conn, "SELECT * FROM feedback_tbl WHERE event_id = '$event_id' AND std_id = '$_SESSION[kld_id]'");
+
+                                        // If there's at least one row returned, it means the student is registered
+                                        if (mysqli_num_rows($try) > 0) {
+                                            echo '<span class="label label-warning label-inline ml-2">Evaluated</span>';
+                                        }
+                                        ?>
+
+                                    </a>
                                     <span class="text-muted font-weight-bold"><?php echo $event_created; ?></span>
                                 </div>
                             </div>
@@ -181,7 +188,7 @@
                                 <textarea id="kt_forms_widget_4_input" class="form-control border-0 p-0 pr-10 resize-none" rows="1" placeholder="" style="overflow: hidden; overflow-wrap: break-word; height: 20px;"></textarea>
                                 <div class="position-absolute top-0 right-0 mt-n1 mr-n2">
 
-                                    <a href="?page=upcoming-view&event_id=<?php echo $event_id; ?>" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
+                                    <a href="?page=attended-view&event_id=<?php echo $event_id; ?>" class="btn btn-primary font-weight-bold py-2 px-6">View Event</a>
                                 </div>
                             </form>
                         </div>

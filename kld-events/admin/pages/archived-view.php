@@ -247,7 +247,11 @@ if (isset($_GET['event_id'])) {
 									</p>
 									<form method="post">
 										<a href="?page=memo&event_id=<?php echo $eventId ?>" class="btn btn-light-primary font-weight-bold py-2 px-6">View Proposal</a>
-										<button id="launch-event" name="launch-event" type="button" class="btn btn-primary font-weight-bold py-2 <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>" <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>>Launch Event</button>
+										<?php if ($event_status === 'archived') { ?>
+											<button id="end-event" name="end-event" type="button" class="btn btn-warning font-weight-bold py-2">Unarchive</button>
+										<?php } else { ?>
+											<button id="launch-event" name="launch-event" type="button" class="btn btn-primary font-weight-bold py-2 <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>" <?php echo (count(array_unique(array_column($stakeholders, 'status'))) === 1 && array_unique(array_column($stakeholders, 'status'))[0] === 'approved') ? '' : 'disabled' ?>>Launch Event</button>
+										<?php } ?>
 										<input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
 									</form>
 								</div>
@@ -269,7 +273,7 @@ if (isset($_GET['event_id'])) {
 					<ul class="nav nav-pills nav-fill">
 
 						<li class="nav-item">
-							<a class="nav-link active" id="proposal-tab-4" data-toggle="tab" href="#proposal-4">
+							<a class="nav-link " id="proposal-tab-4" data-toggle="tab" href="#proposal-4">
 								<span class="nav-icon">
 									<i class="flaticon2-user-1"></i>
 								</span>
@@ -277,7 +281,7 @@ if (isset($_GET['event_id'])) {
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="stats-tab-4" data-toggle="tab" href="#stats-4" aria-controls="stats-4">
+							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4" aria-controls="stats-4">
 								<span class="nav-icon">
 									<i class="flaticon2-pie-chart-4"></i>
 								</span>
@@ -310,7 +314,7 @@ if (isset($_GET['event_id'])) {
 						</li>
 					</ul>
 					<div class="tab-content mt-5" id="myTabContent4">
-						<div class="tab-pane fade  show active" id="proposal-4" role="tabpanel" aria-labelledby="proposal-tab-4">
+						<div class="tab-pane fade  " id="proposal-4" role="tabpanel" aria-labelledby="proposal-tab-4">
 							<h5>Administrator</h5>
 							<div class="row">
 								<?php foreach ($stakeholders as $stakeholder):
@@ -541,31 +545,74 @@ if (isset($_GET['event_id'])) {
 
 
 						</div>
-						<div class="tab-pane fade" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
+						<div class="tab-pane fade show active" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
 							<div class="row">
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 14-->
+									<?php
+									$invitedCountQuery = "
+									SELECT COUNT(*) AS invited_count 
+									FROM std_acc sa
+									JOIN event_invitation ei 
+										ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+										AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+										AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+									JOIN course_tbl 
+										ON sa.course_id = course_tbl.course_id
+									JOIN section_tbl 
+										ON sa.section_id = section_tbl.section_id
+									JOIN yearlvl_tbl 
+										ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+									WHERE ei.event_id = $eventId
+								
+									UNION ALL
+								
+									SELECT COUNT(*) AS invited_count 
+									FROM emp_acc ea
+									JOIN event_invitation ei 
+										ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+										AND (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) -- Ensure it includes cases where these fields are NULL
+									WHERE ei.event_id = $eventId
+								";
+
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = 0;
+									while ($row = $invitedResult->fetch_assoc()) {
+										$invitedCount += $row['invited_count'] ?? 0;
+									}
+									$registeredCountQuery = "
+									SELECT COUNT(*) AS registered_count 
+									FROM registration_tbl 
+									WHERE event_id = $eventId AND status = 'registered'
+									";
+									$registeredResult = $conn->query($registeredCountQuery);
+									$registeredCount = $registeredResult->fetch_assoc()['registered_count'] ?? 0;
+									?>
+
+									<script>
+										// Pass PHP values to JavaScript
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var registeredCount = <?php echo $registeredCount; ?>;
+									</script>
+
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Registration
-													<div class="font-size-sm text-muted mt-2">542 Registered to the event</div>
+													<div class="font-size-sm text-muted mt-2">
+														<?php echo $registeredCount; ?> member(s) registered to the event
+													</div>
 												</div>
 											</div>
-
 										</div>
 
-										<!--end::Header-->
-										<!--begin::Body-->
 										<div class="card-body d-flex flex-column">
 											<div class="flex-grow-1">
-												<div id="kt_mixed_widget_14_chart" style="height: 200px">
-												</div>
+												<div id="kt_mixed_widget_14_chart" style="height: 200px"></div>
 											</div>
 											<div class="pt-5">
-
-												<a href="?page=registered-view" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
+												<a href="?page=registered-view&event_id=<?php echo $eventId; ?>" class="btn btn-success btn-shadow-hover font-weight-bolder w-100 py-3">View Registered</a>
 											</div>
 										</div>
 										<!--end::Body-->
@@ -575,13 +622,63 @@ if (isset($_GET['event_id'])) {
 
 
 								<div class="col-xl-4">
+									<?php
+									$invitedCountQuery = "
+				SELECT COUNT(*) AS invited_count 
+				FROM std_acc sa
+				JOIN event_invitation ei 
+					ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+					AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+					AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+				JOIN course_tbl 
+					ON sa.course_id = course_tbl.course_id
+				JOIN section_tbl 
+					ON sa.section_id = section_tbl.section_id
+				JOIN yearlvl_tbl 
+					ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+				WHERE ei.event_id = $eventId
+
+				UNION ALL
+
+				SELECT COUNT(*) AS invited_count 
+				FROM emp_acc ea
+				JOIN event_invitation ei 
+					ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+					AND (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL) -- Include all-NULL case
+				WHERE ei.event_id = $eventId
+			";
+
+									$invitedResult = $conn->query($invitedCountQuery);
+									$invitedCount = 0;
+									while ($row = $invitedResult->fetch_assoc()) {
+										$invitedCount += $row['invited_count'] ?? 0;
+									}
+
+									$attendanceCountQuery = "
+				SELECT COUNT(*) AS attendance_count 
+				FROM attendance_tbl 
+				WHERE event_id = $eventId AND status = 'attended'
+			";
+
+									$attendanceResult = $conn->query($attendanceCountQuery);
+									$attendanceCount = ($attendanceResult->num_rows > 0) ? $attendanceResult->fetch_assoc()['attendance_count'] : 0;
+									?>
+
+									<script>
+										// Pass PHP values to JavaScript
+
+										var invitedCount = <?php echo $invitedCount; ?>;
+										var attendanceCount = <?php echo $attendanceCount; ?>;
+									</script>
 									<!--begin::Mixed Widget 18-->
 									<div class="card card-custom gutter-b card-stretch">
 										<!--begin::Header-->
 										<div class="card-header border-0 pt-5">
 											<div class="card-title font-weight-bolder">
 												<div class="card-label">Attendance
-													<div class="font-size-sm text-muted mt-2">No Attendance Yet</div>
+													<div class="font-size-sm text-muted mt-2">
+														<?php echo $attendanceCount; ?> attended to the event
+													</div>
 												</div>
 											</div>
 											<div class="card-toolbar">
@@ -601,7 +698,7 @@ if (isset($_GET['event_id'])) {
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=attendance-view" class="btn btn-primary btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Attendance</a>
+												<a href="?page=attendance-view&event_id=<?php echo $eventId; ?>" class="btn btn-primary btn-shadow-hover font-weight-bolder w-100 py-3">View Attendance</a>
 											</div>
 											<!--end::Items-->
 										</div>
@@ -609,6 +706,54 @@ if (isset($_GET['event_id'])) {
 									</div>
 									<!--end::Mixed Widget 18-->
 								</div>
+
+								<?php
+								// Select count of students or employees with 'evaluated' status from feedback_tbl
+								$evaluatedCountQuery = "
+								SELECT COUNT(*) AS evaluated_count
+								FROM feedback_tbl
+								WHERE event_id = $eventId AND status = 'evaluated'
+								";
+								$evaluatedResult = $conn->query($evaluatedCountQuery);
+								$evaluatedCount = ($evaluatedResult->num_rows > 0) ? $evaluatedResult->fetch_assoc()['evaluated_count'] : 0;
+
+								// Select counts of responses for each feedback level (Strongly Disagree to Strongly Agree)
+								$responseCountQuery = "
+									SELECT 
+										SUM(CASE WHEN response = 'Strongly Disagree' THEN 1 ELSE 0 END) AS strongly_disagree,
+										SUM(CASE WHEN response = 'Disagree' THEN 1 ELSE 0 END) AS disagree,
+										SUM(CASE WHEN response = 'Neutral' THEN 1 ELSE 0 END) AS neutral,
+										SUM(CASE WHEN response = 'Agree' THEN 1 ELSE 0 END) AS agree,
+										SUM(CASE WHEN response = 'Strongly Agree' THEN 1 ELSE 0 END) AS strongly_agree
+									FROM response_tbl
+									WHERE event_id = $eventId
+									";
+								$responseResult = $conn->query($responseCountQuery);
+								$responseCounts = ($responseResult->num_rows > 0) ? $responseResult->fetch_assoc() : array(
+									'strongly_disagree' => 0,
+									'disagree' => 0,
+									'neutral' => 0,
+									'agree' => 0,
+									'strongly_agree' => 0
+								);
+
+								// Pass PHP values to JavaScript
+								?>
+
+								<script>
+									var evaluatedCount = <?php echo $evaluatedCount; ?>;
+
+									// Response counts for feedback levels
+									var responseCounts = {
+										stronglyDisagree: <?php echo $responseCounts['strongly_disagree']; ?>,
+										disagree: <?php echo $responseCounts['disagree']; ?>,
+										neutral: <?php echo $responseCounts['neutral']; ?>,
+										agree: <?php echo $responseCounts['agree']; ?>,
+										stronglyAgree: <?php echo $responseCounts['strongly_agree']; ?>
+									};
+								</script>
+
+
 
 								<div class="col-xl-4">
 									<!--begin::Mixed Widget 16-->
@@ -618,7 +763,7 @@ if (isset($_GET['event_id'])) {
 											<div class="card-title">
 												<div class="card-label">
 													<div class="font-weight-bolder">Feedback</div>
-													<div class="font-size-sm text-muted mt-2">No Feedback Yet</div>
+													<div class="font-size-sm text-muted mt-2"><?php echo $evaluatedCount; ?> Submit Feedback</div>
 												</div>
 											</div>
 										</div>
@@ -627,14 +772,15 @@ if (isset($_GET['event_id'])) {
 										<div class="card-body d-flex flex-column">
 											<!--begin::Chart-->
 											<div class="flex-grow-1">
-												<div id="kt_mixed_widget_16_chart" style="height: 200px"></div>
+
+												<div id="chart_110" class="d-flex justify-content-center"></div>
 											</div>
 
 											<!--end::Chart-->
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=feedback-view" class="btn btn-info btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Feedbacks</a>
+												<a href="?page=feedback-view&event_id=<?php echo $eventId; ?>" class="btn btn-info btn-shadow-hover font-weight-bolder w-100 py-3">View Feedbacks</a>
 											</div>
 											<!--end::Items-->
 										</div>

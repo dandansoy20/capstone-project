@@ -1,4 +1,7 @@
 <div class="container">
+    <button type="button" onclick="history.go(-1)" class="btn btn-light-primary font-weight-bolder mb-5">
+        <i class="ki ki-long-arrow-back icon-sm"></i>Back
+    </button>
     <div class="row">
         <?php
         include('./control/db.php');

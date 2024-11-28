@@ -533,7 +533,7 @@ var demo1 = function () {
   });
 };
 
-function updateSliderCapacity() {
+/* function updateSliderCapacity() {
   // Collect selected values
   const courseIds = $("#kt_select2_11").val() || [];
   const yearlvlIds = $("#yrlevel").val() || [];
@@ -569,10 +569,10 @@ function updateSliderCapacity() {
       });
     },
   });
-}
+} */
 
 // Call updateSliderCapacity when filters or the "Select All KLD Members" toggle change
-$("#kt_select2_11, #yrlevel, #kt_select2_3, #kt_select_2_4, #toggleForms").on(
+/* $("#kt_select2_11, #yrlevel, #kt_select2_3, #kt_select_2_4, #toggleForms").on(
   "change",
   updateSliderCapacity
-);
+); */

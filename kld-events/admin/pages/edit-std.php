@@ -79,7 +79,7 @@ $conn->close();
                         <!--begin::User-->
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')">
+                                <div class="symbol-label" style="background-image:url('<?php echo $profilePic; ?>')">
                                 </div>
                                 <i class="symbol-badge bg-success"></i>
                             </div>
@@ -229,9 +229,9 @@ $conn->close();
                                 <label class="col-xl-3 col-lg-3 col-form-label">Display Profile Picture</label>
                                 <div class="col-lg-9 col-xl-6">
                                     <div class="image-input image-input-outline" id="kt_profile_avatar"
-                                        style="background-image: url(assets/media/users/blank.png)">
+                                        style="background-image: url( <?php echo $profilePic; ?>)">
                                         <div class="image-input-wrapper"
-                                            style="background-image: url(assets/media/users/300_21.jpg)"></div>
+                                            style="background-image: url(<?php echo $profilePic; ?>)"></div>
 
                                         <label
                                             class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"

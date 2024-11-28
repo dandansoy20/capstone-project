@@ -77,8 +77,8 @@
 				OR (ei.yearlvl_id IS NOT NULL AND ei.yearlvl_id = s.yearlvl)  -- Invite based on year level
 				OR (ei.section_id IS NULL)  -- No section filter, invite all sections
 				OR (ei.org_id IS NULL)  -- Open to employees, no specific org_id filter
-				OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL)  -- Open for all
-			)
+				OR (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id IS NULL)  -- Open for all
+			) AND NOT (ei.course_id IS NULL AND ei.yearlvl_id IS NULL AND ei.section_id IS NULL AND ei.org_id IS NOT NULL)
 			GROUP BY e.event_id
 			ORDER BY e.event_created DESC;
 						";

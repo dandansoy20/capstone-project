@@ -111,34 +111,6 @@ if (isset($_GET['event_id'])) {
 								<span class="text-muted font-weight-bold"><?php echo $event_date_created; ?></span>
 							</div>
 							<!--end::Info-->
-
-							<!--begin::Dropdown-->
-							<div class="d-flex justify-content-end">
-								<div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions"
-									data-placement="left">
-									<a href="#" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon"
-										data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										<i class="ki ki-bold-more-hor"></i>
-									</a>
-									<div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-										<ul class="navi navi-hover py-5">
-											<li class="navi-item">
-												<a href="?page=edit-venue&id=<?php echo $venue_id; ?>" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-rocket-1"></i></span>
-													<span class="navi-text">Edit</span>
-												</a>
-											</li>
-											<li class="navi-item">
-												<a href="#" onclick="editOrganizer(<?php echo $venue_id; ?>)" class="navi-link">
-													<span class="navi-icon"><i class="flaticon2-gear"></i></span>
-													<span class="navi-text">Archive</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!--end::Dropdown-->
 						</div>
 						<!--end::Top-->
 						<!--begin::Text-->
@@ -228,15 +200,57 @@ if (isset($_GET['event_id'])) {
 						<!--end::Separator-->
 
 						<div class="d-flex justify-content-end">
-							<form method="post"><!-- 
-								<button id="cancel-event" name="cancel-event" type="button" disabled class="btn btn-light-warning font-weight-bold py-2 disabled">Evaluate</button> -->
-								<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>
-								<input type="hidden" id="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
-								<input type="hidden" id="std_id" value="<?php echo $_SESSION['kld_id']; ?>" />
+							<?php
+							// Include the database connection
+							include('./control/db.php');
+
+							// Sanitize inputs to prevent SQL injection
+							$userId = mysqli_real_escape_string($conn, $_SESSION['kld_id']);
+
+							// Prepare and execute the query
+							$query = "SELECT status FROM registration_tbl WHERE event_id='$eventId' AND emp_id='$userId'";
+							$try = mysqli_query($conn, $query);
+
+							// Check if the query returned a result
+							$row = $try ? $try->fetch_array() : null;
+							if ($row && $row['status'] === "registered") {
+								$reg_button = '<button type="button" class="btn btn-primary font-weight-bold py-2 px-6" disabled>Registered</button>
+								<button type="button" data-toggle="modal" data-target="#ticketModal" class="btn btn-warning font-weight-bold py-2 px-6">View Ticket</button>';
+							} else {
+								$reg_button = '<button type="button" id="register_event" name="register_event" class="btn btn-primary font-weight-bold py-2 px-6">Register Now!</button>
+								';
+							}
+							?>
+							<form>
+								<?php echo $reg_button; ?>
+								<input type="hidden" id="event_id" name="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
+								<input type="hidden" id="emp_id" name="emp_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
 							</form>
 						</div>
+
 					</div>
 					<!--end::Body-->
+				</div>
+				<div class="modal fade" id="ticketModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel"><?php echo htmlspecialchars($event_title); ?></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<i aria-hidden="true" class="ki ki-close"></i>
+								</button>
+							</div>
+
+							<div class="modal-body text-center">
+								<img src="assets/qr-code.png" class="img-fluid" alt="Full Preview">
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -297,81 +311,61 @@ if (isset($_GET['event_id'])) {
 								<div class="tab-pane fade show active" id="attendance-4" role="tabpanel" aria-labelledby="attendance-tab-4">
 
 									<div class="row">
-										<div class="col-xl-6 col-sm-12">
-											<!--begin::Forms Widget 4-->
-											<div class="card card-custom gutter-b">
-												<!--begin::Body-->
-												<div class="card-body">
+										<?php
+										include('./control/db.php');
+										$try = mysqli_query($conn, "SELECT * FROM guide_tbl where event_id = '$eventId'");
+										while ($row = $try->fetch_array()) {
+											$guide_id = $row['guide_id'];
+											$guide_title = $row['guide_title'];
+											$guide_desc = $row['guide_desc'];
+											$guide_image = base64_decode($row['guide_image']);
+										?>
 
-													<p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"></p>
-													<!--begin::Bottom-->
-													<div class="pt-4">
+											<div class="col-xl-6 col-sm-12">
+												<!--begin::Forms Widget 4-->
+												<div class="card card-custom gutter-b">
+													<!--begin::Body-->
+													<div class="card-body">
 
-														<!--begin::Image-->
-														<div class="bgi-no-repeat bgi-size-cover rounded" style="background-image: url(assets/media/acquaintance/1.jpg); width: 100%; padding-bottom: 100%;"></div>
-														<!--end::Image-->
-														<p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2"></p>
+														<p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"> <?php echo $guide_title; ?></p>
+														<!--begin::Bottom-->
+														<div class="pt-4">
+
+															<!--begin::Image-->
+															<div class="bgi-no-repeat bgi-size-cover rounded" data-toggle="modal" data-target="#imageModal_<?php echo $guide_id; ?>" style="background-image: url(<?php echo $guide_image; ?>); width: 100%; padding-bottom: 100%;"></div>
+															<!--end::Image-->
+															<p class="text-dark-75 font-size-lg font-weight-normal pt-5 mb-2"> <?php echo $guide_desc; ?></p>
+
+														</div>
+														<!--end::Bottom-->
+														<!--begin::Separator-->
+														<div class="separator separator-solid mt-2 mb-4"></div>
+														<!--end::Separator-->
 
 													</div>
-													<!--end::Bottom-->
-													<!--begin::Separator-->
-													<div class="separator separator-solid mt-2 mb-4"></div>
-													<!--end::Separator-->
-
+													<!--end::Body-->
 												</div>
-												<!--end::Body-->
 											</div>
-										</div>
-										<div class="col-xl-6 col-sm-12">
-											<!--begin::Forms Widget 4-->
-											<div class="card card-custom gutter-b">
-												<!--begin::Body-->
-												<div class="card-body">
-													<!--begin::Bottom-->
-													<div class="pt-4">
-														<!--begin::Image-->
-														<div class="bgi-no-repeat bgi-size-cover rounded" style="background-image: url(assets/media/acquaintance/2.jpg); width: 100%; padding-bottom: 100%;"></div>
-														<!--end::Image-->
+											<div class="modal fade" id="imageModal_<?php echo $guide_id; ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="imageModalLabel"><?php echo htmlspecialchars($guide_title); ?></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body text-center">
+															<img src="<?php echo $guide_image; ?>" class="img-fluid" alt="Full Preview">
+														</div>
 													</div>
-													<!--end::Bottom-->
-													<!--begin::Separator-->
-													<div class="separator separator-solid mt-2 mb-4"></div>
-													<!--end::Separator-->
-
 												</div>
-												<!--end::Body-->
 											</div>
-										</div>
-										<div class="col-xl-6 col-sm-12">
-											<!--begin::Forms Widget 4-->
-											<div class="card card-custom gutter-b">
-												<!--begin::Body-->
-												<div class="card-body">
-													<!--begin::Bottom-->
-													<div class="pt-4">
-														<!--begin::Image-->
-														<img src="assets/media/acquaintance/3.jpg"
-															class="img-fluid rounded" alt="Preview" style="cursor: pointer;"
-															data-toggle="modal" data-target="#imageModal" />
-														<!--end::Image-->
-													</div>
-													<!--end::Bottom-->
+										<?php
+										}
+										?>
 
-													<!--begin::Separator-->
-													<div class="separator separator-solid mt-2 mb-4"></div>
-													<!--end::Separator-->
-												</div>
-												<!--end::Body-->
-											</div>
-										</div>
 									</div>
-
-
-
-
-
-
-
 								</div>
 								<div class="tab-pane fade" id="guide-4" role="tabpanel" aria-labelledby="guide-tab-4">
 
@@ -392,60 +386,33 @@ if (isset($_GET['event_id'])) {
 															<div class="timeline timeline-4">
 																<div class="timeline-bar"></div>
 																<div class="timeline-items">
-																	<div class="timeline-item timeline-item-left">
-																		<div class="timeline-badge">
-																			<div class="bg-danger"></div>
+
+																	<?php
+																	include('./control/db.php');
+																	$try = mysqli_query($conn, "SELECT * FROM agenda_tbl WHERE event_id = '$eventId'");
+																	$counter = 0; // Initialize a counter to alternate left and right items
+																	$colors = ['bg-danger', 'bg-success', 'bg-warning', 'bg-info', 'bg-dark', 'bg-primary']; // List of colors for the badges
+																	while ($row = $try->fetch_array()) {
+																		$agenda_id = $row['agenda_id'];
+																		$agenda_desc = $row['agenda_desc'];
+																		$agenda_time = date("h:i A", strtotime($row['agenda_time'])); // Format time
+																		$badge_color = $colors[$counter % count($colors)]; // Alternate colors
+																		$position_class = ($counter % 2 == 0) ? 'timeline-item-left' : 'timeline-item-right'; // Alternate positions (left or right)
+																		$counter++; // Increment the counter
+																	?>
+																		<div class="timeline-item <?php echo $position_class; ?>">
+																			<div class="timeline-badge">
+																				<div class="<?php echo $badge_color; ?>"></div>
+																			</div>
+																			<div class="timeline-label">
+																				<span class="text-primary font-weight-bold"><?php echo $agenda_time; ?></span>
+																			</div>
+																			<div class="timeline-content"><?php echo $agenda_desc; ?></div>
 																		</div>
-																		<div class="timeline-label">
-																			<span class="text-primary font-weight-bold">11:35 AM</span>
-																		</div>
-																		<div class="timeline-content">Opening Remarks</div>
-																	</div>
-																	<div class="timeline-item timeline-item-right">
-																		<div class="timeline-badge">
-																			<div class="bg-success"></div>
-																		</div>
-																		<div class="timeline-label text-primary">
-																			<span class="text-primary font-weight-bold">11:40 AM</span>
-																		</div>
-																		<div class="timeline-content">Introduction of the Speaker</div>
-																	</div>
-																	<div class="timeline-item timeline-item-left">
-																		<div class="timeline-badge">
-																			<div class="bg-warning"></div>
-																		</div>
-																		<div class="timeline-label">
-																			<span class="text-primary font-weight-bold">11:45 AM</span>
-																		</div>
-																		<div class="timeline-content">Singing National Anthem, Dasmariñas Hymn, and Kolehiyong Lungsod ng Dasmariñas Hymn</div>
-																	</div>
-																	<div class="timeline-item timeline-item-right">
-																		<div class="timeline-badge">
-																			<div class="bg-info"></div>
-																		</div>
-																		<div class="timeline-label text-primary">
-																			<span class="text-primary font-weight-bold">12:00 PM</span>
-																		</div>
-																		<div class="timeline-content">Presentation of the program</div>
-																	</div>
-																	<div class="timeline-item timeline-item-left">
-																		<div class="timeline-badge">
-																			<div class="bg-dark"></div>
-																		</div>
-																		<div class="timeline-label">
-																			<span class="text-primary font-weight-bold">01:00 PM</span>
-																		</div>
-																		<div class="timeline-content">Question and Answers</div>
-																	</div>
-																	<div class="timeline-item timeline-item-right">
-																		<div class="timeline-badge">
-																			<div class="bg-success"></div>
-																		</div>
-																		<div class="timeline-label text-primary">
-																			<span class="text-primary font-weight-bold">1:30 PM</span>
-																		</div>
-																		<div class="timeline-content">Closing Remarks</div>
-																	</div>
+																	<?php
+																	}
+																	?>
+
 																</div>
 															</div>
 														</div>
@@ -470,12 +437,23 @@ if (isset($_GET['event_id'])) {
 
 														<!--begin: Tite-->
 														<div class="d-flex flex-column font-size-sm font-weight-bold pt-5">
-															<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
-																<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Agreement Samle.pdf
-															</a>
-															<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
-																<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Requirements.docx
-															</a>
+
+															<?php
+															include('./control/db.php');
+															$try = mysqli_query($conn, "SELECT * FROM file_tbl where event_id = '$eventId'");
+															while ($row = $try->fetch_array()) {
+																$file_id = $row['file_id'];
+																$file_name = $row['file_name'];
+																$file_path = $row['file_path'];
+
+															?>
+
+																<a href="<?php echo $file_path; ?>" class="d-flex align-items-center text-muted text-hover-primary py-1">
+																	<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> <?php echo $file_name; ?>
+																</a>
+															<?php
+															}
+															?>
 														</div>
 														<!--end: Tite-->
 													</div>
@@ -498,12 +476,23 @@ if (isset($_GET['event_id'])) {
 
 														<!--begin: Tite-->
 														<div class="d-flex flex-column font-size-sm font-weight-bold pt-5">
-															<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
-																<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Agreement Samle.pdf
-															</a>
-															<a href="#" class="d-flex align-items-center text-muted text-hover-primary py-1">
-																<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> Requirements.docx
-															</a>
+
+															<?php
+															include('./control/db.php');
+															$try = mysqli_query($conn, "SELECT * FROM link_tbl where event_id = '$eventId'");
+															while ($row = $try->fetch_array()) {
+																$link_id = $row['link_id'];
+																$link_name = $row['link_name'];
+																$link_url = $row['link_url'];
+
+															?>
+
+																<a href="<?php echo $link_url; ?>" class="d-flex align-items-center text-muted text-hover-primary py-1">
+																	<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span> <?php echo $link_name; ?>
+																</a>
+															<?php
+															}
+															?>
 														</div>
 														<!--end: Tite-->
 													</div>
@@ -516,7 +505,59 @@ if (isset($_GET['event_id'])) {
 
 								</div>
 								<div class="tab-pane fade" id="gallery-4" role="tabpanel" aria-labelledby="gallery-tab-4">
-									gallery
+									<div class="row">
+										<?php
+										include('./control/db.php');
+										$try = mysqli_query($conn, "SELECT * FROM event_gallery where event_id = '$eventId'");
+										while ($row = $try->fetch_array()) {
+											$image_id = $row['image_id'];
+											$event_image = $row['image'];
+										?>
+
+											<div class="col-xl-6 col-sm-12">
+												<!--begin::Forms Widget 4-->
+												<div class="card card-custom gutter-b">
+													<!--begin::Body-->
+													<div class="card-body">
+
+														<p class="text-dark-75 text-hover-primary mb-1 font-size-lg font-weight-bolder"> <?php echo $event_title; ?></p>
+														<!--begin::Bottom-->
+														<div class="pt-4">
+
+															<!--begin::Image-->
+															<div class="bgi-no-repeat bgi-size-cover rounded" data-toggle="modal" data-target="#imageModal_<?php echo $image_id; ?>" style="background-image: url(<?php echo $event_image; ?>); width: 100%; padding-bottom: 100%;"></div>
+															<!--end::Image-->
+
+														</div>
+														<!--end::Bottom-->
+														<!--begin::Separator-->
+														<div class="separator separator-solid mt-2 mb-4"></div>
+														<!--end::Separator-->
+
+													</div>
+													<!--end::Body-->
+												</div>
+											</div>
+											<div class="modal fade" id="imageModal_<?php echo $image_id; ?>" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="imageModalLabel"><?php echo htmlspecialchars($guide_title); ?></h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body text-center">
+															<img src="<?php echo $guide_image; ?>" class="img-fluid" alt="Full Preview">
+														</div>
+													</div>
+												</div>
+											</div>
+										<?php
+										}
+										?>
+
+									</div>
 								</div>
 							</div>
 						</div>

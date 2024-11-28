@@ -229,14 +229,14 @@ if (isset($_GET['event_id'])) {
 							$eventId = mysqli_real_escape_string($conn, $eventId); // Sanitize $eventId as well
 
 							// Prepare and execute the query for attendance
-							$attendanceQuery = "SELECT status FROM attendance_tbl WHERE event_id='$eventId' AND std_id='$userId'";
+							$attendanceQuery = "SELECT status FROM attendance_tbl WHERE event_id='$eventId' AND emp_id='$userId'";
 							$attendanceResult = mysqli_query($conn, $attendanceQuery);
 
 							// Check if the attendance query returned a result
 							$attendanceRow = $attendanceResult ? $attendanceResult->fetch_array() : null;
 
 							// Prepare and execute the query for feedback
-							$feedbackQuery = "SELECT status FROM feedback_tbl WHERE event_id='$eventId' AND std_id='$userId'";
+							$feedbackQuery = "SELECT status FROM feedback_tbl WHERE event_id='$eventId' AND emp_id='$userId'";
 							$feedbackResult = mysqli_query($conn, $feedbackQuery);
 
 							// Check if the feedback query returned a result
@@ -252,7 +252,7 @@ if (isset($_GET['event_id'])) {
 									// If not evaluated, display the "Evaluate" button
 									$reg_button = '
         <button type="button" data-toggle="modal" data-target="#ticketModal" class="btn btn-light-warning font-weight-bold py-2 px-6">View Ticket</button>
-        <a href="?page=feedback_event&event_id=' . $eventId . '&std_id=' . $_SESSION['kld_id'] . '" class="btn btn-primary font-weight-bold py-2 px-6">Evaluate</a>';
+        <a href="?page=feedback_event&event_id=' . $eventId . '&emp_id=' . $_SESSION['kld_id'] . '" class="btn btn-primary font-weight-bold py-2 px-6">Evaluate</a>';
 								}
 							} else {
 								// If not attended, display the "Register Now!" button
@@ -263,7 +263,7 @@ if (isset($_GET['event_id'])) {
 							<form>
 								<?php echo $reg_button; ?>
 								<input type="hidden" id="event_id" name="event_id" value="<?php echo htmlspecialchars($eventId); ?>" />
-								<input type="hidden" id="std_id" name="std_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
+								<input type="hidden" id="emp_id" name="emp_id" value="<?php echo htmlspecialchars($_SESSION['kld_id']); ?>" />
 							</form>
 						</div>
 

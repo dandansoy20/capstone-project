@@ -57,7 +57,7 @@ $("#cancel-event").click(function () {
     showDenyButton: true,
     showCancelButton: true,
     confirmButtonText: "Yes",
-    denyButtonText: `Don't launch`,
+    denyButtonText: `Don't cancel`,
   }).then((result) => {
     if (result.isConfirmed) {
       $(this).text("Submitting");
@@ -81,7 +81,7 @@ $("#cancel-event").click(function () {
               "success"
             ).then(() => {
               var event_id = $("#event_id").val();
-              window.open(`?page=upcoming-view&event_id=${event_id}`, "_self");
+              window.open(`?page=archived-view&event_id=${event_id}`, "_self");
             });
           } else {
             Swal.fire(
@@ -167,7 +167,7 @@ $("#archive-event").click(function () {
       $(this).text("Submitting");
       $(this).prop("disabled", "disabled");
       var dataString = {
-        ajax: "complete",
+        ajax: "archived",
         event_id: $("#event_id").val(),
       };
 

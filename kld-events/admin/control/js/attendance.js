@@ -1,115 +1,5 @@
-////////////
-/* $(document).ready(function () {
-  const typeSelect = $("#kt_datatable_search_status");
-  const studentFields = $("#student-fields");
-  const employeeFields = $("#employee-fields");
-  const studentTable = $("#student-table");
-  const employeeTable = $("#employee-table");
-  const adminTable = $("#admin-table");
-
-  function updateFields(selectedType) {
-    studentFields.addClass("d-none");
-    employeeFields.addClass("d-none");
-
-    if (selectedType === "std") {
-      studentFields.removeClass("d-none");
-    } else if (selectedType === "emp") {
-      employeeFields.removeClass("d-none");
-    }
-  }
-
-  function updateTables(selectedType) {
-    studentTable.addClass("d-none");
-    employeeTable.addClass("d-none");
-    adminTable.addClass("d-none");
-
-    if (selectedType === "std") {
-      studentTable.removeClass("d-none");
-    } else if (selectedType === "emp") {
-      employeeTable.removeClass("d-none");
-    } else if (selectedType === "adm") {
-      adminTable.removeClass("d-none");
-    }
-  }
-
-  function manageCheckboxes() {
-    const checkboxes = $(
-      `${getVisibleTable()} tbody input[type="checkbox"]:not(.switch input[type="checkbox"])`
-    );
-    const mainCheckbox = $(`${getVisibleTable()} thead input[type="checkbox"]`);
-    let selectedCount = 0;
-
-    checkboxes.each(function () {
-      $(this).on("change", function () {
-        this.checked ? selectedCount++ : selectedCount--;
-        updateSelectedCount(selectedCount);
-      });
-    });
-
-    mainCheckbox.on("change", function () {
-      const isChecked = this.checked;
-      checkboxes.each(function () {
-        this.checked = isChecked;
-        selectedCount = isChecked ? checkboxes.length : 0;
-      });
-      updateSelectedCount(selectedCount);
-    });
-  }
-
-  function getVisibleTable() {
-    if (!studentTable.hasClass("d-none")) return "#student-table";
-    if (!employeeTable.hasClass("d-none")) return "#employee-table";
-    if (!adminTable.hasClass("d-none")) return "#admin-table";
-  }
-
-  function updateSelectedCount(selectedCount) {
-    $("#kt_datatable_selected_records").text(selectedCount);
-    if (selectedCount > 0) {
-      $("#std_attendance_actions").addClass("show");
-    } else {
-      $("#std_attendance_actions").removeClass("show");
-    }
-  }
-
-  updateFields(typeSelect.val());
-  updateTables(typeSelect.val());
-  manageCheckboxes();
-
-  typeSelect.on("change", function () {
-    updateFields(this.value);
-    updateTables(this.value);
-    manageCheckboxes();
-  });
-}); */
-
-/* $(document).ready(function () {
-  const switches = $('.attendance_switch input[type="checkbox"]');
-  switches.each(function () {
-    $(this).on("change", function () {
-      const isChecked = this.checked;
-      const studentId = this.value;
-      Swal.fire({
-        title: "Are you sure?",
-        text: isChecked
-          ? "Mark this user as Registered?"
-          : "Mark this user as Not Registered?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-      }).then((result) => {
-        if (result.value) {
-          console.log(`Student ID: ${studentId}, Present: ${isChecked}`);
-          Swal.fire("Updated!", "Registration has been updated.", "success");
-        } else {
-          this.checked = !isChecked;
-        }
-      });
-    });
-  });
-}); */
-
 // Event listener for the attendance toggle
-$(document).on("change", ".attended-checkbox", function () {
+$(document).on("change", 'input[name="switch"][type="checkbox"]', function () {
   var std_id = $(this).data("std-id");
   var event_id = $(this).data("event-id");
   var status = $(this).is(":checked") ? "attended" : "absent";
@@ -156,7 +46,7 @@ $(document).on("change", ".attended-checkbox", function () {
                 row.status = status; // Update the status
                 row.attendance_date =
                   status === "attended"
-                    ? moment().format("MMMM D, YYYY")
+                    ? moment().format("MMMM D, YYYY, h:mm A")
                     : "---------"; // Update attendance date
                 // Update the table row to reflect the changes
                 datatable.updateRow(row);
@@ -223,14 +113,28 @@ $(document).ready(function () {
     columns: [
       {
         field: "std_id",
-        title: "std_id",
+        title: `
+        <label class="checkbox checkbox-inline">
+											
+          <input type="checkbox" id="select_all_checkbox">
+											<span></span>
+										</label>
+        `,
         sortable: false,
         width: 30,
         textAlign: "center",
-        selector: {
-          class: "kt-checkbox",
+        template: function (row) {
+          return `
+          
+        <label class="checkbox checkbox-inline">
+            <input type="checkbox" class="kt-checkbox" data-std-id="${row.std_id}">
+            
+											<span></span>
+										</label>
+          `;
         },
       },
+
       {
         field: "std_profilepic",
         title: "",
@@ -269,7 +173,7 @@ $(document).ready(function () {
           if (row.status === "attended") {
             status = "Attended";
             attendance_date = row.attendance_date
-              ? moment(row.attendance_date).format("MMMM D, YYYY")
+              ? moment(row.attendance_date).format("MMMM D, YYYY, h:mm A")
               : "---------"; // Format the date or use default
           }
 
@@ -322,36 +226,52 @@ $(document).ready(function () {
     ],
   });
 
+  $(document).on("change", "#select_all_checkbox", function () {
+    var isChecked = $(this).is(":checked");
+
+    // Toggle all row checkboxes based on the header checkbox
+    $(".kt-checkbox").prop("checked", isChecked).trigger("change");
+  });
+
   var selectedRecords = [];
   var eventID = $("#event_id").val(); // Assuming eventID is available as a global variable
 
   // Event delegation for individual checkboxes
-  $(document).on("change", "td input[type='checkbox']", function () {
-    var recordId = $(this).closest("tr").data("std-id"); // Get the student ID from the row's data attribute
+  $(document).on("change", " input[type='checkbox']", function () {
+    var std_id = $(this).data("std-id"); // Get the student ID from the checkbox's data attribute
+    if (!std_id) {
+      console.error(
+        "std_id is undefined. Ensure the checkbox has a valid data-std-id attribute."
+      );
+      return;
+    }
 
-    // Add or remove record from the selected list
+    // Check if the checkbox is checked
     if ($(this).is(":checked")) {
-      if (!selectedRecords.includes(recordId)) {
-        selectedRecords.push(recordId);
+      if (!selectedRecords.includes(std_id)) {
+        selectedRecords.push(std_id); // Add to selected records
       }
     } else {
+      // Remove from selected records
       selectedRecords = selectedRecords.filter(function (id) {
-        return id !== recordId; // Remove from selected records
+        return id !== std_id;
       });
     }
 
-    // Update the display of selected records count
-    console.log("Selected Records:", selectedRecords); // Check the selected records
+    // Update the selected records count display
+    console.log("Selected Records:", selectedRecords);
     $("#kt_datatable_selected_records").text(selectedRecords.length);
-    toggleGroupActionForm(); // Toggle visibility of group action form
+
+    // Toggle the visibility of the group action form
+    toggleGroupActionForm();
   });
 
   // Function to toggle the visibility of the group action form
   function toggleGroupActionForm() {
     if (selectedRecords.length > 0) {
-      $("#kt_datatable_group_action_form").collapse("show"); // Show group action form
+      $("#kt_datatable_group_action_form").collapse("show");
     } else {
-      $("#kt_datatable_group_action_form").collapse("hide"); // Hide group action form
+      $("#kt_datatable_group_action_form").collapse("hide");
     }
   }
 
@@ -497,4 +417,403 @@ $(document).ready(function () {
     // Get the selected section value and perform a search in the datatable
     datatable.search($(this).val().toLowerCase(), "section_id");
   });
+});
+
+$(document).on(
+  "change",
+  'input[name="switch_emp"][type="checkbox"]',
+  function () {
+    var emp_id = $(this).data("emp-id");
+    var event_id = $(this).data("event-id");
+    var status = $(this).is(":checked") ? "attended" : "absent";
+    var originalStatus = $(this).prop("checked"); // Save the original state of the checkbox
+
+    // Confirm the action with SweetAlert
+    Swal.fire({
+      title:
+        "Mark this user as " +
+        (status === "attended" ? "attended?" : "absent?"),
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $(this).prop("disabled", true); // Disable the checkbox while processing
+
+        var dataString = {
+          ajax: "emp_attended",
+          event_id: event_id,
+          emp_id: emp_id,
+          status: status, // Send status based on checkbox state
+        };
+
+        // Send AJAX request to update attendance
+        $.ajax({
+          type: "POST",
+          url: "ajax.php",
+          data: dataString,
+          success: function (response) {
+            console.log(response);
+            if (response === "success") {
+              // Show success notification with SweetAlert
+              Swal.fire(
+                "Done!",
+                "This user is marked as " + status + ".",
+                "success"
+              ).then(() => {
+                // Dynamically update the row without reloading the page
+                var row = datatable
+                  .getDataSourceParam("data")
+                  .find((row) => row.emp_id == emp_id);
+                if (row) {
+                  row.status = status; // Update the status
+                  row.attendance_date =
+                    status === "attended"
+                      ? moment().format("MMMM D, YYYY, h:mm A")
+                      : "---------"; // Update attendance date
+                  // Update the table row to reflect the changes
+                  datatable.updateRow(row);
+                }
+              });
+            } else {
+              // Show error notification with SweetAlert
+              Swal.fire(
+                "Error!",
+                "There was an issue updating the status.",
+                "error"
+              ).then(() => {
+                location.reload();
+              });
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error(error);
+            // Show error notification if AJAX fails
+            Swal.fire(
+              "Error!",
+              "There was an issue with the request. Please try again.",
+              "error"
+            );
+          },
+        });
+      } else if (result.isDenied) {
+        // Revert the checkbox to its original state if canceled
+        Swal.fire("Changes are not saved", "", "info");
+        $(this).prop("checked", originalStatus);
+      }
+    });
+  }
+);
+
+$(document).ready(function () {
+  // Configuration for the main datatable
+  var eventID = $("#event_id").val();
+
+  // Initialize the KTDatatable
+  var datatable = $("#attendance_emp").KTDatatable({
+    data: {
+      type: "remote", // Load data remotely
+      source: {
+        read: {
+          url: "ajax.php", // URL for fetching data
+          method: "POST", // HTTP method
+          params: {
+            ajax: "attendance-emp",
+            event_id: eventID, // Pass the event_id dynamically
+          },
+        },
+      },
+      pageSize: 10, // Rows per page
+    },
+
+    search: {
+      input: $("#datatable_search2"),
+    },
+    sortable: true, // Enable sorting
+    layout: {
+      scroll: false, // Disable scrolling
+      footer: false, // Hide footer
+    },
+    columns: [
+      {
+        field: "emp_id",
+        title: `
+        <label class="checkbox checkbox-inline">
+											
+          <input type="checkbox" id="select_all_checkbox_emp">
+											<span></span>
+										</label>
+        `,
+        sortable: false,
+        width: 30,
+        textAlign: "center",
+        template: function (row) {
+          return `
+          
+        <label class="checkbox checkbox-inline">
+            <input type="checkbox" class="kt-checkbox_emp" data-emp-id="${row.emp_id}">
+            
+											<span></span>
+										</label>
+          `;
+        },
+      },
+
+      {
+        field: "emp_profilepic",
+        title: "",
+        width: 50,
+        template: function (row) {
+          return `
+            <div class="symbol symbol-40 symbol-sm flex-shrink-0">
+              <img src="${row.emp_profilepic}" class="h-75 align-self-end" alt="">
+            </div>`;
+        },
+      },
+      {
+        field: "emp_lname",
+        title: "Full Name",
+        width: 150,
+        template: function (row) {
+          return `
+            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+              ${row.emp_fname} ${row.emp_lname}
+            </a>
+            <span class="text-muted font-weight-bold text-muted d-block">${row.emp_kld_id}</span>`;
+        },
+      },
+      {
+        field: "emp_role",
+        title: "Position",
+        template: function (row) {
+          return `<span class="text-muted font-weight-bold">${row.emp_role}</span>`;
+        },
+      },
+      { field: "org_name", title: "Organization" },
+      {
+        field: "attendance_date",
+        title: "Date",
+        width: 150,
+        template: function (row) {
+          let status = "Absent"; // Default status
+          let attendance_date = "---------"; // Default date when not attended
+
+          // If the attendance status is "attended", display the date
+          if (row.status === "attended") {
+            status = "Attended";
+            attendance_date = row.attendance_date
+              ? moment(row.attendance_date).format("MMMM D, YYYY, h:mm A")
+              : "---------"; // Format the date or use default
+          }
+
+          return `
+            <span class="text-muted font-weight-bolder d-block font-size-lg">${attendance_date}</span>
+          `;
+        },
+      },
+      {
+        field: "status",
+        title: "Status",
+        width: 200,
+        template: function (row) {
+          let status = "Absent"; // Default status
+          let label_class = "label-light-danger"; // Default class for "Absent"
+
+          // If the attendance status is "attended", set the appropriate class and label
+          if (row.status === "attended") {
+            status = "Attended";
+            label_class = "label-light-primary"; // Class for "Attended"
+          }
+
+          return `
+            <span class="label label-lg ${label_class} label-inline">${status}</span>
+          `;
+        },
+      },
+      {
+        field: "attendance_toggle",
+        title: "Action",
+        width: 100,
+        template: function (row) {
+          // Set the checkbox checked or unchecked based on attendance status
+          let isChecked = row.status === "attended" ? 'checked="checked"' : "";
+
+          return `
+              <form method="post">
+                <input type="hidden" id="emp_id" name="emp_id" value="${row.emp_id}"/>
+                <input type="hidden" id="event_id" name="event_id" value="${eventID}"/>
+                <span class="switch switch-outline switch-icon switch-success">
+                  <label>
+                    <input type="checkbox" name="switch_emp" class="attended-checkbox" ${isChecked} data-emp-id="${row.emp_id}" data-event-id="${eventID}" name="select"/>
+                    <span></span>
+                  </label>
+                </span>
+              </form>
+          `;
+        },
+      },
+    ],
+  });
+
+  $(document).on("change", "#select_all_checkbox_emp", function () {
+    var isChecked = $(this).is(":checked");
+
+    // Toggle all row checkboxes based on the header checkbox
+    $(".kt-checkbox_emp").prop("checked", isChecked).trigger("change");
+  });
+
+  var selectedRecords = [];
+  var eventID = $("#event_id").val(); // Assuming eventID is available as a global variable
+
+  // Event delegation for individual checkboxes
+  $(document).on("change", " input[type='checkbox']", function () {
+    var emp_id = $(this).data("emp-id"); // Get the student ID from the checkbox's data attribute
+    if (!emp_id) {
+      console.error(
+        "emp_id is undefined. Ensure the checkbox has a valid data-emp-id attribute."
+      );
+      return;
+    }
+
+    // Check if the checkbox is checked
+    if ($(this).is(":checked")) {
+      if (!selectedRecords.includes(emp_id)) {
+        selectedRecords.push(emp_id); // Add to selected records
+      }
+    } else {
+      // Remove from selected records
+      selectedRecords = selectedRecords.filter(function (id) {
+        return id !== emp_id;
+      });
+    }
+
+    // Update the selected records count display
+    console.log("Selected Records:", selectedRecords);
+    $("#kt_datatable_selected_records_emp").text(selectedRecords.length);
+
+    // Toggle the visibility of the group action form
+    toggleGroupActionForm();
+  });
+
+  // Function to toggle the visibility of the group action form
+  function toggleGroupActionForm() {
+    if (selectedRecords.length > 0) {
+      $("#kt_datatable_group_action_form_emp").collapse("show");
+    } else {
+      $("#kt_datatable_group_action_form_emp").collapse("hide");
+    }
+  }
+
+  // Handle "Present" and "Absent" actions
+  $("#mark-present-emp").on("click", function () {
+    updateAttendanceStatus("attended");
+  });
+
+  $("#mark-absent-emp").on("click", function () {
+    updateAttendanceStatus("absent");
+  });
+
+  // Function to update the attendance status of selected records
+  function updateAttendanceStatus(status) {
+    console.log({
+      ajax: "update-attendance-status-emp",
+      event_id: eventID,
+      emp_ids: selectedRecords, // Send selected student IDs
+      status: status,
+    });
+
+    // Check if selectedRecords is empty before sending AJAX
+    if (selectedRecords.length === 0) {
+      Swal.fire(
+        "No records selected!",
+        "Please select students to update.",
+        "warning"
+      );
+      return; // Exit the function if no records are selected
+    }
+
+    // Send AJAX request to update the attendance status of the selected records
+    $.ajax({
+      url: "ajax.php",
+      method: "POST",
+      data: {
+        ajax: "update-attendance-status-emp",
+        event_id: eventID,
+        emp_ids: selectedRecords, // Pass the array of selected student IDs
+        status: status,
+      },
+      success: function (response) {
+        console.log("Response:", response);
+        if (response === "success") {
+          Swal.fire(
+            "Success!",
+            "Attendance status updated for selected students.",
+            "success"
+          ).then(() => {
+            // Reload the datatable or refresh the page
+            datatable.reload(); // Make sure `datatable` is the correct object
+            $("#emp_attendance_count").text("0"); // Reset the count display
+            selectedRecords = []; // Clear selected records
+            toggleGroupActionForm(); // Hide the group action form
+          });
+        } else {
+          Swal.fire(
+            "Error!",
+            "There was an issue updating attendance. Please try again.",
+            "error"
+          );
+        }
+      },
+      error: function () {
+        console.log("AJAX request failed.");
+        Swal.fire("Error!", "AJAX request failed. Please try again.", "error");
+      },
+    });
+  }
+
+  // Set up search filter for input field
+  // Function to set up filters on the select dropdowns
+  function setUpSelectFilters() {
+    // Program filter
+    $("#kt_datatable_org").on("change", function () {
+      datatable.search($(this).val().toLowerCase(), "org_id");
+    });
+
+    // Initialize selectpickers (if you're using Bootstrap select or similar)
+    $("#kt_datatable_org").selectpicker();
+  }
+
+  // Initialize select filters
+  setUpSelectFilters();
+
+  datatable.on("datatable-on-click-checkbox", function (e) {
+    // datatable.checkbox() access to extension methods
+    var ids = datatable.checkbox().getSelectedId();
+    var count = ids.length;
+
+    $("#kt_datatable_selected_records_emp").html(count);
+
+    if (count > 0) {
+      $("#kt_datatable_group_action_form_emp").collapse("show");
+    } else {
+      $("#kt_datatable_group_action_form_emp").collapse("hide");
+    }
+  });
+
+  $("#kt_datatable_fetch_modal")
+    .on("show.bs.modal", function (e) {
+      var ids = datatable.checkbox().getSelectedId();
+      var c = document.createDocumentFragment();
+      for (var i = 0; i < ids.length; i++) {
+        var li = document.createElement("li");
+        li.setAttribute("data-id", ids[i]);
+        li.innerHTML = "Selected record ID: " + ids[i];
+        c.appendChild(li);
+      }
+      $("#kt_datatable_fetch_display").append(c);
+    })
+    .on("hide.bs.modal", function (e) {
+      $("#kt_datatable_fetch_display").empty();
+    });
 });

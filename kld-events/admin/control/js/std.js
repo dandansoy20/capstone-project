@@ -54,7 +54,7 @@ $(document).ready(function () {
         width: 200,
         template: function (row) {
           return `
-            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
+            <a href="?page=edit-std&id=${row.std_id}" class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg">
               ${row.std_fname} ${row.std_lname}
             </a>
             <span class="text-muted font-weight-bold text-muted d-block">${row.std_kld_id}</span>`;

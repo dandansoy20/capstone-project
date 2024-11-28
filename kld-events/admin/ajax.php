@@ -1531,7 +1531,7 @@ if (!array_key_exists('ajax', $_POST)) {
 
             $stmt->close();
             break;
-        case "archive":
+        case "archived":
             $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
             // Use prepared statements to prevent SQL injection
@@ -1581,7 +1581,40 @@ if (!array_key_exists('ajax', $_POST)) {
                 $stmt->close();
             }
             break;
+        case "emp_attended":
+            // Get the necessary parameters from POST data
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $empId = $_POST['emp_id'];     // Student ID passed from AJAX
+            $status = $_POST['status'];    // Status (attended or absent)
 
+            if ($status == 'attended') {
+                // Mark the student as attended (Insert or update)
+                $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, emp_id, status) 
+                                                VALUES (?, ?, ?) 
+                                                ON DUPLICATE KEY UPDATE status = ?");
+                // Binding parameters (i: integer, s: string)
+                $stmt->bind_param("iiss", $eventId, $empId, $status, $status);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+                $stmt->close();
+            } else if ($status == 'absent') {
+                // Delete the attendance record for "attended" students (Mark as absent)
+                $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND emp_id = ? AND status = 'attended'");
+                $stmt->bind_param("ii", $eventId, $empId);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+
+                $stmt->close();
+            }
+            break;
         case "update-attendance-status":
             $eventId = $_POST['event_id'];
             $stdIds = $_POST['std_ids'];  // Array of student IDs
@@ -1608,7 +1641,32 @@ if (!array_key_exists('ajax', $_POST)) {
 
             echo "success";
             break;
+        case "update-attendance-status-emp":
+            $eventId = $_POST['event_id'];
+            $empIds = $_POST['emp_ids'];  // Array of student IDs
+            $status = $_POST['status'];
 
+            foreach ($empIds as $empIds) {
+                if ($status == 'attended') {
+                    // Insert or update attendance status
+                    $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, emp_id, status)
+                                                    VALUES (?, ?, ?)
+                                                    ON DUPLICATE KEY UPDATE status = ?");
+                    $stmt->bind_param("iiss", $eventId, $empIds, $status, $status);
+                } else {
+                    // Delete attendance record for absent status
+                    $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND emp_id = ? AND status = 'attended'");
+                    $stmt->bind_param("ii", $eventId, $empIds);
+                }
+
+                if (!$stmt->execute()) {
+                    echo "error";
+                    exit;
+                }
+            }
+
+            echo "success";
+            break;
 
 
 
@@ -1620,6 +1678,23 @@ if (!array_key_exists('ajax', $_POST)) {
             $stmt = $conn->prepare("INSERT INTO registration_tbl (event_id, std_id, status) VALUES (?, ?, ?)");
             $status_registered = 'registered'; // Status for registration
             $stmt->bind_param("iis", $eventId, $std_id, $status_registered); // "iis" indicates integer, integer, string
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the insert was successful
+            } else {
+                echo "error"; // Indicate there was an error with the insert
+            }
+
+            $stmt->close();
+            break;
+        case "emp_register":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $emp_id = $_POST['emp_id'];
+
+            // Use prepared statements to prevent SQL injection for inserting into registration_tbl
+            $stmt = $conn->prepare("INSERT INTO registration_tbl (event_id, emp_id, status) VALUES (?, ?, ?)");
+            $status_registered = 'registered'; // Status for registration
+            $stmt->bind_param("iis", $eventId, $emp_id, $status_registered); // "iis" indicates integer, integer, string
 
             if ($stmt->execute()) {
                 echo "success"; // Indicate the insert was successful
@@ -2230,7 +2305,60 @@ if (!array_key_exists('ajax', $_POST)) {
             $conn->close();
 
             break;
+        case "attendance-emp":
 
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT ea.emp_id, ea.emp_fname, ea.emp_lname, ea.emp_kld_id, ea.emp_role, ea.emp_profilepic, ea.org_id,
+                                        org_tbl.org_name, 
+                                        at.status, 
+                                        at.attendance_date 
+                                    FROM emp_acc ea
+                                    JOIN event_invitation ei 
+                                            ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+                                    JOIN org_tbl ON ea.org_id = org_tbl.org_id
+                                    LEFT JOIN attendance_tbl at ON ea.emp_id = at.emp_id AND at.event_id = $eventId
+                                    WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+        case "registered-emp":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT ea.*, 
+                                            org_tbl.org_name, 
+                                            rt.status AS reg_status, 
+                                            rt.reg_date AS reg_date 
+                                        FROM emp_acc ea
+                                        JOIN event_invitation ei 
+                                            ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+                                        JOIN org_tbl ON ea.org_id = org_tbl.org_id
+                                        LEFT JOIN registration_tbl rt ON ea.emp_id = rt.emp_id AND rt.event_id = $eventId
+                                        WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
 
 
 
@@ -2478,6 +2606,44 @@ if (!array_key_exists('ajax', $_POST)) {
             }
 
             break;
+
+        case "submit_feedback_emp":
+            $event_id = $_POST['event_id'];
+            $emp_id = $_POST['emp_id'];
+            $responses = json_decode($_POST['responses'], true); // Decode JSON string
+
+            // Prepare the statement to insert into response_tbl
+            $query = "INSERT INTO response_tbl (question_id, event_id, emp_id, response) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                foreach ($responses as $response) {
+                    $question_id = $response['question_id'];
+                    $answer = $response['response'];
+                    $stmt->bind_param("iiis", $question_id, $event_id, $emp_id, $answer);
+                    $stmt->execute();
+                }
+                $stmt->close();
+
+                // Insert into feedback_tbl with status 'evaluated'
+                $feedbackQuery = "INSERT INTO feedback_tbl (event_id, emp_id, status) VALUES (?, ?, 'evaluated')";
+                $feedbackStmt = $conn->prepare($feedbackQuery);
+
+                if ($feedbackStmt) {
+                    $feedbackStmt->bind_param("ii", $event_id, $emp_id);
+                    $feedbackStmt->execute();
+                    $feedbackStmt->close();
+
+                    echo "success";
+                } else {
+                    echo "error in feedback_tbl insertion";
+                }
+            } else {
+                echo "error in response_tbl insertion";
+            }
+
+            break;
+
 
 
         case 3:

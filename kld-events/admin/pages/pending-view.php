@@ -743,14 +743,14 @@ if (isset($_GET['event_id'])) {
 											<!--begin::Chart-->
 											<div class="flex-grow-1">
 
-												<div id="chart_110" class="d-flex justify-content-center"></div>
+												<div id="kt_mixed_widget_16_chart" style="height: 200px"></div>
 											</div>
 
 											<!--end::Chart-->
 											<!--begin::Items-->
 											<div class="pt-5">
 
-												<a href="?page=feedback-view&event_id=<?php echo $eventId; ?>" class="btn btn-info btn-shadow-hover font-weight-bolder w-100 py-3">View Feedbacks</a>
+												<a href="?page=feedback-view&event_id=<?php echo $eventId; ?>" class="btn btn-info btn-shadow-hover disabled font-weight-bolder w-100 py-3">View Feedbacks</a>
 											</div>
 											<!--end::Items-->
 										</div>
@@ -1251,7 +1251,7 @@ if (isset($_GET['event_id'])) {
 
 						</div>
 						<div class="tab-pane fade" id="gallery-4" role="tabpanel" aria-labelledby="gallery-tab-4">
-							gallery
+
 						</div>
 					</div>
 				</div>

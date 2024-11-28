@@ -17,6 +17,7 @@ if ($_GET) {
 		<!--begin::Wrapper-->
 		<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
+
 			<?php include("partials/_header.php"); ?>
 
 			<!--begin::Content-->

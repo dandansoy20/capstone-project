@@ -37,7 +37,7 @@ $("#kld_submit").click(function (e) {
             );
             setTimeout(
               function () {
-                window.open("index.php#login", "_self");
+                window.open("std_login.php", "_self");
               },
               5000 // 5 seconds
             );
