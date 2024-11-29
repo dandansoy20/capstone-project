@@ -104,7 +104,7 @@ if (isset($_GET['event_id'])) {
 
 			// Check if no event found
 			if (empty($stakeholders)) {
-				echo '<h1> walang stakeholder </h1>';
+				echo '';
 			}
 		} else {
 			// Handle execution failure
@@ -151,21 +151,52 @@ if (isset($_GET['event_id'])) {
 											<?php echo htmlspecialchars($event_title); ?>
 										</h1>
 									</a>
-									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($org_name); ?></h6>
+									<?php
+									$try = mysqli_query($conn, "SELECT org_tbl.org_name as event_host FROM kld_event JOIN org_tbl ON kld_event.event_org_id = org_tbl.org_id WHERE event_id = '$eventId'");
+									$row = $try->fetch_array();
+									$event_host = $row['event_host'] ?? "KLD Events";
+									?>
+									<h6 class="text-dark-50 font-weight-bolder m-0"><?php echo htmlspecialchars($event_host); ?></h6>
 									<div class="d-flex my-5">
-										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3">
-											<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-												<!-- SVG content -->
-											</svg>
-										</span>
+										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+												<g id="Stockholm-icons-/-Design-/-Layers" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<polygon id="Bound" points="0 0 24 0 24 24 0 24"></polygon>
+													<path d="M12.9336061,16.072447 L19.36,10.9564761 L19.5181585,10.8312381 C20.1676248,10.3169571 20.2772143,9.3735535 19.7629333,8.72408713 C19.6917232,8.63415859 19.6104327,8.55269514 19.5206557,8.48129411 L12.9336854,3.24257445 C12.3871201,2.80788259 11.6128799,2.80788259 11.0663146,3.24257445 L4.47482784,8.48488609 C3.82645598,9.00054628 3.71887192,9.94418071 4.23453211,10.5925526 C4.30500305,10.6811601 4.38527899,10.7615046 4.47382636,10.8320511 L4.63,10.9564761 L11.0659024,16.0730648 C11.6126744,16.5077525 12.3871218,16.5074963 12.9336061,16.072447 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+													<path d="M11.0563554,18.6706981 L5.33593024,14.122919 C4.94553994,13.8125559 4.37746707,13.8774308 4.06710397,14.2678211 C4.06471678,14.2708238 4.06234874,14.2738418 4.06,14.2768747 L4.06,14.2768747 C3.75257288,14.6738539 3.82516916,15.244888 4.22214834,15.5523151 C4.22358765,15.5534297 4.2250303,15.55454 4.22647627,15.555646 L11.0872776,20.8031356 C11.6250734,21.2144692 12.371757,21.2145375 12.909628,20.8033023 L19.7677785,15.559828 C20.1693192,15.2528257 20.2459576,14.6784381 19.9389553,14.2768974 C19.9376429,14.2751809 19.9363245,14.2734691 19.935,14.2717619 L19.935,14.2717619 C19.6266937,13.8743807 19.0546209,13.8021712 18.6572397,14.1104775 C18.654352,14.112718 18.6514778,14.1149757 18.6486172,14.1172508 L12.9235044,18.6705218 C12.377022,19.1051477 11.6029199,19.1052208 11.0563554,18.6706981 Z" id="Path" fill="#000000" opacity="0.3"></path>
+												</g>
+											</svg></span>
 										<span class="text-dark h4 text-hover-primary"><?php echo htmlspecialchars($category_name); ?></span>
 										<a href="#">
-											<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
-												<!-- SVG icon here -->
-											</span>
-											<span class="text-dark h4 text-hover-primary">
-												<?php echo $venue_name ? htmlspecialchars($venue_name) : 'Virtual Event'; ?>
-											</span>
+											<?php
+											echo (!empty($venue_name)) ?
+												'<a href="?page=venue-view&venue_id="#">
+                                                 <span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
+														<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+														<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+															<g id="Stockholm-icons-/-Map-/-Marker1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+																<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+																<path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+															</g>
+														</svg>
+														<!--end::Svg Icon-->
+													</span>
+													<span class="text-dark h4 text-hover-primary">' . $venue_name . '</span>
+												</a>'
+												:
+												'<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
+													<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Devices/Display3.svg-->
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+														<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+															<rect x="0" y="0" width="24" height="24"/>
+															<polygon fill="#000000" opacity="0.3" points="5 7 5 15 19 15 19 7"/>
+															<path d="M11,19 L11,16 C11,15.4477153 11.4477153,15 12,15 C12.5522847,15 13,15.4477153 13,16 L13,19 L14.5,19 C14.7761424,19 15,19.2238576 15,19.5 C15,19.7761424 14.7761424,20 14.5,20 L9.5,20 C9.22385763,20 9,19.7761424 9,19.5 C9,19.2238576 9.22385763,19 9.5,19 L11,19 Z" fill="#000000" opacity="0.3"/>
+															<path d="M5,7 L5,15 L19,15 L19,7 L5,7 Z M5.25,5 L18.75,5 C19.9926407,5 21,5.8954305 21,7 L21,15 C21,16.1045695 19.9926407,17 18.75,17 L5.25,17 C4.00735931,17 3,16.1045695 3,15 L3,7 C3,5.8954305 4.00735931,5 5.25,5 Z" fill="#000000" fill-rule="nonzero"/>
+														</g>
+													</svg>
+													<!--end::Svg Icon-->
+												</span>
+												<span class="text-dark h4">Virtual Event</span>';
+											?>
 										</a>
 									</div>
 									<div class="d-flex">
@@ -175,14 +206,21 @@ if (isset($_GET['event_id'])) {
 											// Format the date and time
 											$formattedDate = date("F d, Y", strtotime($event_start_date));
 											$formattedTime = date("h:i A", strtotime($event_start_date));
-											echo $formattedDate . " | " . $formattedTime;
+											$clockIcon = '<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3"><!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg--><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+												<g id="Stockholm-icons-/-Home-/-Clock" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<rect id="bound" x="0" y="0" width="24" height="24"></rect>
+													<path d="M12,22 C7.02943725,22 3,17.9705627 3,13 C3,8.02943725 7.02943725,4 12,4 C16.9705627,4 21,8.02943725 21,13 C21,17.9705627 16.9705627,22 12,22 Z" id="Mask" fill="#000000" opacity="0.3"></path>
+													<path d="M11.9630156,7.5 L12.0475062,7.5 C12.3043819,7.5 12.5194647,7.69464724 12.5450248,7.95024814 L13,12.5 L16.2480695,14.3560397 C16.403857,14.4450611 16.5,14.6107328 16.5,14.7901613 L16.5,15 C16.5,15.2109164 16.3290185,15.3818979 16.1181021,15.3818979 C16.0841582,15.3818979 16.0503659,15.3773725 16.0176181,15.3684413 L11.3986612,14.1087258 C11.1672824,14.0456225 11.0132986,13.8271186 11.0316926,13.5879956 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" id="Path-107" fill="#000000"></path>
+												</g>
+											</svg><!--end::Svg Icon--></span>';
+											echo $formattedDate . "  " . $clockIcon . "  " . $formattedTime;
+
 											?>
 										</span>
 										<span class="svg-icon svg-icon-md svg-icon-dark flex-shrink-0 mr-3 ml-3">
 											<!-- SVG clock icon here -->
 										</span>
 									</div>
-
 
 									<p class="text-dark-50 my-5 font-size-xl font-weight-bold">
 										<?php echo htmlspecialchars($event_desc); ?>
@@ -205,7 +243,7 @@ if (isset($_GET['event_id'])) {
 				<div class="example-preview">
 					<ul class="nav nav-pills nav-fill">
 						<li class="nav-item">
-							<a class="nav-link active" id="stats-tab-4" data-toggle="tab" href="#stats-4">
+							<a class="nav-link " id="stats-tab-4" data-toggle="tab" href="#stats-4">
 								<span class="nav-icon">
 									<i class="flaticon2-user-1"></i>
 								</span>
@@ -213,7 +251,7 @@ if (isset($_GET['event_id'])) {
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" id="proposal-tab-4" data-toggle="tab" href="#proposal" aria-controls="proposal">
+							<a class="nav-link active" id="proposal-tab-4" data-toggle="tab" href="#proposal" aria-controls="proposal">
 								<span class="nav-icon">
 									<i class="flaticon2-chat-1"></i>
 								</span>
@@ -232,14 +270,14 @@ if (isset($_GET['event_id'])) {
 
 					<div class="tab-content mt-5" id="myTabContent4">
 
-						<div class="tab-pane fade show active" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
+						<div class="tab-pane fade" id="stats-4" role="tabpanel" aria-labelledby="stats-tab-4">
 
 
 							<div class="card card-custom" id="kt_blockui_content">
 								<div class="card-body p-0">
 									<!--begin::Wizard-->
 									<div class="wizard wizard-1" id="kt_wizard_v1" data-wizard-state="step-first"
-										data-wizard-clickable="false">
+										data-wizard-clickable="true">
 										<!--begin::Wizard Nav-->
 										<div class="wizard-nav border-bottom">
 											<div class="wizard-steps p-8 p-lg-10">
@@ -961,11 +999,11 @@ if (isset($_GET['event_id'])) {
 															</button>
 														</div>
 														<div>
-															<button type="button" id="edit_event_submit" name="edit_event_submit"
+															<!-- <button type="button" id="edit_event_submit" name="edit_event_submit"
 																class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
 																data-wizard-type="action-submit">
 																Save Changes
-															</button>
+															</button> -->
 
 															<button type="button" id="event_next_button" name="event_next_button"
 																class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
@@ -989,7 +1027,7 @@ if (isset($_GET['event_id'])) {
 
 						</div>
 
-						<div class="tab-pane fade" id="proposal" role="tabpanel" aria-labelledby="proposal-tab-4">
+						<div class="tab-pane fade  show active" id="proposal" role="tabpanel" aria-labelledby="proposal-tab-4">
 
 							<h5>Pre-Event Information</h5>
 
@@ -1094,91 +1132,111 @@ if (isset($_GET['event_id'])) {
 											<!--begin: Wizard Form-->
 											<div class="row">
 												<div class="offset-xxl-2 col-xxl-8">
-													<form class="form" id="kt_form">
-														<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
-															<h4 class="mb-10 font-weight-bold text-dark">Event Contents</h4>
-															<div id="add_info_content" class="kt-repeater">
+													<div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
+														<h4 class="mb-10 font-weight-bold text-dark">Event Contents</h4>
+
+														<?php
+														$guide_query = "SELECT * FROM guide_tbl WHERE event_id = '$eventId'";
+														$guide_result = mysqli_query($conn, $guide_query);
+														if (mysqli_num_rows($guide_result) > 0) {
+															while ($guide = mysqli_fetch_assoc($guide_result)) {
+																// Add course_acronym as a data attribute
+																$guide_id = $guide['guide_id'];
+																$guide_title = $guide['guide_title'];
+																$guide_desc = $guide['guide_desc'];
+																$guide_image = base64_decode($guide['guide_image']);
+														?>
+
+
 																<div data-repeater-list="image_list" class="col-lg-12">
 																	<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
 
-																		<!-- Dropzone -->
-																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																			<div class="dropzone dropzone-multi dynamic-dropzone" id="kt_dropzone_6">
+																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3 ">
+																			<div class="image-input image-input-outline" id="kt_user_add_avatar2">
+																				<div class="image-input-wrapper" style="background-image: url('<?php echo $guide_image ?>')"></div>
 
-																				<div class="dropzone-panel mb-lg-0 mb-2">
-																					<a class="dropzone-select btn btn-outline-primary btn-lg">
-																						<i class="flaticon2-image-file"></i> Upload Image Here
-																					</a>
-																					<a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm">Upload All</a>
-																					<a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm">Remove All</a>
-																				</div>
-																				<div class="dropzone-items">
-																					<div class="dropzone-item" style="display:none">
-																						<div class="dropzone-file">
-																							<div class="dropzone-filename" title="some_image_file_name.jpg">
-																								<span data-dz-name="">some_image_file_name.jpg</span>
-																								<strong>(<span data-dz-size="">340kb</span>)</strong>
-																							</div>
-																							<div class="dropzone-error" data-dz-errormessage=""></div>
-																						</div>
-																						<div class="dropzone-progress">
-																							<div class="progress">
-																								<div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress=""></div>
-																							</div>
-																						</div>
-																						<div class="dropzone-toolbar">
-																							<span class="dropzone-start">
-																								<i class="flaticon2-arrow"></i>
-																							</span>
-																							<span class="dropzone-cancel" data-dz-remove="" style="display: none;">
-																								<i class="flaticon2-cross"></i>
-																							</span>
-																							<span class="dropzone-delete" data-dz-remove="">
-																								<i class="flaticon2-cross"></i>
-																							</span>
-																						</div>
-																					</div>
-																				</div>
 																			</div>
 																		</div>
 
-																		<!-- Input Field -->
 																		<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-																			<input type="text" class="form-control" placeholder="Insert Title Here" />
+																			<input type="text" class="form-control" placeholder="Insert Title Here" value="<?php echo $guide_title; ?>" />
 																		</div>
-
-
-																		<!-- Description -->
 																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																			<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
+																			<textarea class="form-control" placeholder="Enter short description." rows="3"><?php echo $guide_desc; ?></textarea>
 																		</div>
-
 																		<!-- Delete Button -->
 																		<div class="col-lg-4 col-md-6 col-sm-12">
-																			<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+																			<button id="delete_guide" name="delete_guide" type="button" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
 																				<i class="la la-trash-o"></i> Delete
-																			</a>
+																			</button>
+																			<input type="hidden" name="guide_id" value="<?php echo $guide_id; ?>" hidden class="form-control">
+																			<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId; ?>" hidden class="form-control">
 																		</div>
 																	</div>
 																</div>
 
-																<!-- Add Button -->
-																<div class="form-group row">
-																	<div class="col-lg-4 col-md-6 col-sm-12">
-																		<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-																			<i class="la la-plus"></i> Add
-																		</a>
+
+																<div class="separator separator-solid mb-15"></div>
+
+														<?php
+															}
+														}
+														?>
+
+														<form id="kt_form">
+															<div class="form-group row">
+																<div class="col-lg-12 col-md-12 col-sm-12 mb-3 ">
+																	<div class="image-input image-input-outline" id="kt_user_add_avatar">
+																		<div class="image-input-wrapper" style="background-image: url(assets/plus.png)"></div>
+
+																		<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+																			<i class="fa fa-pen icon-sm text-muted"></i>
+																			<input type="file" id="guide_image" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+																			<input type="hidden" name="profile_avatar_remove" />
+																		</label>
+
+																		<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																			<i class="ki ki-bold-close icon-xs text-muted"></i>
+																		</span>
 																	</div>
 																</div>
+
+																<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+																	<input type="text" name="guide_title" id="guide_title" class="form-control" placeholder="Insert Title Here" />
+																</div>
+																<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																	<textarea class="form-control" name="guide_desc" id="guide_desc" placeholder="Enter short description." rows="3"></textarea>
+																</div>
+																<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId; ?>" hidden class="form-control">
+
+																<div class="col-lg-4 col-md-6 col-sm-12">
+																	<button type="button" class="btn btn-sm font-weight-bolder btn-primary" name="add_image" id="add_image">
+																		<i class="la la-plus"></i> Add Image
+																	</button>
+																</div>
 															</div>
-														</div>
-														<!-- Second Repeater for Event Program -->
-														<div class="pb-5" data-wizard-type="step-content">
-															<h4 class="mb-10 font-weight-bold text-dark">Set Event Program</h4>
-															<div id="add_info_agenda" class="kt-repeater">
-																<div data-repeater-list="program_list" class="col-lg-12">
+														</form>
+
+
+													</div>
+													<!-- Second Repeater for Event Program -->
+													<div class="pb-5" data-wizard-type="step-content">
+														<h4 class="mb-10 font-weight-bold text-dark">Set Event Program</h4>
+
+
+														<!-- Timepicker -->
+														<?php
+														$agenda_query = "SELECT * FROM agenda_tbl WHERE event_id = '$eventId'";
+														$agenda_result = mysqli_query($conn, $agenda_query);
+														if (mysqli_num_rows($agenda_result) > 0) {
+															while ($agenda = mysqli_fetch_assoc($agenda_result)) {
+																// Add course_acronym as a data attribute
+																$agenda_id = $agenda['agenda_id'];
+																$agenda_time = date("h:i A", strtotime($agenda['agenda_time']));
+																$agenda_desc = $agenda['agenda_desc'];
+														?>
+																<div data-repeater-list="agenda" class="col-lg-12">
 																	<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
-																		<!-- Timepicker -->
 																		<div class="col-lg-4 col-md-12 col-sm-12 mb-3">
 																			<div class="input-group timepicker">
 																				<div class="input-group-prepend">
@@ -1186,203 +1244,259 @@ if (isset($_GET['event_id'])) {
 																						<i class="la la-clock-o"></i>
 																					</span>
 																				</div>
-																				<input class="form-control agenda_tp" id="agenda_tp_1" readonly placeholder="Select time" type="text" />
+																				<input class="form-control" id="agenda_time" readonly="" value="<?php echo $agenda_time; ?>" type="text">
 																			</div>
 																		</div>
 
 																		<!-- Title -->
+
+																		<!-- Delete Button -->
+																		<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+																			<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
+																				<i class="la la-trash-o"></i>Delete
+																			</a>
+																		</div>
+
+																		<input type="hidden" name="agenda_id" value="<?php echo $agenda_id; ?>" hidden class="form-control">
+																		<input type="hidden" name="event_id" id="event_id" value="<?php echo $eventId; ?>" hidden class="form-control">
+
+																		<!-- Description -->
+																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																			<textarea class="form-control" disabled placeholder="Enter short description." rows="3"><?php echo $agenda_desc; ?></textarea>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="separator separator-solid mb-15"></div>
+
+														<?php
+															}
+														}
+														?>
+														<form id="kt_form">
+															<div data-repeater-list="agenda" class="col-lg-12">
+																<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+																	<div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+																		<div class="input-group timepicker">
+																			<div class="input-group-prepend">
+																				<span class="input-group-text">
+																					<i class="la la-clock-o"></i>
+																				</span>
+																			</div>
+																			<input class="form-control" id="kt_timepicker_4" readonly="" value="" type="text">
+																		</div>
+																	</div>
+
+																	<!-- Title -->
+
+																	<!-- Delete Button -->
+
+																	<!-- Description -->
+																	<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																		<textarea class="form-control" name="agenda_desc" id="agenda_desc" placeholder="Enter Agenda Description." rows="3"></textarea>
+																	</div>
+																</div>
+															</div>
+
+															<!-- Add Button -->
+															<div class="form-group row">
+																<div class="col-12 col-md-6 col-sm-12">
+																	<button type="button" class="btn btn-sm font-weight-bolder btn-primary" name="add_agenda" id="add_agenda">
+																		<i class="la la-plus"></i> Add Agenda
+																	</button>
+																</div>
+															</div>
+
+														</form>
+													</div>
+
+													<!--end: Wizard Step 2-->
+													<!--begin: Wizard Step 3-->
+													<div class="pb-5" data-wizard-type="step-content">
+														<h4 class="mb-10 font-weight-bold text-dark">
+															<i class="fas fa-file mr-2 text-primary"></i> Attachment File(s)
+														</h4>
+
+														<?php
+														$file_query = "SELECT * FROM file_tbl WHERE event_id = '$eventId'";
+														$file_result = mysqli_query($conn, $file_query);
+
+														if (mysqli_num_rows($file_result) > 0) {
+															while ($file = mysqli_fetch_assoc($file_result)) {
+																// Get the file details
+																$file_id = $file['file_id'];
+																$file_path = $file['file_path']; // If you saved the full path, no need to base64 decode
+																// Optionally, if the file path is base64 encoded, decode it
+																// $file_path = base64_decode($file['file_path']);
+
+																// Get the original file name if you stored it
+																$original_file_name = basename($file_path); // Extract file name from the path
+
+														?>
+																<div class="d-flex flex-row align-items-center font-size-lg font-weight-bold text-muted py-1">
+																	<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span>
+																	<?php echo $original_file_name; ?> <!-- Dynamically display the file name -->
+																	<span class="ml-auto">
+																		<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-outline-danger" onclick="deleteFile(<?php echo $file_id; ?>)">
+																			<i class="la la-trash-o"></i> Delete
+																		</a>
+																	</span>
+																</div>
+														<?php
+															}
+														}
+														?>
+
+														<div class="separator separator-dashed my-5"></div>
+
+														<form id="kt_form">
+															<div class="form-group row">
+																<div class="col-lg-9 mb-3">
+																	<div class="dropzone dropzone-default" id="event_file" name="event_file">
+																		<div class="dropzone-msg dz-message needsclick">
+																			<h3 class="dropzone-msg-title">Drop files here or click to upload.</h3>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group row">
+																<div class="col-12 col-md-6 col-sm-12">
+																	<button type="button" class="btn btn-sm font-weight-bolder btn-primary" name="add_file" id="add_file">
+																		Upload File
+																	</button>
+																</div>
+															</div>
+														</form>
+
+
+
+														<div class="separator separator-solid my-10"></div>
+
+
+														<h4 class="mb-10 font-weight-bold text-dark">
+															<i class="fas fa-link mr-2 text-primary"></i> Event Link
+														</h4>
+
+														<?php
+														$link_query = "SELECT * FROM link_tbl WHERE event_id = '$eventId'";
+														$link_result = mysqli_query($conn, $link_query);
+
+														if (mysqli_num_rows($link_result) > 0) {
+															while ($link = mysqli_fetch_assoc($link_result)) {
+																// Get the link details
+																$link_id = $link['link_id'];
+																$link_name = $link['link_name'];
+																$link_url = $link['link_url'];
+
+														?>
+
+																<div class="d-flex flex-row align-items-center font-size-lg font-weight-bold text-muted py-1">
+																	<span class="flaticon2-clip-symbol text-warning icon-1x mr-2"></span>
+																	<a href="<?php echo $link_url; ?>" target="_blank"><?php echo $link_name; ?></a>
+																	<span class="ml-auto">
+																		<a href="" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-outline-danger">
+																			<i class="la la-trash-o"></i> Delete
+																		</a>
+																	</span>
+																</div>
+														<?php
+															}
+														}
+														?>
+
+														<div class="separator separator-dashed my-5"></div>
+														<!-- Timepicker -->
+														<form id="kt_form">
+															<div class="form-group row">
+																<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+																	<input type="text" name="link_name" id="link_name" class="form-control" placeholder="Insert Title Here" />
+																</div>
+
+																<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																	<textarea class="form-control" id="link_url" name="link_url" placeholder="https://kld.edu.ph/kld-events" rows="3"></textarea>
+																</div>
+
+
+															</div>
+
+															<div class="form-group row">
+																<div class="col-12 col-md-6 col-sm-12">
+																	<button type="button" class="btn btn-sm font-weight-bolder btn-primary" name="add_link" id="add_link">
+																		Upload Link
+																	</button>
+																</div>
+															</div>
+														</form>
+
+
+
+													</div>
+													<!--end: Wizard Step 3-->
+													<!--begin: Wizard Step 4-->
+													<div class="pb-5" data-wizard-type="step-content">
+														<h4 class="mb-10 font-weight-bold text-dark">To-Do List</h4>
+
+														<div id="add_info_todo" class="kt-repeater">
+															<div data-repeater-list="attachment" class="col-lg-12">
+																<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
+																	<!-- Timepicker -->
+																	<div class="form-group row">
 																		<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
 																			<input type="text" class="form-control" placeholder="Insert Title Here" />
 																		</div>
-
-																		<!-- Delete Button -->
-																		<div class="col-lg-2 col-md-12 col-sm-12 mb-3">
+																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+																			<textarea class="form-control" placeholder="Enter Task Here..." rows="3"></textarea>
+																		</div>
+																		<label class="col-lg-2 col-form-label text-right">Due Date:</label>
+																		<div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+																			<div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
+																				<input type="text" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_1" />
+																				<div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
+																					<span class="input-group-text">
+																						<i class="ki ki-calendar"></i>
+																					</span>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-lg-3 col-md-12 col-sm-12 mb-3">
 																			<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
 																				<i class="la la-trash-o"></i>
 																			</a>
 																		</div>
 
-																		<!-- Description -->
-																		<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																			<textarea class="form-control" placeholder="Enter short description." rows="3"></textarea>
-																		</div>
+
+
 																	</div>
 																</div>
 
 																<!-- Add Button -->
-																<div class="form-group row">
-																	<div class="col-12 col-md-6 col-sm-12">
-																		<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-																			<i class="la la-plus"></i> Add
-																		</a>
-																	</div>
-																</div>
+
 															</div>
-														</div>
-
-														<!--end: Wizard Step 2-->
-														<!--begin: Wizard Step 3-->
-														<div class="pb-5" data-wizard-type="step-content">
-															<h4 class="mb-10 font-weight-bold text-dark">Attachment File(s)</h4>
-
 															<div class="form-group row">
-																<div class="col-lg-9 mb-3">
-																	<div class="dropzone dropzone-multi" id="kt_dropzone_4">
-
-																		<div class="dropzone-panel mb-lg-0 mb-2">
-																			<a class="dropzone-select btn btn-light-primary font-weight-bold btn-sm">Attach files</a>
-																			<a class="dropzone-upload btn btn-light-primary font-weight-bold btn-sm">Upload All</a>
-																			<a class="dropzone-remove-all btn btn-light-primary font-weight-bold btn-sm">Remove All</a>
-																		</div>
-																		<div class="dropzone-items">
-																			<div class="dropzone-item" style="display:none">
-																				<div class="dropzone-file">
-																					<div class="dropzone-filename" title="some_image_file_name.jpg">
-																						<span data-dz-name="">some_image_file_name.jpg</span>
-																						<strong>(
-																							<span data-dz-size="">340kb</span>)</strong>
-																					</div>
-																					<div class="dropzone-error" data-dz-errormessage=""></div>
-																				</div>
-																				<div class="dropzone-progress">
-																					<div class="progress">
-																						<div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress=""></div>
-																					</div>
-																				</div>
-																				<div class="dropzone-toolbar">
-																					<span class="dropzone-start">
-																						<i class="flaticon2-arrow"></i>
-																					</span>
-																					<span class="dropzone-cancel" data-dz-remove="" style="display: none;">
-																						<i class="flaticon2-cross"></i>
-																					</span>
-																					<span class="dropzone-delete" data-dz-remove="">
-																						<i class="flaticon2-cross"></i>
-																					</span>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-
+																<div class="col-12 col-md-6 col-sm-12">
+																	<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
+																		<i class="la la-plus"></i> Add
+																	</a>
 																</div>
-
-																<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																	<textarea class="form-control" placeholder="Enter short description" rows="3"></textarea>
-																</div>
-
 															</div>
 
-
-															<div class="separator separator-solid my-5"></div>
-
-
-															<h4 class="mb-10 font-weight-bold text-dark">Event Link</h4>
-
-
-
-
-															<div id="kt_repeater_3" class="kt-repeater">
-																<div data-repeater-list="attachment" class="col-lg-12">
-																	<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
-																		<!-- Timepicker -->
-																		<div class="form-group row">
-																			<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-																				<input type="text" class="form-control" placeholder="Insert Title Here" />
-																			</div>
-																			<div class="col-lg-3 col-md-12 col-sm-12 mb-3">
-																				<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-																					<i class="la la-trash-o"></i>
-																				</a>
-																			</div>
-
-																			<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																				<textarea class="form-control" placeholder="https://kld.edu.ph/kld-events" rows="3"></textarea>
-																			</div>
-
-
-																		</div>
-																	</div>
-
-																	<!-- Add Button -->
-
-																</div>
-																<div class="form-group row">
-																	<div class="col-12 col-md-6 col-sm-12">
-																		<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-																			<i class="la la-plus"></i> Add
-																		</a>
-																	</div>
-																</div>
-
-
-															</div>
-														</div>
-														<!--end: Wizard Step 3-->
-														<!--begin: Wizard Step 4-->
-														<div class="pb-5" data-wizard-type="step-content">
-															<h4 class="mb-10 font-weight-bold text-dark">To-Do List</h4>
-
-															<div id="add_info_todo" class="kt-repeater">
-																<div data-repeater-list="attachment" class="col-lg-12">
-																	<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
-																		<!-- Timepicker -->
-																		<div class="form-group row">
-																			<div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-																				<input type="text" class="form-control" placeholder="Insert Title Here" />
-																			</div>
-																			<div class="col-lg-12 col-md-12 col-sm-12 mb-3">
-																				<textarea class="form-control" placeholder="Enter Task Here..." rows="3"></textarea>
-																			</div>
-																			<label class="col-lg-2 col-form-label text-right">Due Date:</label>
-																			<div class="col-lg-8 col-md-12 col-sm-12 mb-3">
-																				<div class="input-group date" id="kt_datetimepicker_1" data-target-input="nearest">
-																					<input type="text" class="form-control datetimepicker-input" placeholder="Select date & time" data-target="#kt_datetimepicker_1" />
-																					<div class="input-group-append" data-target="#kt_datetimepicker_1" data-toggle="datetimepicker">
-																						<span class="input-group-text">
-																							<i class="ki ki-calendar"></i>
-																						</span>
-																					</div>
-																				</div>
-																			</div>
-																			<div class="col-lg-3 col-md-12 col-sm-12 mb-3">
-																				<a href="javascript:;" data-repeater-delete="" class="btn btn-sm font-weight-bolder btn-light-danger">
-																					<i class="la la-trash-o"></i>
-																				</a>
-																			</div>
-
-
-
-																		</div>
-																	</div>
-
-																	<!-- Add Button -->
-
-																</div>
-																<div class="form-group row">
-																	<div class="col-12 col-md-6 col-sm-12">
-																		<a href="javascript:;" data-repeater-create="" class="btn btn-sm font-weight-bolder btn-light-primary">
-																			<i class="la la-plus"></i> Add
-																		</a>
-																	</div>
-																</div>
-
-
-															</div>
 
 														</div>
-														<!--end: Wizard Step 4-->
-														<!--begin: Wizard Actions-->
-														<div class="d-flex justify-content-between border-top mt-5 pt-10">
-															<div class="mr-2">
-																<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
-															</div>
-															<div>
-																<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">Save Changes</button>
-																<button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
-															</div>
+
+													</div>
+													<!--end: Wizard Step 4-->
+													<!--begin: Wizard Actions-->
+													<div class="d-flex justify-content-between border-top mt-5 pt-10">
+														<div class="mr-2">
+															<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
 														</div>
-														<!--end: Wizard Actions-->
-													</form>
+														<div>
+															<!-- <button type="button" id="add_info" name="add_info" class="btn btn-light-primary font-weight-bolder text-uppercase px-9 py-4">Save Changes</button> -->
+															<button type="button" class="btn btn-primary font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-next">Next</button>
+														</div>
+													</div>
+													<!--end: Wizard Actions-->
+
 												</div>
 												<!--end: Wizard-->
 											</div>
@@ -1399,69 +1513,284 @@ if (isset($_GET['event_id'])) {
 						<div class="tab-pane fade" id="feedback-4" role="tabpanel" aria-labelledby="feedback-tab-4">
 							<div class="row justify-content-center">
 								<div class="kt-repeater feedback-cat col-lg-8"> <!-- Changed ID to class -->
-									<div data-repeater-list="feedback">
-										<div data-repeater-item class="form-group row align-items-center kt-repeater-item">
-											<div class="col-12">
-												<!--begin::Card-->
-												<div class="card card-custom gutter-b example example-compact">
-													<div class="card-header">
-														<h3 class="card-title">Feedback Form</h3>
-													</div>
-													<form class="form">
-														<div class="card-body">
-															<div class="form-group">
-																<label>Category:</label>
-																<input type="text" class="form-control" placeholder="Venue Management" />
-															</div>
-
-															<label>Questions:</label>
-															<div class="kt-repeater feedback-question"> <!-- Changed ID to class -->
-																<div data-repeater-list="questions">
-																	<div data-repeater-item class="form-group kt-repeater-item">
-																		<div class="form-group row">
-																			<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
-																				<input type="text" class="form-control" placeholder="The answer to the question is quite good." />
-																			</div>
-																			<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
-																				<select class="form-control">
-																					<option>Likert Scale</option>
-																					<option>Essay Type</option>
-																				</select>
-																			</div>
-																			<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
-																				<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger">
-																					<i class="la la-trash-o"></i>
-																				</a>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="col-12 d-flex mt-3">
-																	<a href="javascript:;" data-repeater-create class="btn font-weight-bolder btn-primary">
-																		<i class="la la-plus"></i> Add Question
-																	</a>
-																</div>
-															</div>
-														</div>
-														<div class="card-footer">
-															<div class="row">
-																<div class="col text-right">
-																	<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
-																</div>
-															</div>
-														</div>
-													</form>
-												</div>
+									<div class="col-12">
+										<!--begin::Card-->
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Feedback Form</h3>
 											</div>
+											<form class="form">
+												<div class="card-body">
+													<div class="form-group">
+														<label>Category:</label>
+														<input type="text" class="form-control" placeholder="Venue Management" value="Overall Experience" disabled />
+													</div>
+
+													<label>Questions:</label>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The overall quality of the virtual event met my expectations." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The sessions were well-structured and engaging." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="I found the virtual event to be valuable and worthwhile." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer">
+													<div class="row">
+														<div class="col text-right">
+															<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Feedback Form</h3>
+											</div>
+											<form class="form">
+												<div class="card-body">
+													<div class="form-group">
+														<label>Category:</label>
+														<input type="text" class="form-control" placeholder="Venue Management" value="Content and Delivery" disabled />
+													</div>
+
+													<label>Questions:</label>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The topics covered were relevant and useful." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The presentations were clear and engaging." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The event met my learning or informational needs." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer">
+													<div class="row">
+														<div class="col text-right">
+															<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Feedback Form</h3>
+											</div>
+											<form class="form">
+												<div class="card-body">
+													<div class="form-group">
+														<label>Category:</label>
+														<input type="text" class="form-control" placeholder="Venue Management" value="Technical Support" disabled />
+													</div>
+
+													<label>Questions:</label>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="Accessing and using the virtual platform was easy." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="I did not encounter significant technical difficulties during the event." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The support provided by the event organizers was satisfactory." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer">
+													<div class="row">
+														<div class="col text-right">
+															<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="card card-custom gutter-b example example-compact">
+											<div class="card-header">
+												<h3 class="card-title">Feedback Form</h3>
+											</div>
+											<form class="form">
+												<div class="card-body">
+													<div class="form-group">
+														<label>Category:</label>
+														<input type="text" class="form-control" placeholder="Venue Management" value="Interactivity and Engagement" disabled />
+													</div>
+
+													<label>Questions:</label>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The interactive features (polls, Q&A, chat) were useful." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="I was able to engage and participate actively during the event.." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+													<div class="form-group row">
+														<div class="col-lg-9 col-md-10 col-sm-12 mb-3">
+															<input type="text" disabled class="form-control" value="The virtual platform facilitated effective communication and interaction." />
+														</div>
+														<div class="col-lg-2 col-md-4 col-sm-12 mb-3">
+															<select class="form-control">
+																<option selected disabled>Likert Scale</option>
+															</select>
+														</div>
+														<div class="col-lg-1 col-md-12 col-sm-12 mb-3">
+															<a href="javascript:;" data-repeater-delete class="btn btn-sm font-weight-bolder btn-light-danger disabled">
+																<i class="la la-trash-o"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="card-footer">
+													<div class="row">
+														<div class="col text-right">
+															<button type="button" data-repeater-delete class="btn btn-danger">Delete</button>
+														</div>
+													</div>
+												</div>
+											</form>
 										</div>
 									</div>
 									<div class="col-12 d-flex justify-content-around mt-3">
-										<a href="javascript:;" data-repeater-create class="btn btn-lg font-weight-bolder btn-light-primary">
+										<a href="" data-repeater-create class="btn btn-lg font-weight-bolder btn-light-primary disabled">
 											<i class="la la-plus"></i> Add Category
 										</a>
-										<a href="" data-repeater-create class="btn btn-lg font-weight-bolder btn-success">
+										<!-- <a href="" data-repeater-create class="btn btn-lg font-weight-bolder btn-success">
 											<i class="la la-save"></i> Save Changes
-										</a>
+										</a> -->
 									</div>
 								</div>
 							</div>
@@ -1475,35 +1804,6 @@ if (isset($_GET['event_id'])) {
 
 		<div class="separator separator-solid separator-border-4"></div>
 
-		<div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="row">
-					<div class="modal-content">
-						<div class="alert alert-info mb-5 p-5" role="alert">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<i aria-hidden="true" class="ki ki-close"></i>
-							</button>
-							<h4 class="alert-heading">Well done!</h4>
-
-							<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-						</div>
-					</div>
-
-					<div class="modal-content">
-						<div class="alert alert-info mb-5 p-5" role="alert">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<i aria-hidden="true" class="ki ki-close"></i>
-							</button>
-							<h4 class="alert-heading">Well done!</h4>
-
-							<p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-						</div>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
 
 		<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">

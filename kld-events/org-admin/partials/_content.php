@@ -59,14 +59,11 @@ if (session_status() == PHP_SESSION_NONE) {
 					<!--begin::Body-->
 					<div class="card-body d-flex align-items-center py-0 mt-8">
 						<div class="d-flex flex-column flex-grow-1 py-2 py-lg-5">
-							<a href="?page=profile&id=<?php echo $_SESSION['kld_id']; ?>"
-								class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary">Hello, <?php echo $_SESSION['kld_fname'] ?></a>
-							<span class="font-weight-bold text-muted  font-size-lg"><?php echo $_SESSION['kld_org_role'] ?></span>
-
-							<span class="font-weight-normal text-muted  font-size-lg"><?php echo $_SESSION['kld_org_name'] ?></span>
+							<a href="?page=org-view&org_id=<?php echo $_SESSION['kld_org']; ?>"
+								class="card-title font-weight-bolder text-dark-75 font-size-h5 mb-2 text-hover-primary"><?php echo $_SESSION['kld_org_name'] ?></a>
 						</div>
 						<div class="symbol symbol-circle symbol-lg-100">
-							<img src="<?php echo !empty($_SESSION['kld_profile']) ? $_SESSION['kld_profile'] : 'assets/default.jpg'; ?>" alt="" />
+							<img src="<?php echo base64_decode($_SESSION['kld_org_pic']) ?>" alt="" />
 
 						</div>
 					</div>

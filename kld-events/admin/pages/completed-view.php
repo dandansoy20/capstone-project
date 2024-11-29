@@ -126,6 +126,9 @@ if (isset($_GET['event_id'])) {
 <div class="d-flex flex-column-fluid">
 	<!--begin::Container-->
 	<div class=" container ">
+		<button type="button" onclick="history.go(-1)" class="btn btn-light-primary font-weight-bolder mb-5">
+			<i class="ki ki-long-arrow-back icon-sm"></i>Back
+		</button>
 		<div class="row">
 			<div class="col-xl-12">
 				<!--begin::Engage Widget 1-->

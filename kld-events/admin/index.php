@@ -164,6 +164,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="control/js/add-course.js"></script>
 	<script src="control/js/add-section.js"></script>
 	<script src="control/js/add-venue.js"></script>
+	<script src="control/js/add-admin.js"></script>
 	<script src="control/js/add-std.js"></script>
 	<script src="control/js/add-emp.js"></script>
 	<script src="control/js/calendar.js"></script>

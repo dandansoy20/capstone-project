@@ -20,6 +20,9 @@ while ($row = $try->fetch_array()) {
 
 <div class="d-flex flex-column-fluid">
     <div class="container">
+        <button type="button" onclick="history.go(-1)" class="btn btn-light-primary font-weight-bolder mb-5">
+            <i class="ki ki-long-arrow-back icon-sm"></i>Back
+        </button>
         <div class="card card-custom card-transparent">
             <div class="card-body p-0">
                 <!--begin::Wizard-->

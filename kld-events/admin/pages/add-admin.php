@@ -41,7 +41,7 @@
                                                                     data-action="change" data-toggle="tooltip" title=""
                                                                     data-original-title="Change avatar">
                                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                                    <input type="file" name="profile_avatar"
+                                                                    <input type="file" name="profile_avatar" id="add_admin_profilepic"
                                                                         accept=".png, .jpg, .jpeg" />
                                                                     <input type="hidden" name="profile_avatar_remove" />
                                                                 </label>
@@ -62,7 +62,7 @@
                                                             Name</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
-                                                                class="form-control form-control-solid form-control-lg"
+                                                                class="form-control form-control-solid form-control-lg" id="add_admin_fname"
                                                                 name="firstname" placeholder="Juan" type="text" value="" />
                                                         </div>
                                                     </div>
@@ -73,7 +73,7 @@
                                                             Name</label>
                                                         <div class="col-lg-9 col-xl-9">
                                                             <input
-                                                                class="form-control form-control-solid form-control-lg"
+                                                                class="form-control form-control-solid form-control-lg" id="add_admin_lname"
                                                                 name="lastname" placeholder="Dela Cruz" type="text" value="" />
                                                         </div>
                                                     </div>
@@ -85,7 +85,7 @@
                                                         <label
                                                             class="col-xl-3 col-lg-3 col-form-label">Roles/Positions</label>
                                                         <div class="col-lg-9 col-xl-9">
-                                                            <select class="form-control form-control-solid form-control-lg" id="add_org_organization" name="course" type="text" value="">
+                                                            <select class="form-control form-control-solid form-control-lg" id="add_admin_role" name="role" type="text" value="">
                                                                 <option selected disabled>Select Role</option>
                                                                 <option>College Administrator</option>
                                                                 <option>VP Administrative Affairs</option>
@@ -98,18 +98,6 @@
                                                     </div>
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
-                                                    <div class="form-group row">
-                                                        <label class="col-xl-3 col-lg-3 col-form-label">KLD ID
-                                                            Number</label>
-                                                        <div class="col-lg-9 col-xl-9">
-                                                            <div class="input-group input-group-solid input-group-lg">
-                                                                <input type="text"
-                                                                    class="form-control form-control-solid form-control-lg"
-                                                                    placeholder="Enter ID Number" name="idnum" id="kt_inputmask_4"
-                                                                    value="" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <!--end::Group-->
                                                     <!--begin::Group-->
                                                     <div class="form-group row">
@@ -118,8 +106,8 @@
                                                         <div class="col-lg-9 col-xl-9">
                                                             <div class="input-group input-group-solid input-group-lg">
                                                                 <input type="text"
-                                                                    class="form-control form-control-solid form-control-lg"
-                                                                    name="email" placeholder="Enter Email" value="" />
+                                                                    class="form-control form-control-solid form-control-lg" id="add_admin_email"
+                                                                    placeholder="Enter Email" value="" />
                                                                 <div class="input-group-append"><span
                                                                         class="input-group-text">@kld.edu.ph</span>
                                                                 </div>
@@ -127,22 +115,16 @@
                                                         </div>
                                                     </div>
                                                     <!--end::Group-->
-
-                                                    <div class="d-flex justify-content-between border-top pt-10 mt-15">
-                                                        <div class="mr-2">
-                                                        </div>
-                                                        <div>
-                                                            <button type="button"
-                                                                class="btn btn-success font-weight-bolder px-9 py-4"
-                                                                data-wizard-type="action-submit">
-                                                                Add
-                                                            </button>
-
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <!--end::Wizard Step 1-->
-
+                                                <div class="d-flex justify-content-between border-top pt-10 mt-15">
+                                                    <div class="mr-2">
+                                                    </div>
+                                                    <div>
+                                                        <button onclick="history.back()" type="button" class="btn btn-secondary font-weight-bolder px-9 py-4">Back</button>
+                                                        <button id="add_admin_submit" type="button" class="btn btn-primary font-weight-bolder px-9 py-4">Add</button>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>

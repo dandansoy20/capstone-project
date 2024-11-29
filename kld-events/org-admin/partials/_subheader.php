@@ -1,4 +1,3 @@
-
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-12  subheader-transparent " id="kt_subheader">
 	<div class=" container  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -11,7 +10,7 @@
 
 				<!--begin::Title-->
 				<h2 class="text-white font-weight-bold my-2 mr-5">
-					Dashboard </h2>
+					KLD Event Organizer </h2>
 
 				<!--end::Title-->
 
@@ -49,7 +48,7 @@
 		<!--end::Info-->
 
 		<!--begin::Toolbar-->
-	
+
 
 		<!--end::Toolbar-->
 	</div>

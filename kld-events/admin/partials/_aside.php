@@ -263,7 +263,11 @@ include('control/db.php');
 					<h4 class="menu-text">Users</h4>
 				</li>
 
-				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
+				<?php
+				// Determine if the menu should be hidden
+				$hidden = ($_SESSION['kld_admin_role'] !== 'Head of Event Management') ? 'hidden' : '';
+				?>
+				<li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" <?php echo $hidden ?>><a
 						href="javascript:;" class="menu-link menu-toggle">
 
 						<span class="svg-icon menu-icon">

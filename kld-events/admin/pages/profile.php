@@ -50,6 +50,7 @@ $conn->close();
 <div class="d-flex flex-column-fluid">
     <!--begin::Container-->
     <div class=" container ">
+
         <!--begin::Profile Personal Information-->
         <div class="d-flex flex-row">
             <!--begin::Aside-->
@@ -203,7 +204,7 @@ $conn->close();
                                     <div class="image-input image-input-outline" id="kt_profile_avatar"
                                         style="background-image: url(<?php echo $profilePic; ?>)">
                                         <div class="image-input-wrapper"
-                                            style="background-image: url(assets/media/users/300_21.jpg)"></div>
+                                            style="background-image: url(<?php echo $profilePic; ?>)"></div>
 
                                         <label
                                             class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -285,17 +286,6 @@ $conn->close();
                                             <option>Head of Equipments and Venue</option>
 
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-xl-3 col-lg-3 col-form-label">KLD Number</label>
-                                <div class="col-lg-9 col-xl-6">
-                                    <div class="input-group input-group-lg input-group-solid">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i
-                                                    class="la la-address-card"></i></span></div>
-                                        <input type="text" class="form-control form-control-lg form-control-solid"
-                                            value="" disabled placeholder="ID Number" />
                                     </div>
                                 </div>
                             </div>

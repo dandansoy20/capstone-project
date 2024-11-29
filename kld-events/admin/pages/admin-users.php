@@ -16,7 +16,7 @@ $breadcrumb = ["Admin", "User"]; // Dynamic breadcrumb for this page
 
                 <?php
                 include('./control/db.php');
-                $try = mysqli_query($conn, "Select * from admin_acc where status != 'INACTIVE' ");
+                $try = mysqli_query($conn, "Select * from admin_acc");
                 while ($row = $try->fetch_array()) {
                     echo '
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6" id="admin_acc_container' . $row['admin_id'] . '">

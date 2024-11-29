@@ -69,6 +69,14 @@ License: You must have a valid license purchased only from themeforest(the above
 	<link href="assets/css/pages/wizard/wizard-4.css" rel="stylesheet" type="text/css" />
 	<!--end::Layout Themes-->
 	<link rel="shortcut icon" href="assets/media/logos/kldlogo.png" />
+
+	<!--begin::Layout Themes(used by all pages)-->
+	<link href="assets/css/themes/layout/header/base/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/header/menu/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/pages/wizard/wizard-2.css" rel="stylesheet" type="text/css" />
+	<!--end::Layout Themes-->
 </head>
 
 <!--end::Head-->
@@ -158,9 +166,11 @@ License: You must have a valid license purchased only from themeforest(the above
 	<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
 	<script src="assets/js/scripts.bundle.js"></script>
 	<script src="control/js/add-events.js"></script>
+	<script src="control/js/edit-events.js"></script>
 	<script src="control/js/calendar.js"></script>
-
-	<script src="control/js/letter.js"></script>
+	<script src="control/js/attendance.js"></script>
+	<script src="control/js/feedback.js"></script>
+	<script src="control/js/launch.js"></script>
 	<script src="https://keenthemes.com/metronic/assets/js/engage_code.js"></script>
 
 

@@ -590,7 +590,7 @@ if (!array_key_exists('ajax', $_POST)) {
                     echo "failed";
                     break;
                 case "org":
-                    $query = "SELECT org_acc.*, org_tbl.org_name 
+                    $query = "SELECT org_acc.*, org_tbl.org_name, org_tbl.org_pic
                                   FROM org_acc 
                                   JOIN org_tbl ON org_acc.org_id = org_tbl.org_id 
                                   WHERE org_acc.org_uname = '" . $username . "' 
@@ -608,6 +608,8 @@ if (!array_key_exists('ajax', $_POST)) {
                         $_SESSION['login_type'] = "Organizer";
                         $_SESSION['kld_org'] = $row['org_id'];
                         $_SESSION['kld_profile'] = $row['org_profile'];
+
+                        $_SESSION['kld_org_pic'] = $row['org_pic'];
                         $_SESSION['kld_fname'] = $row['org_fname'];
                         $_SESSION['kld_lname'] = $row['org_lname'];
                         $_SESSION['kld_email'] = $row['org_email'];
@@ -636,9 +638,8 @@ if (!array_key_exists('ajax', $_POST)) {
             $venue_id = $_POST['venue_id'];
             $event_start_date = date('Y-m-d H:i:s', strtotime($_POST['event_start_date']));
             $event_end_date = date('Y-m-d H:i:s', strtotime($_POST['event_end_date']));
-            $event_cap = $_POST['capacity']; // Capture the event capacity
-            $event_title = $_POST['event_title'];
-            $event_description = $_POST['event_description'];
+            $event_title = htmlspecialchars($_POST['event_title'], ENT_QUOTES);
+            $event_description = htmlspecialchars($_POST['event_description'], ENT_QUOTES);
             $event_category = $_POST['event_category'];
             $event_organization = $_POST['event_organization'];
             $event_poster = $_POST['event_poster'];
@@ -647,31 +648,29 @@ if (!array_key_exists('ajax', $_POST)) {
             $try = mysqli_query(
                 $conn,
                 "INSERT INTO kld_event
-                        (event_type, 
-                        venue_id, 
-                        event_start_date, 
-                        event_end_date, 
-                        event_cap,  
-                        event_title, 
-                        category_id, 
-                        event_desc, 
-                        event_org_id, 
-                        event_poster,
-                        status)
-                    VALUES
-                        (
-                            '" . $eventType . "',
-                            '" . $venue_id . "',
-                            '" . $event_start_date . "',
-                            '" . $event_end_date . "',
-                            '" . $event_cap . "',  
-                            '" . $event_title . "',
-                            '" . $event_category . "',
-                            '" . $event_description . "',
-                            '" . $event_organization . "',
-                            '" . $event_poster . "',
-                            'pending'
-                        )"
+                            (event_type, 
+                            venue_id, 
+                            event_start_date, 
+                            event_end_date, 
+                            event_title, 
+                            category_id, 
+                            event_desc, 
+                            event_org_id, 
+                            event_poster,
+                            status)
+                        VALUES
+                            (
+                                '" . $eventType . "',
+                                '" . $venue_id . "',
+                                '" . $event_start_date . "',
+                                '" . $event_end_date . "',
+                                '" . $event_title . "',
+                                '" . $event_category . "',
+                                '" . $event_description . "',
+                                '" . $event_organization . "',
+                                '" . $event_poster . "',
+                                'pending'
+                            )"
             );
 
             if ($try) {
@@ -699,7 +698,7 @@ if (!array_key_exists('ajax', $_POST)) {
                     }
                 }
 
-                // Handle inserting attendees into the event_invitation table
+                // Decode JSON data from the POST request
                 $attendees = [
                     'course_ids' => json_decode($_POST['course_ids'], true),
                     'yearlvl_ids' => json_decode($_POST['yearlvl_ids'], true),
@@ -707,25 +706,37 @@ if (!array_key_exists('ajax', $_POST)) {
                     'org_ids' => json_decode($_POST['org_ids'], true)
                 ];
 
-                // Use null coalescing operator to handle potential null values
-                foreach ($attendees['course_ids'] ?? [] as $course_id) {
-                    $insert_invitation = "INSERT INTO event_invitation (event_id, course_id) VALUES ('$event_id', '$course_id')";
-                    mysqli_query($conn, $insert_invitation);
+                // Always insert the event_id first
+                $insert_invitation = "INSERT INTO event_invitation (event_id) VALUES ('$event_id')";
+                mysqli_query($conn, $insert_invitation);
+
+                // Insert additional data only if it's not null
+                if (!is_null($attendees['course_ids'])) {
+                    foreach ($attendees['course_ids'] as $course_id) {
+                        $insert_invitation = "INSERT INTO event_invitation (event_id, course_id) VALUES ('$event_id', '$course_id')";
+                        mysqli_query($conn, $insert_invitation);
+                    }
                 }
 
-                foreach ($attendees['yearlvl_ids'] ?? [] as $yearlvl_id) {
-                    $insert_invitation = "INSERT INTO event_invitation (event_id, yearlvl_id) VALUES ('$event_id', '$yearlvl_id')";
-                    mysqli_query($conn, $insert_invitation);
+                if (!is_null($attendees['yearlvl_ids'])) {
+                    foreach ($attendees['yearlvl_ids'] as $yearlvl_id) {
+                        $insert_invitation = "INSERT INTO event_invitation (event_id, yearlvl_id) VALUES ('$event_id', '$yearlvl_id')";
+                        mysqli_query($conn, $insert_invitation);
+                    }
                 }
 
-                foreach ($attendees['section_ids'] ?? [] as $section_id) {
-                    $insert_invitation = "INSERT INTO event_invitation (event_id, section_id) VALUES ('$event_id', '$section_id')";
-                    mysqli_query($conn, $insert_invitation);
+                if (!is_null($attendees['section_ids'])) {
+                    foreach ($attendees['section_ids'] as $section_id) {
+                        $insert_invitation = "INSERT INTO event_invitation (event_id, section_id) VALUES ('$event_id', '$section_id')";
+                        mysqli_query($conn, $insert_invitation);
+                    }
                 }
 
-                foreach ($attendees['org_ids'] ?? [] as $org_id) {
-                    $insert_invitation = "INSERT INTO event_invitation (event_id, org_id) VALUES ('$event_id', '$org_id')";
-                    mysqli_query($conn, $insert_invitation);
+                if (!is_null($attendees['org_ids'])) {
+                    foreach ($attendees['org_ids'] as $org_id) {
+                        $insert_invitation = "INSERT INTO event_invitation (event_id, org_id) VALUES ('$event_id', '$org_id')";
+                        mysqli_query($conn, $insert_invitation);
+                    }
                 }
 
                 // Insert the proposal letter
@@ -750,12 +761,46 @@ if (!array_key_exists('ajax', $_POST)) {
 
             break;
 
+        case "update_capacity":
+            // Collect filters from the AJAX request
+            $courseIds = isset($_POST['course_ids']) ? $_POST['course_ids'] : [];
+            $yearlvlIds = isset($_POST['yearlvl_ids']) ? $_POST['yearlvl_ids'] : [];
+            $sectionIds = isset($_POST['section_ids']) ? $_POST['section_ids'] : [];
+            $orgIds = isset($_POST['org_ids']) ? $_POST['org_ids'] : [];
+            $selectAllMembers = isset($_POST['select_all_kld_members']) ? $_POST['select_all_kld_members'] : false;
+
+            // Prepare queries based on the select all switch
+            if ($selectAllMembers === "true" || (empty($courseIds) && empty($yearlvlIds) && empty($sectionIds) && empty($orgIds))) {
+                // If "Select All KLD Members" is active or no filters are selected, count all records
+                $studentQuery = "SELECT COUNT(*) as student_count FROM std_acc";
+                $employeeQuery = "SELECT COUNT(*) as employee_count FROM emp_acc";
+            } else {
+                // Count only records matching the selected filters
+                $studentQuery = "SELECT COUNT(*) as student_count FROM std_acc WHERE course_id IN ('" . implode("','", $courseIds) . "') AND yearlvl_id IN ('" . implode("','", $yearlvlIds) . "') AND section_id IN ('" . implode("','", $sectionIds) . "')";
+                $employeeQuery = "SELECT COUNT(*) as employee_count FROM emp_acc WHERE org_id IN ('" . implode("','", $orgIds) . "')";
+            }
+
+            // Execute queries
+            $studentResult = mysqli_query($conn, $studentQuery);
+            $studentCount = $studentResult ? $studentResult->fetch_assoc()['student_count'] : 0;
+
+            $employeeResult = mysqli_query($conn, $employeeQuery);
+            $employeeCount = $employeeResult ? $employeeResult->fetch_assoc()['employee_count'] : 0;
+
+            // Calculate total count
+            $totalCount = $studentCount + $employeeCount;
+
+            // Return the total count as a JSON response
+            echo json_encode(['totalCount' => $totalCount]);
+
+            break;
+
         case "admin_approve":
             $id = $_POST['session_id']; // Session ID of the admin
             $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
             // Use prepared statements to prevent SQL injection
-            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND org_acc_id=?");
+            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND admin_id=?");
             $status = 'approved'; // Set status to 'approved'
             $stmt->bind_param("ssi", $status, $eventId, $id); // "ssi" indicates the types: string, string, integer
 
@@ -773,7 +818,7 @@ if (!array_key_exists('ajax', $_POST)) {
             $eventId = $_POST['event_id']; // Event ID passed from AJAX
 
             // Use prepared statements to prevent SQL injection
-            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND org_acc_id=?");
+            $stmt = $conn->prepare("UPDATE stakeholder_tbl SET status=?, date_approved=NOW() WHERE event_id=? AND admin_id=?");
             $status = 'rejected'; // Set status to 'rejected'
             $stmt->bind_param("ssi", $status, $eventId, $id); // "ssi" indicates the types: string, string, integer
 
@@ -785,13 +830,235 @@ if (!array_key_exists('ajax', $_POST)) {
 
             $stmt->close();
             break;
+        case "launch":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'upcoming'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "cancel":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'cancelled'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "complete":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'completed'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "archived":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $conn->prepare("UPDATE kld_event SET status=? WHERE event_id=?");
+            $status = 'archived'; // Set status to 'approved'
+            $stmt->bind_param("si", $status, $eventId); // "ssi" indicates the types: string, string, integer
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the update was successful
+            } else {
+                echo "error"; // Indicate there was an error with the update
+            }
+
+            $stmt->close();
+            break;
+        case "std_attended":
+            // Get the necessary parameters from POST data
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $stdId = $_POST['std_id'];     // Student ID passed from AJAX
+            $status = $_POST['status'];    // Status (attended or absent)
+
+            if ($status == 'attended') {
+                // Mark the student as attended (Insert or update)
+                $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, std_id, status) 
+                                                VALUES (?, ?, ?) 
+                                                ON DUPLICATE KEY UPDATE status = ?");
+                // Binding parameters (i: integer, s: string)
+                $stmt->bind_param("iiss", $eventId, $stdId, $status, $status);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+                $stmt->close();
+            } else if ($status == 'absent') {
+                // Delete the attendance record for "attended" students (Mark as absent)
+                $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND std_id = ? AND status = 'attended'");
+                $stmt->bind_param("ii", $eventId, $stdId);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+
+                $stmt->close();
+            }
+            break;
+        case "emp_attended":
+            // Get the necessary parameters from POST data
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $empId = $_POST['emp_id'];     // Student ID passed from AJAX
+            $status = $_POST['status'];    // Status (attended or absent)
+
+            if ($status == 'attended') {
+                // Mark the student as attended (Insert or update)
+                $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, emp_id, status) 
+                                                    VALUES (?, ?, ?) 
+                                                    ON DUPLICATE KEY UPDATE status = ?");
+                // Binding parameters (i: integer, s: string)
+                $stmt->bind_param("iiss", $eventId, $empId, $status, $status);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+                $stmt->close();
+            } else if ($status == 'absent') {
+                // Delete the attendance record for "attended" students (Mark as absent)
+                $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND emp_id = ? AND status = 'attended'");
+                $stmt->bind_param("ii", $eventId, $empId);
+
+                if ($stmt->execute()) {
+                    echo "success"; // Success message if the query executed successfully
+                } else {
+                    echo "error"; // Error message if the query failed
+                }
+
+                $stmt->close();
+            }
+            break;
+        case "update-attendance-status":
+            $eventId = $_POST['event_id'];
+            $stdIds = $_POST['std_ids'];  // Array of student IDs
+            $status = $_POST['status'];
+
+            foreach ($stdIds as $stdId) {
+                if ($status == 'attended') {
+                    // Insert or update attendance status
+                    $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, std_id, status)
+                                                    VALUES (?, ?, ?)
+                                                    ON DUPLICATE KEY UPDATE status = ?");
+                    $stmt->bind_param("iiss", $eventId, $stdId, $status, $status);
+                } else {
+                    // Delete attendance record for absent status
+                    $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND std_id = ? AND status = 'attended'");
+                    $stmt->bind_param("ii", $eventId, $stdId);
+                }
+
+                if (!$stmt->execute()) {
+                    echo "error";
+                    exit;
+                }
+            }
+
+            echo "success";
+            break;
+        case "update-attendance-status-emp":
+            $eventId = $_POST['event_id'];
+            $empIds = $_POST['emp_ids'];  // Array of student IDs
+            $status = $_POST['status'];
+
+            foreach ($empIds as $empIds) {
+                if ($status == 'attended') {
+                    // Insert or update attendance status
+                    $stmt = $conn->prepare("INSERT INTO attendance_tbl (event_id, emp_id, status)
+                                                        VALUES (?, ?, ?)
+                                                        ON DUPLICATE KEY UPDATE status = ?");
+                    $stmt->bind_param("iiss", $eventId, $empIds, $status, $status);
+                } else {
+                    // Delete attendance record for absent status
+                    $stmt = $conn->prepare("DELETE FROM attendance_tbl WHERE event_id = ? AND emp_id = ? AND status = 'attended'");
+                    $stmt->bind_param("ii", $eventId, $empIds);
+                }
+
+                if (!$stmt->execute()) {
+                    echo "error";
+                    exit;
+                }
+            }
+
+            echo "success";
+            break;
+
+
+
+        case "std_register":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $std_id = $_POST['std_id'];
+
+            // Use prepared statements to prevent SQL injection for inserting into registration_tbl
+            $stmt = $conn->prepare("INSERT INTO registration_tbl (event_id, std_id, status) VALUES (?, ?, ?)");
+            $status_registered = 'registered'; // Status for registration
+            $stmt->bind_param("iis", $eventId, $std_id, $status_registered); // "iis" indicates integer, integer, string
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the insert was successful
+            } else {
+                echo "error"; // Indicate there was an error with the insert
+            }
+
+            $stmt->close();
+            break;
+        case "emp_register":
+            $eventId = $_POST['event_id']; // Event ID passed from AJAX
+            $emp_id = $_POST['emp_id'];
+
+            // Use prepared statements to prevent SQL injection for inserting into registration_tbl
+            $stmt = $conn->prepare("INSERT INTO registration_tbl (event_id, emp_id, status) VALUES (?, ?, ?)");
+            $status_registered = 'registered'; // Status for registration
+            $stmt->bind_param("iis", $eventId, $emp_id, $status_registered); // "iis" indicates integer, integer, string
+
+            if ($stmt->execute()) {
+                echo "success"; // Indicate the insert was successful
+            } else {
+                echo "error"; // Indicate there was an error with the insert
+            }
+
+            $stmt->close();
+            break;
+
         case "add_comment":
             $comment = mysqli_real_escape_string($conn, $_POST['comment']);
             $event_id = intval($_POST['event_id']);
             $session_id = intval($_POST['session_id']);
 
             // Insert the comment into the comment_tbl
-            $query = "INSERT INTO comment_tbl (event_id, org_acc_id, comment, comment_date) VALUES ('$event_id', '$session_id', '$comment', NOW())";
+            $query = "INSERT INTO comment_tbl (event_id, admin_id, comment, comment_date) VALUES ('$event_id', '$session_id', '$comment', NOW())";
 
             if (mysqli_query($conn, $query)) {
                 echo "success"; // Echo success message
@@ -800,7 +1067,6 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo "error"; // Echo error message
             }
             break;
-
 
 
         case "venue_name":
@@ -847,83 +1113,442 @@ if (!array_key_exists('ajax', $_POST)) {
                 echo 2;
             }
             break;
+        case "attendance_check_sections":
+            $selectedPrograms = explode(",", base64_decode($_POST['selectedPrograms']));
+            $selectedYearLevels = explode(",", base64_decode($_POST['selectedYearLevels']));
 
+            $selectedPrograms = array_map('intval', $selectedPrograms);
+            $selectedYearLevels = array_map('intval', $selectedYearLevels);
+
+            $query = "SELECT * FROM section_tbl WHERE course_id IN (" . implode(",", $selectedPrograms) . ")";
+            $query .= " AND yearlvl IN (" . implode(",", $selectedYearLevels) . ")";
+
+            $try = mysqli_query($conn, $query);
+            $sections = [];
+
+            if ($try && mysqli_num_rows($try) > 0) {
+                while ($row = $try->fetch_array()) {
+                    $sections[] = [
+                        'section_id' => htmlspecialchars($row['section_id'], ENT_QUOTES, 'UTF-8'),
+                        'section_name' => htmlspecialchars($row['section_name'], ENT_QUOTES, 'UTF-8')
+                    ];
+                }
+            }
+
+            echo json_encode(['status' => $try ? 1 : 2, 'sections' => $sections]);
+            break;
+
+        case "std_check_sections":
+            $kt_datatable_program = explode(",", base64_decode($_POST['kt_datatable_program']));
+            $kt_datatable_yearlvl = explode(",", base64_decode($_POST['kt_datatable_yearlvl']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+        case "std_reg_check_sections":
+            $kt_datatable_program = explode(",", base64_decode($_POST['kt_datatable_program']));
+            $kt_datatable_yearlvl = explode(",", base64_decode($_POST['kt_datatable_yearlvl']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+
+            break;
+        case "std_att_check_sections":
+            $kt_datatable_program_att = explode(",", base64_decode($_POST['kt_datatable_program_att']));
+            $kt_datatable_yearlvl_att = explode(",", base64_decode($_POST['kt_datatable_yearlvl_att']));
+            $query = "Select * from section_tbl where course_id in (" . implode(",", $kt_datatable_program_att) . ")";
+            $query .= " and yearlvl in (" . implode(",", $kt_datatable_yearlvl_att) . ")";
+
+            $try = mysqli_query($conn, $query);
+            while ($row = $try->fetch_array()) {
+                $result = '<option value="' . $row['section_id'] . '">' . $row['section_name'] . '</option>';
+                echo $result;
+            }
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+
+            break;
+        case "view_registered":
+
+            // Query to fetch the data
+            $query = "SELECT sa.*, 
+                            course_tbl.course_acronym, 
+                            section_tbl.section_name, 
+                            yearlvl_tbl.yearlvl_name,
+                            at.status, 
+                            at.attendance_date 
+                        FROM std_acc sa
+                        JOIN event_invitation ei 
+                            ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+                            AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+                            AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+                        JOIN course_tbl ON sa.course_id = course_tbl.course_id
+                        JOIN section_tbl ON sa.section_id = section_tbl.section_id
+                        JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+                        LEFT JOIN attendance_tbl at ON sa.std_id = at.std_id AND at.event_id = $eventId
+                        WHERE ei.event_id = $eventId"; // Adjust query as needed
+            $result = mysqli_query($conn, $query);
+
+            $data = [];
+            if ($result) {
+                // Fetch all data from the query result
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $data[] = $row;
+                }
+            }
+
+            // Return the data in JSON format
+            echo json_encode(['data' => $data]);
+            break;
+
+        case "add_org":
+            $org_name = $_POST['org_name'];
+            $add_org_description = $_POST['add_org_description'];
+            $org_pic = $_POST['org_pic']; // Adding the category icon
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO org_tbl
+                                (
+                                    org_name,
+                                    org_desc,
+                                    org_pic
+                                )
+                                VALUES
+                                (
+                                    '" . $org_name . "',
+                                    '" . $add_org_description . "',
+                                    '" . $org_pic . "'
+                                )"
+            );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+            break;
+        case "edit_org":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_org_name = mysqli_real_escape_string($conn, $_POST['edit_org_name']);
+            $edit_org_description = mysqli_real_escape_string($conn, $_POST['edit_org_description']);
+            $org_pic = mysqli_real_escape_string($conn, $_POST['org_pic']);
+            $org_id = mysqli_real_escape_string($conn, $_POST['org_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE org_tbl
+                             SET
+                                 org_name = '$edit_org_name',
+                                 org_desc = '$edit_org_description',
+                                 org_pic = '$org_pic'
+                             WHERE org_id = '$org_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
         case "add_cat":
             $add_cat_category = $_POST['add_cat_category'];
             $add_cat_description = $_POST['add_cat_description'];
-
+            $add_cat_icon = $_POST['add_cat_icon']; // Adding the category icon
 
             $try = mysqli_query(
                 $conn,
-                "Insert into category_tbl
-                       ( 
-                            category_name,
-                            category_desc
-                        )
-                        values
-                        (
-                            '" . $add_cat_category . "',
-                            '" . $add_cat_description . "'
-                        )
-            "
+                "INSERT INTO category_tbl
+                            (
+                                category_name,
+                                category_desc,
+                                category_icon
+                            )
+                            VALUES
+                            (
+                                '" . $add_cat_category . "',
+                                '" . $add_cat_description . "',
+                                '" . $add_cat_icon . "'
+                            )"
             );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+            break;
+        case "edit_cat":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_cat_category = mysqli_real_escape_string($conn, $_POST['edit_cat_category']);
+            $edit_cat_description = mysqli_real_escape_string($conn, $_POST['edit_cat_description']);
+            $edit_cat_icon = mysqli_real_escape_string($conn, $_POST['edit_cat_icon']);
+            $category_id = mysqli_real_escape_string($conn, $_POST['category_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE category_tbl
+                         SET
+                             category_name = '$edit_cat_category',
+                             category_desc = '$edit_cat_description',
+                             category_icon = '$edit_cat_icon'
+                         WHERE category_id = '$category_id'"
+            );
+
             if ($try) {
                 echo 1;
             } else {
                 echo 2;
             }
             break;
+
+        case "add_course":
+            $add_course_name = mysqli_real_escape_string($conn, $_POST['add_course_name']);
+            $add_course_description = mysqli_real_escape_string($conn, $_POST['add_course_description']);
+            $add_course_acronym = mysqli_real_escape_string($conn, $_POST['add_course_acronym']); // Adding the category icon
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO course_tbl
+                                (
+                                    course_name,
+                                    course_desc,
+                                    course_acronym
+                                )
+                                VALUES
+                                (
+                                    '$add_course_name',
+                                    '$add_course_description',
+                                    '$add_course_acronym'
+                                )"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
+        case "edit_course":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_course_name = mysqli_real_escape_string($conn, $_POST['edit_course_name']);
+            $edit_course_description = mysqli_real_escape_string($conn, $_POST['edit_course_description']);
+            $edit_course_acronym = mysqli_real_escape_string($conn, $_POST['edit_course_acronym']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE course_tbl
+                             SET
+                                 course_name = '$edit_course_name',
+                                 course_desc = '$edit_course_description',
+                                 course_acronym = '$edit_course_acronym'
+                             WHERE course_id = '$course_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+        case "add_section":
+            $add_section_name = mysqli_real_escape_string($conn, $_POST['add_section_name']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+            $yearlvl = mysqli_real_escape_string($conn, $_POST['yearlvl']); // Adding the category icon
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO section_tbl
+                                    (
+                                        section_name,
+                                        course_id,
+                                        yearlvl
+                                    )
+                                    VALUES
+                                    (
+                                        '$add_section_name',
+                                        '$course_id',
+                                        '$yearlvl'
+                                    )"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
+        case "edit_section":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_section_name = mysqli_real_escape_string($conn, $_POST['edit_section_name']);
+            $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
+            $yearlvl = mysqli_real_escape_string($conn, $_POST['yearlvl']); // Adding the category icon
+            $section_id = mysqli_real_escape_string($conn, $_POST['section_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE section_tbl
+                                 SET
+                                     section_name = '$edit_section_name',
+                                     section_desc = '$course_id',
+                                     section_acronym = '$yearlvl'
+                                 WHERE section_id = '$section_id'"
+            );
+
+            if ($try) {
+                echo 1;
+            } else {
+                echo 2;
+            }
+            break;
+
         case "add_venue":
             $add_venue = $_POST['add_venue'];
             $add_venue_description = $_POST['add_venue_description'];
-
+            $add_venue_img = $_POST['add_venue_img']; // Adding the category icon
 
             $try = mysqli_query(
                 $conn,
-                "Insert into venue_tbl
-                       ( 
-                            venue_name,
-                            venue_desc
-                        )
-                        values
-                        (
-                            '" . $add_venue . "',
-                            '" . $add_venue_description . "'
-                        )
-            "
+                "INSERT INTO venue_tbl
+                            (
+                                venue_name,
+                                venue_desc,
+                                venue_img
+                            )
+                            VALUES
+                            (
+                                '" . $add_venue . "',
+                                '" . $add_venue_description . "',
+                                '" . $add_venue_img . "'
+                            )"
             );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+            break;
+        case "edit_venue":
+            // Escape the inputs to handle special characters like single quotes
+            $edit_venue = mysqli_real_escape_string($conn, $_POST['edit_venue']);
+            $edit_venue_description = mysqli_real_escape_string($conn, $_POST['edit_venue_description']);
+            $venue_img = mysqli_real_escape_string($conn, $_POST['venue_img']);
+            $venue_id = mysqli_real_escape_string($conn, $_POST['venue_id']);
+
+            $try = mysqli_query(
+                $conn,
+                "UPDATE venue_tbl
+                             SET
+                                 venue_name = '$edit_venue',
+                                 venue_desc = '$edit_venue_description',
+                                 venue_img = '$venue_img'
+                             WHERE venue_id = '$venue_id'"
+            );
+
             if ($try) {
                 echo 1;
             } else {
                 echo 2;
             }
             break;
-        case "calendar_init":
-            $try = mysqli_query(
-                $conn,
-                "Select * from kld_event
-            "
-            );
-            $json = [];
-            while ($row = $try->fetch_array()) {
-                $temp_obj = new stdClass();
-                $temp_obj->title = $row['event_title'];
-                $temp_obj->start = $row['event_start_date'];
-                $temp_obj->end = $row['event_end_date'];
-                $temp_obj->description = $row['event_desc'];
-                $temp_obj->className = $row['event_start_date'] == $row['event_end_date'] ? "fc-event-primary" : "fc-event-solid-info";
+            /* case "calendar_init":
+                $try = mysqli_query(
+                    $conn,
+                    "Select * from kld_event
+                "
+                );
+                $json = [];
+                while ($row = $try->fetch_array()) {
+                    $temp_obj = new stdClass();
+                    $temp_obj->title = $row['event_title'];
+                    $temp_obj->start = $row['event_start_date'];
+                    $temp_obj->end = $row['event_end_date'];
+                    $temp_obj->description = $row['event_desc'];
+                    $temp_obj->className = $row['event_start_date'] == $row['event_end_date'] ? "fc-event-primary" : "fc-event-solid-info";
+    
+                    array_push($json, $temp_obj);
+                }
+    
+                echo json_encode($json);
+                break; */
+        case "venue_calendar":
+            if (isset($_POST['venue_id'])) {
+                $venue_id = mysqli_real_escape_string($conn, $_POST['venue_id']);
 
-                array_push($json, $temp_obj);
+                $try = mysqli_query($conn, "SELECT * FROM kld_event WHERE venue_id = '$venue_id'");
+
+                if (!$try) {
+                    echo json_encode(["error" => "Failed to fetch events"]);
+                    exit;
+                }
+
+                $json = [];
+
+                // Array of possible event color classes
+                $color_classes = [
+                    "fc-event-solid-primary",
+                    "fc-event-solid-info",
+                    "fc-event-solid-success",
+                    "fc-event-solid-warning",
+                    "fc-event-solid-danger",
+                    "fc-event-light",
+                    "fc-event-solid-dark"
+                ];
+
+                while ($row = $try->fetch_array()) {
+                    $temp_obj = new stdClass();
+                    $temp_obj->title = $row['event_title'];
+                    $temp_obj->start = $row['event_start_date'];
+                    $temp_obj->end = $row['event_end_date'];
+                    $temp_obj->description = $row['event_desc'];
+
+                    // Randomly select a class from the array
+                    $random_class = $color_classes[array_rand($color_classes)];
+
+                    $temp_obj->className = $random_class;  // Assign the random class
+
+                    array_push($json, $temp_obj);
+                }
+
+                echo json_encode($json);
+            } else {
+                echo json_encode(["error" => "Venue ID not provided"]);
             }
-
-            echo json_encode($json);
             break;
+
 
         case "add_cat2":
             $try = mysqli_query(
                 $conn,
                 "Select * from kld_event
-            "
+                "
             );
             $json = [];
             while ($row = $try->fetch_array()) {
@@ -941,11 +1566,13 @@ if (!array_key_exists('ajax', $_POST)) {
             break;
 
         case "hide_org":
+
+
             $org_acc_id = $_POST['org_acc_id'];
             $try = mysqli_query(
                 $conn,
                 "Update org_acc set status = 'INACTIVE' where org_acc_id = '" . $org_acc_id . "'
-            "
+                "
             );
             if ($try) {
                 echo 1;
@@ -954,6 +1581,380 @@ if (!array_key_exists('ajax', $_POST)) {
             }
 
             break;
+
+
+
+
+        case "registered-std":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT sa.*, 
+                                            course_tbl.course_acronym, 
+                                            section_tbl.section_name, 
+                                            yearlvl_tbl.yearlvl_name,
+                                            rt.status AS reg_status, 
+                                            rt.reg_date AS reg_date 
+                                        FROM std_acc sa
+                                        JOIN event_invitation ei 
+                                            ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+                                            AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+                                            AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+                                        JOIN course_tbl ON sa.course_id = course_tbl.course_id
+                                        JOIN section_tbl ON sa.section_id = section_tbl.section_id
+                                        JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+                                        LEFT JOIN registration_tbl rt ON sa.std_id = rt.std_id AND rt.event_id = $eventId
+                                        WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+
+        case "attendance-std":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT sa.std_id, sa.std_fname, sa.std_lname, sa.std_kld_id, sa.yearlvl, sa.section_id, sa.course_id, sa.std_profilepic,
+                                        course_tbl.course_acronym, 
+                                        section_tbl.section_name, 
+                                        yearlvl_tbl.yearlvl_name,
+                                        at.status, 
+                                        at.attendance_date 
+                                    FROM std_acc sa
+                                    JOIN event_invitation ei 
+                                        ON (sa.course_id = ei.course_id OR ei.course_id IS NULL)
+                                        AND (sa.yearlvl = ei.yearlvl_id OR ei.yearlvl_id IS NULL)
+                                        AND (sa.section_id = ei.section_id OR ei.section_id IS NULL)
+                                    JOIN course_tbl ON sa.course_id = course_tbl.course_id
+                                    JOIN section_tbl ON sa.section_id = section_tbl.section_id
+                                    JOIN yearlvl_tbl ON sa.yearlvl = yearlvl_tbl.yearlvl_id
+                                    LEFT JOIN attendance_tbl at ON sa.std_id = at.std_id AND at.event_id = $eventId
+                                    WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+        case "attendance-emp":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT ea.emp_id, ea.emp_fname, ea.emp_lname, ea.emp_kld_id, ea.emp_role, ea.emp_profilepic, ea.org_id,
+                                            org_tbl.org_name, 
+                                            at.status, 
+                                            at.attendance_date 
+                                        FROM emp_acc ea
+                                        JOIN event_invitation ei 
+                                                ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+                                        JOIN org_tbl ON ea.org_id = org_tbl.org_id
+                                        LEFT JOIN attendance_tbl at ON ea.emp_id = at.emp_id AND at.event_id = $eventId
+                                        WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+        case "registered-emp":
+
+            $eventId = $_POST['event_id'];
+            $sql = "SELECT DISTINCT ea.*, 
+                                                org_tbl.org_name, 
+                                                rt.status AS reg_status, 
+                                                rt.reg_date AS reg_date 
+                                            FROM emp_acc ea
+                                            JOIN event_invitation ei 
+                                                ON (ea.org_id = ei.org_id OR ei.org_id IS NULL)
+                                            JOIN org_tbl ON ea.org_id = org_tbl.org_id
+                                            LEFT JOIN registration_tbl rt ON ea.emp_id = rt.emp_id AND rt.event_id = $eventId
+                                            WHERE ei.event_id = $eventId";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+
+
+
+
+        case "std-fetch":
+
+            $sql = "SELECT 
+                                        std_acc.*, 
+                                        course_tbl.*, 
+                                        section_tbl.*, 
+                                        yearlvl_tbl.* 
+                                    FROM 
+                                        std_acc 
+                                    JOIN 
+                                        course_tbl ON std_acc.course_id = course_tbl.course_id 
+                                    JOIN 
+                                        section_tbl ON std_acc.section_id = section_tbl.section_id 
+                                    JOIN 
+                                        yearlvl_tbl ON std_acc.yearlvl = yearlvl_tbl.yearlvl_id";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+        case "emp-fetch":
+
+            $sql = "SELECT 
+                                emp_acc.*, 
+                                org_tbl.*
+                            FROM 
+                                emp_acc 
+                            JOIN 
+                                org_tbl ON emp_acc.org_id = org_tbl.org_id ";
+            $result = $conn->query($sql);
+
+            $data = [];
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+            }
+
+            echo json_encode($data);
+            $conn->close();
+
+            break;
+
+        case "add_guide":
+            $guide_title = $_POST['guide_title'];
+            $guide_desc = $_POST['guide_desc'];
+            $guide_image = $_POST['guide_image']; // Adding the category icon
+            $event_id = $_POST['event_id'];
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO guide_tbl
+                            (
+                                event_id,
+                                guide_title,
+                                guide_desc,
+                                guide_image
+                            )
+                            VALUES
+                            (
+                                '" . $event_id . "',
+                                '" . $guide_title . "',
+                                '" . $guide_desc . "',
+                                '" . $guide_image . "'
+                            )"
+            );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+
+
+            break;
+
+        case "delete_guide":
+            $guide_id = $_POST['guide_id'];
+            $event_id = $_POST['event_id'];
+
+            // Delete the guide from the database
+            $delete_query = "DELETE FROM guide_tbl WHERE guide_id = '$guide_id' AND event_id = '$event_id'";
+
+            $try = mysqli_query($conn, $delete_query);
+
+            if ($try) {
+                echo "success";  // Successfully deleted
+            } else {
+                echo "error";  // Error occurred
+            }
+
+            break;
+        case "add_agenda":
+            $agenda_desc = $_POST['agenda_desc'];
+            $agenda_time = $_POST['agenda_time']; // Adding the category icon
+            $event_id = $_POST['event_id'];
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO agenda_tbl
+                                (
+                                    event_id,
+                                    agenda_time,
+                                    agenda_desc
+                                )
+                                VALUES
+                                (
+                                    '" . $event_id . "',
+                                    '" . $agenda_time . "',
+                                    '" . $agenda_desc . "'
+                                )"
+            );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+
+
+            break;
+        case "add_link":
+            $link_name = $_POST['link_name'];
+            $link_url = $_POST['link_url']; // Adding the category icon
+            $event_id = $_POST['event_id'];
+
+            $try = mysqli_query(
+                $conn,
+                "INSERT INTO link_tbl
+                                    (
+                                        event_id,
+                                        link_name,
+                                        link_url
+                                    )
+                                    VALUES
+                                    (
+                                        '" . $event_id . "',
+                                        '" . $link_name . "',
+                                        '" . $link_url . "'
+                                    )"
+            );
+
+            if ($try) {
+                echo "success";
+            } else {
+                echo "error";
+            }
+
+
+            break;
+        case "add_file":
+            // Check if a file is uploaded
+            if (isset($_FILES['file'])) {
+                $file = $_FILES['file'];
+                $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+                // Validate file type
+                if (!in_array($file['type'], $allowedTypes)) {
+                    echo "Invalid file type.";
+                    exit;
+                }
+
+                // Get the original file name
+                $originalFileName = $file['name'];
+                $fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+                // Generate a unique file name if needed, or just keep the original one
+                // Optional: To avoid overwriting files with the same name, you can prefix or suffix the original file name with a unique identifier
+                $newFileName = uniqid('file_', true) . '.' . $fileExtension;
+
+                $uploadDir = 'assets/file-upload/';
+                $uploadFilePath = $uploadDir . $newFileName;
+
+                // Ensure the upload directory exists
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true); // Create the directory if it doesn't exist
+                }
+
+                // Move the uploaded file to the target directory
+                if (move_uploaded_file($file['tmp_name'], $uploadFilePath)) {
+                    $event_id = $_POST['event_id']; // Get event ID from POST data
+
+                    // Insert the original file name and file path into the database
+                    $sql = "INSERT INTO file_tbl (event_id, file_name, file_path) VALUES ('$event_id', '$originalFileName', '$uploadFilePath')";
+                    if (mysqli_query($conn, $sql)) {
+                        echo "success";
+                    } else {
+                        echo "Database error: " . mysqli_error($conn);
+                    }
+                } else {
+                    echo "Error uploading file.";
+                }
+            } else {
+                echo "No file uploaded.";
+            }
+            break;
+
+        case "submit_feedback_std":
+            $event_id = $_POST['event_id'];
+            $std_id = $_POST['std_id'];
+            $responses = json_decode($_POST['responses'], true); // Decode JSON string
+
+            // Prepare the statement to insert into response_tbl
+            $query = "INSERT INTO response_tbl (question_id, event_id, std_id, response) VALUES (?, ?, ?, ?)";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                foreach ($responses as $response) {
+                    $question_id = $response['question_id'];
+                    $answer = $response['response'];
+                    $stmt->bind_param("iiis", $question_id, $event_id, $std_id, $answer);
+                    $stmt->execute();
+                }
+                $stmt->close();
+
+                // Insert into feedback_tbl with status 'evaluated'
+                $feedbackQuery = "INSERT INTO feedback_tbl (event_id, std_id, status) VALUES (?, ?, 'evaluated')";
+                $feedbackStmt = $conn->prepare($feedbackQuery);
+
+                if ($feedbackStmt) {
+                    $feedbackStmt->bind_param("ii", $event_id, $std_id);
+                    $feedbackStmt->execute();
+                    $feedbackStmt->close();
+
+                    echo "success";
+                } else {
+                    echo "error in feedback_tbl insertion";
+                }
+            } else {
+                echo "error in response_tbl insertion";
+            }
+
+            break;
+
+        case "submit_feedback_emp":
         case 3:
             include('db.php');
             $name2 = $_POST['name2'];

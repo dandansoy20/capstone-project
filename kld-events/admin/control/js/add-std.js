@@ -79,7 +79,7 @@ $("#add_std_submit").click(async function () {
             );
             setTimeout(
               function () {
-                window.open("login.php", "_self");
+                window.open("?page=admin-users", "_self");
               },
               2000 // 2 seconds
             );
